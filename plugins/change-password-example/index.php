@@ -30,7 +30,7 @@ class ChangePasswordExamplePlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('allowed_emails')->SetLabel('Allowed emails')
 				->SetType(\RainLoop\Enumerations\PluginPropertyType::STRING_TEXT)

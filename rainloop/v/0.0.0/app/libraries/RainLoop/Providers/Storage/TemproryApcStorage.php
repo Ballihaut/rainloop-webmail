@@ -45,7 +45,7 @@ class TemproryApcStorage extends \RainLoop\Providers\Storage\FileStorage
 	 * @return bool
 	 */
 	public function Clear($oAccount, $iStorageType, $sKey)
-	{
+	: bool {
 		@\apc_delete($this->generateFileName($oAccount, $iStorageType, $sKey));
 
 		return true;
@@ -71,7 +71,7 @@ class TemproryApcStorage extends \RainLoop\Providers\Storage\FileStorage
 	 * @return string
 	 */
 	public function generateFileName($mAccount, $iStorageType, $sKey, $bMkDir = false, $bForDeleteAction = false)
-	{
+	: string {
 		$sFileName = parent::generateFileName($mAccount, $iStorageType, $sKey, false, false);
 		return $sFileName.'/'.\RainLoop\Utils::GetConnectionToken().'/';
 	}

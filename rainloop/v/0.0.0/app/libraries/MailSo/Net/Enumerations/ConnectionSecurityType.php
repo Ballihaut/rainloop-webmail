@@ -29,8 +29,8 @@ class ConnectionSecurityType
 	 *
 	 * @return bool
 	 */
-	public static function UseSSL($iPort, $iSecurityType)
-	{
+	public static function UseSSL(int $iPort, int $iSecurityType)
+	: bool {
 		$iPort = (int) $iPort;
 		$iResult = (int) $iSecurityType;
 		if (self::AUTO_DETECT === $iSecurityType)
@@ -60,8 +60,8 @@ class ConnectionSecurityType
 	 *
 	 * @return bool
 	 */
-	public static function UseStartTLS($bSupported, $iSecurityType, $bHasSupportedAuth = true)
-	{
+	public static function UseStartTLS(bool $bSupported, bool $iSecurityType, bool $bHasSupportedAuth = true)
+	: bool {
 		return ($bSupported &&
 			(self::STARTTLS === $iSecurityType || 
 				(self::AUTO_DETECT === $iSecurityType && (!$bHasSupportedAuth || \MailSo\Config::$PreferStartTlsIfAutoDetect))) &&

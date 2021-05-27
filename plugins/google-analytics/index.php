@@ -17,7 +17,7 @@ class GoogleAnalyticsPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		$oAccount = \RainLoop\Plugins\Property::NewInstance('account')->SetLabel('Account')
 			->SetAllowedInJs(true)
 			->SetDefaultValue('')

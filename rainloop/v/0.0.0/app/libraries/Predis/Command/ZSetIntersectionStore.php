@@ -22,7 +22,7 @@ class ZSetIntersectionStore extends ZSetUnionStore
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZINTERSTORE';
     }
 }

@@ -85,7 +85,7 @@ class WebdisConnection implements NodeConnectionInterface
      *
      * @throws NotSupportedException
      */
-    private function throwNotSupportedException($method)
+    private function throwNotSupportedException(string $method)
     {
         $class = __CLASS__;
         throw new NotSupportedException("The method $class::$method() is not supported.");
@@ -214,7 +214,7 @@ class WebdisConnection implements NodeConnectionInterface
      * {@inheritdoc}
      */
     public function isConnected()
-    {
+    : bool {
         return true;
     }
 

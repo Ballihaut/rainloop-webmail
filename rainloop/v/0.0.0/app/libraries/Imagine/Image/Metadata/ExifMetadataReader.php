@@ -27,7 +27,7 @@ class ExifMetadataReader extends AbstractMetadataReader
     }
 
     public static function isSupported()
-    {
+    : bool {
         return function_exists('exif_read_data');
     }
 
@@ -73,7 +73,7 @@ class ExifMetadataReader extends AbstractMetadataReader
      *
      * @return MetadataBag
      */
-    private function doReadData($data)
+    private function doReadData(string $data)
     {
         if (substr($data, 0, 2) === 'II') {
             $mime = 'image/tiff';
@@ -92,7 +92,7 @@ class ExifMetadataReader extends AbstractMetadataReader
      * @return MetadataBag
      */
     private function extract($path)
-    {
+    : array {
         if (false === $exifData = @exif_read_data($path, null, true, false)) {
             return array();
         }

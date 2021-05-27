@@ -51,7 +51,7 @@ class File extends \MailSo\Log\Driver
 	 *
 	 * @return \MailSo\Log\Drivers\File
 	 */
-	public static function NewInstance($sLoggerFileName, $sNewLine = "\r\n")
+	public static function NewInstance($sLoggerFileName, string $sNewLine = "\r\n")
 	{
 		return new self($sLoggerFileName, $sNewLine);
 	}
@@ -70,7 +70,7 @@ class File extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	protected function clearImplementation()
-	{
+	: bool {
 		return \unlink($this->sLoggerFileName);
 	}
 
@@ -80,7 +80,7 @@ class File extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	private function writeToLogFile($mDesc)
-	{
+	: bool {
 		if (\is_array($mDesc))
 		{
 			$mDesc = \implode($this->sNewLine, $mDesc);

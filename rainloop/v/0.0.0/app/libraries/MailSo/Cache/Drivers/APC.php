@@ -21,7 +21,7 @@ class APC implements \MailSo\Cache\DriverInterface
 	/**
 	 * @var string
 	 */
-	private $sKeyPrefix;
+	private string $sKeyPrefix;
 
 	/**
 	 * @access private
@@ -43,7 +43,7 @@ class APC implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return \MailSo\Cache\Drivers\APC
 	 */
-	public static function NewInstance($sKeyPrefix = '')
+	public static function NewInstance(string $sKeyPrefix = '')
 	{
 		return new self($sKeyPrefix);
 	}
@@ -86,7 +86,7 @@ class APC implements \MailSo\Cache\DriverInterface
 	 * @return bool
 	 */
 	public function GC($iTimeToClearInHours = 24)
-	{
+	: bool {
 		if (0 === $iTimeToClearInHours)
 		{
 			return \apc_clear_cache('user');
@@ -100,8 +100,8 @@ class APC implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return string
 	 */
-	private function generateCachedKey($sKey)
-	{
+	private function generateCachedKey(string $sKey)
+	: string {
 		return $this->sKeyPrefix.\sha1($sKey);
 	}
 }

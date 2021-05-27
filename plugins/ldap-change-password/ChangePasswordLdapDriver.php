@@ -5,17 +5,17 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	/**
 	 * @var string
 	 */
-	private $sHostName = '127.0.0.1';
+	private string $sHostName = '127.0.0.1';
 
 	/**
 	 * @var int
 	 */
-	private $iHostPort = 389;
+	private int $iHostPort = 389;
 
 	/**
 	 * @var string
 	 */
-	private $sUserDnFormat = '';
+	private string $sUserDnFormat = '';
 
 	/**
 	 * @var string
@@ -25,7 +25,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	/**
 	 * @var string
 	 */
-	private $sPasswordEncType = 'SHA';
+	private string $sPasswordEncType = 'SHA';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -35,7 +35,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @param string $sHostName
@@ -47,7 +47,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordLdapDriver
 	 */
 	public function SetConfig($sHostName, $iHostPort, $sUserDnFormat, $sPasswordField, $sPasswordEncType)
-	{
+	: self {
 		$this->sHostName = $sHostName;
 		$this->iHostPort = $iHostPort;
 		$this->sUserDnFormat = $sUserDnFormat;
@@ -63,7 +63,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordLdapDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 
 		return $this;
@@ -75,7 +75,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordLdapDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -90,7 +90,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}
@@ -103,7 +103,7 @@ class ChangePasswordLdapDriver implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return bool
 	 */
 	public function ChangePassword(\RainLoop\Account $oAccount, $sPrevPassword, $sNewPassword)
-	{
+	: bool {
 		$bResult = false;
 
 		try

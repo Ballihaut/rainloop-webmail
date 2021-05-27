@@ -28,7 +28,7 @@ class GuessContentType extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $extensionMap = array(
+    public array $extensionMap = array(
 
         // images
         'jpg' => 'image/jpeg',
@@ -87,7 +87,7 @@ class GuessContentType extends DAV\ServerPlugin {
      * @param string $fileName
      * @return string
      */
-    protected function getContentType($fileName) {
+    protected function getContentType(string $fileName) {
 
         // Just grabbing the extension
         $extension = strtolower(substr($fileName,strrpos($fileName,'.')+1));

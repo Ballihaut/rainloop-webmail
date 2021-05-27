@@ -22,7 +22,7 @@ class ProxyRead implements IProxyRead {
      *
      * @var array
      */
-    protected $principalInfo;
+    protected array $principalInfo;
 
     /**
      * Principal backend
@@ -51,7 +51,7 @@ class ProxyRead implements IProxyRead {
      *
      * @return string
      */
-    public function getName() {
+    public function getName() : string {
 
         return 'calendar-proxy-read';
 
@@ -101,7 +101,7 @@ class ProxyRead implements IProxyRead {
      *
      * @return array
      */
-    public function getAlternateUriSet() {
+    public function getAlternateUriSet() : array {
 
         return array();
 
@@ -112,7 +112,7 @@ class ProxyRead implements IProxyRead {
      *
      * @return string
      */
-    public function getPrincipalUrl() {
+    public function getPrincipalUrl() : string {
 
         return $this->principalInfo['uri'] . '/' . $this->getName();
 

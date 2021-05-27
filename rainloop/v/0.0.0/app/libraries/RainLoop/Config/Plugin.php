@@ -7,7 +7,7 @@ class Plugin extends \RainLoop\Config\AbstractConfig
 	/**
 	 * @var array
 	 */
-	private $aMap;
+	private array $aMap;
 
 	/**
 	 * @return void
@@ -23,8 +23,8 @@ class Plugin extends \RainLoop\Config\AbstractConfig
 	 * @param array $aMap
 	 * @return array
 	 */
-	private function convertConfigMap($aMap)
-	{
+	private function convertConfigMap(array $aMap)
+	: array {
 		if (0 < \count($aMap))
 		{
 			$aResultMap = array();

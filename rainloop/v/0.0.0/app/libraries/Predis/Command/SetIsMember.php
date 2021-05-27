@@ -22,7 +22,7 @@ class SetIsMember extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SISMEMBER';
     }
 

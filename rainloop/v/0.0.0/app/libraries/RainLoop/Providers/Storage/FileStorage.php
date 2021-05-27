@@ -7,7 +7,7 @@ class FileStorage implements \RainLoop\Providers\Storage\IStorage
 	/**
 	 * @var string
 	 */
-	private $sDataPath;
+	private string $sDataPath;
 
 	/**
 	 * @var bool
@@ -128,7 +128,7 @@ class FileStorage implements \RainLoop\Providers\Storage\IStorage
 	 *
 	 * @return string
 	 */
-	public function generateFileName($mAccount, $iStorageType, $sKey, $bMkDir = false, $bForDeleteAction = false)
+	public function generateFileName($mAccount, $iStorageType, $sKey, bool $bMkDir = false, bool $bForDeleteAction = false)
 	{
 		if (null === $mAccount)
 		{

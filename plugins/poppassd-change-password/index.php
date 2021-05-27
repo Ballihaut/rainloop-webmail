@@ -36,7 +36,7 @@ class PoppassdChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('host')->SetLabel('POPPASSD Host')
 				->SetDefaultValue('127.0.0.1'),

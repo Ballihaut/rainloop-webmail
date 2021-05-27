@@ -23,14 +23,14 @@ class CalendarObject extends \SabreForRainLoop\DAV\File implements ICalendarObje
      *
      * @var array
      */
-    protected $objectData;
+    protected array $objectData;
 
     /**
      * Array with information about the containing calendar
      *
      * @var array
      */
-    protected $calendarInfo;
+    protected array $calendarInfo;
 
     /**
      * Constructor
@@ -117,7 +117,7 @@ class CalendarObject extends \SabreForRainLoop\DAV\File implements ICalendarObje
      *
      * @return string
      */
-    public function getContentType() {
+    public function getContentType() : string {
 
         return 'text/calendar; charset=utf-8';
 
@@ -130,7 +130,7 @@ class CalendarObject extends \SabreForRainLoop\DAV\File implements ICalendarObje
      *
      * @return string
      */
-    public function getETag() {
+    public function getETag() : string {
 
         if (isset($this->objectData['etag'])) {
             return $this->objectData['etag'];
@@ -204,7 +204,7 @@ class CalendarObject extends \SabreForRainLoop\DAV\File implements ICalendarObje
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         // An alternative acl may be specified in the object data.
         if (isset($this->objectData['acl'])) {

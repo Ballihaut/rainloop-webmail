@@ -21,7 +21,7 @@ class Domain
 	/**
 	 * @var int
 	 */
-	private $iIncPort;
+	private int $iIncPort;
 
 	/**
 	 * @var int
@@ -36,12 +36,12 @@ class Domain
 	/**
 	 * @var string
 	 */
-	private $sOutHost;
+	private string $sOutHost;
 
 	/**
 	 * @var int
 	 */
-	private $iOutPort;
+	private int $iOutPort;
 
 	/**
 	 * @var int
@@ -61,7 +61,7 @@ class Domain
 	/**
 	 * @var bool
 	 */
-	private $bOutUsePhpMail;
+	private bool $bOutUsePhpMail;
 
 	/**
 	 * @var bool
@@ -71,12 +71,12 @@ class Domain
 	/**
 	 * @var string
 	 */
-	private $sSieveHost;
+	private string $sSieveHost;
 
 	/**
 	 * @var int
 	 */
-	private $iSievePort;
+	private int $iSievePort;
 
 	/**
 	 * @var int
@@ -91,12 +91,12 @@ class Domain
 	/**
 	 * @var string
 	 */
-	private $sWhiteList;
+	private string $sWhiteList;
 
 	/**
 	 * @var string
 	 */
-	private $sAliasName;
+	private string $sAliasName;
 
 	/**
 	 * @param string $sName
@@ -170,7 +170,7 @@ class Domain
 		$sIncHost, $iIncPort, $iIncSecure, $bIncShortLogin,
 		$bUseSieve, $sSieveHost, $iSievePort, $iSieveSecure,
 		$sOutHost, $iOutPort, $iOutSecure, $bOutShortLogin, $bOutAuth, $bOutUsePhpMail,
-		$sWhiteList = '')
+		string $sWhiteList = '')
 	{
 		return new self($sName,
 			$sIncHost, $iIncPort, $iIncSecure, $bIncShortLogin,
@@ -185,7 +185,7 @@ class Domain
 	 *
 	 * @return \RainLoop\Model\Domain|null
 	 */
-	public static function NewInstanceFromDomainConfigArray($sName, $aDomain)
+	public static function NewInstanceFromDomainConfigArray(string $sName, $aDomain)
 	{
 		$oDomain = null;
 
@@ -265,7 +265,7 @@ class Domain
 	 * @return string
 	 */
 	public function ToIniString()
-	{
+	: string {
 		$this->Normalize();
 		return \implode("\n", array(
 			'imap_host = "'.$this->encodeIniString($this->sIncHost).'"',
@@ -292,7 +292,7 @@ class Domain
 	 *
 	 * @return int
 	 */
-	public static function StrConnectionSecurityTypeToCons($sType)
+	public static function StrConnectionSecurityTypeToCons(string $sType)
 	{
 		$iSecurityType = ConnectionSecurityType::NONE;
 		switch (strtoupper($sType))
@@ -348,8 +348,8 @@ class Domain
 		$sIncHost, $iIncPort, $iIncSecure, $bIncShortLogin,
 		$bUseSieve, $sSieveHost, $iSievePort, $iSieveSecure,
 		$sOutHost, $iOutPort, $iOutSecure, $bOutShortLogin, $bOutAuth, $bOutUsePhpMail,
-		$sWhiteList = '')
-	{
+		string $sWhiteList = '')
+	: self {
 		$this->sIncHost = \MailSo\Base\Utils::IdnToAscii($sIncHost);
 		$this->iIncPort = $iIncPort;
 		$this->iIncSecure = $iIncSecure;
@@ -529,7 +529,7 @@ class Domain
 	 * @return self
 	 */
 	public function SetAliasName($sAliasName)
-	{
+	: self {
 		$this->sAliasName = $sAliasName;
 
 		return $this;
@@ -541,8 +541,8 @@ class Domain
 	 *
 	 * @return bool
 	 */
-	public function ValidateWhiteList($sEmail, $sLogin = '')
-	{
+	public function ValidateWhiteList($sEmail, string $sLogin = '')
+	: bool {
 		$sW = \trim($this->sWhiteList);
 		if (0 < strlen($sW))
 		{
@@ -564,8 +564,8 @@ class Domain
 	 *
 	 * @return array
 	 */
-	public function ToSimpleJSON($bAjax = false)
-	{
+	public function ToSimpleJSON(bool $bAjax = false)
+	: array {
 		return array(
 			'Name' => $bAjax ? \MailSo\Base\Utils::IdnToUtf8($this->Name()) : $this->Name(),
 			'IncHost' => $bAjax ? \MailSo\Base\Utils::IdnToUtf8($this->IncHost()) : $this->IncHost(),

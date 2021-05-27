@@ -22,7 +22,7 @@ class StringIncrement extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'INCR';
     }
 }

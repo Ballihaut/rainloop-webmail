@@ -22,7 +22,7 @@ class KeyType extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'TYPE';
     }
 }

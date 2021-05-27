@@ -22,7 +22,7 @@ class KeyPreciseExpire extends KeyExpire
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PEXPIRE';
     }
 }

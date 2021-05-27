@@ -63,7 +63,7 @@ class KetamaRing extends HashRing
      * {@inheritdoc}
      */
     protected function wrapAroundStrategy($upper, $lower, $ringKeysCount)
-    {
+    : int {
         // Binary search for the first item in ringkeys with a value greater
         // or equal to the key. If no such item exists, return the first item.
         return $lower < $ringKeysCount ? $lower : 0;

@@ -8,7 +8,7 @@ abstract class AbstractTwoFactorAuth
 	 * @return string
 	 */
 	public function Label()
-	{
+	: string {
 		return 'Two Factor Authenticator Code';
 	}
 	

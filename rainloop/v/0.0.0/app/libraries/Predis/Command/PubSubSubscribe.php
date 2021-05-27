@@ -30,7 +30,7 @@ class PubSubSubscribe extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeArguments($arguments);
     }
 }

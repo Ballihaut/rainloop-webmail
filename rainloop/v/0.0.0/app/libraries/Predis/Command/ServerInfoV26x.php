@@ -22,7 +22,7 @@ class ServerInfoV26x extends ServerInfo
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         if ($data === '') {
             return array();
         }

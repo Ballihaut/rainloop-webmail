@@ -18,8 +18,8 @@ class Helper
 	 *
 	 * @return bool
 	 */
-	static public function ValidateWildcardValues($sString, $sWildcardValues, &$sFoundedValue = '')
-	{
+	public static function ValidateWildcardValues(string $sString, $sWildcardValues, string &$sFoundedValue = '')
+	: bool {
 		$sFoundedValue = '';
 		
 		$sString = \trim($sString);
@@ -56,7 +56,7 @@ class Helper
 			else
 			{
 				$aItem = \explode('*', $sItem);
-				$aItem = \array_map(function ($sItem) {
+				$aItem = \array_map(function (string $sItem) : string {
 					return \preg_quote($sItem, '/');
 				}, $aItem);
 

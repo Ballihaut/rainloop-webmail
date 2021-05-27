@@ -43,7 +43,7 @@ class RestChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
      * @return array
      */
     public function configMapping()
-    {
+    : array {
         return array(
             \RainLoop\Plugins\Property::NewInstance('rest_url')
                 ->SetLabel('REST API Url')

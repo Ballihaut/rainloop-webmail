@@ -5,7 +5,7 @@ class ChangePasswordExampleDriver implements \RainLoop\Providers\ChangePassword\
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @param string $sAllowedEmails
@@ -13,7 +13,7 @@ class ChangePasswordExampleDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordExampleDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -24,7 +24,7 @@ class ChangePasswordExampleDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}

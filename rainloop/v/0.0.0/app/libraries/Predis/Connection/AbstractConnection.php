@@ -24,10 +24,10 @@ use Predis\Protocol\ProtocolException;
 abstract class AbstractConnection implements NodeConnectionInterface
 {
     private $resource;
-    private $cachedId;
+    private string $cachedId;
 
     protected $parameters;
-    protected $initCommands = array();
+    protected array $initCommands = array();
 
     /**
      * @param ParametersInterface $parameters Initialization parameters for the connection.
@@ -141,8 +141,8 @@ abstract class AbstractConnection implements NodeConnectionInterface
      *
      * @return string
      */
-    private function createExceptionMessage($message)
-    {
+    private function createExceptionMessage(string $message)
+    : string {
         $parameters = $this->parameters;
 
         if ($parameters->scheme === 'unix') {
@@ -209,7 +209,7 @@ abstract class AbstractConnection implements NodeConnectionInterface
      * @return string
      */
     protected function getIdentifier()
-    {
+    : string {
         if ($this->parameters->scheme === 'unix') {
             return $this->parameters->path;
         }

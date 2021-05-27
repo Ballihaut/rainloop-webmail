@@ -22,7 +22,7 @@ class ZSetReverseRange extends ZSetRange
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREVRANGE';
     }
 }

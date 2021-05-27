@@ -22,7 +22,7 @@ class ListInsert extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LINSERT';
     }
 }

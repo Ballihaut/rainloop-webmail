@@ -38,8 +38,8 @@ class FacebookUrlManipulator
      *
      * @return string The URL with the params removed.
      */
-    public static function removeParamsFromUrl($url, array $paramsToFilter)
-    {
+    public static function removeParamsFromUrl(string $url, array $paramsToFilter)
+    : string {
         $parts = parse_url($url);
 
         $query = '';
@@ -74,8 +74,8 @@ class FacebookUrlManipulator
      *
      * @return string
      */
-    public static function appendParamsToUrl($url, array $newParams = [])
-    {
+    public static function appendParamsToUrl(string $url, array $newParams = [])
+    : string {
         if (!$newParams) {
             return $url;
         }
@@ -104,8 +104,8 @@ class FacebookUrlManipulator
      *
      * @return array
      */
-    public static function getParamsAsArray($url)
-    {
+    public static function getParamsAsArray(string $url)
+    : array {
         $query = parse_url($url, PHP_URL_QUERY);
         if (!$query) {
             return [];
@@ -144,7 +144,7 @@ class FacebookUrlManipulator
      *
      * @return string|null
      */
-    public static function forceSlashPrefix($string)
+    public static function forceSlashPrefix(string $string)
     {
         if (!$string) {
             return $string;
@@ -161,7 +161,7 @@ class FacebookUrlManipulator
      * @return string The $urlToTrim with the hostname and Graph version removed.
      */
     public static function baseGraphUrlEndpoint($urlToTrim)
-    {
+    : string {
         return '/' . preg_replace('/^https:\/\/.+\.facebook\.com(\/v.+?)?\//', '', $urlToTrim);
     }
 }

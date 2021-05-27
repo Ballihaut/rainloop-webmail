@@ -22,7 +22,7 @@ class KeyDelete extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'DEL';
     }
 
@@ -30,7 +30,7 @@ class KeyDelete extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeArguments($arguments);
     }
 }

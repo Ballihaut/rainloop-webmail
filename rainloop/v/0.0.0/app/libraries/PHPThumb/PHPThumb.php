@@ -39,13 +39,13 @@ abstract class PHPThumb
      *
      * @var bool
      */
-    protected $remoteImage;
+    protected bool $remoteImage;
 
     /**
      * An array of attached plugins to execute in order.
      * @var array
      */
-    protected $plugins;
+    protected array $plugins;
 
     /**
      * @param $fileName
@@ -76,8 +76,8 @@ abstract class PHPThumb
      * @param $filename
      * @return bool
      */
-    protected function validateRequestedResource($filename)
-    {
+    protected function validateRequestedResource(string $filename)
+    : bool {
         if(false !== filter_var($filename, FILTER_VALIDATE_URL)) {
             $this->remoteImage = true;
             return true;
@@ -105,7 +105,7 @@ abstract class PHPThumb
      * @return PHPThumb
      */
     public function setFileName($fileName)
-    {
+    : self {
         $this->fileName = $fileName;
 
         return $this;
@@ -126,7 +126,7 @@ abstract class PHPThumb
      * @return PHPThumb
      */
     public function setFormat($format)
-    {
+    : self {
         $this->format = $format;
 
         return $this;

@@ -31,11 +31,11 @@ class Layers extends AbstractLayers
     /**
      * @var integer
      */
-    private $offset = 0;
+    private int $offset = 0;
     /**
      * @var array
      */
-    private $layers = array();
+    private array $layers = array();
 
     private $palette;
 
@@ -65,7 +65,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function animate($format, $delay, $loops)
-    {
+    : self {
         if ('gif' !== strtolower($format)) {
             throw new InvalidArgumentException('Animated picture is currently only supported on gif');
         }
@@ -178,7 +178,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function valid()
-    {
+    : bool {
         return $this->offset < count($this);
     }
 
@@ -198,7 +198,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function offsetExists($offset)
-    {
+    : bool {
         return is_int($offset) && $offset >= 0 && $offset < count($this);
     }
 

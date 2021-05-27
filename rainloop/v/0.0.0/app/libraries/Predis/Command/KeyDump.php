@@ -22,7 +22,7 @@ class KeyDump extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'DUMP';
     }
 }

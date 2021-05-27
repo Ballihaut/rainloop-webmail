@@ -79,7 +79,7 @@ class GraphObjectFactory extends GraphNodeFactory
      *
      * @deprecated 5.0.0 GraphObjectFactory has been renamed to GraphNodeFactory
      */
-    public function makeGraphList($subclassName = null, $auto_prefix = true)
+    public function makeGraphList($subclassName = null, bool $auto_prefix = true)
     {
         return $this->makeGraphEdge($subclassName, $auto_prefix);
     }

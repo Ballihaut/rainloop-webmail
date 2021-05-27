@@ -26,7 +26,7 @@ class Test
 	/**
 	 * @var array
 	 */
-	private static $aStreams = array();
+	private static array $aStreams = array();
 
 	/**
 	 * @var resource
@@ -38,8 +38,8 @@ class Test
 	 *
 	 * @return resource|bool
 	 */
-	public static function CreateStream($sRawResponse)
-	{
+	public static function CreateStream(string $sRawResponse)
+	: string {
 		if (!in_array(self::STREAM_NAME, stream_get_wrappers()))
 		{
 			stream_wrapper_register(self::STREAM_NAME, '\MailSo\Base\StreamWrappers\Test');
@@ -63,7 +63,7 @@ class Test
 	 *
 	 * @return bool
 	 */
-	public function stream_open($sPath)
+	public function stream_open(string $sPath)
 	{
 		$bResult = false;
 		$aPath = parse_url($sPath);
@@ -89,7 +89,7 @@ class Test
 	 *
 	 * @return string
 	 */
-	public function stream_read($iCount)
+	public function stream_read(int $iCount)
 	{
 		return fread($this->rReadSream, $iCount);
 	}
@@ -116,7 +116,7 @@ class Test
 	 * @return bool
 	 */
 	public function stream_eof()
-	{
+	: bool {
 		return feof($this->rReadSream);
 	}
 
@@ -132,7 +132,7 @@ class Test
 	 * @return bool
 	 */
 	public function stream_seek()
-	{
+	: bool {
 		return false;
 	}
 }

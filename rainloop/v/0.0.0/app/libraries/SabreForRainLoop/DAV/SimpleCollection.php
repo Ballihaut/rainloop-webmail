@@ -19,7 +19,7 @@ class SimpleCollection extends Collection {
      *
      * @var array
      */
-    protected $children = array();
+    protected array $children = array();
 
     /**
      * Name of this resource
@@ -97,7 +97,7 @@ class SimpleCollection extends Collection {
      *
      * @return array
      */
-    public function getChildren() {
+    public function getChildren() : array {
 
         return array_values($this->children);
 

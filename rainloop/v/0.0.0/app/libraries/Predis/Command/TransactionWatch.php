@@ -22,7 +22,7 @@ class TransactionWatch extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'WATCH';
     }
 
@@ -30,7 +30,7 @@ class TransactionWatch extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (isset($arguments[0]) && is_array($arguments[0])) {
             return $arguments[0];
         }

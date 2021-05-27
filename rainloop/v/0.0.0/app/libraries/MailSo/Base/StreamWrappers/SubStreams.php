@@ -26,39 +26,39 @@ class SubStreams
 	/**
 	 * @var array
 	 */
-	private static $aStreams = array();
+	private static array $aStreams = array();
 
 	/**
 	 * @var array
 	 */
-	private $aSubStreams;
+	private array $aSubStreams;
 
 	/**
 	 * @var int
 	 */
-	private $iIndex;
+	private int $iIndex;
 
 	/**
 	 * @var string
 	 */
-	private $sBuffer;
+	private string $sBuffer;
 
 	/**
 	 * @var bool
 	 */
-	private $bIsEnd;
+	private bool $bIsEnd;
 
 	/**
 	 * @var int
 	 */
-	private $iPos;
+	private int $iPos;
 
 	/**
 	 * @param array $aSubStreams
 	 *
 	 * @return resource|bool
 	 */
-	public static function CreateStream($aSubStreams)
+	public static function CreateStream(array $aSubStreams)
 	{
 		if (!\in_array(self::STREAM_NAME, \stream_get_wrappers()))
 		{
@@ -96,7 +96,7 @@ class SubStreams
 	 *
 	 * @return bool
 	 */
-	public function stream_open($sPath)
+	public function stream_open(string $sPath)
 	{
 		$this->aSubStreams = array();
 
@@ -198,7 +198,7 @@ class SubStreams
 	 * @return int
 	 */
 	public function stream_write()
-	{
+	: int {
 		return 0;
 	}
 
@@ -222,7 +222,7 @@ class SubStreams
 	 * @return array
 	 */
 	public function stream_stat()
-	{
+	: array {
 		return array(
 			'dev' => 2,
 			'ino' => 0,
@@ -244,7 +244,7 @@ class SubStreams
 	 * @return bool
 	 */
 	public function stream_seek()
-	{
+	: bool {
 		return false;
 	}
 }

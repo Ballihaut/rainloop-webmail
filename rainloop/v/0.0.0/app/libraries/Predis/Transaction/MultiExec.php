@@ -36,10 +36,10 @@ class MultiExec implements ClientContextInterface
 
     protected $client;
     protected $commands;
-    protected $exceptions = true;
-    protected $attempts = 0;
-    protected $watchKeys = array();
-    protected $modeCAS = false;
+    protected bool $exceptions = true;
+    protected int $attempts = 0;
+    protected array $watchKeys = array();
+    protected bool $modeCAS = false;
 
     /**
      * @param ClientInterface $client  Client instance used by the transaction.
@@ -196,7 +196,7 @@ class MultiExec implements ClientContextInterface
      * @return $this|mixed
      */
     public function executeCommand(CommandInterface $command)
-    {
+    : self {
         $this->initialize();
 
         if ($this->state->isCAS()) {
@@ -248,7 +248,7 @@ class MultiExec implements ClientContextInterface
      * @return MultiExec
      */
     public function multi()
-    {
+    : self {
         if ($this->state->check(MultiExecState::INITIALIZED | MultiExecState::CAS)) {
             $this->state->unflag(MultiExecState::CAS);
             $this->call('MULTI');
@@ -267,7 +267,7 @@ class MultiExec implements ClientContextInterface
      * @return MultiExec
      */
     public function unwatch()
-    {
+    : self {
         if (!$this->client->getProfile()->supportsCommand('UNWATCH')) {
             throw new NotSupportedException(
                 'UNWATCH is not supported by the current profile.'
@@ -287,7 +287,7 @@ class MultiExec implements ClientContextInterface
      * @return MultiExec
      */
     public function discard()
-    {
+    : self {
         if ($this->state->isInitialized()) {
             $this->call($this->state->isCAS() ? 'UNWATCH' : 'DISCARD');
 
@@ -304,7 +304,7 @@ class MultiExec implements ClientContextInterface
      * @return mixed
      */
     public function exec()
-    {
+    : array {
         return $this->execute();
     }
 
@@ -422,7 +422,7 @@ class MultiExec implements ClientContextInterface
      * @throws CommunicationException
      * @throws ServerException
      */
-    protected function executeTransactionBlock($callable)
+    protected function executeTransactionBlock(callable $callable)
     {
         $exception = null;
         $this->state->flag(MultiExecState::INSIDEBLOCK);

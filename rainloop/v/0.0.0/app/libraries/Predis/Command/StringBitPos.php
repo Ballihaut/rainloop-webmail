@@ -22,7 +22,7 @@ class StringBitPos extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BITPOS';
     }
 }

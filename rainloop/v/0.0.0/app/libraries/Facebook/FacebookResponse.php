@@ -42,7 +42,7 @@ class FacebookResponse
     /**
      * @var array The headers returned from Graph.
      */
-    protected $headers;
+    protected array $headers;
 
     /**
      * @var string The raw body of the response from Graph.
@@ -52,7 +52,7 @@ class FacebookResponse
     /**
      * @var array The decoded body of the Graph response.
      */
-    protected $decodedBody = [];
+    protected array $decodedBody = [];
 
     /**
      * @var FacebookRequest The original request that returned this response.
@@ -386,7 +386,7 @@ class FacebookResponse
      * @deprecated 5.0.0 getGraphList() has been renamed to getGraphEdge()
      * @todo v6: Remove this method
      */
-    public function getGraphList($subclassName = null, $auto_prefix = true)
+    public function getGraphList($subclassName = null, bool $auto_prefix = true)
     {
         return $this->getGraphEdge($subclassName, $auto_prefix);
     }
@@ -401,7 +401,7 @@ class FacebookResponse
      *
      * @throws FacebookSDKException
      */
-    public function getGraphEdge($subclassName = null, $auto_prefix = true)
+    public function getGraphEdge($subclassName = null, bool $auto_prefix = true)
     {
         $factory = new GraphNodeFactory($this);
 

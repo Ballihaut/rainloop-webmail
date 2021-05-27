@@ -20,7 +20,7 @@ class File extends Node implements DAV\PartialUpdate\IFile {
      * @param resource|string $data
      * @return string
      */
-    public function put($data) {
+    public function put($data) : string {
 
         file_put_contents($this->path,$data);
         return '"' . md5_file($this->path) . '"';
@@ -37,7 +37,7 @@ class File extends Node implements DAV\PartialUpdate\IFile {
      * param resource|string $data
      * @return void
      */
-    public function putRange($data, $offset) {
+    public function putRange($data, $offset) : string {
 
         $f = fopen($this->path, 'c');
         fseek($f,$offset-1);
@@ -84,7 +84,7 @@ class File extends Node implements DAV\PartialUpdate\IFile {
      *
      * @return string|null
      */
-    public function getETag() {
+    public function getETag() : string {
 
         return '"' . md5_file($this->path). '"';
 

@@ -14,7 +14,7 @@ namespace SabreForRainLoop\VObject;
  */
 class TimeZoneUtil {
 
-    public static $map = array(
+    public static array $map = array(
 
         // from http://unicode.org/repos/cldr-tmp/trunk/diff/supplemental/zone_tzid.html
         // snapshot taken on 2012/01/16
@@ -305,7 +305,7 @@ class TimeZoneUtil {
      *
      * Source: http://msdn.microsoft.com/en-us/library/aa563018(loband).aspx
      */
-    public static $microsoftExchangeMap = array(
+    public static array $microsoftExchangeMap = array(
         0  => 'UTC',
         31 => 'Africa/Casablanca',
 
@@ -405,7 +405,7 @@ class TimeZoneUtil {
      * @param SabreForRainLoop\VObject\Component $vcalendar
      * @return DateTimeZone
      */
-    static public function getTimeZone($tzid, Component $vcalendar = null, $failIfUncertain = false) {
+    public static function getTimeZone($tzid, Component $vcalendar = null, bool $failIfUncertain = false) {
 
         // First we will just see if the tzid is a support timezone identifier.
         try {

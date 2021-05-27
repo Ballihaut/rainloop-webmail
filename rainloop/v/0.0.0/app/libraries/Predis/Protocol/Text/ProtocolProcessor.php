@@ -29,7 +29,7 @@ use Predis\Response\Status as StatusResponse;
  */
 class ProtocolProcessor implements ProtocolProcessorInterface
 {
-    protected $mbiterable;
+    protected bool $mbiterable;
     protected $serializer;
 
     /**

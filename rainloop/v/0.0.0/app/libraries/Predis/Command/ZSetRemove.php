@@ -22,7 +22,7 @@ class ZSetRemove extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREM';
     }
 
@@ -30,7 +30,7 @@ class ZSetRemove extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeVariadic($arguments);
     }
 }

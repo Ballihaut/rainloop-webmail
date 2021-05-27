@@ -9,8 +9,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function PublicFile($sHash)
-	{
+	public static function PublicFile(string $sHash)
+	: string {
 		return '/Public/Files/'.sha1($sHash).'/Data/';
 	}
 
@@ -19,8 +19,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function SsoCacherKey($sSsoHash)
-	{
+	public static function SsoCacherKey(string $sSsoHash)
+	: string {
 		return '/Sso/Data/'.$sSsoHash.'/Login/';
 	}
 
@@ -29,8 +29,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function RsaCacherKey($sHash)
-	{
+	public static function RsaCacherKey(string $sHash)
+	: string {
 		return '/Rsa/Data/'.$sHash.'/';
 	}
 
@@ -39,8 +39,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function LicensingDomainKeyValue($sDomain)
-	{
+	public static function LicensingDomainKeyValue(string $sDomain)
+	: string {
 		return '/Licensing/DomainKey/Value/'.$sDomain;
 	}
 
@@ -49,8 +49,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function LicensingDomainKeyOtherValue($sDomain)
-	{
+	public static function LicensingDomainKeyOtherValue(string $sDomain)
+	: string {
 		return '/Licensing/DomainKeyOther/Value/'.$sDomain;
 	}
 
@@ -60,8 +60,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function RepositoryCacheFile($sRepo, $sRepoFile)
-	{
+	public static function RepositoryCacheFile(string $sRepo, string $sRepoFile)
+	: string {
 		return '/RepositoryCache/Repo/'.$sRepo.'/File/'.$sRepoFile;
 	}
 
@@ -70,7 +70,7 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function RepositoryCacheCore($sRepo)
+	public static function RepositoryCacheCore(string $sRepo)
 	{
 		return '/RepositoryCache/CoreRepo/'.$sRepo;
 	}
@@ -82,8 +82,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function ReadReceiptCache($sEmail, $sFolderFullName, $sUid)
-	{
+	public static function ReadReceiptCache(string $sEmail, string $sFolderFullName, string $sUid)
+	: string {
 		return '/ReadReceipt/'.$sEmail.'/'.$sFolderFullName.'/'.$sUid;
 	}
 
@@ -94,8 +94,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function LangCache($sLanguage, $bAdmim, $sPluginsHash)
-	{
+	public static function LangCache(string $sLanguage, $bAdmim, string $sPluginsHash)
+	: string {
 		return '/LangCache/'.$sPluginsHash.'/'.$sLanguage.'/'.($bAdmim ? 'Admin' : 'App').'/'.APP_VERSION.'/';
 	}
 
@@ -105,8 +105,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function TemplatesCache($bAdmin, $sPluginsHash)
-	{
+	public static function TemplatesCache($bAdmin, string $sPluginsHash)
+	: string {
 		return '/TemplatesCache/'.$sPluginsHash.'/'.($bAdmin ? 'Admin' : 'App').'/'.APP_VERSION.'/';
 	}
 
@@ -115,8 +115,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function PluginsJsCache($sPluginsHash)
-	{
+	public static function PluginsJsCache(string $sPluginsHash)
+	: string {
 		return '/PluginsJsCache/'.$sPluginsHash.'/'.APP_VERSION.'/';
 	}
 
@@ -127,8 +127,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function CssCache($sTheme, $sHash)
-	{
+	public static function CssCache(string $sTheme, string $sHash)
+	: string {
 		return '/CssCache/'.$sHash.'/'.$sTheme.'/'.APP_VERSION.'/';
 	}
 
@@ -137,8 +137,8 @@ class KeyPathHelper
 	 *
 	 * @return string
 	 */
-	static public function SessionAdminKey($sRand)
-	{
+	public static function SessionAdminKey(string $sRand)
+	: string {
 		return '/Session/AdminKey/'.\md5($sRand).'/';
 	}
 }

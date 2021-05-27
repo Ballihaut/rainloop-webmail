@@ -29,7 +29,7 @@ class FlatText extends Text {
      *
      * @var string
      */
-    public $delimiter = ',';
+    public string $delimiter = ',';
 
     /**
      * Sets the value as a quoted-printable encoded string.

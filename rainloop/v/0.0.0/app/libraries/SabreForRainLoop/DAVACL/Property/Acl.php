@@ -18,7 +18,7 @@ class Acl extends DAV\Property {
      *
      * @var array
      */
-    private $privileges;
+    private array $privileges;
 
     /**
      * Whether or not the server base url is required to be prefixed when
@@ -26,7 +26,7 @@ class Acl extends DAV\Property {
      *
      * @var boolean
      */
-    private $prefixBaseUrl;
+    private bool $prefixBaseUrl;
 
     /**
      * Constructor
@@ -87,7 +87,7 @@ class Acl extends DAV\Property {
      * @param \DOMElement $dom
      * @return Acl
      */
-    static public function unserialize(\DOMElement $dom) {
+    public static function unserialize(\DOMElement $dom) {
 
         $privileges = array();
         $xaces = $dom->getElementsByTagNameNS('urn:DAV','ace');

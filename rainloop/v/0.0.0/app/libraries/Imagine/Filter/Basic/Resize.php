@@ -24,7 +24,7 @@ class Resize implements FilterInterface
      * @var BoxInterface
      */
     private $size;
-    private $filter;
+    private string $filter;
 
     /**
      * Constructs Resize filter with given width and height

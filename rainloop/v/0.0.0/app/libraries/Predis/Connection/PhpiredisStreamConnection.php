@@ -88,7 +88,7 @@ class PhpiredisStreamConnection extends StreamConnection
      * {@inheritdoc}
      */
     protected function tcpStreamInitializer(ParametersInterface $parameters)
-    {
+    : float {
         $uri = "tcp://[{$parameters->host}]:{$parameters->port}";
         $flags = STREAM_CLIENT_CONNECT;
         $socket = null;

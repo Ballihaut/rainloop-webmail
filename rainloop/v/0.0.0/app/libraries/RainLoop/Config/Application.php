@@ -66,7 +66,7 @@ class Application extends \RainLoop\Config\AbstractConfig
 			$sKey = \strtolower($sSection.'.'.$sName);
 			if (\in_array($sKey, $this->aReplaceEnv) && false !== strpos($mResult, '$'))
 			{
-				$mResult = \preg_replace_callback('/\$([^\s]+)/', function($aMatch) {
+				$mResult = \preg_replace_callback('/\$([^\s]+)/', function($aMatch) : string {
 
 					if (!empty($aMatch[0]) && !empty($aMatch[1]))
 					{
@@ -97,7 +97,7 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 *
 	 * @return void
 	 */
-	public function SetPassword($sPassword)
+	public function SetPassword(string $sPassword)
 	{
 		if (function_exists('password_hash'))
 		{
@@ -111,8 +111,8 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 *
 	 * @return bool
 	 */
-	public function ValidatePassword($sPassword)
-	{
+	public function ValidatePassword(string $sPassword)
+	: bool {
 		$sPassword = (string) $sPassword;
 		$sConfigPassword = (string) $this->Get('security', 'admin_password', '');
 
@@ -149,7 +149,7 @@ class Application extends \RainLoop\Config\AbstractConfig
 	 * @return array
 	 */
 	protected function defaultValues()
-	{
+	: array {
 		return array(
 
 			'webmail' => array(

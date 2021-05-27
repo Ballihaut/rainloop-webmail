@@ -99,7 +99,7 @@ abstract class Node implements \IteratorAggregate, \ArrayAccess, \Countable {
      * @param int $options
      * @return array
      */
-    public function validate($options = 0) {
+    public function validate(int $options = 0) {
 
         return array();
 

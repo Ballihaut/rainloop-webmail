@@ -25,7 +25,7 @@ class SupportedPrivilegeSet extends DAV\Property {
      *
      * @var array
      */
-    private $privileges;
+    private array $privileges;
 
     /**
      * Constructor

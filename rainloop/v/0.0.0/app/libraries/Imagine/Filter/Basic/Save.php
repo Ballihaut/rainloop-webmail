@@ -27,7 +27,7 @@ class Save implements FilterInterface
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * Constructs Save filter with given path and options

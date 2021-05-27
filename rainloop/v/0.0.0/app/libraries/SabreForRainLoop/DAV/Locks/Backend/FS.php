@@ -36,7 +36,7 @@ class FS extends AbstractBackend {
 
     }
 
-    protected function getFileNameForUri($uri) {
+    protected function getFileNameForUri(string $uri) : string {
 
         return $this->dataDir . '/sabredav_' . md5($uri) . '.locks';
 
@@ -96,7 +96,7 @@ class FS extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function lock($uri, LockInfo $lockInfo) {
+    public function lock($uri, LockInfo $lockInfo) : bool {
 
         // We're making the lock timeout 30 minutes
         $lockInfo->timeout = 1800;
@@ -119,7 +119,7 @@ class FS extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function unlock($uri, LockInfo $lockInfo) {
+    public function unlock($uri, LockInfo $lockInfo) : bool {
 
         $locks = $this->getLocks($uri,false);
         foreach($locks as $k=>$lock) {
@@ -142,7 +142,7 @@ class FS extends AbstractBackend {
      * @param string $uri
      * @return array
      */
-    protected function getData($uri) {
+    protected function getData($uri) : array {
 
         $path = $this->getFilenameForUri($uri);
         if (!file_exists($path)) return array();

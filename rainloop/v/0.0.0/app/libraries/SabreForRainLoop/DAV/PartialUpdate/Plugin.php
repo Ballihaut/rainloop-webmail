@@ -50,7 +50,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'partialupdate';
 
@@ -91,7 +91,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getHTTPMethods($uri) {
+    public function getHTTPMethods($uri) : array {
         
         $tree = $this->server->tree;
         
@@ -109,7 +109,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array('sabredav-partialupdate');
 

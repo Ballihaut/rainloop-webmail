@@ -22,7 +22,7 @@ class SetDifferenceStore extends SetIntersectionStore
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SDIFFSTORE';
     }
 }

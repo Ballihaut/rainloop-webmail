@@ -23,8 +23,8 @@ class Filters extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return array
 	 */
-	public function Load($oAccount, $bAllowRaw = false)
-	{
+	public function Load($oAccount, bool $bAllowRaw = false)
+	: bool {
 		try
 		{
 			return $this->IsActive() ? $this->oDriver->Load($oAccount, $bAllowRaw) : array();
@@ -49,8 +49,8 @@ class Filters extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return bool
 	 */
-	public function Save($oAccount, $aFilters, $sRaw = '', $bRawIsActive = false)
-	{
+	public function Save($oAccount, $aFilters, string $sRaw = '', bool $bRawIsActive = false)
+	: bool {
 		try
 		{
 			return $this->IsActive() ? $this->oDriver->Save(

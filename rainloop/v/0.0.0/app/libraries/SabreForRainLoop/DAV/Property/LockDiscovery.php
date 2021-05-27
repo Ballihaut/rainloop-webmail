@@ -20,14 +20,14 @@ class LockDiscovery extends DAV\Property {
      *
      * @var array
      */
-    public $locks;
+    public iterable $locks;
 
     /**
      * Should we show the locktoken as well?
      *
      * @var bool
      */
-    public $revealLockToken;
+    public bool $revealLockToken;
 
     /**
      * Hides the {DAV:}lockroot element from the response.
@@ -35,7 +35,7 @@ class LockDiscovery extends DAV\Property {
      * It was reported that showing the lockroot in the response can break
      * Office 2000 compatibility.
      */
-    static public $hideLockRoot = false;
+    public static $hideLockRoot = false;
 
     /**
      * __construct

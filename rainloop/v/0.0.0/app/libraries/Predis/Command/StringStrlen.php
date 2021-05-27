@@ -22,7 +22,7 @@ class StringStrlen extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'STRLEN';
     }
 }

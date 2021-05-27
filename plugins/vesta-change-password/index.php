@@ -38,7 +38,7 @@ class VestaChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
      * @return array
      */
     public function configMapping()
-    {
+    : array {
         return array(
             \RainLoop\Plugins\Property::NewInstance('vesta_host')->SetLabel('Vesta Host')
                 ->SetDefaultValue('')

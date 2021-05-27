@@ -19,7 +19,7 @@ class ElementList implements \Iterator, \Countable, \ArrayAccess {
      *
      * @var array
      */
-    protected $elements = array();
+    protected array $elements = array();
 
     /**
      * Creates the element list.
@@ -39,7 +39,7 @@ class ElementList implements \Iterator, \Countable, \ArrayAccess {
      *
      * @var int
      */
-    private $key = 0;
+    private int $key = 0;
 
     /**
      * Returns current item in iteration
@@ -105,7 +105,7 @@ class ElementList implements \Iterator, \Countable, \ArrayAccess {
      *
      * @return int
      */
-    public function count() {
+    public function count() : int {
 
         return count($this->elements);
 

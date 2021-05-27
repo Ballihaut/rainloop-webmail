@@ -7,27 +7,27 @@ abstract class AbstractConfig
 	/**
 	 * @var string
 	 */
-	private $sFile;
+	private string $sFile;
 
 	/**
 	 * @var string
 	 */
-	private $sAdditionalFile;
+	private string $sAdditionalFile;
 
 	/**
 	 * @var array
 	 */
-	private $aData;
+	private iterable $aData;
 
 	/**
 	 * @var bool
 	 */
-	private $bUseApcCache;
+	private bool $bUseApcCache;
 
 	/**
 	 * @var string
 	 */
-	private $sFileHeader;
+	private string $sFileHeader;
 
 	/**
 	 * @param string $sFileName
@@ -55,13 +55,13 @@ abstract class AbstractConfig
 	/**
 	 * @return array
 	 */
-	protected abstract function defaultValues();
+	abstract protected function defaultValues();
 
 	/**
 	 * @return bool
 	 */
 	public function IsInited()
-	{
+	: bool {
 		return \is_array($this->aData) && 0 < \count($this->aData);
 	}
 
@@ -121,7 +121,7 @@ abstract class AbstractConfig
 	 * @return string
 	 */
 	private function cacheKey()
-	{
+	: string {
 		return 'config:'.\sha1($this->sFile).':'.\sha1($this->sAdditionalFile).':';
 	}
 
@@ -129,7 +129,7 @@ abstract class AbstractConfig
 	 * @return bool
 	 */
 	private function loadDataFromCache()
-	{
+	: bool {
 		if ($this->bUseApcCache)
 		{
 			$iMTime = @\filemtime($this->sFile);
@@ -162,7 +162,7 @@ abstract class AbstractConfig
 	 * @return bool
 	 */
 	private function storeDataToCache()
-	{
+	: bool {
 		if ($this->bUseApcCache)
 		{
 			$iMTime = @\filemtime($this->sFile);
@@ -189,7 +189,7 @@ abstract class AbstractConfig
 	 * @return bool
 	 */
 	private function clearCache()
-	{
+	: bool {
 		if ($this->bUseApcCache)
 		{
 			$sKey = $this->cacheKey();
@@ -207,7 +207,7 @@ abstract class AbstractConfig
 	 * @return bool
 	 */
 	public function IsFileExists()
-	{
+	: bool {
 		return \file_exists($this->sFile);
 	}
 
@@ -298,7 +298,7 @@ abstract class AbstractConfig
 						{
 							$sDesk = \str_replace("\r", '', $mParamValue[1]);
 							$aDesk = \explode("\n", $sDesk);
-							$aDesk = \array_map(function (&$sLine) {
+							$aDesk = \array_map(function (string &$sLine) : string {
 								return '; '.$sLine;
 							}, $aDesk);
 

@@ -21,8 +21,8 @@ if (!\defined('MAILSO_LIBRARY_ROOT_PATH'))
 	 *
 	 * @return mixed
 	 */
-	function MailSoSplAutoloadRegisterFunction($sClassName)
-	{
+	function MailSoSplAutoloadRegisterFunction(string $sClassName)
+	: bool {
 		return (0 === \strpos($sClassName, 'MailSo') && false !== \strpos($sClassName, '\\')) ?
 			include MAILSO_LIBRARY_ROOT_PATH.\str_replace('\\', '/', \substr($sClassName, 7)).'.php' : false;
 	}

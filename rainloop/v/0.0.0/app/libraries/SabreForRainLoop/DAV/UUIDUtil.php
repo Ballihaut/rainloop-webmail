@@ -23,7 +23,7 @@ class UUIDUtil {
      * @see http://www.php.net/manual/en/function.uniqid.php#94959
      * @return string
      */
-    static function getUUID() {
+    static function getUUID() : string {
 
         return sprintf( '%04x%04x-%04x-%04x-%04x-%04x%04x%04x',
             // 32 bits for "time_low"
@@ -52,7 +52,7 @@ class UUIDUtil {
      * @param string $uuid
      * @return bool
      */
-    static function validateUUID($uuid) {
+    static function validateUUID($uuid) : bool {
 
         return preg_match(
             '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i',

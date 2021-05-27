@@ -4,8 +4,8 @@
 // Action: Creates MD5 encrypted password
 // Call: md5crypt (string cleartextpassword)
 
-function md5crypt($pw, $salt = "", $magic = "")
-{
+function md5crypt($pw, string $salt = "", string $magic = "")
+: string {
     $MAGIC = "$1$";
 
     if ($magic == "")
@@ -101,7 +101,7 @@ function md5crypt($pw, $salt = "", $magic = "")
 }
 
 function create_salt()
-{
+: string {
     srand((double) microtime() * 1000000);
     return substr(md5(rand(0,9999999)), 0, 8);
 }
@@ -109,7 +109,7 @@ function create_salt()
 // PHP around 5.3.8 includes hex2bin as native function - http://php.net/hex2bin
 if (!function_exists('hex2bin'))
 {
-	function hex2bin($str)
+	function hex2bin(string $str)
 	{
 		$len = strlen($str);
 		$nstr = "";
@@ -123,7 +123,7 @@ if (!function_exists('hex2bin'))
 	}
 }
 
-function to64($v, $n)
+function to64($v, int $n)
 {
     $ITOA64 = "./0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     $ret = "";

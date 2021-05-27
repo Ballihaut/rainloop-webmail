@@ -24,7 +24,7 @@ class MultiExecState
     const CAS         = 8;    // 0b01000
     const WATCH       = 16;   // 0b10000
 
-    private $flags;
+    private int $flags;
 
     /**
      *
@@ -82,7 +82,7 @@ class MultiExecState
      * @return bool
      */
     public function check($flags)
-    {
+    : bool {
         return ($this->flags & $flags) === $flags;
     }
 
@@ -100,7 +100,7 @@ class MultiExecState
      * @return bool
      */
     public function isReset()
-    {
+    : bool {
         return $this->flags === 0;
     }
 
@@ -140,7 +140,7 @@ class MultiExecState
      * @return bool
      */
     public function isWatchAllowed()
-    {
+    : bool {
         return $this->check(self::INITIALIZED) && !$this->check(self::CAS);
     }
 

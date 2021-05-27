@@ -21,7 +21,7 @@ class AddressBook extends DAV\Collection implements IAddressBook, DAV\IPropertie
      *
      * @var array
      */
-    protected $addressBookInfo;
+    protected array $addressBookInfo;
 
     /**
      * CardDAV backend
@@ -262,7 +262,7 @@ class AddressBook extends DAV\Collection implements IAddressBook, DAV\IPropertie
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

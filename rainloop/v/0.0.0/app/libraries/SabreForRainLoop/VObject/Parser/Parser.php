@@ -33,7 +33,7 @@ abstract class Parser {
      *
      * @var int
      */
-    protected $options;
+    protected int $options;
 
     /**
      * Creates the parser.

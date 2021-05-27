@@ -37,7 +37,7 @@ abstract class AbstractPrincipalCollection extends DAV\Collection implements IPr
      *
      * @var bool
      */
-    public $disableListing = false;
+    public bool $disableListing = false;
 
     /**
      * Creates the object

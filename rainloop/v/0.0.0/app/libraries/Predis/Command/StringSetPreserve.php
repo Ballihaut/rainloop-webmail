@@ -22,7 +22,7 @@ class StringSetPreserve extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SETNX';
     }
 

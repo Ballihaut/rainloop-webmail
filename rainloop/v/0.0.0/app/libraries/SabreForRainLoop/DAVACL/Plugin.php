@@ -53,7 +53,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $principalCollectionSet = array(
+    public array $principalCollectionSet = array(
         'principals',
     );
 
@@ -67,7 +67,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var bool
      */
-    public $allowAccessToNodesWithoutACL = true;
+    public bool $allowAccessToNodesWithoutACL = true;
 
     /**
      * By default nodes that are inaccessible by the user, can still be seen
@@ -78,7 +78,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var bool
      */
-    public $hideNodesFromListings = false;
+    public bool $hideNodesFromListings = false;
 
     /**
      * This string is prepended to the username of the currently logged in
@@ -87,7 +87,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var string
      */
-    public $defaultUsernamePath = 'principals';
+    public string $defaultUsernamePath = 'principals';
 
     /**
      * This list of properties are the properties a client can search on using
@@ -97,7 +97,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $principalSearchPropertySet = array(
+    public array $principalSearchPropertySet = array(
         '{DAV:}displayname' => 'Display name',
         '{http://sabredav.org/ns}email-address' => 'Email address',
     );
@@ -109,7 +109,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $adminPrincipals = array();
+    public array $adminPrincipals = array();
 
     /**
      * Returns a list of features added by this plugin.
@@ -118,7 +118,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array('access-control', 'calendarserver-principal-property-search');
 
@@ -130,7 +130,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getMethods($uri) {
+    public function getMethods($uri) : array {
 
         return array('ACL');
 
@@ -144,7 +144,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'acl';
 
@@ -160,7 +160,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getSupportedReportSet($uri) {
+    public function getSupportedReportSet($uri) : array {
 
         return array(
             '{DAV:}expand-property',
@@ -185,7 +185,7 @@ class Plugin extends DAV\ServerPlugin {
      * @throws SabreForRainLoop\DAVACL\Exception\NeedPrivileges
      * @return bool
      */
-    public function checkPrivileges($uri, $privileges, $recursion = self::R_PARENT, $throwExceptions = true) {
+    public function checkPrivileges($uri, $privileges, $recursion = self::R_PARENT, bool $throwExceptions = true) : bool {
 
         if (!is_array($privileges)) $privileges = array($privileges);
 
@@ -250,7 +250,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getCurrentUserPrincipals() {
+    public function getCurrentUserPrincipals() : array {
 
         $currentUser = $this->getCurrentUserPrincipal();
 
@@ -269,7 +269,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    protected $principalMembershipCache = array();
+    protected array $principalMembershipCache = array();
 
 
     /**
@@ -351,7 +351,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    static function getDefaultSupportedPrivilegeSet() {
+    static function getDefaultSupportedPrivilegeSet() : array {
 
         return array(
             'privilege'  => '{DAV:}all',
@@ -993,7 +993,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param \DOMNode $dom
      * @return bool
      */
-    public function report($reportName, $dom) {
+    public function report($reportName, $dom) : bool {
 
         switch($reportName) {
 
@@ -1342,7 +1342,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param \DOMDocument $dom
      * @return array
      */
-    protected function parsePrincipalPropertySearchReportRequest($dom) {
+    protected function parsePrincipalPropertySearchReportRequest($dom) : array {
 
         $httpDepth = $this->server->getHTTPDepth(0);
         if ($httpDepth!==0) {

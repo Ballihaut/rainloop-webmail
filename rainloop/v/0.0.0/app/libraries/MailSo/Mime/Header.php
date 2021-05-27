@@ -20,7 +20,7 @@ class Header
 	/**
 	 * @var string
 	 */
-	private $sName;
+	private string $sName;
 
 	/**
 	 * @var string
@@ -30,12 +30,12 @@ class Header
 	/**
 	 * @var string
 	 */
-	private $sFullValue;
+	private string $sFullValue;
 
 	/**
 	 * @var string
 	 */
-	private $sEncodedValueForReparse;
+	private string $sEncodedValueForReparse;
 
 	/**
 	 * @var ParameterCollection
@@ -69,7 +69,7 @@ class Header
 	 *
 	 * @return void
 	 */
-	private function initInputData($sName, $sValue, $sEncodedValueForReparse)
+	private function initInputData(string $sName, string $sValue, string $sEncodedValueForReparse)
 	{
 		$this->sName = trim($sName);
 		$this->sFullValue = trim($sValue);
@@ -109,7 +109,7 @@ class Header
 	 *
 	 * @return \MailSo\Mime\Header
 	 */
-	public static function NewInstance($sName, $sValue = '', $sEncodedValueForReparse = '', $sParentCharset = '')
+	public static function NewInstance($sName, string $sValue = '', string $sEncodedValueForReparse = '', string $sParentCharset = '')
 	{
 		return new self($sName, $sValue, $sEncodedValueForReparse, $sParentCharset);
 	}
@@ -121,7 +121,7 @@ class Header
 	 * @return \MailSo\Mime\Header | false
 	 */
 	public static function NewInstanceFromEncodedString($sEncodedLines, $sIncomingCharset = \MailSo\Base\Enumerations\Charset::ISO_8859_1)
-	{
+	: bool {
 		if (empty($sIncomingCharset))
 		{
 			$sIncomingCharset = \MailSo\Base\Enumerations\Charset::ISO_8859_1;
@@ -153,7 +153,7 @@ class Header
 	 * @return string
 	 */
 	public function NameWithDelimitrom()
-	{
+	: string {
 		return $this->Name().': ';
 	}
 
@@ -177,8 +177,8 @@ class Header
 	 * @param string $sParentCharset
 	 * @return \MailSo\Mime\Header
 	 */
-	public function SetParentCharset($sParentCharset)
-	{
+	public function SetParentCharset(bool $sParentCharset)
+	: self {
 		if ($this->sParentCharset !== $sParentCharset && $this->IsReparsed() && 0 < \strlen($this->sEncodedValueForReparse))
 		{
 			$this->initInputData(
@@ -205,8 +205,8 @@ class Header
 	 * @param string $sValue
 	 * @return string
 	 */
-	private function wordWrapHelper($sValue, $sGlue = "\r\n ")
-	{
+	private function wordWrapHelper(string $sValue, string $sGlue = "\r\n ")
+	: string {
 		return \trim(substr(wordwrap($this->NameWithDelimitrom().$sValue,
 			\MailSo\Mime\Enumerations\Constants::LINE_LENGTH, $sGlue
 		), \strlen($this->NameWithDelimitrom())));
@@ -257,7 +257,7 @@ class Header
 	 * @return bool
 	 */
 	public function IsSubject()
-	{
+	: bool {
 		return \strtolower(\MailSo\Mime\Enumerations\Header::SUBJECT) === \strtolower($this->Name());
 	}
 
@@ -265,7 +265,7 @@ class Header
 	 * @return bool
 	 */
 	public function IsParameterized()
-	{
+	: bool {
 		return \in_array(\strtolower($this->sName), array(
 			\strtolower(\MailSo\Mime\Enumerations\Header::CONTENT_TYPE),
 			\strtolower(\MailSo\Mime\Enumerations\Header::CONTENT_DISPOSITION)
@@ -276,7 +276,7 @@ class Header
 	 * @return bool
 	 */
 	public function IsEmail()
-	{
+	: bool {
 		return \in_array(\strtolower($this->sName), array(
 			\strtolower(\MailSo\Mime\Enumerations\Header::FROM_),
 			\strtolower(\MailSo\Mime\Enumerations\Header::TO_),
@@ -313,7 +313,7 @@ class Header
 	 * @return bool
 	 */
 	public function IsReparsed()
-	{
+	: bool {
 		return $this->IsEmail() || $this->IsSubject() || $this->IsParameterized();
 	}
 }

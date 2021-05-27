@@ -51,7 +51,7 @@ class XMLUtil {
      * @throws InvalidArgumentException
      * @return array
      */
-    static function parseClarkNotation($str) {
+    static function parseClarkNotation(string $str) : array {
 
         if (!preg_match('/^{([^}]*)}(.*)$/',$str,$matches)) {
             throw new \InvalidArgumentException('\'' . $str . '\' is not a valid clark-notation formatted string');
@@ -158,7 +158,7 @@ class XMLUtil {
      * @param array $propertyMap
      * @return array
      */
-    static function parseProperties(\DOMElement $parentNode, array $propertyMap = array()) {
+    static function parseProperties(\DOMElement $parentNode, array $propertyMap = array()) : iterable {
 
         $propList = array();
         foreach($parentNode->childNodes as $propNode) {

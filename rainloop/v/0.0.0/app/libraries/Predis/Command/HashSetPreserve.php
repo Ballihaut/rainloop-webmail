@@ -22,7 +22,7 @@ class HashSetPreserve extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HSETNX';
     }
 

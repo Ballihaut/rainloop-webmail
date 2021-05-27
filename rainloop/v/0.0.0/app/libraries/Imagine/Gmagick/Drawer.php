@@ -43,7 +43,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function arc(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $thickness = 1)
-    {
+    : self {
         $x      = $center->getX();
         $y      = $center->getY();
         $width  = $size->getWidth();
@@ -81,7 +81,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function chord(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         $x      = $center->getX();
         $y      = $center->getY();
         $width  = $size->getWidth();
@@ -125,7 +125,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function ellipse(PointInterface $center, BoxInterface $size, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         $width  = $size->getWidth();
         $height = $size->getHeight();
 
@@ -166,7 +166,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function line(PointInterface $start, PointInterface $end, ColorInterface $color, $thickness = 1)
-    {
+    : self {
         try {
             $pixel = $this->getColor($color);
             $line  = new \GmagickDraw();
@@ -197,7 +197,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function pieSlice(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         $width  = $size->getWidth();
         $height = $size->getHeight();
 
@@ -231,7 +231,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function dot(PointInterface $position, ColorInterface $color)
-    {
+    : self {
         $x = $position->getX();
         $y = $position->getY();
 
@@ -257,12 +257,12 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function polygon(array $coordinates, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         if (count($coordinates) < 3) {
             throw new InvalidArgumentException(sprintf('Polygon must consist of at least 3 coordinates, %d given', count($coordinates)));
         }
 
-        $points = array_map(function (PointInterface $p) {
+        $points = array_map(function (PointInterface $p) : array {
             return array('x' => $p->getX(), 'y' => $p->getY());
         }, $coordinates);
 
@@ -295,18 +295,18 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function text($string, AbstractFont $font, PointInterface $position, $angle = 0, $width = null)
-    {
+    : self {
         try {
             $pixel = $this->getColor($font->getColor());
             $text  = new \GmagickDraw();
 
             $text->setfont($font->getFile());
-            /**
+            $text->setfontsize((int) ($font->getSize(/**
              * @see http://www.php.net/manual/en/imagick.queryfontmetrics.php#101027
              *
              * ensure font resolution is the same as GD's hard-coded 96
              */
-            $text->setfontsize((int) ($font->getSize() * (96 / 72)));
+            ) * (96 / 72)));
             $text->setfillcolor($pixel);
 
             $info = $this->gmagick->queryfontmetrics($text, $string);

@@ -5,12 +5,12 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	/**
 	 * @var string
 	 */
-	private $sHostName = '127.0.0.1';
+	private string $sHostName = '127.0.0.1';
 
 	/**
 	 * @var int
 	 */
-	private $iHostPort = 389;
+	private int $iHostPort = 389;
 
 	/**
 	 * @var string
@@ -25,27 +25,27 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	/**
 	 * @var string
 	 */
-	private $sUsersDn = '';
+	private string $sUsersDn = '';
 
 	/**
 	 * @var string
 	 */
-	private $sObjectClass = 'inetOrgPerson';
+	private string $sObjectClass = 'inetOrgPerson';
 
 	/**
 	 * @var string
 	 */
-	private $sUidField = 'uid';
+	private string $sUidField = 'uid';
 
 	/**
 	 * @var string
 	 */
-	private $sNameField = 'givenname';
+	private string $sNameField = 'givenname';
 
 	/**
 	 * @var string
 	 */
-	private $sEmailField = 'mail';
+	private string $sEmailField = 'mail';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -55,7 +55,7 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @param string $sHostName
@@ -69,8 +69,8 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 *
 	 * @return \LdapContactsSuggestions
 	 */
-	public function SetConfig($sHostName, $iHostPort, $sAccessDn, $sAccessPassword, $sUsersDn, $sObjectClass, $sUidField, $sNameField, $sEmailField)
-	{
+	public function SetConfig($sHostName, $iHostPort, string $sAccessDn, $sAccessPassword, $sUsersDn, $sObjectClass, $sUidField, $sNameField, $sEmailField)
+	: self {
 		$this->sHostName = $sHostName;
 		$this->iHostPort = $iHostPort;
 		if (0 < \strlen($sAccessDn))
@@ -93,7 +93,7 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 * @return \LdapContactsSuggestions
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 
 		return $this;
@@ -107,7 +107,7 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 * @return array
 	 */
 	public function Process($oAccount, $sQuery, $iLimit = 20)
-	{
+	: array {
 		$sQuery = \trim($sQuery);
 
 		if (2 > \strlen($sQuery))
@@ -137,8 +137,8 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 *
 	 * @return array
 	 */
-	private function findNameAndEmail($aLdapItem, $aEmailFields, $aNameFields, $aUidFields)
-	{
+	private function findNameAndEmail($aLdapItem, iterable $aEmailFields, iterable $aNameFields, iterable $aUidFields)
+	: array {
 		$sEmail = $sName = $sUid = '';
 		if ($aLdapItem)
 		{
@@ -319,7 +319,7 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 *
 	 * @return string
 	 */
-	public function logLdapError($oCon, $sCmd)
+	public function logLdapError($oCon, string $sCmd)
 	{
 		if ($this->oLogger)
 		{
@@ -337,7 +337,7 @@ class LdapContactsSuggestions implements \RainLoop\Providers\Suggestions\ISugges
 	 * @return \LdapContactsSuggestions
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;

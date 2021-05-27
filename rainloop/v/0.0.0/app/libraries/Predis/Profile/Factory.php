@@ -20,7 +20,7 @@ use Predis\ClientException;
  */
 final class Factory
 {
-    private static $profiles = array(
+    private static array $profiles = array(
         '2.0' => 'Predis\Profile\RedisVersion200',
         '2.2' => 'Predis\Profile\RedisVersion220',
         '2.4' => 'Predis\Profile\RedisVersion240',
@@ -67,7 +67,7 @@ final class Factory
      *
      * @throws \InvalidArgumentException
      */
-    public static function define($alias, $class)
+    public static function define($alias, string $class)
     {
         $reflection = new \ReflectionClass($class);
 

@@ -22,7 +22,7 @@ class SetRandomMember extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SRANDMEMBER';
     }
 }

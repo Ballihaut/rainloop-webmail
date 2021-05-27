@@ -19,7 +19,7 @@ namespace Predis\Command;
 abstract class Command implements CommandInterface
 {
     private $slot;
-    private $arguments = array();
+    private array $arguments = array();
 
     /**
      * Returns a filtered array of the arguments.

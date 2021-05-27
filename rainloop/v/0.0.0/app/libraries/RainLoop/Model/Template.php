@@ -7,17 +7,17 @@ class Template
 	/**
 	 * @var string
 	 */
-	private $sId;
+	private string $sId;
 
 	/**
 	 * @var string
 	 */
-	private $sName;
+	private string $sName;
 
 	/**
 	 * @var string
 	 */
-	private $sBody;
+	private string $sBody;
 
 	/**
 	 * @var bool
@@ -46,7 +46,7 @@ class Template
 	 *
 	 * @return \RainLoop\Model\Template
 	 */
-	public static function NewInstance($sId = '', $sName = '', $sBody = '')
+	public static function NewInstance(string $sId = '', string $sName = '', string $sBody = '')
 	{
 		return new self($sId, $sBody);
 	}
@@ -89,8 +89,8 @@ class Template
 	 *
 	 * @return bool
 	 */
-	public function FromJSON($aData, $bAjax = false)
-	{
+	public function FromJSON($aData, bool $bAjax = false)
+	: bool {
 		if (isset($aData['ID'], $aData['Name'], $aData['Body']))
 		{
 			$this->sId = $aData['ID'];
@@ -108,7 +108,7 @@ class Template
 	 *
 	 * @return array
 	 */
-	public function ToSimpleJSON($bAjax = false)
+	public function ToSimpleJSON(bool $bAjax = false)
 	{
 		$sBody = $this->Body();
 		$bPopulated = true;
@@ -148,7 +148,7 @@ class Template
 	 * @return bool
 	 */
 	public function Validate()
-	{
+	: bool {
 		return 0 < \strlen($this->sBody);
 	}
 }

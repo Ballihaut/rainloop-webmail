@@ -70,7 +70,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'locks';
 
@@ -86,7 +86,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function unknownMethod($method, $uri) {
+    public function unknownMethod($method, $uri) : bool {
 
         switch($method) {
 
@@ -105,7 +105,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param array $newProperties
      * @return bool
      */
-    public function afterGetProperties($path, &$newProperties) {
+    public function afterGetProperties($path, &$newProperties) : bool {
 
         foreach($newProperties[404] as $propName=>$discard) {
 
@@ -142,7 +142,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function beforeMethod($method, $uri) {
+    public function beforeMethod($method, $uri) : bool {
 
         switch($method) {
 
@@ -190,7 +190,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getHTTPMethods($uri) {
+    public function getHTTPMethods($uri) : array {
 
         if ($this->locksBackend)
             return array('LOCK','UNLOCK');
@@ -207,7 +207,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array(2);
 
@@ -226,7 +226,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param bool $returnChildLocks
      * @return array
      */
-    public function getLocks($uri, $returnChildLocks = false) {
+    public function getLocks($uri, bool $returnChildLocks = false) {
 
         $lockList = array();
 
@@ -453,7 +453,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param bool $checkChildLocks If set to true, this function will also look for any locks set on child resources of the supplied urls. This is needed for for example deletion of entire trees.
      * @return bool
      */
-    protected function validateLock($urls = null,&$lastLock = null, $checkChildLocks = false) {
+    protected function validateLock($urls = null,&$lastLock = null, bool $checkChildLocks = false) : bool {
 
         if (is_null($urls)) {
             $urls = array($this->server->getRequestUri());
@@ -577,7 +577,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getIfConditions() {
+    public function getIfConditions() : array {
 
         $header = $this->server->httpRequest->getHeader('If');
         if (!$header) return array();

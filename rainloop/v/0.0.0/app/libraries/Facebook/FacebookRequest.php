@@ -56,22 +56,22 @@ class FacebookRequest
     /**
      * @var string The Graph endpoint for this request.
      */
-    protected $endpoint;
+    protected string $endpoint;
 
     /**
      * @var array The headers to send with this request.
      */
-    protected $headers = [];
+    protected array $headers = [];
 
     /**
      * @var array The parameters to send with this request.
      */
-    protected $params = [];
+    protected array $params = [];
 
     /**
      * @var array The files to send with this request.
      */
-    protected $files = [];
+    protected array $files = [];
 
     /**
      * @var string ETag to send with this request.
@@ -113,7 +113,7 @@ class FacebookRequest
      * @return FacebookRequest
      */
     public function setAccessToken($accessToken)
-    {
+    : self {
         $this->accessToken = $accessToken;
         if ($accessToken instanceof AccessToken) {
             $this->accessToken = $accessToken->getValue();
@@ -132,7 +132,7 @@ class FacebookRequest
      * @throws FacebookSDKException
      */
     public function setAccessTokenFromParams($accessToken)
-    {
+    : self {
         $existingAccessToken = $this->getAccessToken();
         if (!$existingAccessToken) {
             $this->setAccessToken($accessToken);
@@ -217,7 +217,7 @@ class FacebookRequest
      *
      * @return FacebookRequest
      */
-    public function setMethod($method)
+    public function setMethod(string $method)
     {
         $this->method = strtoupper($method);
     }
@@ -258,7 +258,7 @@ class FacebookRequest
      * @throws FacebookSDKException
      */
     public function setEndpoint($endpoint)
-    {
+    : self {
         // Harvest the access token from the endpoint to keep things in sync
         $params = FacebookUrlManipulator::getParamsAsArray($endpoint);
         if (isset($params['access_token'])) {
@@ -289,7 +289,7 @@ class FacebookRequest
      * @return array
      */
     public function getHeaders()
-    {
+    : array {
         $headers = static::getDefaultHeaders();
 
         if ($this->eTag) {
@@ -353,7 +353,7 @@ class FacebookRequest
      * @return FacebookRequest
      */
     public function dangerouslySetParams(array $params = [])
-    {
+    : self {
         $this->params = array_merge($this->params, $params);
 
         return $this;
@@ -367,7 +367,7 @@ class FacebookRequest
      * @return array
      */
     public function sanitizeFileParams(array $params)
-    {
+    : array {
         foreach ($params as $key => $value) {
             if ($value instanceof FacebookFile) {
                 $this->addFile($key, $value);
@@ -423,7 +423,7 @@ class FacebookRequest
      * @return boolean
      */
     public function containsVideoUploads()
-    {
+    : bool {
         foreach ($this->files as $file) {
             if ($file instanceof FacebookVideo) {
                 return true;
@@ -481,7 +481,7 @@ class FacebookRequest
      * @return array
      */
     public function getPostParams()
-    {
+    : array {
         if ($this->getMethod() === 'POST') {
             return $this->getParams();
         }
@@ -527,7 +527,7 @@ class FacebookRequest
      * @return array
      */
     public static function getDefaultHeaders()
-    {
+    : array {
         return [
             'User-Agent' => 'fb-php-' . Facebook::VERSION,
             'Accept-Encoding' => '*',

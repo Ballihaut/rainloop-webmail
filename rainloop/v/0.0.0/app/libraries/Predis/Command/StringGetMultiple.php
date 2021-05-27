@@ -22,7 +22,7 @@ class StringGetMultiple extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'MGET';
     }
 
@@ -30,7 +30,7 @@ class StringGetMultiple extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeArguments($arguments);
     }
 }

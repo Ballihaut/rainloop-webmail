@@ -34,7 +34,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      *
      * @var array
      */
-    public $temporaryFilePatterns = array(
+    public array $temporaryFilePatterns = array(
         '/^\._(.*)$/',     // OS/X resource forks
         '/^.DS_Store$/',   // OS/X custom folder settings
         '/^desktop.ini$/', // Windows custom folder settings
@@ -103,7 +103,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function beforeMethod($method, $uri) {
+    public function beforeMethod($method, $uri) : bool {
 
         if (!$tempLocation = $this->isTempFile($uri))
             return true;
@@ -132,7 +132,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param resource $data
      * @return bool
      */
-    public function beforeCreateFile($uri,$data) {
+    public function beforeCreateFile($uri,$data) : bool {
 
         if ($tempPath = $this->isTempFile($uri)) {
 
@@ -153,7 +153,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $path
      * @return boolean|string
      */
-    protected function isTempFile($path) {
+    protected function isTempFile(string $path) {
 
         // We're only interested in the basename.
         list(, $tempPath) = URLUtil::splitPath($path);
@@ -179,7 +179,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $tempLocation
      * @return bool
      */
-    public function httpGet($tempLocation) {
+    public function httpGet(string $tempLocation) : bool {
 
         if (!file_exists($tempLocation)) return true;
 
@@ -199,7 +199,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $tempLocation
      * @return bool
      */
-    public function httpPut($tempLocation) {
+    public function httpPut(string $tempLocation) : bool {
 
         $hR = $this->server->httpResponse;
         $hR->setHeader('X-Sabre-Temp','true');
@@ -225,7 +225,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $tempLocation
      * @return bool
      */
-    public function httpDelete($tempLocation) {
+    public function httpDelete(string $tempLocation) : bool {
 
         if (!file_exists($tempLocation)) return true;
 
@@ -248,7 +248,7 @@ class TemporaryFileFilterPlugin extends ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function httpPropfind($tempLocation, $uri) {
+    public function httpPropfind(string $tempLocation, $uri) : bool {
 
         if (!file_exists($tempLocation)) return true;
 

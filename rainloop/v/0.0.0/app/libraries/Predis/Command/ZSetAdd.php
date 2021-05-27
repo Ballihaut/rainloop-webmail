@@ -22,7 +22,7 @@ class ZSetAdd extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZADD';
     }
 
@@ -30,7 +30,7 @@ class ZSetAdd extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (is_array(end($arguments))) {
             foreach (array_pop($arguments) as $member => $score) {
                 $arguments[] = $score;

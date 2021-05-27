@@ -21,12 +21,12 @@ final class Box implements BoxInterface
     /**
      * @var integer
      */
-    private $width;
+    private int $width;
 
     /**
      * @var integer
      */
-    private $height;
+    private int $height;
 
     /**
      * Constructs the Size with given width and height
@@ -82,7 +82,7 @@ final class Box implements BoxInterface
      * {@inheritdoc}
      */
     public function contains(BoxInterface $box, PointInterface $start = null)
-    {
+    : bool {
         $start = $start ? $start : new Point(0, 0);
 
         return $start->in($this) && $this->width >= $box->getWidth() + $start->getX() && $this->height >= $box->getHeight() + $start->getY();
@@ -92,7 +92,7 @@ final class Box implements BoxInterface
      * {@inheritdoc}
      */
     public function square()
-    {
+    : int {
         return $this->width * $this->height;
     }
 

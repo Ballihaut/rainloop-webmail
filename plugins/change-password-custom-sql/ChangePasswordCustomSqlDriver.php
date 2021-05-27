@@ -5,27 +5,27 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	/**
 	 * @var string
 	 */
-	private $mHost = '127.0.0.1';
+	private string $mHost = '127.0.0.1';
 
 	/**
 	 * @var string
 	 */
-	private $mUser = '';
+	private string $mUser = '';
 
 	/**
 	 * @var string
 	 */
-	private $mPass = '';
+	private string $mPass = '';
 
 	/**
 	 * @var string
 	 */
-	private $mDatabase = '';
+	private string $mDatabase = '';
 
 	/**
 	 * @var string
 	 */
-	private $mTable = '';
+	private string $mTable = '';
 
 	/**
 	 * @var string
@@ -43,7 +43,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmHost($mHost)
-	{
+	: self {
 		$this->mHost = $mHost;
 		return $this;
 	}
@@ -54,7 +54,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmUser($mUser)
-	{
+	: self {
 		$this->mUser = $mUser;
 		return $this;
 	}
@@ -65,7 +65,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmPass($mPass)
-	{
+	: self {
 		$this->mPass = $mPass;
 		return $this;
 	}
@@ -76,7 +76,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmDatabase($mDatabase)
-	{
+	: self {
 		$this->mDatabase = $mDatabase;
 		return $this;
 	}
@@ -87,7 +87,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmTable($mTable)
-	{
+	: self {
 		$this->mTable = $mTable;
 		return $this;
 	}
@@ -98,7 +98,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetmSql($mSql)
-	{
+	: self {
 		$this->mSql = $mSql;
 		return $this;
 	}
@@ -109,7 +109,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \ChangePasswordCustomSqlDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -124,7 +124,7 @@ class ChangePasswordCustomSqlDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email();
 	}
 

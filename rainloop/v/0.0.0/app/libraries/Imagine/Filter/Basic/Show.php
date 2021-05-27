@@ -27,7 +27,7 @@ class Show implements FilterInterface
     /**
      * @var array
      */
-    private $options;
+    private array $options;
 
     /**
      * Constructs the Show filter with given format and options

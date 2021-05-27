@@ -22,7 +22,7 @@ class SetAdd extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SADD';
     }
 
@@ -30,7 +30,7 @@ class SetAdd extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeVariadic($arguments);
     }
 }

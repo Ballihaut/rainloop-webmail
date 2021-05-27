@@ -22,7 +22,7 @@ class ListPushHead extends ListPushTail
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LPUSH';
     }
 }

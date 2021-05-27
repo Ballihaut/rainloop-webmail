@@ -22,7 +22,7 @@ class HashGetMultiple extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HMGET';
     }
 
@@ -30,7 +30,7 @@ class HashGetMultiple extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeVariadic($arguments);
     }
 }

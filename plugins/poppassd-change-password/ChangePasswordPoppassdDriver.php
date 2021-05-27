@@ -5,17 +5,17 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	/**
 	 * @var string
 	 */
-	private $sHost = '127.0.0.1';
+	private string $sHost = '127.0.0.1';
 
 	/**
 	 * @var int
 	 */
-	private $iPort = 106;
+	private int $iPort = 106;
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -28,7 +28,7 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordPoppassdDriver
 	 */
 	public function SetHost($sHost)
-	{
+	: self {
 		$this->sHost = $sHost;
 		return $this;
 	}
@@ -38,8 +38,8 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	 *
 	 * @return \ChangePasswordPoppassdDriver
 	 */
-	public function SetPort($iPort)
-	{
+	public function SetPort(int $iPort)
+	: self {
 		$this->iPort = (int) $iPort;
 		return $this;
 	}
@@ -50,7 +50,7 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordPoppassdDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -61,7 +61,7 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordPoppassdDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -76,7 +76,7 @@ class ChangePasswordPoppassdDriver implements \RainLoop\Providers\ChangePassword
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}

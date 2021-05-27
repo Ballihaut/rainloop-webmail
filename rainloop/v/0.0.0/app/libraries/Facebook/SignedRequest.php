@@ -119,7 +119,7 @@ class SignedRequest
      * @return boolean
      */
     public function hasOAuthData()
-    {
+    : bool {
         return $this->get('oauth_token') || $this->get('code');
     }
 
@@ -131,7 +131,7 @@ class SignedRequest
      * @return string
      */
     public function make(array $payload)
-    {
+    : string {
         $payload['algorithm'] = isset($payload['algorithm']) ? $payload['algorithm'] : 'HMAC-SHA256';
         $payload['issued_at'] = isset($payload['issued_at']) ? $payload['issued_at'] : time();
         $encodedPayload = $this->base64UrlEncode(json_encode($payload));
@@ -169,7 +169,7 @@ class SignedRequest
      * @throws FacebookSDKException
      */
     protected function split()
-    {
+    : array {
         if (strpos($this->rawSignedRequest, '.') === false) {
             throw new FacebookSDKException('Malformed signed request.', 606);
         }
@@ -292,7 +292,7 @@ class SignedRequest
      *
      * @return string decoded string
      */
-    public function base64UrlDecode($input)
+    public function base64UrlDecode(string $input)
     {
         $urlDecodedBase64 = strtr($input, '-_', '+/');
         $this->validateBase64($urlDecodedBase64);
@@ -311,8 +311,8 @@ class SignedRequest
      *
      * @return string base64 url encoded input
      */
-    public function base64UrlEncode($input)
-    {
+    public function base64UrlEncode(string $input)
+    : string {
         return strtr(base64_encode($input), '+/', '-_');
     }
 

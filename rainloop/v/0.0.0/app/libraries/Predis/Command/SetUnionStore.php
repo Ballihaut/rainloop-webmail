@@ -22,7 +22,7 @@ class SetUnionStore extends SetIntersectionStore
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SUNIONSTORE';
     }
 }

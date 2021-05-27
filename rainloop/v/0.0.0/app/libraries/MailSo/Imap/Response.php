@@ -20,7 +20,7 @@ class Response
 	/**
 	 * @var array
 	 */
-	public $ResponseList;
+	public array $ResponseList;
 
 	/**
 	 * @var array | null
@@ -30,27 +30,27 @@ class Response
 	/**
 	 * @var string
 	 */
-	public $StatusOrIndex;
+	public string $StatusOrIndex;
 
 	/**
 	 * @var string
 	 */
-	public $HumanReadable;
+	public string $HumanReadable;
 
 	/**
 	 * @var bool
 	 */
-	public $IsStatusResponse;
+	public bool $IsStatusResponse;
 
 	/**
 	 * @var string
 	 */
-	public $ResponseType;
+	public int $ResponseType;
 
 	/**
 	 * @var string
 	 */
-	public $Tag;
+	public string $Tag;
 
 	/**
 	 * @access private
@@ -80,7 +80,7 @@ class Response
 	 * @return string
 	 */
 	private function recToLine($aList)
-	{
+	: string {
 		$aResult = array();
 		if (\is_array($aList))
 		{

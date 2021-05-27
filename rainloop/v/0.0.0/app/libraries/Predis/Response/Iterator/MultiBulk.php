@@ -51,7 +51,7 @@ class MultiBulk extends MultiBulkIterator
      *
      * @param bool $disconnect Consume the iterator or drop the connection.
      */
-    public function drop($disconnect = false)
+    public function drop(bool $disconnect = false)
     {
         if ($disconnect) {
             if ($this->valid()) {

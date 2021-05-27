@@ -47,7 +47,7 @@ abstract class Collection extends Node implements ICollection {
      * @param string $name
      * @return bool
      */
-    public function childExists($name) {
+    public function childExists($name) : bool {
 
         try {
 

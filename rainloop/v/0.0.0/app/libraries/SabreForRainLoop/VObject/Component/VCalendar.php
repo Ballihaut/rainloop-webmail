@@ -24,14 +24,14 @@ class VCalendar extends VObject\Document {
      *
      * @var string
      */
-    static public $defaultName = 'VCALENDAR';
+    public static string $defaultName = 'VCALENDAR';
 
     /**
      * This is a list of components, and which classes they should map to.
      *
      * @var array
      */
-    static public $componentMap = array(
+    public static array $componentMap = array(
         'VEVENT'    => 'SabreForRainLoop\\VObject\\Component\\VEvent',
         'VFREEBUSY' => 'SabreForRainLoop\\VObject\\Component\\VFreeBusy',
         'VJOURNAL'  => 'SabreForRainLoop\\VObject\\Component\\VJournal',
@@ -44,7 +44,7 @@ class VCalendar extends VObject\Document {
      *
      * @var array
      */
-    static public $valueMap = array(
+    public static array $valueMap = array(
         'BINARY'           => 'SabreForRainLoop\\VObject\\Property\\Binary',
         'BOOLEAN'          => 'SabreForRainLoop\\VObject\\Property\\Boolean',
         'CAL-ADDRESS'      => 'SabreForRainLoop\\VObject\\Property\\ICalendar\\CalAddress',
@@ -67,7 +67,7 @@ class VCalendar extends VObject\Document {
      *
      * @var array
      */
-    static public $propertyMap = array(
+    public static array $propertyMap = array(
         // Calendar properties
         'CALSCALE'      => 'SabreForRainLoop\\VObject\\Property\\FlatText',
         'METHOD'        => 'SabreForRainLoop\\VObject\\Property\\FlatText',
@@ -279,7 +279,7 @@ class VCalendar extends VObject\Document {
      *
      * @return array
      */
-    protected function getDefaults() {
+    protected function getDefaults() : array {
 
         return array(
             'VERSION' => '2.0',
@@ -300,7 +300,7 @@ class VCalendar extends VObject\Document {
      *
      * @return array
      */
-    public function validate($options = 0) {
+    public function validate($options = 0) : array {
 
         $warnings = array();
 

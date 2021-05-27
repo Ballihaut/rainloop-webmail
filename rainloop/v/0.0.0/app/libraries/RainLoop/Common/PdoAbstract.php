@@ -12,12 +12,12 @@ abstract class PdoAbstract
 	/**
 	 * @var bool
 	 */
-	protected $bExplain = false;
+	protected bool $bExplain = false;
 
 	/**
 	 * @var bool
 	 */
-	protected $bSqliteCollate = true;
+	protected bool $bSqliteCollate = true;
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -27,7 +27,7 @@ abstract class PdoAbstract
 	/**
 	 * @var string
 	 */
-	protected $sDbType;
+	protected string $sDbType;
 
 	/**
 	 * @return bool
@@ -59,8 +59,8 @@ abstract class PdoAbstract
 	 *
 	 * @return int
 	 */
-	public function sqliteNoCaseCollationHelper($sStr1, $sStr2)
-	{
+	public function sqliteNoCaseCollationHelper(string $sStr1, string $sStr2)
+	: int {
 		$this->oLogger->WriteDump(array($sStr1, $sStr2));
 		return \strcmp(\mb_strtoupper($sStr1, 'UTF-8'), \mb_strtoupper($sStr2, 'UTF-8'));
 	}
@@ -101,7 +101,7 @@ abstract class PdoAbstract
 		try
 		{
 //			$bCaseFunc = false;
-			$oPdo = @new \PDO($sDsn, $sDbLogin, $sDbPassword);
+			$oPdo = new \PDO($sDsn, $sDbLogin, $sDbPassword);
 			if ($oPdo)
 			{
 				$sPdoType = $oPdo->getAttribute(\PDO::ATTR_DRIVER_NAME);
@@ -191,7 +191,7 @@ abstract class PdoAbstract
 	 *
 	 * @return \PDOStatement|null
 	 */
-	protected function prepareAndExecute($sSql, $aParams = array(), $bMultiplyParams = false, $bLogParams = false)
+	protected function prepareAndExecute($sSql, array $aParams = array(), bool $bMultiplyParams = false, bool $bLogParams = false)
 	{
 		if ($this->bExplain && !$bMultiplyParams)
 		{
@@ -234,7 +234,7 @@ abstract class PdoAbstract
 	 * @param string $sSql
 	 * @param array $aParams
 	 */
-	protected function prepareAndExplain($sSql, $aParams = array())
+	protected function prepareAndExplain(string $sSql, array $aParams = array())
 	{
 		$mResult = null;
 		if (0 === strpos($sSql, 'SELECT '))
@@ -281,7 +281,7 @@ abstract class PdoAbstract
 	 *
 	 * @return int
 	 */
-	protected function getUserId($sEmail, $bSkipInsert = false, $bCache = true)
+	protected function getUserId($sEmail, bool $bSkipInsert = false, bool $bCache = true)
 	{
 		static $aCache = array();
 		if ($bCache && isset($aCache[$sEmail]))
@@ -337,7 +337,7 @@ abstract class PdoAbstract
 	 *
 	 * @return string
 	 */
-	public function quoteValue($sValue)
+	public function quoteValue(string $sValue)
 	{
 		$oPdo = $this->getPDO();
 		return $oPdo ? $oPdo->quote((string) $sValue, \PDO::PARAM_STR) : '\'\'';
@@ -349,8 +349,8 @@ abstract class PdoAbstract
 	 *
 	 * @return int|string|bool
 	 */
-	protected function getSystemValue($sName, $bReturnIntValue = true)
-	{
+	protected function getSystemValue($sName, bool $bReturnIntValue = true)
+	: bool {
 		$oPdo = $this->getPDO();
 		if ($oPdo)
 		{
@@ -387,7 +387,7 @@ abstract class PdoAbstract
 	 *
 	 * @return int|string|bool
 	 */
-	protected function getVersion($sName)
+	protected function getVersion(string $sName)
 	{
 		return $this->getSystemValue($sName.'_version', true);
 	}
@@ -398,7 +398,7 @@ abstract class PdoAbstract
 	 *
 	 * @return bool
 	 */
-	protected function setVersion($sName, $iVersion)
+	protected function setVersion(string $sName, $iVersion)
 	{
 		$bResult = false;
 		$oPdo = $this->getPDO();
@@ -523,7 +523,7 @@ rl_email text NOT NULL DEFAULT \'\'
 	 *
 	 * @return bool
 	 */
-	protected function dataBaseUpgrade($sName, $aData = array())
+	protected function dataBaseUpgrade($sName, array $aData = array())
 	{
 		$iFromVersion = null;
 		try

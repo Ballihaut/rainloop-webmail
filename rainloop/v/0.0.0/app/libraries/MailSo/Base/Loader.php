@@ -20,12 +20,12 @@ class Loader
 	/**
 	 * @var bool
 	 */
-	public static $StoreStatistic = true;
+	public static bool $StoreStatistic = true;
 
 	/**
 	 * @var int
 	 */
-	public static $InitTime = 0;
+	public static int $InitTime = 0;
 
 	/**
 	 * @var float
@@ -35,12 +35,12 @@ class Loader
 	/**
 	 * @var array
 	 */
-	private static $aIncStatistic = array();
+	private static array $aIncStatistic = array();
 
 	/**
 	 * @var array
 	 */
-	private static $aSetStatistic = array();
+	private static array $aSetStatistic = array();
 
 	/**
 	 * @staticvar bool $bIsInited
@@ -67,7 +67,7 @@ class Loader
 	 *
 	 * @return void
 	 */
-	public static function IncStatistic($sName, $iIncSize = 1)
+	public static function IncStatistic($sName, int $iIncSize = 1)
 	{
 		if (self::$StoreStatistic)
 		{

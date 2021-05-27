@@ -11,19 +11,19 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 	/**
 	 * @var string
 	 */
-	private $sHost = '';
+	private string $sHost = '';
 	/**
 	 * @var string
 	 */
-	private $sAdminUser = '';
+	private string $sAdminUser = '';
 	/**
 	 * @var string
 	 */
-	private $sAdminPassword = '';
+	private string $sAdminPassword = '';
 	/**
 	 * @var \MailSo\Log\Logger
 	 */
@@ -36,7 +36,7 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	 * @return \MailInABoxChangePasswordDriver
 	 */
 	public function SetConfig($sHost, $sAdminUser, $sAdminPassword)
-	{
+	: self {
 		$this->sHost = $sHost;
 		$this->sAdminUser = $sAdminUser;
 		$this->sAdminPassword = $sAdminPassword;
@@ -48,7 +48,7 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	 * @return \MailInABoxChangePasswordDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -58,7 +58,7 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	 * @return \MailInABoxChangePasswordDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -72,7 +72,7 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	 * @return \MailInABoxChangePasswordDriver
 	 */
 	public function WriteLog($sDesc, $iType = \MailSo\Log\Enumerations\Type::INFO)
-	{
+	: self {
 		if ($this->oLogger)
 		{
 			$this->oLogger->Write($sDesc, $iType);
@@ -85,7 +85,7 @@ class MailInABoxChangePasswordDriver implements \RainLoop\Providers\ChangePasswo
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}

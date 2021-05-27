@@ -18,7 +18,7 @@ class MethodNotAllowed extends \SabreForRainLoop\DAV\Exception {
      *
      * @return int
      */
-    public function getHTTPCode() {
+    public function getHTTPCode() : int {
 
         return 405;
 
@@ -32,7 +32,7 @@ class MethodNotAllowed extends \SabreForRainLoop\DAV\Exception {
      * @param \SabreForRainLoop\DAV\Server $server
      * @return array
      */
-    public function getHTTPHeaders(\SabreForRainLoop\DAV\Server $server) {
+    public function getHTTPHeaders(\SabreForRainLoop\DAV\Server $server) : array {
 
         $methods = $server->getAllowedMethods($server->getRequestUri());
 

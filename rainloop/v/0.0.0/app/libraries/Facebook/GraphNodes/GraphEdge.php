@@ -42,7 +42,7 @@ class GraphEdge extends Collection
     /**
      * @var array An array of Graph meta data like pagination, etc.
      */
-    protected $metaData = [];
+    protected array $metaData = [];
 
     /**
      * @var string|null The parent Graph edge endpoint that generated the list.

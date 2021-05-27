@@ -27,14 +27,14 @@ class Card extends DAV\File implements ICard, DAVACL\IACL {
      *
      * @var array
      */
-    protected $cardData;
+    protected array $cardData;
 
     /**
      * Array with information about the containing addressbook
      *
      * @var array
      */
-    protected $addressBookInfo;
+    protected array $addressBookInfo;
 
     /**
      * Constructor
@@ -116,7 +116,7 @@ class Card extends DAV\File implements ICard, DAVACL\IACL {
      *
      * @return string
      */
-    public function getContentType() {
+    public function getContentType() : string {
 
         return 'text/x-vcard; charset=utf-8';
 
@@ -207,7 +207,7 @@ class Card extends DAV\File implements ICard, DAVACL\IACL {
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

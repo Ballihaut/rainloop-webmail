@@ -49,8 +49,8 @@ final class Range
      *
      * @return Boolean
      */
-    public function contains($value)
-    {
+    public function contains(bool $value)
+    : bool {
         return $value >= $this->start && $value < $this->end;
     }
 }

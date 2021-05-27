@@ -40,7 +40,7 @@ class FacebookFile
     /**
      * @var resource The stream pointing to the file.
      */
-    protected $stream;
+    protected int $stream;
 
     /**
      * Creates a new FacebookFile entity.
@@ -107,7 +107,7 @@ class FacebookFile
      * @return string
      */
     public function getFileName()
-    {
+    : string {
         return basename($this->path);
     }
 
@@ -129,7 +129,7 @@ class FacebookFile
      * @return boolean
      */
     protected function isRemoteFile($pathToFile)
-    {
+    : bool {
         return preg_match('/^(https?|ftp):\/\/.*/', $pathToFile) === 1;
     }
 }

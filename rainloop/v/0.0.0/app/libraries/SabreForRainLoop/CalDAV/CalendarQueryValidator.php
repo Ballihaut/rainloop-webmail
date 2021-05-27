@@ -29,7 +29,7 @@ class CalendarQueryValidator {
      * @param array $filters
      * @return bool
      */
-    public function validate(VObject\Component $vObject,array $filters) {
+    public function validate(VObject\Component $vObject,array $filters) : bool {
 
         // The top level object is always a component filter.
         // We'll parse it manually, as it's pretty simple.
@@ -55,7 +55,7 @@ class CalendarQueryValidator {
      * @param array $filters
      * @return bool
      */
-    protected function validateCompFilters(VObject\Component $parent, array $filters) {
+    protected function validateCompFilters(VObject\Component $parent, array $filters) : bool {
 
         foreach($filters as $filter) {
 
@@ -124,7 +124,7 @@ class CalendarQueryValidator {
      * @param array $filters
      * @return bool
      */
-    protected function validatePropFilters(VObject\Component $parent, array $filters) {
+    protected function validatePropFilters(VObject\Component $parent, array $filters) : bool {
 
         foreach($filters as $filter) {
 
@@ -194,7 +194,7 @@ class CalendarQueryValidator {
      * @param array $filters
      * @return bool
      */
-    protected function validateParamFilters(VObject\Property $parent, array $filters) {
+    protected function validateParamFilters(VObject\Property $parent, array $filters) : bool {
 
         foreach($filters as $filter) {
 
@@ -290,7 +290,7 @@ class CalendarQueryValidator {
      * @param DateTime $end
      * @return bool
      */
-    protected function validateTimeRange(VObject\Node $component, $start, $end) {
+    protected function validateTimeRange(VObject\Node $component, $start, $end) : bool {
 
         if (is_null($start)) {
             $start = new DateTime('1900-01-01');

@@ -30,7 +30,7 @@ class StringSetMultiple extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 1 && is_array($arguments[0])) {
             $flattenedKVs = array();
             $args = $arguments[0];

@@ -39,7 +39,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function IsActive()
-	{
+	: bool {
 		return $this->oDriver instanceof \RainLoop\Providers\AddressBook\AddressBookInterface &&
 			$this->oDriver->IsSupported();
 	}
@@ -48,7 +48,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function IsSupported()
-	{
+	: bool {
 		return $this->oDriver instanceof \RainLoop\Providers\AddressBook\AddressBookInterface &&
 			$this->oDriver->IsSupported();
 	}
@@ -57,7 +57,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function IsSharingAllowed()
-	{
+	: bool {
 		return $this->oDriver instanceof \RainLoop\Providers\AddressBook\AddressBookInterface &&
 			$this->oDriver->IsSharingAllowed();
 	}
@@ -81,7 +81,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return bool
 	 */
-	public function Export($sEmail, $sType = 'vcf')
+	public function Export($sEmail, string $sType = 'vcf')
 	{
 		return $this->IsActive() ? $this->oDriver->Export($sEmail, $sType) : false;
 	}
@@ -127,7 +127,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return array
 	 */
-	public function GetContacts($sEmail, $iOffset = 0, $iLimit = 20, $sSearch = '', &$iResultCount = 0)
+	public function GetContacts($sEmail, int $iOffset = 0, int $iLimit = 20, string $sSearch = '', int &$iResultCount = 0)
 	{
 		return $this->IsActive() ? $this->oDriver->GetContacts($sEmail,
 			$iOffset, $iLimit, $sSearch, $iResultCount) : array();
@@ -140,7 +140,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return \RainLoop\Providers\AddressBook\Classes\Contact|null
 	 */
-	public function GetContactByID($sEmail, $mID, $bIsStrID = false)
+	public function GetContactByID($sEmail, $mID, bool $bIsStrID = false)
 	{
 		return $this->IsActive() ? $this->oDriver->GetContactByID($sEmail, $mID, $bIsStrID) : null;
 	}
@@ -154,7 +154,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function GetSuggestions($sEmail, $sSearch, $iLimit = 20)
+	public function GetSuggestions($sEmail, $sSearch, int $iLimit = 20)
 	{
 		return $this->IsActive() ? $this->oDriver->GetSuggestions($sEmail, $sSearch, $iLimit) : array();
 	}
@@ -166,7 +166,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return bool
 	 */
-	public function IncFrec($sEmail, $aEmails, $bCreateAuto = true)
+	public function IncFrec($sEmail, $aEmails, bool $bCreateAuto = true)
 	{
 		return $this->IsActive() ? $this->oDriver->IncFrec($sEmail, $aEmails, $bCreateAuto) : false;
 	}
@@ -176,7 +176,7 @@ class AddressBook extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return int
 	 */
-	private function csvNameToTypeConvertor($sCsvName)
+	private function csvNameToTypeConvertor(string $sCsvName)
 	{
 		static $aMap = null;
 		if (null === $aMap)

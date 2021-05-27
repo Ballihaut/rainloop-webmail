@@ -11,7 +11,7 @@ class LdapChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	public function Supported()
-	{
+	: string {
 		if (!\function_exists('ldap_connect'))
 		{
 			return 'The LDAP PHP extension must be installed to use this plugin';
@@ -56,7 +56,7 @@ class LdapChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('hostname')->SetLabel('LDAP hostname')
 				->SetDefaultValue('127.0.0.1'),

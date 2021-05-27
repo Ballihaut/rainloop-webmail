@@ -40,14 +40,14 @@ class PDO extends AbstractBackend {
      *
      * @var string
      */
-    protected $calendarTableName;
+    protected string $calendarTableName;
 
     /**
      * The table name that will be used for calendar objects
      *
      * @var string
      */
-    protected $calendarObjectTableName;
+    protected string $calendarObjectTableName;
 
     /**
      * List of CalDAV properties, and how they map to database fieldnames
@@ -57,7 +57,7 @@ class PDO extends AbstractBackend {
      *
      * @var array
      */
-    public $propertyMap = array(
+    public array $propertyMap = array(
         '{DAV:}displayname'                          => 'displayname',
         '{urn:ietf:params:xml:ns:caldav}calendar-description' => 'description',
         '{urn:ietf:params:xml:ns:caldav}calendar-timezone'    => 'timezone',
@@ -235,7 +235,7 @@ class PDO extends AbstractBackend {
      * @param array $mutations
      * @return bool|array
      */
-    public function updateCalendar($calendarId, array $mutations) {
+    public function updateCalendar($calendarId, array $mutations) : bool {
 
         $newValues = array();
         $result = array(
@@ -417,7 +417,7 @@ class PDO extends AbstractBackend {
      * @param string $calendarData
      * @return string|null
      */
-    public function createCalendarObject($calendarId,$objectUri,$calendarData) {
+    public function createCalendarObject($calendarId,$objectUri,$calendarData) : string {
 
         $extraData = $this->getDenormalizedData($calendarData);
 
@@ -456,7 +456,7 @@ class PDO extends AbstractBackend {
      * @param string $calendarData
      * @return string|null
      */
-    public function updateCalendarObject($calendarId,$objectUri,$calendarData) {
+    public function updateCalendarObject($calendarId,$objectUri,$calendarData) : string {
 
         $extraData = $this->getDenormalizedData($calendarData);
 
@@ -483,7 +483,7 @@ class PDO extends AbstractBackend {
      * @param string $calendarData
      * @return array
      */
-    protected function getDenormalizedData($calendarData) {
+    protected function getDenormalizedData(string $calendarData) : array {
 
         $vObject = VObject\Reader::read($calendarData);
         $componentType = null;

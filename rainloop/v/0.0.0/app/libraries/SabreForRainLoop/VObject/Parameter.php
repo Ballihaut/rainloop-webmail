@@ -24,7 +24,7 @@ class Parameter extends Node {
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * vCard 2.1 allows parameters to be encoded without a name.
@@ -33,14 +33,14 @@ class Parameter extends Node {
      *
      * @var bool
      */
-    public $noName = false;
+    public bool $noName = false;
 
     /**
      * Parameter value
      *
      * @var string
      */
-    protected $value;
+    protected array $value;
 
     /**
      * Sets up the object.
@@ -71,7 +71,7 @@ class Parameter extends Node {
      * @param string $value
      * @return string
      */
-    public static function guessParameterNameByValue($value) {
+    public static function guessParameterNameByValue(string $value) {
         switch(strtoupper($value)) {
 
             // Encodings
@@ -182,7 +182,7 @@ class Parameter extends Node {
      *
      * @return string|null
      */
-    public function getValue() {
+    public function getValue() : string {
 
         if (is_array($this->value)) {
             return implode(',' , $this->value);
@@ -211,7 +211,7 @@ class Parameter extends Node {
      *
      * @return array
      */
-    public function getParts() {
+    public function getParts() : array {
 
         if (is_array($this->value)) {
             return $this->value;
@@ -252,7 +252,7 @@ class Parameter extends Node {
      * @param string $value
      * @return bool
      */
-    public function has($value) {
+    public function has(string $value) : bool {
 
         return in_array(
             strtolower($value),
@@ -266,7 +266,7 @@ class Parameter extends Node {
      *
      * @return string
      */
-    public function serialize() {
+    public function serialize() : string {
 
         $value = $this->getParts();
 
@@ -280,7 +280,7 @@ class Parameter extends Node {
 
         }
 
-        return $this->name . '=' . array_reduce($value, function($out, $item) {
+        return $this->name . '=' . array_reduce($value, function($out, string $item) : string {
 
             if (!is_null($out)) $out.=',';
 

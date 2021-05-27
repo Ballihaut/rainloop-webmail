@@ -24,7 +24,7 @@ class FireAndForget extends Pipeline
      * {@inheritdoc}
      */
     protected function executePipeline(ConnectionInterface $connection, \SplQueue $commands)
-    {
+    : array {
         while (!$commands->isEmpty()) {
             $connection->writeRequest($commands->dequeue());
         }

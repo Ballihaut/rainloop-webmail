@@ -26,7 +26,7 @@ class Principal extends DAV\Node implements IPrincipal, DAV\IProperties, IACL {
      *
      * @var array
      */
-    protected $principalProperties;
+    protected array $principalProperties;
 
     /**
      * Principal backend
@@ -69,7 +69,7 @@ class Principal extends DAV\Node implements IPrincipal, DAV\IProperties, IACL {
      *
      * @return array
      */
-    public function getAlternateUriSet() {
+    public function getAlternateUriSet() : array {
 
         $uris = array();
         if (isset($this->principalProperties['{DAV:}alternate-URI-set'])) {

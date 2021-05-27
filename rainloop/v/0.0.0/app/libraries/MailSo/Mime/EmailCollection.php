@@ -38,7 +38,7 @@ class EmailCollection extends \MailSo\Base\Collection
 	 *
 	 * @return \MailSo\Mime\EmailCollection
 	 */
-	public static function NewInstance($sEmailAddresses = '')
+	public static function NewInstance(string $sEmailAddresses = '')
 	{
 		return new self($sEmailAddresses);
 	}
@@ -74,7 +74,7 @@ class EmailCollection extends \MailSo\Base\Collection
 	 * @return \MailSo\Mime\EmailCollection
 	 */
 	public function MergeWithOtherCollection(\MailSo\Mime\EmailCollection $oEmails)
-	{
+	: self {
 		$aEmails =& $oEmails->GetAsArray();
 		foreach ($aEmails as /* @var $oEmail \MailSo\Mime\Email */ $oEmail)
 		{
@@ -88,7 +88,7 @@ class EmailCollection extends \MailSo\Base\Collection
 	 * @return \MailSo\Mime\EmailCollection
 	 */
 	public function Unique()
-	{
+	: self {
 		$aCache = array();
 		$aReturn = array();
 
@@ -114,8 +114,8 @@ class EmailCollection extends \MailSo\Base\Collection
 	 *
 	 * @return string
 	 */
-	public function ToString($bConvertSpecialsName = false, $bIdn = false)
-	{
+	public function ToString(bool $bConvertSpecialsName = false, bool $bIdn = false)
+	: string {
 		$aReturn = $aEmails = array();
 		$aEmails =& $this->GetAsArray();
 		foreach ($aEmails as /* @var $oEmail \MailSo\Mime\Email */ $oEmail)
@@ -131,8 +131,8 @@ class EmailCollection extends \MailSo\Base\Collection
 	 *
 	 * @return \MailSo\Mime\EmailCollection
 	 */
-	private function parseEmailAddresses($sRawEmails)
-	{
+	private function parseEmailAddresses(string $sRawEmails)
+	: self {
 		$this->Clear();
 
 		$sWorkingRecipients = \trim($sRawEmails);

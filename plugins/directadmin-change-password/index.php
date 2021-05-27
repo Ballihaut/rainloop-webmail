@@ -38,7 +38,7 @@ class DirectadminChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('direct_admin_host')->SetLabel('DirectAdmin Host')
 				->SetDefaultValue('')

@@ -47,7 +47,7 @@ abstract class AbstractDigest implements BackendInterface {
      * @throws DAV\Exception\NotAuthenticated
      * @return bool
      */
-    public function authenticate(DAV\Server $server, $realm) {
+    public function authenticate(DAV\Server $server, $realm) : bool {
 
         $digest = new HTTP\DigestAuth();
 

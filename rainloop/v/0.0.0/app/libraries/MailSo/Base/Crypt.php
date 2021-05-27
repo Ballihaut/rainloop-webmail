@@ -24,8 +24,8 @@ class Crypt
 	 *
 	 * @return string
 	 */
-	public static function XxteaEncrypt($sString, $sKey)
-	{
+	public static function XxteaEncrypt(string $sString, $sKey)
+	: string {
 		if (0 === \strlen($sString))
 		{
 			return '';
@@ -73,8 +73,8 @@ class Crypt
 	 *
 	 * @return string
 	 */
-	public static function XxteaDecrypt($sEncriptedString, $sKey)
-	{
+	public static function XxteaDecrypt(string $sEncriptedString, $sKey)
+	: string {
 		if (0 === \strlen($sEncriptedString))
 		{
 			return '';
@@ -158,7 +158,7 @@ class Crypt
 	 *
 	 * @return array
 	 */
-	private static function str2long($sS, $sW)
+	private static function str2long(string $sS, $sW)
 	{
 		$aV = \unpack('V*', $sS . \str_repeat("\0", (4 - \strlen($sS) % 4) & 3));
 		$aV = \array_values($aV);
@@ -174,7 +174,7 @@ class Crypt
 	 *
 	 * @return int
 	 */
-	private static function int32($iN)
+	private static function int32(int $iN)
 	{
 		while ($iN >= 2147483648)
 		{

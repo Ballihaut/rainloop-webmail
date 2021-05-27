@@ -80,7 +80,7 @@ class ColorParser
      * @throws InvalidArgumentException
      */
     public function parseToGrayscale($color)
-    {
+    : array {
         if (is_array($color) && 1 === count($color)) {
             return array_values($color);
         }
@@ -104,7 +104,7 @@ class ColorParser
      * @throws InvalidArgumentException
      */
     private function parse($color)
-    {
+    : array {
         if (!is_string($color) && !is_array($color) && !is_int($color)) {
             throw new InvalidArgumentException(sprintf('Color must be specified as a hexadecimal string, array or integer, %s given', gettype($color)));
         }
@@ -120,7 +120,7 @@ class ColorParser
             if (0 === strpos($color, 'cmyk(')) {
                 $substrColor = substr($color, 5, strlen($color) - 6);
 
-                $components = array_map(function ($component) {
+                $components = array_map(function (string $component) : float {
                     return round(trim($component, ' %'));
                 }, explode(',', $substrColor));
 

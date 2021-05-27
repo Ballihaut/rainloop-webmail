@@ -5,22 +5,22 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	/**
 	 * @var string
 	 */
-	private $sDsn = '';
+	private string $sDsn = '';
 
 	/**
 	 * @var string
 	 */
-	private $sUser = '';
+	private string $sUser = '';
 
 	/**
 	 * @var string
 	 */
-	private $sPassword = '';
+	private string $sPassword = '';
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -35,7 +35,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \FroxlorChangePasswordDriver
 	 */
 	public function SetConfig($sDsn, $sUser, $sPassword)
-	{
+	: self {
 		$this->sDsn = $sDsn;
 		$this->sUser = $sUser;
 		$this->sPassword = $sPassword;
@@ -49,7 +49,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \FroxlorChangePasswordDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -60,7 +60,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \FroxlorChangePasswordDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -75,7 +75,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}
@@ -134,27 +134,10 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @param string $sPassword
 	 * @return string
 	 */
-	private function cryptPassword($sPassword, $type = 3)
+	private function cryptPassword($sPassword, int $type = 3)
 	{
 		return $this->makeCryptPassword($sPassword,$type);
 	}
-
-	/**
-	 * This file is part of the Froxlor project.
-	 * Copyright (c) 2010 the Froxlor Team (see authors).
-	 *
-	 * For the full copyright and license information, please view the COPYING
-	 * file that was distributed with this source code. You can also view the
-	 * COPYING file online at http://files.froxlor.org/misc/COPYING.txt
-	 *
-	 * @copyright  (c) the authors
-	 * @author     Michal Wojcik <m.wojcik@sonet3.pl>
-	 * @author     Michael Kaufmann <mkaufmann@nutime.de>
-	 * @author     Froxlor team <team@froxlor.org> (2010-)
-	 * @license    GPLv2 http://files.froxlor.org/misc/COPYING.txt
-	 * @package    Functions
-	 *
-	 */
 
 	/**
 	 * Make crypted password from clear text password
@@ -173,7 +156,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 *
 	 * @return string encrypted password
 	 */
-	private function makeCryptPassword ($password,$type = 3) {
+	private function makeCryptPassword (string $password,int $type = 3) {
 		switch ($type) {
 			case 0:
 				$cryptPassword = \crypt($password);
@@ -213,7 +196,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @param boolean $isSalt
 	 *            optional, create a hash for a salt used in makeCryptPassword because crypt() does not like some special characters in its salts, default is false
 	 */
-	private function generatePassword($isSalt = false)
+	private function generatePassword(bool $isSalt = false)
 	{
 	    $alpha_lower = 'abcdefghijklmnopqrstuvwxyz';
 	    $alpha_upper = \strtoupper($alpha_lower);
@@ -237,7 +220,7 @@ class FroxlorChangePasswordDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return string
 	 */
 	private function special_shuffle($str = null)
-	{
+	: string {
 	    $len = \mb_strlen($str);
 	    $sploded = array();
 	    while ($len -- > 0) {

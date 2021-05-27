@@ -24,21 +24,21 @@ class CssToInlineStyles
      *
      * @var	array
      */
-    private $cssRules;
+    private iterable $cssRules;
 
     /**
      * Should the generated HTML be cleaned
      *
      * @var	bool
      */
-    private $cleanup = false;
+    private bool $cleanup = false;
 
     /**
      * The encoding to use.
      *
      * @var	string
      */
-    private $encoding = 'UTF-8';
+    private string $encoding = 'UTF-8';
 
     /**
      * The HTML to process
@@ -52,14 +52,14 @@ class CssToInlineStyles
      *
      * @var	bool
      */
-    private $useInlineStylesBlock = false;
+    private bool $useInlineStylesBlock = false;
 
     /*
      * Strip original style tags
      *
      * @var bool
      */
-    private $stripOriginalStyleTags = false;
+    private bool $stripOriginalStyleTags = false;
 
     /**
      * Creates an instance, you could set the HTML and CSS here, or load it
@@ -199,7 +199,7 @@ class CssToInlineStyles
      * @return string
      * @param  bool[optional] $outputXHTML Should we output valid XHTML?
      */
-    public function convert($outputXHTML = false)
+    public function convert(bool $outputXHTML = false)
     {
         // redefine
         $outputXHTML = (bool) $outputXHTML;
@@ -563,7 +563,7 @@ class CssToInlineStyles
      * @return array
      * @param  string $propertyString The CSS-properties.
      */
-    private function processCSSProperties($propertyString)
+    private function processCSSProperties(string $propertyString)
     {
         // split into chunks
         $properties = (array) explode(';', $propertyString);
@@ -603,7 +603,7 @@ class CssToInlineStyles
      * @return void
      * @param  bool[optional] $on Should we enable cleanup?
      */
-    public function setCleanup($on = true)
+    public function setCleanup(bool $on = true)
     {
         $this->cleanup = (bool) $on;
     }
@@ -614,7 +614,7 @@ class CssToInlineStyles
      * @return void
      * @param  string $css The CSS to use.
      */
-    public function setCSS($css)
+    public function setCSS(string $css)
     {
         $this->css = (string) $css;
     }
@@ -625,7 +625,7 @@ class CssToInlineStyles
      * @return void
      * @param  string $encoding The encoding to use.
      */
-    public function setEncoding($encoding)
+    public function setEncoding(string $encoding)
     {
         $this->encoding = (string) $encoding;
     }
@@ -636,7 +636,7 @@ class CssToInlineStyles
      * @return void
      * @param  string $html The HTML to process.
      */
-    public function setHTML($html)
+    public function setHTML(string $html)
     {
         $this->html = (string) $html;
     }
@@ -648,7 +648,7 @@ class CssToInlineStyles
      * @return void
      * @param  bool[optional] $on Should we process inline styles?
      */
-    public function setUseInlineStylesBlock($on = true)
+    public function setUseInlineStylesBlock(bool $on = true)
     {
         $this->useInlineStylesBlock = (bool) $on;
     }
@@ -660,7 +660,7 @@ class CssToInlineStyles
      * @return void
      * @param  bool[optional] $onShould we process inline styles?
      */
-    public function setStripOriginalStyleTags($on = true)
+    public function setStripOriginalStyleTags(bool $on = true)
     {
         $this->stripOriginalStyleTags = (bool) $on;
     }
@@ -684,7 +684,7 @@ class CssToInlineStyles
      * @param  array $e2 The second element.
      */
     private static function sortOnSpecifity($e1, $e2)
-    {
+    : int {
         // validate
         if(!isset($e1['specifity']) || !isset($e2['specifity'])) return 0;
 

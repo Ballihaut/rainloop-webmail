@@ -12,7 +12,7 @@ class ProxyauthLoginExamplePlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @param string $sPassword
 	 */
 	public function isValidAccount($sLogin, $sPassword)
-	{
+	: bool {
 		return !empty($sLogin) && !empty($sPassword);
 	}
 

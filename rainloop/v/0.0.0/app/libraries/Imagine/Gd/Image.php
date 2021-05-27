@@ -105,7 +105,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function crop(PointInterface $start, BoxInterface $size)
-    {
+    : self {
         if (!$start->in($this->getSize())) {
             throw new OutOfBoundsException('Crop coordinates must start at minimum 0, 0 position from top  left corner, crop height and width must be positive integers and must not exceed the current image borders');
         }
@@ -132,7 +132,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function paste(ImageInterface $image, PointInterface $start)
-    {
+    : self {
         if (!$image instanceof self) {
             throw new InvalidArgumentException(sprintf('Gd\Image can only paste() Gd\Image instances, %s given', get_class($image)));
         }
@@ -161,7 +161,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function resize(BoxInterface $size, $filter = ImageInterface::FILTER_UNDEFINED)
-    {
+    : self {
         if (ImageInterface::FILTER_UNDEFINED !== $filter) {
             throw new InvalidArgumentException('Unsupported filter type, GD only supports ImageInterface::FILTER_UNDEFINED filter');
         }
@@ -194,7 +194,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function rotate($angle, ColorInterface $background = null)
-    {
+    : self {
         $color = $background ? $background : $this->palette->color('fff');
         $resource = imagerotate($this->resource, -1 * $angle, $this->getColor($color));
 
@@ -214,7 +214,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function save($path = null, array $options = array())
-    {
+    : self {
         $path = null === $path ? (isset($this->metadata['filepath']) ? $this->metadata['filepath'] : $path) : $path;
 
         if (null === $path) {
@@ -241,7 +241,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function show($format, array $options = array())
-    {
+    : self {
         header('Content-type: '.$this->getMimeType($format));
 
         $this->saveOrOutput($format, $options);
@@ -274,7 +274,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function flipHorizontally()
-    {
+    : self {
         $size   = $this->getSize();
         $width  = $size->getWidth();
         $height = $size->getHeight();
@@ -299,7 +299,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function flipVertically()
-    {
+    : self {
         $size   = $this->getSize();
         $width  = $size->getWidth();
         $height = $size->getHeight();
@@ -324,7 +324,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     final public function strip()
-    {
+    : self {
         // GD strips profiles and comment, so there's nothing to do here
         return $this;
     }
@@ -359,7 +359,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function applyMask(ImageInterface $mask)
-    {
+    : self {
         if (!$mask instanceof self) {
             throw new InvalidArgumentException('Cannot mask non-gd images');
         }
@@ -393,7 +393,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function fill(FillInterface $fill)
-    {
+    : self {
         $size = $this->getSize();
 
         for ($x = 0, $width = $size->getWidth(); $x < $width; $x++) {
@@ -425,7 +425,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function histogram()
-    {
+    : array {
         $size   = $this->getSize();
         $colors = array();
 
@@ -469,7 +469,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      **/
     public function interlace($scheme)
-    {
+    : self {
         static $supportedInterlaceSchemes = array(
             ImageInterface::INTERLACE_NONE      => 0,
             ImageInterface::INTERLACE_LINE      => 1,
@@ -506,7 +506,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function usePalette(PaletteInterface $palette)
-    {
+    : self {
         if (!$palette instanceof RGB) {
             throw new RuntimeException('GD driver only supports RGB palette');
         }
@@ -597,7 +597,7 @@ final class Image extends AbstractImage
      * @throws RuntimeException
      *
      */
-    private function createImage(BoxInterface $size, $operation)
+    private function createImage(BoxInterface $size, string $operation)
     {
         $resource = imagecreatetruecolor($size->getWidth(), $size->getHeight());
 

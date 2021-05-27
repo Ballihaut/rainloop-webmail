@@ -22,7 +22,7 @@ class ServerScript extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SCRIPT';
     }
 }

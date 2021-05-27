@@ -22,7 +22,7 @@ class HyperLogLogCount extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PFCOUNT';
     }
 
@@ -30,7 +30,7 @@ class HyperLogLogCount extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeArguments($arguments);
     }
 }

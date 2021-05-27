@@ -33,7 +33,7 @@ class SystemStatus extends DAV\Property implements CalDAV\Notifications\INotific
      *
      * @var int
      */
-    protected $type;
+    protected int $type;
 
     /**
      * A human-readable description of the problem.

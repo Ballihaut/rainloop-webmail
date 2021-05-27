@@ -5,17 +5,17 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	/**
 	 * @var string
 	 */
-	private $mHost = '127.0.0.1';
+	private string $mHost = '127.0.0.1';
 
 	/**
 	 * @var string
 	 */
-	private $mUser = '';
+	private string $mUser = '';
 
 	/**
 	 * @var string
 	 */
-	private $mPass = '';
+	private string $mPass = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -28,7 +28,7 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordCyberPanel
 	 */
 	public function SetmHost($mHost)
-	{
+	: self {
 		$this->mHost = $mHost;
 		return $this;
 	}
@@ -39,7 +39,7 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordCyberPanel
 	 */
 	public function SetmUser($mUser)
-	{
+	: self {
 		$this->mUser = $mUser;
 		return $this;
 	}
@@ -50,7 +50,7 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordCyberPanel
 	 */
 	public function SetmPass($mPass)
-	{
+	: self {
 		$this->mPass = $mPass;
 		return $this;
 	}
@@ -61,7 +61,7 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return \ChangePasswordCyberPanel
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -76,7 +76,7 @@ class ChangePasswordCyberPanel implements \RainLoop\Providers\ChangePassword\Cha
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email();
 	}
 

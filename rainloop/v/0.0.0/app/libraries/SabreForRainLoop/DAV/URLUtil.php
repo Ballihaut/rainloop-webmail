@@ -30,7 +30,7 @@ class URLUtil {
      */
     static function encodePath($path) {
 
-        return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\)\/])/',function($match) {
+        return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\)\/])/',function($match) : string {
 
             return '%'.sprintf('%02x',ord($match[0]));
 
@@ -48,7 +48,7 @@ class URLUtil {
      */
     static function encodePathSegment($pathSegment) {
 
-        return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\)])/',function($match) {
+        return preg_replace_callback('/([^A-Za-z0-9_\-\.~\(\)])/',function($match) : string {
 
             return '%'.sprintf('%02x',ord($match[0]));
 
@@ -73,7 +73,7 @@ class URLUtil {
      * @param string $path
      * @return string
      */
-    static function decodePathSegment($path) {
+    static function decodePathSegment(string $path) {
 
         $path = rawurldecode($path);
         $encoding = mb_detect_encoding($path, array('UTF-8','ISO-8859-1'));
@@ -107,7 +107,7 @@ class URLUtil {
      * @param string $path
      * @return array
      */
-    static function splitPath($path) {
+    static function splitPath($path) : array {
 
         $matches = array();
         if(preg_match('/^(?:(?:(.*)(?:\/+))?([^\/]+))(?:\/?)$/u',$path,$matches)) {

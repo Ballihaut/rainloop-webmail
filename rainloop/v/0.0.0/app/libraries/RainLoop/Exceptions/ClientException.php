@@ -16,7 +16,7 @@ class ClientException extends Exception
 	/**
 	 * @var string
 	 */
-	private $sAdditionalMessage;
+	private string $sAdditionalMessage;
 
 	/**
 	 * @param int $iCode
@@ -56,8 +56,8 @@ class ClientException extends Exception
 	 *
 	 * @return ClientException
 	 */
-	public function setLogoutOnException($bLogoutOnException, $sAdditionalLogoutMessage = '')
-	{
+	public function setLogoutOnException($bLogoutOnException, string $sAdditionalLogoutMessage = '')
+	: self {
 		$this->bLogoutOnException = !!$bLogoutOnException;
 
 		$this->sAdditionalMessage = $sAdditionalLogoutMessage;

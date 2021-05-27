@@ -22,7 +22,7 @@ class KeyRandom extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'RANDOMKEY';
     }
 

@@ -33,7 +33,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $directories = array();
+    public array $directories = array();
 
     /**
      * Server class
@@ -86,7 +86,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array('addressbook');
 
@@ -102,7 +102,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getSupportedReportSet($uri) {
+    public function getSupportedReportSet($uri) : array {
 
         $node = $this->server->tree->getNodeForPath($uri);
         if ($node instanceof IAddressBook || $node instanceof ICard) {
@@ -193,7 +193,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param DAV\INode $node
      * @return bool
      */
-    public function updateProperties(&$mutations, &$result, DAV\INode $node) {
+    public function updateProperties(&$mutations, &$result, DAV\INode $node) : bool {
 
         if (!$node instanceof UserAddressBooks) {
             return true;
@@ -451,7 +451,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $test anyof or allof (which means OR or AND)
      * @return bool
      */
-    public function validateFilters($vcardData, array $filters, $test) {
+    public function validateFilters($vcardData, array $filters, bool $test) : bool {
 
         $vcard = VObject\Reader::read($vcardData);
 
@@ -530,7 +530,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $test
      * @return bool
      */
-    protected function validateParamFilters(array $vProperties, array $filters, $test) {
+    protected function validateParamFilters(array $vProperties, array $filters, bool $test) : bool {
 
         foreach($filters as $filter) {
 
@@ -595,7 +595,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $test
      * @return bool
      */
-    protected function validateTextMatches(array $texts, array $filters, $test) {
+    protected function validateTextMatches(array $texts, array $filters, bool $test) : bool {
 
         foreach($filters as $filter) {
 
@@ -688,7 +688,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param array $postVars
      * @return bool
      */
-    public function browserPostAction($uri, $action, array $postVars) {
+    public function browserPostAction(string $uri, $action, array $postVars) {
 
         if ($action!=='mkaddressbook')
             return;

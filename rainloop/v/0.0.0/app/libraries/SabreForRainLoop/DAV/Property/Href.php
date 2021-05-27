@@ -28,7 +28,7 @@ class Href extends DAV\Property implements IHref {
      *
      * @var bool
      */
-    private $autoPrefix = true;
+    private bool $autoPrefix = true;
 
     /**
      * __construct

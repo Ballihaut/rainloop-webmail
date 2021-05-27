@@ -189,7 +189,7 @@ class GraphNodeFactory
      *
      * @throws FacebookSDKException
      */
-    public function makeGraphEdge($subclassName = null, $auto_prefix = true)
+    public function makeGraphEdge($subclassName = null, bool $auto_prefix = true)
     {
         $this->validateResponseAsArray();
         $this->validateResponseCastableAsGraphEdge();
@@ -351,7 +351,7 @@ class GraphNodeFactory
      * @return array
      */
     public function getMetaData(array $data)
-    {
+    : array {
         unset($data['data']);
 
         return $data;
@@ -365,7 +365,7 @@ class GraphNodeFactory
      * @return boolean
      */
     public static function isCastableAsGraphEdge(array $data)
-    {
+    : bool {
         if ($data === []) {
             return true;
         }

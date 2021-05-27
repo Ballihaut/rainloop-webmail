@@ -43,7 +43,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
      *
      * @var array
      */
-    protected $items = [];
+    protected array $items = [];
 
     /**
      * Create a new collection.
@@ -94,7 +94,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
      * @return array
      */
     public function getFieldNames()
-    {
+    : array {
         return array_keys($this->items);
     }
 
@@ -152,7 +152,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
      *
      * @return string
      */
-    public function asJson($options = 0)
+    public function asJson(int $options = 0)
     {
         return json_encode($this->asArray(), $options);
     }
@@ -163,7 +163,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
      * @return int
      */
     public function count()
-    {
+    : int {
         return count($this->items);
     }
 
@@ -185,7 +185,7 @@ class Collection implements ArrayAccess, Countable, IteratorAggregate
      * @return bool
      */
     public function offsetExists($key)
-    {
+    : bool {
         return array_key_exists($key, $this->items);
     }
 

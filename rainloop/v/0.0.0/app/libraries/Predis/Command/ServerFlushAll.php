@@ -22,7 +22,7 @@ class ServerFlushAll extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'FLUSHALL';
     }
 }

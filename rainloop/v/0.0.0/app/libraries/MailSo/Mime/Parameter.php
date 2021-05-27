@@ -20,12 +20,12 @@ class Parameter
 	/**
 	 * @var string
 	 */
-	private $sName;
+	private string $sName;
 
 	/**
 	 * @var string
 	 */
-	private $sValue;
+	private string $sValue;
 
 	/**
 	 * @access private
@@ -45,7 +45,7 @@ class Parameter
 	 *
 	 * @return \MailSo\Mime\Parameter
 	 */
-	public static function NewInstance($sName, $sValue = '')
+	public static function NewInstance($sName, string $sValue = '')
 	{
 		return new self($sName, $sValue);
 	}
@@ -66,7 +66,7 @@ class Parameter
 	 * @return \MailSo\Mime\Parameter
 	 */
 	public function Reset()
-	{
+	: self {
 		$this->sName = '';
 		$this->sValue = '';
 
@@ -95,8 +95,8 @@ class Parameter
 	 *
 	 * @return \MailSo\Mime\Parameter
 	 */
-	public function Parse($sRawParam, $sSeparator = '=')
-	{
+	public function Parse(string $sRawParam, string $sSeparator = '=')
+	: self {
 		$this->Reset();
 
 		$aParts = explode($sSeparator, $sRawParam, 2);
@@ -115,7 +115,7 @@ class Parameter
 	 *
 	 * @return string
 	 */
-	public function ToString($bConvertSpecialsName = false)
+	public function ToString(bool $bConvertSpecialsName = false)
 	{
 		$sResult = '';
 		if (0 < strlen($this->sName))

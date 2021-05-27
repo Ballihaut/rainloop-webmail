@@ -33,7 +33,7 @@ class WhiteListPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('auth_error')->SetLabel('Auth Error')
 				->SetType(\RainLoop\Enumerations\PluginPropertyType::BOOL)

@@ -26,7 +26,7 @@ class FreeBusyGenerator {
      *
      * @var array
      */
-    protected $objects;
+    protected array $objects;
 
     /**
      * Start of range

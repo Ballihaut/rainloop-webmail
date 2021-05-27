@@ -57,7 +57,7 @@ class CompositeStreamConnection extends StreamConnection implements CompositeCon
      * {@inheritdoc}
      */
     public function readBuffer($length)
-    {
+    : string {
         if ($length <= 0) {
             throw new \InvalidArgumentException('Length parameter must be greater than 0.');
         }
@@ -82,7 +82,7 @@ class CompositeStreamConnection extends StreamConnection implements CompositeCon
      * {@inheritdoc}
      */
     public function readLine()
-    {
+    : string {
         $value = '';
         $socket = $this->getResource();
 

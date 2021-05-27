@@ -35,7 +35,7 @@ class ChangePasswordCustomSqlPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('mHost')->SetLabel('MySQL Host')
 				->SetDefaultValue('127.0.0.1'),

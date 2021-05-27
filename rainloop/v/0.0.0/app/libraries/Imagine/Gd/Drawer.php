@@ -50,7 +50,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function arc(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if (false === imagealphablending($this->resource, true)) {
@@ -75,7 +75,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function chord(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if ($fill) {
@@ -104,7 +104,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function ellipse(PointInterface $center, BoxInterface $size, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if ($fill) {
@@ -133,7 +133,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function line(PointInterface $start, PointInterface $end, ColorInterface $color, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if (false === imagealphablending($this->resource, true)) {
@@ -156,7 +156,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function pieSlice(PointInterface $center, BoxInterface $size, $start, $end, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if ($fill) {
@@ -185,7 +185,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function dot(PointInterface $position, ColorInterface $color)
-    {
+    : self {
         if (false === imagealphablending($this->resource, true)) {
             throw new RuntimeException('Draw point operation failed');
         }
@@ -206,14 +206,14 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function polygon(array $coordinates, ColorInterface $color, $fill = false, $thickness = 1)
-    {
+    : self {
         imagesetthickness($this->resource, max(1, (int) $thickness));
 
         if (count($coordinates) < 3) {
             throw new InvalidArgumentException(sprintf('A polygon must consist of at least 3 points, %d given', count($coordinates)));
         }
 
-        $points = call_user_func_array('array_merge', array_map(function (PointInterface $p) {
+        $points = call_user_func_array('array_merge', array_map(function (PointInterface $p) : array {
             return array($p->getX(), $p->getY());
         }, $coordinates));
 
@@ -243,7 +243,7 @@ final class Drawer implements DrawerInterface
      * {@inheritdoc}
      */
     public function text($string, AbstractFont $font, PointInterface $position, $angle = 0, $width = null)
-    {
+    : self {
         if (!$this->info['FreeType Support']) {
             throw new RuntimeException('GD is not compiled with FreeType support');
         }
@@ -314,7 +314,7 @@ final class Drawer implements DrawerInterface
      *
      * Fits a string into box with given width
      */
-    private function wrapText($string, AbstractFont $font, $angle, $width)
+    private function wrapText(string $string, AbstractFont $font, $angle, $width)
     {
         $result = '';
         $words = explode(' ', $string);

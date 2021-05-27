@@ -22,7 +22,7 @@ class PubSubSubscribeByPattern extends PubSubSubscribe
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PSUBSCRIBE';
     }
 }

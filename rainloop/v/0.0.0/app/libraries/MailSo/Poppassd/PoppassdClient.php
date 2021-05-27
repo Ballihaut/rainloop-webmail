@@ -20,7 +20,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	/**
 	 * @var bool
 	 */
-	private $bIsLoggined;
+	private bool $bIsLoggined;
 
 	/**
 	 * @var int
@@ -62,7 +62,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	public function Connect($sServerName, $iPort = 106,
 		$iSecurityType = \MailSo\Net\Enumerations\ConnectionSecurityType::AUTO_DETECT,
 		$bVerifySsl = false, $bAllowSelfSigned = true)
-	{
+	: self {
 		$this->iRequestTime = \microtime(true);
 
 		parent::Connect($sServerName, $iPort, $iSecurityType, $bVerifySsl, $bAllowSelfSigned);
@@ -82,8 +82,8 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Poppassd\Exceptions\ResponseException
 	 */
-	public function Login($sLogin, $sPassword)
-	{
+	public function Login(string $sLogin, $sPassword)
+	: self {
 		if ($this->bIsLoggined)
 		{
 			$this->writeLogException(
@@ -119,7 +119,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Poppassd\Exceptions\Exception
 	 */
 	public function Logout()
-	{
+	: self {
 		if ($this->bIsLoggined)
 		{
 			$this->sendRequestWithCheck('quit');
@@ -138,7 +138,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Poppassd\Exceptions\Exception
 	 */
 	public function NewPass($sNewPassword)
-	{
+	: self {
 		if ($this->bIsLoggined)
 		{
 			$this->sendRequestWithCheck('newpass', $sNewPassword);
@@ -159,7 +159,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 *
 	 * @return string
 	 */
-	private function secureRequestParams($sCommand, $sAddToCommand)
+	private function secureRequestParams(string $sCommand, string $sAddToCommand)
 	{
 		$sResult = null;
 		if (0 < \strlen($sAddToCommand))
@@ -185,8 +185,8 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 */
-	private function sendRequest($sCommand, $sAddToCommand = '')
-	{
+	private function sendRequest(string $sCommand, string $sAddToCommand = '')
+	: self {
 		if (0 === \strlen(\trim($sCommand)))
 		{
 			$this->writeLogException(
@@ -223,8 +223,8 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Poppassd\Exceptions\Exception
 	 */
-	private function sendRequestWithCheck($sCommand, $sAddToCommand = '', $bAuthRequestValidate = false)
-	{
+	private function sendRequestWithCheck($sCommand, string $sAddToCommand = '', bool $bAuthRequestValidate = false)
+	: self {
 		$this->sendRequest($sCommand, $sAddToCommand);
 		$this->validateResponse($bAuthRequestValidate);
 
@@ -239,8 +239,8 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Poppassd\Exceptions\ResponseException
 	 */
-	private function validateResponse($bAuthRequestValidate = false)
-	{
+	private function validateResponse(bool $bAuthRequestValidate = false)
+	: self {
 		$this->getNextBuffer();
 
 		$bResult = false;
@@ -276,7 +276,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @return string
 	 */
 	protected function getLogName()
-	{
+	: string {
 		return 'POPPASSD';
 	}
 
@@ -288,7 +288,7 @@ class PoppassdClient extends \MailSo\Net\NetClient
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		parent::SetLogger($oLogger);
 
 		return $this;

@@ -31,7 +31,7 @@ class Time extends Text {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return "TIME";
 
@@ -44,7 +44,7 @@ class Time extends Text {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         $parts = DateTimeParser::parseVCardTime($this->getValue());
 

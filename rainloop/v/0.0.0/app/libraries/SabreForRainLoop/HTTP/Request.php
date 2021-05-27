@@ -159,7 +159,7 @@ class Request {
      *
      * @return string
      */
-    public function getAbsoluteUri() {
+    public function getAbsoluteUri() : string {
 
         // Checking if the request was made through HTTPS. The last in line is for IIS
         $protocol = isset($this->_SERVER['HTTPS']) && ($this->_SERVER['HTTPS']) && ($this->_SERVER['HTTPS']!='off');
@@ -187,7 +187,7 @@ class Request {
      * @param bool $asString
      * @return resource
      */
-    public function getBody($asString = false) {
+    public function getBody(bool $asString = false) {
 
         if (is_null($this->body)) {
             if (!is_null(self::$defaultInputStream)) {
@@ -218,7 +218,7 @@ class Request {
      * @param bool $setAsDefaultInputStream
      * @return void
      */
-    public function setBody($body,$setAsDefaultInputStream = false) {
+    public function setBody($body,bool $setAsDefaultInputStream = false) {
 
         if(is_resource($body)) {
             $this->body = $body;
@@ -269,7 +269,7 @@ class Request {
      *
      * @return string
      */
-    public function getHTTPVersion() {
+    public function getHTTPVersion() : string {
 
         $protocol = $this->getRawServerValue('SERVER_PROTOCOL');
         if ($protocol==='HTTP/1.0') {

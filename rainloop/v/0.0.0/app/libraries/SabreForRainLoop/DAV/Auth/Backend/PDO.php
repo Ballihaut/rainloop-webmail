@@ -25,7 +25,7 @@ class PDO extends AbstractDigest {
      *
      * @var string
      */
-    protected $tableName;
+    protected string $tableName;
 
 
     /**

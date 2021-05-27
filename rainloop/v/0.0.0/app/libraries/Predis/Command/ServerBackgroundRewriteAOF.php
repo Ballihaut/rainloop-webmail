@@ -22,7 +22,7 @@ class ServerBackgroundRewriteAOF extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BGREWRITEAOF';
     }
 
@@ -30,7 +30,7 @@ class ServerBackgroundRewriteAOF extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : bool {
         return $data == 'Background append only file rewriting started';
     }
 }

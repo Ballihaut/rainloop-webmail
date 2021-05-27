@@ -31,7 +31,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function gamma($correction)
-    {
+    : self {
         try {
             $this->imagick->gammaImage($correction, \Imagick::CHANNEL_ALL);
         } catch (\ImagickException $e) {
@@ -45,7 +45,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function negative()
-    {
+    : self {
         try {
             $this->imagick->negateImage(false, \Imagick::CHANNEL_ALL);
         } catch (\ImagickException $e) {
@@ -59,7 +59,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function grayscale()
-    {
+    : self {
         try {
             $this->imagick->setImageType(\Imagick::IMGTYPE_GRAYSCALE);
         } catch (\ImagickException $e) {
@@ -73,7 +73,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function colorize(ColorInterface $color)
-    {
+    : self {
         try {
             $this->imagick->colorizeImage((string) $color, 1);
         } catch (\ImagickException $e) {
@@ -87,7 +87,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function sharpen()
-    {
+    : self {
         try {
             $this->imagick->sharpenImage(2, 1);
         } catch (\ImagickException $e) {
@@ -101,7 +101,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function blur($sigma = 1)
-    {
+    : self {
         try {
             $this->imagick->gaussianBlurImage(0, $sigma);
         } catch (\ImagickException $e) {

@@ -30,7 +30,7 @@ class ZSetRangeByScore extends ZSetRange
      * {@inheritdoc}
      */
     protected function prepareOptions($options)
-    {
+    : array {
         $opts = array_change_key_case($options, CASE_UPPER);
         $finalizedOpts = array();
 
@@ -49,7 +49,7 @@ class ZSetRangeByScore extends ZSetRange
      * {@inheritdoc}
      */
     protected function withScores()
-    {
+    : bool {
         $arguments = $this->getArguments();
 
         for ($i = 3; $i < count($arguments); ++$i) {

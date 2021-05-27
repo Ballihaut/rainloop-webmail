@@ -7,57 +7,57 @@ class Filter
 	/**
 	 * @var string
 	 */
-	private $sID;
+	private string $sID;
 
 	/**
 	 * @var bool
 	 */
-	private $bEnabled;
+	private bool $bEnabled;
 
 	/**
 	 * @var string
 	 */
-	private $sName;
+	private string $sName;
 
 	/**
 	 * @var array
 	 */
-	private $aConditions;
+	private array $aConditions;
 
 	/**
 	 * @var string
 	 */
-	private $sConditionsType;
+	private string $sConditionsType;
 
 	/**
 	 * @var string
 	 */
-	private $sActionType;
+	private string $sActionType;
 
 	/**
 	 * @var string
 	 */
-	private $sActionValue;
+	private string $sActionValue;
 
 	/**
 	 * @var string
 	 */
-	private $sActionValueSecond;
+	private string $sActionValueSecond;
 
 	/**
 	 * @var string
 	 */
-	private $sActionValueThird;
+	private string $sActionValueThird;
 
 	/**
 	 * @var string
 	 */
-	private $sActionValueFourth;
+	private string $sActionValueFourth;
 
 	/**
 	 * @var bool
 	 */
-	private $bMarkAsRead;
+	private bool $bMarkAsRead;
 
 	/**
 	 * @var bool
@@ -67,12 +67,12 @@ class Filter
 	/**
 	 * @var bool
 	 */
-	private $bKeep;
+	private bool $bKeep;
 
 	/**
 	 * @var bool
 	 */
-	private $bStop;
+	private bool $bStop;
 
 	public function __construct()
 	{
@@ -129,7 +129,7 @@ class Filter
 	 * @return array
 	 */
 	public function Conditions()
-	{
+	: iterable {
 		return $this->aConditions;
 	}
 
@@ -216,8 +216,8 @@ class Filter
 	/**
 	 * @param string $sFilterJson
 	 */
-	public function unserializeFromJson($sFilterJson)
-	{
+	public function unserializeFromJson(string $sFilterJson)
+	: bool {
 		$aFilterJson = \json_decode(\trim($sFilterJson), true);
 		if (\is_array($aFilterJson))
 		{
@@ -233,7 +233,7 @@ class Filter
 	 * @return array
 	 */
 	public function FromJSON($aFilter)
-	{
+	: bool {
 		if (\is_array($aFilter))
 		{
 			$this->sID = isset($aFilter['ID']) ? $aFilter['ID'] : '';
@@ -270,8 +270,8 @@ class Filter
 	 *
 	 * @return array
 	 */
-	public function ToSimpleJSON($bAjax = false)
-	{
+	public function ToSimpleJSON(bool $bAjax = false)
+	: array {
 		$aConditions = array();
 		foreach ($this->Conditions() as $oItem)
 		{

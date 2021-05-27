@@ -19,12 +19,12 @@ class Config
 	/**
 	 * @var bool
 	 */
-	public static $ICONV = true;
+	public static bool $ICONV = true;
 
 	/**
 	 * @var bool
 	 */
-	public static $MBSTRING = true;
+	public static bool $MBSTRING = true;
 
 	/**
 	 * @var array|null
@@ -44,7 +44,7 @@ class Config
 	/**
 	 * @var bool
 	 */
-	public static $FixIconvByMbstring = true;
+	public static bool $FixIconvByMbstring = true;
 
 	/**
 	 * @var int
@@ -54,27 +54,27 @@ class Config
 	/**
 	 * @var int
 	 */
-	public static $MessageListCountLimitTrigger = 0;
+	public static int $MessageListCountLimitTrigger = 0;
 
 	/**
 	 * @var bool
 	 */
-	public static $MessageListUndeletedOnly = true;
+	public static bool $MessageListUndeletedOnly = true;
 
 	/**
 	 * @var int
 	 */
-	public static $MessageListDateFilter = 0;
+	public static int $MessageListDateFilter = 0;
 
 	/**
 	 * @var string
 	 */
-	public static $MessageListPermanentFilter = '';
+	public static string $MessageListPermanentFilter = '';
 
 	/**
 	 * @var int
 	 */
-	public static $LargeThreadLimit = 50;
+	public static int $LargeThreadLimit = 50;
 
 	/**
 	 * @var bool
@@ -84,7 +84,7 @@ class Config
 	/**
 	 * @var bool
 	 */
-	public static $LogSimpleLiterals = false;
+	public static bool $LogSimpleLiterals = false;
 
 	/**
 	 * @var bool
@@ -94,17 +94,17 @@ class Config
 	/**
 	 * @var bool
 	 */
-	public static $PreferStartTlsIfAutoDetect = true;
+	public static bool $PreferStartTlsIfAutoDetect = true;
 
 	/**
 	 * @var string
 	 */
-	public static $BoundaryPrefix = '_Part_';
+	public static string $BoundaryPrefix = '_Part_';
 
 	/**
 	 * @var int
 	 */
-	public static $ImapTimeout = 300;
+	public static int $ImapTimeout = 300;
 
 	/**
 	 * @var \MailSo\Log\Logger|null

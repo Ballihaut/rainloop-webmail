@@ -30,43 +30,29 @@ class PDO extends AbstractBackend {
      *
      * @var string
      */
-    protected $tableName;
+    protected string $tableName;
 
     /**
      * PDO table name for 'group members'
      *
      * @var string
      */
-    protected $groupMembersTableName;
+    protected string $groupMembersTableName;
 
     /**
      * A list of additional fields to support
      *
      * @var array
      */
-    protected $fieldMap = array(
+    protected array $fieldMap = array(
 
-        /**
-         * This property can be used to display the users' real name.
-         */
         '{DAV:}displayname' => array(
             'dbField' => 'displayname',
         ),
 
-        /**
-         * This property is actually used by the CardDAV plugin, where it gets
-         * mapped to {http://calendarserver.orgi/ns/}me-card.
-         *
-         * The reason we don't straight-up use that property, is because
-         * me-card is defined as a property on the users' addressbook
-         * collection.
-         */
         '{http://sabredav.org/ns}vcard-url' => array(
             'dbField' => 'vcardurl',
         ),
-        /**
-         * This is the users' primary email-address.
-         */
         '{http://sabredav.org/ns}email-address' => array(
             'dbField' => 'email',
         ),
@@ -224,7 +210,7 @@ class PDO extends AbstractBackend {
      * @param array $mutations
      * @return array|bool
      */
-    public function updatePrincipal($path, $mutations) {
+    public function updatePrincipal($path, $mutations) : bool {
 
         $updateAble = array();
         foreach($mutations as $key=>$value) {
@@ -300,7 +286,7 @@ class PDO extends AbstractBackend {
      * @param array $searchProperties
      * @return array
      */
-    public function searchPrincipals($prefixPath, array $searchProperties) {
+    public function searchPrincipals($prefixPath, array $searchProperties) : array {
 
         $query = 'SELECT uri FROM ' . $this->tableName . ' WHERE 1=1 ';
         $values = array();

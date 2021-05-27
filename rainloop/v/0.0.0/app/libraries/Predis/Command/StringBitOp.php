@@ -22,7 +22,7 @@ class StringBitOp extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BITOP';
     }
 
@@ -30,7 +30,7 @@ class StringBitOp extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 3 && is_array($arguments[2])) {
             list($operation, $destination) = $arguments;
             $arguments = $arguments[2];

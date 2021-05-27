@@ -43,7 +43,7 @@ class Outbox extends DAV\Collection implements IOutbox {
      *
      * @return string
      */
-    public function getName() {
+    public function getName() : string {
 
         return 'outbox';
 
@@ -54,7 +54,7 @@ class Outbox extends DAV\Collection implements IOutbox {
      *
      * @return \SabreForRainLoop\DAV\INode[]
      */
-    public function getChildren() {
+    public function getChildren() : array {
 
         return array();
 
@@ -98,7 +98,7 @@ class Outbox extends DAV\Collection implements IOutbox {
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

@@ -22,22 +22,22 @@ class Account extends \RainLoop\Account // for backward compatibility
 	/**
 	 * @var string
 	 */
-	private $sProxyAuthUser;
+	private string $sProxyAuthUser;
 
 	/**
 	 * @var string
 	 */
-	private $sProxyAuthPassword;
+	private string $sProxyAuthPassword;
 
 	/**
 	 * @var string
 	 */
-	private $sClientCert;
+	private string $sClientCert;
 
 	/**
 	 * @var string
 	 */
-	private $sSignMeToken;
+	private string $sSignMeToken;
 
 	/**
 	 * @var \RainLoop\Model\Domain
@@ -47,7 +47,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	/**
 	 * @var string
 	 */
-	private $sParentEmail;
+	private string $sParentEmail;
 
 	/**
 	 * @param string $sEmail
@@ -86,7 +86,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return \RainLoop\Model\Account
 	 */
 	public static function NewInstance($sEmail, $sLogin, $sPassword, \RainLoop\Model\Domain $oDomain,
-		$sSignMeToken = '', $sProxyAuthUser = '', $sProxyAuthPassword = '', $sClientCert = '')
+		string $sSignMeToken = '', string $sProxyAuthUser = '', string $sProxyAuthPassword = '', string $sClientCert = '')
 	{
 		return new self($sEmail, $sLogin, $sPassword, $oDomain, $sSignMeToken, $sProxyAuthUser, $sProxyAuthPassword, $sClientCert);
 	}
@@ -95,7 +95,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return string
 	 */
 	public static function GenerateTokensPassword($sAccessToken, $sRefreshToken)
-	{
+	: string {
 		return APP_GOOGLE_ACCESS_TOKEN_PREFIX.\json_encode(array($sAccessToken, $sRefreshToken));
 	}
 
@@ -103,7 +103,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return array
 	 */
 	public static function ParseTokensPassword($sPassword)
-	{
+	: array {
 		$iGatLen = \strlen(APP_GOOGLE_ACCESS_TOKEN_PREFIX);
 		if ($sPassword && APP_GOOGLE_ACCESS_TOKEN_PREFIX === \substr($sPassword, 0, $iGatLen))
 		{
@@ -164,7 +164,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return string
 	 */
 	public function IsAdditionalAccount()
-	{
+	: bool {
 		return 0 < \strlen($this->sParentEmail);
 	}
 
@@ -232,7 +232,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return bool
 	 */
 	public function SignMe()
-	{
+	: bool {
 		return 0 < \strlen($this->sSignMeToken);
 	}
 
@@ -256,7 +256,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 * @return string
 	 */
 	public function Hash()
-	{
+	: string {
 		return md5(APP_SALT.$this->Email().APP_SALT.$this->DomainIncHost().
 			APP_SALT.$this->DomainIncPort().APP_SALT.$this->Password().APP_SALT.'0'.APP_SALT.$this->ParentEmail().APP_SALT);
 	}
@@ -526,7 +526,7 @@ class Account extends \RainLoop\Account // for backward compatibility
 	 *
 	 * @return bool
 	 */
-	public function OutConnectAndLoginHelper($oPlugins, $oSmtpClient, $oConfig, $refreshTokenCallback = null, &$bUsePhpMail = false)
+	public function OutConnectAndLoginHelper($oPlugins, $oSmtpClient, $oConfig, $refreshTokenCallback = null, bool &$bUsePhpMail = false)
 	{
 		$bLogin = false;
 

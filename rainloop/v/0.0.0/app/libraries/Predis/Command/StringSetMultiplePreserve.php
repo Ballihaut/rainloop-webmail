@@ -22,7 +22,7 @@ class StringSetMultiplePreserve extends StringSetMultiple
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'MSETNX';
     }
 

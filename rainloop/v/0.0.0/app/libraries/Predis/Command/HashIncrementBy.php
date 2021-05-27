@@ -22,7 +22,7 @@ class HashIncrementBy extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HINCRBY';
     }
 }

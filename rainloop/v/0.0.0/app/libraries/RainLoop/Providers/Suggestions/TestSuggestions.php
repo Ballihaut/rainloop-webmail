@@ -12,7 +12,7 @@ class TestSuggestions implements \RainLoop\Providers\Suggestions\ISuggestions
 	 * @return array
 	 */
 	public function Process($oAccount, $sQuery, $iLimit = 20)
-	{
+	: array {
 		return array(
 			array($oAccount->Email(), ''),
 			array('email@domain.com', 'name')

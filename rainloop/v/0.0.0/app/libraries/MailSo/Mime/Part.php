@@ -32,7 +32,7 @@ class Part
 	/**
 	 * @var string
 	 */
-	public static $ForceCharset = '';
+	public static string $ForceCharset = '';
 
 	/**
 	 * @var \MailSo\Mime\HeaderCollection
@@ -52,22 +52,22 @@ class Part
 	/**
 	 * @var array
 	 */
-	public $LineParts;
+	public array $LineParts;
 
 	/**
 	 * @var string
 	 */
-	private $sBoundary;
+	private string $sBoundary;
 
 	/**
 	 * @var string
 	 */
-	private $sParentCharset;
+	private string $sParentCharset;
 
 	/**
 	 * @var int
 	 */
-	private $iParseBuffer;
+	private int $iParseBuffer;
 
 	/**
 	 * @access private
@@ -90,7 +90,7 @@ class Part
 	 * @return \MailSo\Mime\Part
 	 */
 	public function Reset()
-	{
+	: self {
 		\MailSo\Base\ResourceRegistry::CloseMemoryResource($this->Body);
 		$this->Body = null;
 
@@ -124,7 +124,7 @@ class Part
 	 * @return \MailSo\Mime\Part
 	 */
 	public function SetParentCharset($sParentCharset)
-	{
+	: self {
 		$this->sParentCharset = $sParentCharset;
 
 		return $this;
@@ -135,7 +135,7 @@ class Part
 	 * @return \MailSo\Mime\Part
 	 */
 	public function SetBoundary($sBoundary)
-	{
+	: self {
 		$this->sBoundary = $sBoundary;
 
 		return $this;
@@ -146,7 +146,7 @@ class Part
 	 * @return \MailSo\Mime\Part
 	 */
 	public function SetParseBuffer($iParseBuffer)
-	{
+	: self {
 		$this->iParseBuffer = $iParseBuffer;
 
 		return $this;
@@ -156,7 +156,7 @@ class Part
 	 * @return string
 	 */
 	public function HeaderCharset()
-	{
+	: string {
 		return ($this->Headers) ? trim(strtolower($this->Headers->ParameterValue(
 			\MailSo\Mime\Enumerations\Header::CONTENT_TYPE,
 			\MailSo\Mime\Enumerations\Parameter::CHARSET))) : '';
@@ -166,7 +166,7 @@ class Part
 	 * @return string
 	 */
 	public function HeaderBoundary()
-	{
+	: string {
 		return ($this->Headers) ? trim($this->Headers->ParameterValue(
 			\MailSo\Mime\Enumerations\Header::CONTENT_TYPE,
 			\MailSo\Mime\Enumerations\Parameter::BOUNDARY)) : '';
@@ -176,7 +176,7 @@ class Part
 	 * @return string
 	 */
 	public function ContentType()
-	{
+	: string {
 		return ($this->Headers) ?
 			trim(strtolower($this->Headers->ValueByName(
 				\MailSo\Mime\Enumerations\Header::CONTENT_TYPE))) : '';
@@ -186,7 +186,7 @@ class Part
 	 * @return string
 	 */
 	public function ContentTransferEncoding()
-	{
+	: string {
 		return ($this->Headers) ?
 			trim(strtolower($this->Headers->ValueByName(
 				\MailSo\Mime\Enumerations\Header::CONTENT_TRANSFER_ENCODING))) : '';
@@ -196,7 +196,7 @@ class Part
 	 * @return string
 	 */
 	public function ContentID()
-	{
+	: string {
 		return ($this->Headers) ? trim($this->Headers->ValueByName(
 			\MailSo\Mime\Enumerations\Header::CONTENT_ID)) : '';
 	}
@@ -205,7 +205,7 @@ class Part
 	 * @return string
 	 */
 	public function ContentLocation()
-	{
+	: string {
 		return ($this->Headers) ? trim($this->Headers->ValueByName(
 			\MailSo\Mime\Enumerations\Header::CONTENT_LOCATION)) : '';
 	}
@@ -235,7 +235,7 @@ class Part
 	 * @return string
 	 */
 	public function FileName()
-	{
+	: string {
 		$sResult = '';
 		if ($this->Headers)
 		{
@@ -258,8 +258,8 @@ class Part
 	 * @param string $sFileName
 	 * @return \MailSo\Mime\Part
 	 */
-	public function ParseFromFile($sFileName)
-	{
+	public function ParseFromFile(string $sFileName)
+	: self {
 		$rStreamHandle = (@file_exists($sFileName)) ? @fopen($sFileName, 'rb') : false;
 		if (is_resource($rStreamHandle))
 		{
@@ -278,8 +278,8 @@ class Part
 	 * @param string $sRawMessage
 	 * @return \MailSo\Mime\Part
 	 */
-	public function ParseFromString($sRawMessage)
-	{
+	public function ParseFromString(string $sRawMessage)
+	: self {
 		$rStreamHandle = (0 < strlen($sRawMessage)) ?
 			\MailSo\Base\ResourceRegistry::CreateMemoryResource() : false;
 
@@ -302,7 +302,7 @@ class Part
 	 * @return \MailSo\Mime\Part
 	 */
 	public function ParseFromStream($rStreamHandle)
-	{
+	: self {
 		$this->Reset();
 
 		$oParserClass = new \MailSo\Mime\Parser\ParserMemory();
@@ -363,8 +363,8 @@ class Part
 	 * @param resource $rStreamHandle
 	 * @return \MailSo\Mime\Part
 	 */
-	public function ParseFromStreamRecursion($rStreamHandle, &$oCallbackClass, &$iOffset,
-		&$sPrevBuffer, &$sBuffer, &$aBoundaryStack, &$bIsOef, $bNotFirstRead = false)
+	public function ParseFromStreamRecursion($rStreamHandle, &$oCallbackClass, int &$iOffset,
+		string &$sPrevBuffer, string &$sBuffer, &$aBoundaryStack, bool &$bIsOef, bool $bNotFirstRead = false)
 	{
 		$oCallbackClass->StartParseMimePart($this);
 

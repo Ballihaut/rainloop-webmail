@@ -22,7 +22,7 @@ class ListPushHeadX extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LPUSHX';
     }
 }

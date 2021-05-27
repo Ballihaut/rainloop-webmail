@@ -20,27 +20,27 @@ class FolderCollection extends \MailSo\Base\Collection
 	/**
 	 * @var string
 	 */
-	public $Namespace;
+	public string $Namespace;
 
 	/**
 	 * @var string
 	 */
-	public $FoldersHash;
+	public string $FoldersHash;
 
 	/**
 	 * @var bool
 	 */
-	public $IsThreadsSupported;
+	public bool $IsThreadsSupported;
 
 	/**
 	 * @var bool
 	 */
-	public $Optimized;
+	public bool $Optimized;
 
 	/**
 	 * @var array
 	 */
-	public $SystemFolders;
+	public array $SystemFolders;
 
 	/**
 	 * @access protected
@@ -149,7 +149,7 @@ class FolderCollection extends \MailSo\Base\Collection
 	 * @return \MailSo\Mail\FolderCollection
 	 */
 	public function SetNamespace($sNamespace)
-	{
+	: self {
 		$this->Namespace = $sNamespace;
 
 		return $this;
@@ -160,7 +160,7 @@ class FolderCollection extends \MailSo\Base\Collection
 	 *
 	 * @return void
 	 */
-	public function InitByUnsortedMailFolderArray($aUnsortedMailFolders)
+	public function InitByUnsortedMailFolderArray(iterable $aUnsortedMailFolders)
 	{
 		$this->Clear();
 
@@ -207,7 +207,7 @@ class FolderCollection extends \MailSo\Base\Collection
 		$aSortedByLenImapFolders = \array_merge($aSortedByLenImapFolders, $aAddedFolders);
 		unset($aAddedFolders);
 
-		\uasort($aSortedByLenImapFolders, function ($oFolderA, $oFolderB) {
+		\uasort($aSortedByLenImapFolders, function ($oFolderA, $oFolderB) : int {
 			return \strnatcmp($oFolderA->FullNameRaw(), $oFolderB->FullNameRaw());
 		});
 

@@ -24,7 +24,7 @@ class VFreeBusy extends VObject\Component {
      * @param Datetime $end
      * @return bool
      */
-    public function isFree(\DateTime $start, \Datetime $end) {
+    public function isFree(\DateTime $start, \Datetime $end) : bool {
 
         foreach($this->select('FREEBUSY') as $freebusy) {
 

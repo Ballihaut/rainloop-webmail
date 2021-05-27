@@ -22,7 +22,7 @@ class KeyPreciseTimeToLive extends KeyTimeToLive
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PTTL';
     }
 }

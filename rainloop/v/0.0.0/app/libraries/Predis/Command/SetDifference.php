@@ -22,7 +22,7 @@ class SetDifference extends SetIntersection
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SDIFF';
     }
 }

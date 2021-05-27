@@ -22,7 +22,7 @@ class KeyMigrate extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'MIGRATE';
     }
 
@@ -30,7 +30,7 @@ class KeyMigrate extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (is_array(end($arguments))) {
             foreach (array_pop($arguments) as $modifier => $value) {
                 $modifier = strtoupper($modifier);

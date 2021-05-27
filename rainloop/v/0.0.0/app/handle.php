@@ -20,7 +20,7 @@ if (!\defined('RAINLOOP_APP_LIBRARIES_PATH'))
 	 * @return mixed
 	 */
 	function rainLoopSplAutoloadNamespaces()
-	{
+	: array {
 		return RAINLOOP_INCLUDE_AS_API_DEF ? array('RainLoop', 'Predis') :
 			array('RainLoop', 'Facebook', 'PHPThumb', 'Predis', 'SabreForRainLoop', 'Imagine', 'Detection');
 	}
@@ -31,7 +31,7 @@ if (!\defined('RAINLOOP_APP_LIBRARIES_PATH'))
 	 * @return mixed
 	 */
 	function rainLoopSplAutoloadRegisterFunction($sClassName)
-	{
+	: bool {
 		if ($sClassName && '\\' === $sClassName[0])
 		{
 			$sClassName = \substr($sClassName, 1);

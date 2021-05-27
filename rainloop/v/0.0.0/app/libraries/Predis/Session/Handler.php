@@ -66,7 +66,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function open($save_path, $session_id)
-    {
+    : bool {
         // NOOP
         return true;
     }
@@ -75,7 +75,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function close()
-    {
+    : bool {
         // NOOP
         return true;
     }
@@ -84,7 +84,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function gc($maxlifetime)
-    {
+    : bool {
         // NOOP
         return true;
     }
@@ -93,7 +93,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function read($session_id)
-    {
+    : string {
         if ($data = $this->client->get($session_id)) {
             return $data;
         }
@@ -104,7 +104,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function write($session_id, $session_data)
-    {
+    : bool {
         $this->client->setex($session_id, $this->ttl, $session_data);
 
         return true;
@@ -114,7 +114,7 @@ class Handler implements \SessionHandlerInterface
      * {@inheritdoc}
      */
     public function destroy($session_id)
-    {
+    : bool {
         $this->client->del($session_id);
 
         return true;

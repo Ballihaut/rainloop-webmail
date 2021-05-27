@@ -28,7 +28,7 @@ class NeedPrivileges extends DAV\Exception\Forbidden {
      *
      * @var array
      */
-    protected $privileges;
+    protected array $privileges;
 
     /**
      * Constructor

@@ -27,7 +27,7 @@ use Predis\NotSupportedException;
  */
 class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
 {
-    private $pool;
+    private array $pool;
     private $strategy;
     private $distributor;
 
@@ -45,7 +45,7 @@ class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function isConnected()
-    {
+    : bool {
         foreach ($this->pool as $connection) {
             if ($connection->isConnected()) {
                 return true;
@@ -96,7 +96,7 @@ class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function remove(NodeConnectionInterface $connection)
-    {
+    : bool {
         if (($id = array_search($connection, $this->pool, true)) !== false) {
             unset($this->pool[$id]);
             $this->distributor->remove($connection);
@@ -115,7 +115,7 @@ class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * @return bool Returns true if the connection was in the pool.
      */
     public function removeById($connectionID)
-    {
+    : bool {
         if ($connection = $this->getConnectionById($connectionID)) {
             return $this->remove($connection);
         }
@@ -179,7 +179,7 @@ class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function count()
-    {
+    : int {
         return count($this->pool);
     }
 
@@ -223,7 +223,7 @@ class PredisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * @return array
      */
     public function executeCommandOnNodes(CommandInterface $command)
-    {
+    : array {
         $responses = array();
 
         foreach ($this->pool as $connection) {

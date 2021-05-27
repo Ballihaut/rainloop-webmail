@@ -141,7 +141,7 @@ class UserCalendars implements DAV\IExtendedCollection, DAVACL\IACL {
      * @todo needs optimizing
      * @return bool
      */
-    public function childExists($name) {
+    public function childExists($name) : bool {
 
         foreach($this->getChildren() as $child) {
             if ($name==$child->getName())
@@ -157,7 +157,7 @@ class UserCalendars implements DAV\IExtendedCollection, DAVACL\IACL {
      *
      * @return array
      */
-    public function getChildren() {
+    public function getChildren() : iterable {
 
         $calendars = $this->caldavBackend->getCalendarsForUser($this->principalInfo['uri']);
         $objs = array();
@@ -251,7 +251,7 @@ class UserCalendars implements DAV\IExtendedCollection, DAVACL\IACL {
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

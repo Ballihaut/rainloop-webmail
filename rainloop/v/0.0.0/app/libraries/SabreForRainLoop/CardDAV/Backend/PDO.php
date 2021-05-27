@@ -26,12 +26,12 @@ class PDO extends AbstractBackend {
     /**
      * The PDO table name used to store addressbooks
      */
-    protected $addressBooksTableName;
+    protected string $addressBooksTableName;
 
     /**
      * The PDO table name used to store cards
      */
-    protected $cardsTableName;
+    protected string $cardsTableName;
 
     /**
      * Sets up the object
@@ -92,7 +92,7 @@ class PDO extends AbstractBackend {
      * @see SabreForRainLoop\DAV\IProperties::updateProperties
      * @return bool|array
      */
-    public function updateAddressBook($addressBookId, array $mutations) {
+    public function updateAddressBook($addressBookId, array $mutations) : bool {
 
         $updates = array();
 
@@ -262,7 +262,7 @@ class PDO extends AbstractBackend {
      * @param string $cardData
      * @return string|null
      */
-    public function createCard($addressBookId, $cardUri, $cardData) {
+    public function createCard($addressBookId, $cardUri, $cardData) : string {
 
         $stmt = $this->pdo->prepare('INSERT INTO ' . $this->cardsTableName . ' (carddata, uri, lastmodified, addressbookid) VALUES (?, ?, ?, ?)');
 
@@ -300,7 +300,7 @@ class PDO extends AbstractBackend {
      * @param string $cardData
      * @return string|null
      */
-    public function updateCard($addressBookId, $cardUri, $cardData) {
+    public function updateCard($addressBookId, $cardUri, $cardData) : string {
 
         $stmt = $this->pdo->prepare('UPDATE ' . $this->cardsTableName . ' SET carddata = ?, lastmodified = ? WHERE uri = ? AND addressbookid =?');
         $stmt->execute(array($cardData, time(), $cardUri, $addressBookId));
@@ -319,7 +319,7 @@ class PDO extends AbstractBackend {
      * @param string $cardUri
      * @return bool
      */
-    public function deleteCard($addressBookId, $cardUri) {
+    public function deleteCard($addressBookId, $cardUri) : bool {
 
         $stmt = $this->pdo->prepare('DELETE FROM ' . $this->cardsTableName . ' WHERE addressbookid = ? AND uri = ?');
         $stmt->execute(array($addressBookId, $cardUri));

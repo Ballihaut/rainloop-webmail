@@ -91,7 +91,7 @@ class User extends DAVACL\Principal implements DAV\ICollection {
      * @param string $name
      * @return bool
      */
-    public function childExists($name) {
+    public function childExists($name) : bool {
 
         try {
             $this->getChild($name);

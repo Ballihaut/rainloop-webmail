@@ -22,7 +22,7 @@ class ConnectionQuit extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'QUIT';
     }
 }

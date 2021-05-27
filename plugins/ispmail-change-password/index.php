@@ -11,7 +11,7 @@ class IspmailChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	public function Supported()
-	{
+	: string {
 		if (!extension_loaded('pdo') || !class_exists('PDO'))
 		{
 			return 'The PHP extension PDO (mysql) must be installed to use this plugin';
@@ -62,7 +62,7 @@ class IspmailChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('host')->SetLabel('MySQL Host')
 				->SetDefaultValue('127.0.0.1'),

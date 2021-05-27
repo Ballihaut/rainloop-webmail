@@ -24,7 +24,7 @@ class ScheduleCalendarTransp extends DAV\Property {
     const TRANSPARENT = 'transparent';
     const OPAQUE = 'opaque';
 
-    protected $value;
+    protected string $value;
 
     /**
      * Creates the property

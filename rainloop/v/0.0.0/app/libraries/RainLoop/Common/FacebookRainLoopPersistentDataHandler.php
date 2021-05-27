@@ -7,7 +7,7 @@ class FacebookRainLoopPersistentDataHandler implements \Facebook\PersistentData\
 	/**
 	 * @var string
 	 */
-	private $rlUserHash;
+	private string $rlUserHash;
 
 	/**
 	 * @var mixed
@@ -75,7 +75,7 @@ class FacebookRainLoopPersistentDataHandler implements \Facebook\PersistentData\
 	 * @return string
 	 */
 	private function generateSessionVariableName($key)
-	{
+	: string {
 		return implode('/', array('Fackebook', \md5($this->rlUserHash), 'Storage', $key));
 	}
 }

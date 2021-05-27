@@ -17,7 +17,7 @@ namespace MailSo\Base;
  */
 class HtmlUtils
 {
-	static $KOS = '@@_KOS_@@';
+	static string $KOS = '@@_KOS_@@';
 
 	/**
 	 * @access private
@@ -110,7 +110,7 @@ class HtmlUtils
 	 * @return boolean
 	 */
 	private static function comparedVersion()
-	{
+	: bool {
 		return \version_compare(PHP_VERSION, '5.3.6') >= 0;
 	}
 
@@ -120,7 +120,7 @@ class HtmlUtils
 	 * @return string
 	 */
 	private static function domToString($oElem, $oDom = null)
-	{
+	: string {
 		$sResult = '';
 		if ($oElem instanceof \DOMDocument)
 		{
@@ -156,7 +156,7 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function GetTextFromDom_($oDom, $bWrapByFakeHtmlAndBodyDiv = true)
+	public static function GetTextFromDom_($oDom, bool $bWrapByFakeHtmlAndBodyDiv = true)
 	{
 		$sResult = '';
 
@@ -215,7 +215,7 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function GetTextFromDom($oDom, $bWrapByFakeHtmlAndBodyDiv = true)
+	public static function GetTextFromDom($oDom, bool $bWrapByFakeHtmlAndBodyDiv = true)
 	{
 		$sResult = '';
 
@@ -267,7 +267,7 @@ class HtmlUtils
 	 * @return string
 	 */
 	public static function ClearBodyAndHtmlTag($sHtml, &$sHtmlAttrs = '', &$sBodyAttrs = '')
-	{
+	: string {
 		$aMatch = array();
 		if (\preg_match('/<html([^>]+)>/im', $sHtml, $aMatch) && !empty($aMatch[1]))
 		{
@@ -305,8 +305,8 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function FixSchemas($sHtml, $bClearEmpty = true)
-	{
+	public static function FixSchemas($sHtml, bool $bClearEmpty = true)
+	: string {
 		if ($bClearEmpty)
 		{
 			$sHtml = \str_replace('<o:p></o:p>', '', $sHtml);
@@ -364,7 +364,7 @@ class HtmlUtils
 	 * @param mixed $oDom
 	 * @param bool $bClearStyleAndHead = true
 	 */
-	public static function ClearTags(&$oDom, $bClearStyleAndHead = true)
+	public static function ClearTags(&$oDom, bool $bClearStyleAndHead = true)
 	{
 		$aRemoveTags = array(
 			'svg', 'link', 'base', 'meta', 'title', 'x-script', 'script', 'bgsound', 'keygen', 'source',
@@ -643,9 +643,9 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function ClearStyle($sStyle, $oElement, &$bHasExternals, &$aFoundCIDs,
-		$aContentLocationUrls, &$aFoundedContentLocationUrls, $bDoNotReplaceExternalUrl = false, $fAdditionalExternalFilter = null)
-	{
+	public static function ClearStyle(string $sStyle, $oElement, &$bHasExternals, &$aFoundCIDs,
+		$aContentLocationUrls, &$aFoundedContentLocationUrls, bool $bDoNotReplaceExternalUrl = false, $fAdditionalExternalFilter = null)
+	: string {
 		$sStyle = \trim($sStyle);
 		$aOutStyles = array();
 		$aStyles = \explode(';', $sStyle);
@@ -870,7 +870,7 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function ClearHtmlSimple($sHtml, $bDoNotReplaceExternalUrl = false, $bFindLinksInHtml = false, $bWrapByFakeHtmlAndBodyDiv = true)
+	public static function ClearHtmlSimple($sHtml, bool $bDoNotReplaceExternalUrl = false, bool $bFindLinksInHtml = false, bool $bWrapByFakeHtmlAndBodyDiv = true)
 	{
 		$bHasExternals = false;
 		$aFoundCIDs = array();
@@ -901,12 +901,12 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function ClearHtml($sHtml, &$bHasExternals = false, &$aFoundCIDs = array(),
-		$aContentLocationUrls = array(), &$aFoundedContentLocationUrls = array(),
-		$bDoNotReplaceExternalUrl = false, $bFindLinksInHtml = false,
+	public static function ClearHtml($sHtml, bool &$bHasExternals = false, &$aFoundCIDs = array(),
+		array $aContentLocationUrls = array(), &$aFoundedContentLocationUrls = array(),
+		bool $bDoNotReplaceExternalUrl = false, bool $bFindLinksInHtml = false,
 		$fAdditionalExternalFilter = null, $fAdditionalDomReader = false,
-		$bTryToDetectHiddenImages = false, $bWrapByFakeHtmlAndBodyDiv = true)
-	{
+		bool $bTryToDetectHiddenImages = false, bool $bWrapByFakeHtmlAndBodyDiv = true)
+	: string {
 		$sResult = '';
 
 		$sHtml = null === $sHtml ? '' : (string) $sHtml;
@@ -1281,7 +1281,7 @@ class HtmlUtils
 	 * @return string
 	 */
 	public static function BuildHtml($sHtml, &$aFoundCids = array(), &$mFoundDataURL = null, &$aFoundedContentLocationUrls = array())
-	{
+	: string {
 		$oDom = \MailSo\Base\HtmlUtils::GetDomFromText($sHtml);
 
 		\MailSo\Base\HtmlUtils::ClearTags($oDom);
@@ -1421,8 +1421,8 @@ class HtmlUtils
 	 *
 	 * @return string
 	 */
-	public static function ConvertPlainToHtml($sText, $bLinksWithTargetBlank = true)
-	{
+	public static function ConvertPlainToHtml($sText, bool $bLinksWithTargetBlank = true)
+	: string {
 		$sText = \trim($sText);
 		if (0 === \strlen($sText))
 		{
@@ -1509,7 +1509,7 @@ class HtmlUtils
 	 * @return string
 	 */
 	public static function ConvertHtmlToPlain($sText)
-	{
+	: string {
 		$sText = \trim(\stripslashes($sText));
 		$sText = \MailSo\Base\Utils::StripSpaces($sText);
 

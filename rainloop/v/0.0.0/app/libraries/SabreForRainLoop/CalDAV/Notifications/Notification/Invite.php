@@ -42,7 +42,7 @@ class Invite extends DAV\Property implements CalDAV\Notifications\INotificationT
      *
      * @var int
      */
-    protected $type;
+    protected int $type;
 
     /**
      * True if access to a calendar is read-only.

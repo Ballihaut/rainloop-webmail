@@ -22,7 +22,7 @@ class SetPop extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SPOP';
     }
 }

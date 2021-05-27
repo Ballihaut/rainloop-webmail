@@ -7,12 +7,12 @@ class RainLoopFacebookRedirectLoginHelper extends \Facebook\FacebookRedirectLogi
 	/**
 	 * @var string
 	 */
-	private $rlAppId;
+	private string $rlAppId;
 
 	/**
 	 * @var string
 	 */
-	private $rlUserHash;
+	private string $rlUserHash;
 
 	/**
 	 * @var mixed
@@ -121,7 +121,7 @@ class RainLoopFacebookRedirectLoginHelper extends \Facebook\FacebookRedirectLogi
 	}
 
 	private function generateSessionVariableName()
-	{
+	: string {
 		return implode('/', array('Fackebook', \md5($this->rlUserHash), 'Storage'));
 	}
 }

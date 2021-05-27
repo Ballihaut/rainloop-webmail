@@ -34,8 +34,8 @@ class Pipeline implements ClientContextInterface
     private $client;
     private $pipeline;
 
-    private $responses = array();
-    private $running = false;
+    private array $responses = array();
+    private bool $running = false;
 
     /**
      * @param ClientInterface $client Client instance used by the context.
@@ -80,7 +80,7 @@ class Pipeline implements ClientContextInterface
      * @return $this
      */
     public function executeCommand(CommandInterface $command)
-    {
+    : self {
         $this->recordCommand($command);
 
         return $this;
@@ -159,8 +159,8 @@ class Pipeline implements ClientContextInterface
      *
      * @return $this
      */
-    public function flushPipeline($send = true)
-    {
+    public function flushPipeline(bool $send = true)
+    : self {
         if ($send && !$this->pipeline->isEmpty()) {
             $responses = $this->executePipeline($this->getConnection(), $this->pipeline);
             $this->responses = array_merge($this->responses, $responses);
@@ -178,7 +178,7 @@ class Pipeline implements ClientContextInterface
      *
      * @throws ClientException
      */
-    private function setRunning($bool)
+    private function setRunning(bool $bool)
     {
         if ($bool && $this->running) {
             throw new ClientException('The current pipeline context is already being executed.');

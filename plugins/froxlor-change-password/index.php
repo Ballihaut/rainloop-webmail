@@ -11,7 +11,7 @@ class FroxlorchangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	public function Supported()
-	{
+	: string {
 		if (!extension_loaded('pdo') || !class_exists('PDO'))
 		{
 			return 'The PHP exention PDO (mysql) must be installed to use this plugin';
@@ -58,7 +58,7 @@ class FroxlorchangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('pdo_dsn')->SetLabel('Froxlor PDO dsn')
 				->SetDefaultValue('mysql:host=127.0.0.1;dbname=froxlor'),

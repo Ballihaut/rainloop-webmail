@@ -39,7 +39,7 @@ class FacebookBatchRequest extends FacebookRequest implements IteratorAggregate,
     /**
      * @var array An array of FacebookRequest entities to send.
      */
-    protected $requests;
+    protected iterable $requests;
 
     /**
      * @var array An array of files to upload.
@@ -72,7 +72,7 @@ class FacebookBatchRequest extends FacebookRequest implements IteratorAggregate,
      * @throws \InvalidArgumentException
      */
     public function add($request, $name = null)
-    {
+    : self {
         if (is_array($request)) {
             foreach ($request as $key => $req) {
                 $this->add($req, $key);

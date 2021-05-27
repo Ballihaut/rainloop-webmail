@@ -22,7 +22,7 @@ class ProxyWrite implements IProxyWrite {
      *
      * @var array
      */
-    protected $principalInfo;
+    protected array $principalInfo;
 
     /**
      * Principal Backend
@@ -51,7 +51,7 @@ class ProxyWrite implements IProxyWrite {
      *
      * @return string
      */
-    public function getName() {
+    public function getName() : string {
 
         return 'calendar-proxy-write';
 
@@ -101,7 +101,7 @@ class ProxyWrite implements IProxyWrite {
      *
      * @return array
      */
-    public function getAlternateUriSet() {
+    public function getAlternateUriSet() : array {
 
         return array();
 
@@ -112,7 +112,7 @@ class ProxyWrite implements IProxyWrite {
      *
      * @return string
      */
-    public function getPrincipalUrl() {
+    public function getPrincipalUrl() : string {
 
         return $this->principalInfo['uri'] . '/' . $this->getName();
 

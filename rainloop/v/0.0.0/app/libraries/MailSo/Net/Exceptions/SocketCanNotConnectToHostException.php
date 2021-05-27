@@ -21,12 +21,12 @@ class SocketCanNotConnectToHostException extends \MailSo\Net\Exceptions\Connecti
 	/**
 	 * @var string
 	 */
-	private $sSocketMessage;
+	private string $sSocketMessage;
 
 	/**
 	 * @var int
 	 */
-	private $iSocketCode;
+	private int $iSocketCode;
 
 	/**
 	 * @param string $sSocketMessage = ''

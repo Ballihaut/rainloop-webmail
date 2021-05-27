@@ -22,7 +22,7 @@ class TransactionDiscard extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'DISCARD';
     }
 }

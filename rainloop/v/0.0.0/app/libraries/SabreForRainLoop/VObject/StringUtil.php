@@ -17,7 +17,7 @@ class StringUtil {
      * @param string $str
      * @return bool
      */
-    static function isUTF8($str) {
+    static function isUTF8($str) : bool {
 
         // First check.. mb_check_encoding
         if (!mb_check_encoding($str, 'UTF-8')) {
@@ -42,7 +42,7 @@ class StringUtil {
      * @param string $str
      * @return string
      */
-    static function convertToUTF8($str) {
+    static function convertToUTF8(string $str) {
 
         $encoding = mb_detect_encoding($str , array('UTF-8','ISO-8859-1'), true);
 

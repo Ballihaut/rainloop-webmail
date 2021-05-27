@@ -21,7 +21,7 @@ class DispatcherLoop
 {
     private $pubsub;
 
-    protected $callbacks;
+    protected array $callbacks;
     protected $defaultCallback;
     protected $subscriptionCallback;
 
@@ -93,7 +93,7 @@ class DispatcherLoop
      * @param string   $channel  Channel name.
      * @param Callable $callback A callback.
      */
-    public function attachCallback($channel, $callback)
+    public function attachCallback(string $channel, $callback)
     {
         $callbackName = $this->getPrefixKeys().$channel;
 
@@ -107,7 +107,7 @@ class DispatcherLoop
      *
      * @param string $channel Redis channel.
      */
-    public function detachCallback($channel)
+    public function detachCallback(string $channel)
     {
         $callbackName = $this->getPrefixKeys().$channel;
 
@@ -158,7 +158,7 @@ class DispatcherLoop
      * @return string
      */
     protected function getPrefixKeys()
-    {
+    : string {
         $options = $this->pubsub->getClient()->getOptions();
 
         if (isset($options->prefix)) {

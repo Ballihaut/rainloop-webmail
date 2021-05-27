@@ -28,7 +28,7 @@ class Client {
      *
      * @var array
      */
-    public $propertyMap = array();
+    public array $propertyMap = array();
 
     protected $baseUri;
     protected $userName;
@@ -63,7 +63,7 @@ class Client {
      *
      * @var boolean
      */
-    protected $verifyPeer;
+    protected int $verifyPeer;
 
     /**
      * Constructor
@@ -149,7 +149,7 @@ class Client {
      * @param int $depth
      * @return array
      */
-    public function propFind($url, array $properties, $depth = 0) {
+    public function propFind($url, array $properties, int $depth = 0) {
 
         $body = '<?xml version="1.0"?>' . "\n";
         $body.= '<d:propfind xmlns:d="DAV:">' . "\n";
@@ -273,7 +273,7 @@ class Client {
      *
      * @return array
      */
-    public function options() {
+    public function options() : array {
 
         $result = $this->request('OPTIONS');
         if (!isset($result['headers']['dav'])) {
@@ -306,7 +306,7 @@ class Client {
      * @param array $headers
      * @return array
      */
-    public function request($method, $url = '', $body = null, $headers = array()) {
+    public function request($method, string $url = '', $body = null, $headers = array()) {
 
         $url = $this->getAbsoluteUrl($url);
 
@@ -467,7 +467,7 @@ class Client {
      * @return array
      */
     // @codeCoverageIgnoreStart
-    protected function curlRequest($url, $settings) {
+    protected function curlRequest($url, $settings) : array {
 
 	    // TODO rainloop
         $curl = curl_init($url);
@@ -553,7 +553,7 @@ class Client {
      * @param string $url
      * @return string
      */
-    protected function getAbsoluteUrl($url) {
+    protected function getAbsoluteUrl(string $url) : string {
 
         // If the url starts with http:// or https://, the url is already absolute.
         if (preg_match('/^http(s?):\/\//', $url)) {

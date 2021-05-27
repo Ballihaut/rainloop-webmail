@@ -22,7 +22,7 @@ class TransactionMulti extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'MULTI';
     }
 }

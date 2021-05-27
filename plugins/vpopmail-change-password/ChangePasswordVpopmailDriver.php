@@ -5,27 +5,27 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	/**
 	 * @var string
 	 */
-	private $mHost = 'localhost';
+	private string $mHost = 'localhost';
 
 	/**
 	 * @var string
 	 */
-	private $mUser = '';
+	private string $mUser = '';
 
 	/**
 	 * @var string
 	 */
-	private $mPass = '';
+	private string $mPass = '';
 
 	/**
 	 * @var string
 	 */
-	private $mDatabase = '';
+	private string $mDatabase = '';
 
 	/**
 	 * @var string
 	 */
-	private $mTable = '';
+	private string $mTable = '';
 
 	/**
 	 * @var string
@@ -40,7 +40,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	/**
 	 * @var array
 	 */
-	private $aDomains = array();
+	private array $aDomains = array();
 
 	/**
 	 * @param string $mHost
@@ -48,7 +48,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmHost($mHost)
-	{
+	: self {
 		$this->mHost = $mHost;
 		return $this;
 	}
@@ -59,7 +59,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmUser($mUser)
-	{
+	: self {
 		$this->mUser = $mUser;
 		return $this;
 	}
@@ -70,7 +70,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmPass($mPass)
-	{
+	: self {
 		$this->mPass = $mPass;
 		return $this;
 	}
@@ -81,7 +81,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmDatabase($mDatabase)
-	{
+	: self {
 		$this->mDatabase = $mDatabase;
 		return $this;
 	}
@@ -92,7 +92,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmTable($mTable)
-	{
+	: self {
 		$this->mTable = $mTable;
 		return $this;
 	}
@@ -103,7 +103,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetmColumn($mColumn)
-	{
+	: self {
 		$this->mColumn = $mColumn;
 		return $this;
 	}
@@ -114,7 +114,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return \ChangePasswordVpopmailDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -129,7 +129,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return bool
 	 */
 	public function SetAllowedDomains($aDomains)
-	{
+	: self {
 		if (\is_array($aDomains) && 0 < \count($aDomains))
 		{
 			$this->aDomains = $aDomains;
@@ -144,7 +144,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return 0 === \count($this->aDomains) || ($oAccount && \in_array(\strtolower(
 			\MailSo\Base\Utils::GetDomainFromEmail($oAccount->Email)), $this->aDomains));
 	}
@@ -157,7 +157,7 @@ class ChangePasswordVpopmailDriver implements \RainLoop\Providers\ChangePassword
 	 * @return bool
 	 */
 	public function ChangePassword(\RainLoop\Account $oAccount, $sPrevPassword, $sNewPassword)
-	{
+	: bool {
 		if ($this->oLogger)
 		{
 			$this->oLogger->Write('Try to change password for '.$oAccount->Email());

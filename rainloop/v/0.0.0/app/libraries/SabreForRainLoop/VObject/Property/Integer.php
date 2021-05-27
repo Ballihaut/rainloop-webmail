@@ -51,7 +51,7 @@ class Integer extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return "INTEGER";
 
@@ -64,7 +64,7 @@ class Integer extends Property {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         return array((int)$this->getValue());
 

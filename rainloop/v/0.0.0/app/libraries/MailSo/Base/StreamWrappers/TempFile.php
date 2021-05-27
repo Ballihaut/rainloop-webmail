@@ -26,7 +26,7 @@ class TempFile
 	/**
 	 * @var array
 	 */
-	private static $aStreams = array();
+	private static array $aStreams = array();
 
 	/**
 	 * @var resource
@@ -47,7 +47,7 @@ class TempFile
 	 *
 	 * @return resource|bool
 	 */
-	public static function CreateStream($sHash, &$sFileName = '')
+	public static function CreateStream(string $sHash, string &$sFileName = '')
 	{
 		self::Reg();
 
@@ -60,7 +60,7 @@ class TempFile
 	 *
 	 * @return bool
 	 */
-	public function stream_open($sPath)
+	public function stream_open(string $sPath)
 	{
 		$bResult = false;
 		$aPath = parse_url($sPath);
@@ -95,7 +95,7 @@ class TempFile
 	 * @return bool
 	 */
 	public function stream_close()
-	{
+	: bool {
 		return true;
 	}
 
@@ -103,7 +103,7 @@ class TempFile
 	 * @return bool
 	 */
 	public function stream_flush()
-	{
+	: bool {
 		return fflush($this->rSream);
 	}
 
@@ -112,7 +112,7 @@ class TempFile
 	 *
 	 * @return string
 	 */
-	public function stream_read($iLen)
+	public function stream_read(int $iLen)
 	{
 		return fread($this->rSream, $iLen);
 	}
@@ -122,7 +122,7 @@ class TempFile
 	 *
 	 * @return int
 	 */
-	public function stream_write($sInputString)
+	public function stream_write(string $sInputString)
 	{
 		return fwrite($this->rSream, $sInputString);
 	}
@@ -139,7 +139,7 @@ class TempFile
 	 * @return bool
 	 */
 	public function stream_eof()
-	{
+	: bool {
 		return feof($this->rSream);
 	}
 
@@ -157,8 +157,8 @@ class TempFile
 	 *
 	 * @return int
 	 */
-	public function stream_seek($iOffset, $iWhence = SEEK_SET)
-	{
+	public function stream_seek(int $iOffset, $iWhence = SEEK_SET)
+	: int {
 		return fseek($this->rSream, $iOffset, $iWhence);
 	}
 }

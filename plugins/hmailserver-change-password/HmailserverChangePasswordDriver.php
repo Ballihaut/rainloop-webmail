@@ -5,17 +5,17 @@ class HmailserverChangePasswordDriver implements \RainLoop\Providers\ChangePassw
 	/**
 	 * @var string
 	 */
-	private $sLogin = '';
+	private string $sLogin = '';
 
 	/**
 	 * @var string
 	 */
-	private $sPassword = '';
+	private string $sPassword = '';
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -29,7 +29,7 @@ class HmailserverChangePasswordDriver implements \RainLoop\Providers\ChangePassw
 	 * @return \HmailserverChangePasswordDriver
 	 */
 	public function SetConfig($sLogin, $sPassword)
-	{
+	: self {
 		$this->sLogin = $sLogin;
 		$this->sPassword = $sPassword;
 
@@ -42,7 +42,7 @@ class HmailserverChangePasswordDriver implements \RainLoop\Providers\ChangePassw
 	 * @return \HmailserverChangePasswordDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -53,7 +53,7 @@ class HmailserverChangePasswordDriver implements \RainLoop\Providers\ChangePassw
 	 * @return \HmailserverChangePasswordDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -68,7 +68,7 @@ class HmailserverChangePasswordDriver implements \RainLoop\Providers\ChangePassw
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}

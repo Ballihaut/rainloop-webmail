@@ -7,17 +7,17 @@ class Tag
 	/**
 	 * @var string
 	 */
-	public $IdContactTag;
+	public string $IdContactTag;
 
 	/**
 	 * @var string
 	 */
-	public $Name;
+	public string $Name;
 
 	/**
 	 * @var bool
 	 */
-	public $ReadOnly;
+	public bool $ReadOnly;
 
 	public function __construct()
 	{

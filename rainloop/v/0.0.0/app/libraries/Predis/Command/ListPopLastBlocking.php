@@ -22,7 +22,7 @@ class ListPopLastBlocking extends ListPopFirstBlocking
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BRPOP';
     }
 }

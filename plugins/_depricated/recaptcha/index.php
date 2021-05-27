@@ -22,7 +22,7 @@ class RecaptchaPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('public_key')->SetLabel('Public Key')
 				->SetAllowedInJs(true)
@@ -40,7 +40,7 @@ class RecaptchaPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	private function getCaptchaCacherKey()
-	{
+	: string {
 		return 'Captcha/Login/'.\RainLoop\Utils::GetConnectionToken();
 	}
 
@@ -78,7 +78,7 @@ class RecaptchaPlugin extends \RainLoop\Plugins\AbstractPlugin
 	/**
 	 * @param string $sAction
 	 */
-	public function AjaxActionPreCall($sAction)
+	public function AjaxActionPreCall(bool $sAction)
 	{
 		if ('Login' === $sAction && 0 >= $this->getLimit())
 		{
@@ -103,7 +103,7 @@ class RecaptchaPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @param string $sAction
 	 * @param array $aResponseItem
 	 */
-	public function FilterAjaxResponse($sAction, &$aResponseItem)
+	public function FilterAjaxResponse(bool $sAction, &$aResponseItem)
 	{
 		if ('Login' === $sAction && $aResponseItem && isset($aResponseItem['Result']))
 		{

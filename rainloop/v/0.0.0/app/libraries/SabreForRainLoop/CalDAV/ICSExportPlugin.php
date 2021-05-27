@@ -46,7 +46,7 @@ class ICSExportPlugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function beforeMethod($method, $uri) {
+    public function beforeMethod($method, string $uri) {
 
         if ($method!='GET') return;
         if ($this->server->httpRequest->getQueryString()!='export') return;

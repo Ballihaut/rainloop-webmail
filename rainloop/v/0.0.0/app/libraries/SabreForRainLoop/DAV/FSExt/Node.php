@@ -22,7 +22,7 @@ abstract class Node extends DAV\FS\Node implements DAV\IProperties {
      * @see SabreForRainLoop\DAV\IProperties::updateProperties
      * @return bool|array
      */
-    public function updateProperties($properties) {
+    public function updateProperties($properties) : bool {
 
         $resourceData = $this->getResourceData();
 
@@ -73,7 +73,7 @@ abstract class Node extends DAV\FS\Node implements DAV\IProperties {
      *
      * @return string
      */
-    protected function getResourceInfoPath() {
+    protected function getResourceInfoPath() : string {
 
         list($parentDir) = DAV\URLUtil::splitPath($this->path);
         return $parentDir . '/.sabredav';
@@ -85,7 +85,7 @@ abstract class Node extends DAV\FS\Node implements DAV\IProperties {
      *
      * @return array
      */
-    protected function getResourceData() {
+    protected function getResourceData() : array {
 
         $path = $this->getResourceInfoPath();
         if (!file_exists($path)) return array('properties' => array());
@@ -175,7 +175,7 @@ abstract class Node extends DAV\FS\Node implements DAV\IProperties {
     /**
      * @return bool
      */
-    public function deleteResourceData() {
+    public function deleteResourceData() : bool {
 
         // When we're deleting this node, we also need to delete any resource information
         $path = $this->getResourceInfoPath();

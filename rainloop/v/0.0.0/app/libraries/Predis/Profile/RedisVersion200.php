@@ -22,7 +22,7 @@ class RedisVersion200 extends RedisProfile
      * {@inheritdoc}
      */
     public function getVersion()
-    {
+    : string {
         return '2.0';
     }
 
@@ -30,7 +30,7 @@ class RedisVersion200 extends RedisProfile
      * {@inheritdoc}
      */
     public function getSupportedCommands()
-    {
+    : array {
         return array(
             /* ---------------- Redis 1.2 ---------------- */
 

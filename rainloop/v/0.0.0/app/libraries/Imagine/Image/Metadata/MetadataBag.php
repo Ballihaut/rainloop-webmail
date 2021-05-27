@@ -17,7 +17,7 @@ namespace Imagine\Image\Metadata;
 class MetadataBag implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     /** @var array */
-    private $data;
+    private array $data;
 
     public function __construct(array $data = array())
     {
@@ -41,7 +41,7 @@ class MetadataBag implements \ArrayAccess, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function count()
-    {
+    : int {
         return count($this->data);
     }
 
@@ -57,7 +57,7 @@ class MetadataBag implements \ArrayAccess, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function offsetExists($offset)
-    {
+    : bool {
         return array_key_exists($offset, $this->data);
     }
 

@@ -39,7 +39,7 @@ final class Center implements PointInterface
      * {@inheritdoc}
      */
     public function getX()
-    {
+    : float {
         return ceil($this->box->getWidth() / 2);
     }
 
@@ -47,7 +47,7 @@ final class Center implements PointInterface
      * {@inheritdoc}
      */
     public function getY()
-    {
+    : float {
         return ceil($this->box->getHeight() / 2);
     }
 
@@ -55,7 +55,7 @@ final class Center implements PointInterface
      * {@inheritdoc}
      */
     public function in(BoxInterface $box)
-    {
+    : bool {
         return $this->getX() < $box->getWidth() && $this->getY() < $box->getHeight();
     }
 

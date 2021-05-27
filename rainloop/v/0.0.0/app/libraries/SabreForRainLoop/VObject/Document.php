@@ -55,28 +55,28 @@ abstract class Document extends Component {
      *
      * @var string
      */
-    static public $defaultName;
+    public static $defaultName;
 
     /**
      * List of properties, and which classes they map to.
      *
      * @var array
      */
-    static public $propertyMap = array();
+    public static array $propertyMap = array();
 
     /**
      * List of components, along with which classes they map to.
      *
      * @var array
      */
-    static public $componentMap = array();
+    public static array $componentMap = array();
 
     /**
      * List of value-types, and which classes they map to.
      *
      * @var array
      */
-    static public $valueMap = array();
+    public static array $valueMap = array();
 
     /**
      * Creates a new document.
@@ -128,7 +128,7 @@ abstract class Document extends Component {
      * @param string $arg1,... Unlimited number of args
      * @return mixed
      */
-    public function create($name) {
+    public function create(string $name) {
 
         if (isset(static::$componentMap[strtoupper($name)])) {
 
@@ -161,7 +161,7 @@ abstract class Document extends Component {
      * @param bool $defaults
      * @return Component
      */
-    public function createComponent($name, array $children = null, $defaults = true) {
+    public function createComponent($name, array $children = null, bool $defaults = true) {
 
         $name = strtoupper($name);
         $class = 'SabreForRainLoop\\VObject\\Component';
@@ -190,7 +190,7 @@ abstract class Document extends Component {
      * @param string $valueType Force a specific valuetype, such as URI or TEXT
      * @return Property
      */
-    public function createProperty($name, $value = null, array $parameters = null, $valueType = null) {
+    public function createProperty(string $name, $value = null, array $parameters = null, $valueType = null) {
 
         // If there's a . in the name, it means it's prefixed by a groupname.
         if (($i=strpos($name,'.'))!==false) {

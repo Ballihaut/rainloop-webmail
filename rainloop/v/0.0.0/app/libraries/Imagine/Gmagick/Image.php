@@ -45,7 +45,7 @@ final class Image extends AbstractImage
      */
     private $palette;
 
-    private static $colorspaceMapping = array(
+    private static array $colorspaceMapping = array(
         PaletteInterface::PALETTE_CMYK => \Gmagick::COLORSPACE_CMYK,
         PaletteInterface::PALETTE_RGB  => \Gmagick::COLORSPACE_RGB,
     );
@@ -102,7 +102,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function crop(PointInterface $start, BoxInterface $size)
-    {
+    : self {
         if (!$start->in($this->getSize())) {
             throw new OutOfBoundsException('Crop coordinates must start at minimum 0, 0 position from top left corner, crop height and width must be positive integers and must not exceed the current image borders');
         }
@@ -122,7 +122,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function flipHorizontally()
-    {
+    : self {
         try {
             $this->gmagick->flopimage();
         } catch (\GmagickException $e) {
@@ -138,7 +138,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function flipVertically()
-    {
+    : self {
         try {
             $this->gmagick->flipimage();
         } catch (\GmagickException $e) {
@@ -154,7 +154,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function strip()
-    {
+    : self {
         try {
             try {
                 $this->profile($this->palette->profile());
@@ -176,7 +176,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function paste(ImageInterface $image, PointInterface $start)
-    {
+    : self {
         if (!$image instanceof self) {
             throw new InvalidArgumentException(sprintf('Gmagick\Image can only paste() Gmagick\Image instances, %s given', get_class($image)));
         }
@@ -200,7 +200,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function resize(BoxInterface $size, $filter = ImageInterface::FILTER_UNDEFINED)
-    {
+    : self {
         static $supportedFilters = array(
             ImageInterface::FILTER_UNDEFINED => \Gmagick::FILTER_UNDEFINED,
             ImageInterface::FILTER_BESSEL    => \Gmagick::FILTER_BESSEL,
@@ -239,7 +239,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function rotate($angle, ColorInterface $background = null)
-    {
+    : self {
         try {
             $background = $background ?: $this->palette->color('fff');
             $pixel = $this->getColor($background);
@@ -265,7 +265,7 @@ final class Image extends AbstractImage
      *
      * @throws InvalidArgumentException
      */
-    private function applyImageOptions(\Gmagick $image, array $options, $path)
+    private function applyImageOptions(\Gmagick $image, array $options, string $path)
     {
         if (isset($options['format'])) {
             $format = $options['format'];
@@ -326,7 +326,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function save($path = null, array $options = array())
-    {
+    : self {
         $path = null === $path ? $this->gmagick->getImageFilename() : $path;
 
         if ('' === trim($path)) {
@@ -350,7 +350,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function show($format, array $options = array())
-    {
+    : self {
         header('Content-type: '.$this->getMimeType($format));
         echo $this->get($format, $options);
 
@@ -449,7 +449,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function applyMask(ImageInterface $mask)
-    {
+    : self {
         if (!$mask instanceof self) {
             throw new InvalidArgumentException('Can only apply instances of Imagine\Gmagick\Image as masks');
         }
@@ -493,7 +493,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function fill(FillInterface $fill)
-    {
+    : self {
         try {
             $draw = new \GmagickDraw();
             $size = $this->getSize();
@@ -602,7 +602,7 @@ final class Image extends AbstractImage
 
         $palette = $this->palette();
 
-        return $this->palette->color(array_map(function ($color) use ($palette, $pixel, $colorMapping) {
+        return $this->palette->color(array_map(function ($color) use ($palette, $pixel, $colorMapping) : int {
             if (!isset($colorMapping[$color])) {
                 throw new InvalidArgumentException(sprintf('Color %s is not mapped in Gmagick', $color));
             }
@@ -627,7 +627,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function interlace($scheme)
-    {
+    : self {
         static $supportedInterlaceSchemes = array(
             ImageInterface::INTERLACE_NONE      => \Gmagick::INTERLACE_NO,
             ImageInterface::INTERLACE_LINE      => \Gmagick::INTERLACE_LINE,
@@ -648,7 +648,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function usePalette(PaletteInterface $palette)
-    {
+    : self {
         if (!isset(static::$colorspaceMapping[$palette->name()])) {
             throw new InvalidArgumentException(sprintf('The palette %s is not supported by Gmagick driver',$palette->name()));
         }
@@ -691,7 +691,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function profile(ProfileInterface $profile)
-    {
+    : self {
         try {
             $this->gmagick->profileimage('ICM', $profile->data());
         } catch (\GmagickException $e) {

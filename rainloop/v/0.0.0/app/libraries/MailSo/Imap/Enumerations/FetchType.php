@@ -64,7 +64,7 @@ class FetchType
 	 *
 	 * @return string
 	 */
-	public static function BuildBodyCustomHeaderRequest(array $aHeaders, $bPeek = true)
+	public static function BuildBodyCustomHeaderRequest(array $aHeaders, bool $bPeek = true)
 	{
 		$sResult = '';
 		if (0 < \count($aHeaders))

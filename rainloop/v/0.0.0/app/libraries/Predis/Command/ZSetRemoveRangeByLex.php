@@ -22,7 +22,7 @@ class ZSetRemoveRangeByLex extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREMRANGEBYLEX';
     }
 }

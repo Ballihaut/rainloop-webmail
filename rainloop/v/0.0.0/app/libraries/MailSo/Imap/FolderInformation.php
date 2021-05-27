@@ -30,12 +30,12 @@ class FolderInformation
 	/**
 	 * @var array
 	 */
-	public $Flags;
+	public array $Flags;
 
 	/**
 	 * @var array
 	 */
-	public $PermanentFlags;
+	public array $PermanentFlags;
 
 	/**
 	 * @var int
@@ -104,7 +104,7 @@ class FolderInformation
 	 * @return bool
 	 */
 	public function IsFlagSupported($sFlag)
-	{
+	: bool {
 		return \in_array('\\*', $this->PermanentFlags) ||
 			\in_array($sFlag, $this->PermanentFlags) ||
 			\in_array($sFlag, $this->Flags);

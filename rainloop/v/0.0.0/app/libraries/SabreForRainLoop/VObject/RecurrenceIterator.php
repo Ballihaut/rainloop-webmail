@@ -80,7 +80,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $exceptionDates = array();
+    public array $exceptionDates = array();
 
     /**
      * Base event
@@ -95,7 +95,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $overriddenDates = array();
+    public array $overriddenDates = array();
 
     /**
      * list of events that are 'overridden'.
@@ -104,7 +104,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $overriddenEvents = array();
+    public array $overriddenEvents = array();
 
     /**
      * Frequency is one of: secondly, minutely, hourly, daily, weekly, monthly,
@@ -112,21 +112,21 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var string
      */
-    public $frequency;
+    public string $frequency;
 
     /**
      * The last instance of this recurrence, inclusively
      *
      * @var DateTime|null
      */
-    public $until;
+    public int $until;
 
     /**
      * The number of recurrences, or 'null' if infinitely recurring.
      *
      * @var int
      */
-    public $count;
+    public int $count;
 
     /**
      * The interval.
@@ -136,7 +136,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var int
      */
-    public $interval = 1;
+    public int $interval = 1;
 
     /**
      * Which seconds to recur.
@@ -163,7 +163,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $byHour;
+    public int $byHour;
 
     /**
      * Which weekdays to recur.
@@ -177,7 +177,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $byDay;
+    public int $byDay;
 
     /**
      * Which days of the month to recur
@@ -187,7 +187,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $byMonthDay;
+    public int $byMonthDay;
 
     /**
      * Which days of the year to recur.
@@ -217,7 +217,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $byMonth;
+    public int $byMonth;
 
     /**
      * Which items in an existing st to recur.
@@ -233,7 +233,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    public $bySetPos;
+    public int $bySetPos;
 
     /**
      * When a week starts
@@ -247,14 +247,14 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var int
      */
-    public $counter = 0;
+    public int $counter = 0;
 
     /**
      * Simple mapping from iCalendar day names to day numbers
      *
      * @var array
      */
-    private $dayMap = array(
+    private array $dayMap = array(
         'SU' => 0,
         'MO' => 1,
         'TU' => 2,
@@ -269,7 +269,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var array
      */
-    private $dayNames = array(
+    private array $dayNames = array(
         0 => 'Sunday',
         1 => 'Monday',
         2 => 'Tuesday',
@@ -301,7 +301,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @var int
      */
-    private $handledOverridden = 0;
+    private int $handledOverridden = 0;
 
     /**
      * Creates the iterator
@@ -563,7 +563,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @return bool
      */
-    public function valid() {
+    public function valid() : bool {
 
         if (!is_null($this->count)) {
             return $this->counter < $this->count;
@@ -621,7 +621,7 @@ class RecurrenceIterator implements \Iterator {
      *
      * @return bool
      */
-    public function isInfinite() {
+    public function isInfinite() : bool {
 
         return !$this->count && !$this->until;
 

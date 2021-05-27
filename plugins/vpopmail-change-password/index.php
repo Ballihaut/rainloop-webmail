@@ -48,7 +48,7 @@ class ChangePasswordVpopmailPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('domains')->SetLabel('Allowed Domains')
 				->SetType(\RainLoop\Enumerations\PluginPropertyType::STRING_TEXT)

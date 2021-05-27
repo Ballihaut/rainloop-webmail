@@ -65,14 +65,14 @@ class Server {
      *
      * @var array
      */
-    protected $plugins = array();
+    protected array $plugins = array();
 
     /**
      * This array contains a list of callbacks we should call when certain events are triggered
      *
      * @var array
      */
-    protected $eventSubscriptions = array();
+    protected array $eventSubscriptions = array();
 
     /**
      * This is a default list of namespaces.
@@ -82,7 +82,7 @@ class Server {
      *
      * @var array
      */
-    public $xmlNamespaces = array(
+    public array $xmlNamespaces = array(
         'DAV:' => 'd',
         'http://sabredav.org/ns' => 's',
     );
@@ -93,11 +93,11 @@ class Server {
      *
      * @var array
      */
-    public $propertyMap = array(
+    public array $propertyMap = array(
         '{DAV:}resourcetype' => 'SabreForRainLoop\\DAV\\Property\\ResourceType',
     );
 
-    public $protectedProperties = array(
+    public array $protectedProperties = array(
         // RFC4918
         '{DAV:}getcontentlength',
         '{DAV:}getetag',
@@ -124,7 +124,7 @@ class Server {
      *
      * @var bool
      */
-    public $debugExceptions = false;
+    public bool $debugExceptions = false;
 
     /**
      * This property allows you to automatically add the 'resourcetype' value
@@ -135,7 +135,7 @@ class Server {
      *
      * @var array
      */
-    public $resourceTypeMapping = array(
+    public array $resourceTypeMapping = array(
         'SabreForRainLoop\\DAV\\ICollection' => '{DAV:}collection',
     );
 
@@ -147,7 +147,7 @@ class Server {
      *
      * @var bool
      */
-    static public $exposeVersion = true;
+    public static bool $exposeVersion = true;
 
     /**
      * Sets up the server
@@ -226,7 +226,7 @@ class Server {
             $error->setAttribute('xmlns:s',self::NS_SABREDAV);
             $DOM->appendChild($error);
 
-            $h = function($v) {
+            $h = function(string $v) : string {
 
                 return htmlspecialchars($v, ENT_NOQUOTES, 'UTF-8');
 
@@ -303,7 +303,7 @@ class Server {
      *
      * @return string
      */
-    public function guessBaseUri() {
+    public function guessBaseUri() : string {
 
         $pathInfo = $this->httpRequest->getRawServerValue('PATH_INFO');
         $uri = $this->httpRequest->getRawServerValue('REQUEST_URI');
@@ -424,7 +424,7 @@ class Server {
      * @param array $arguments
      * @return bool
      */
-    public function broadcastEvent($eventName,$arguments = array()) {
+    public function broadcastEvent($eventName,array $arguments = array()) : bool {
 
         if (isset($this->eventSubscriptions[$eventName])) {
 
@@ -520,7 +520,7 @@ class Server {
      * @param string $uri
      * @return bool
      */
-    protected function httpGet($uri) {
+    protected function httpGet($uri) : bool {
 
         $node = $this->tree->getNodeForPath($uri,0);
 
@@ -803,7 +803,7 @@ class Server {
 
         // Intercepting Content-Range
         if ($this->httpRequest->getHeader('Content-Range')) {
-            /**
+            throw new /**
             Content-Range is dangerous for PUT requests:  PUT per definition
             stores a full resource.  draft-ietf-httpbis-p2-semantics-15 says
             in section 7.6:
@@ -826,7 +826,7 @@ class Server {
             all PUT requests with a Content-Range for now.
             */
 
-            throw new Exception\NotImplemented('PUT with Content-Range is not allowed.');
+            Exception\NotImplemented('PUT with Content-Range is not allowed.');
         }
 
         // Intercepting the Finder problem
@@ -983,7 +983,7 @@ class Server {
      * @param string $uri
      * @return bool
      */
-    protected function httpMove($uri) {
+    protected function httpMove($uri) : bool {
 
         $moveInfo = $this->getCopyAndMoveInfo();
 
@@ -1020,7 +1020,7 @@ class Server {
      * @param string $uri
      * @return bool
      */
-    protected function httpCopy($uri) {
+    protected function httpCopy($uri) : bool {
 
         $copyInfo = $this->getCopyAndMoveInfo();
         // If the destination is part of the source tree, we must fail
@@ -1126,7 +1126,7 @@ class Server {
      * @throws Exception\Forbidden A permission denied exception is thrown whenever there was an attempt to supply a uri outside of the base uri
      * @return string
      */
-    public function calculateUri($uri) {
+    public function calculateUri($uri) : string {
 
         if ($uri[0]!='/' && strpos($uri,'://')) {
 
@@ -1304,7 +1304,7 @@ class Server {
      *
      * @return array
      */
-    public function getCopyAndMoveInfo() {
+    public function getCopyAndMoveInfo() : array {
 
         // Collecting the relevant HTTP headers
         if (!$this->httpRequest->getHeader('Destination')) throw new Exception\BadRequest('The destination header was not supplied');
@@ -1452,7 +1452,7 @@ class Server {
      * @param int $depth
      * @return array
      */
-    public function getPropertiesForPath($path, $propertyNames = array(), $depth = 0) {
+    public function getPropertiesForPath(string $path, array $propertyNames = array(), $depth = 0) : iterable {
 
         if ($depth!=0) $depth = 1;
 
@@ -1628,7 +1628,7 @@ class Server {
      * @param string   $etag
      * @return bool
      */
-    public function createFile($uri,$data, &$etag = null) {
+    public function createFile($uri,$data, &$etag = null) : bool {
 
         list($dir,$name) = URLUtil::splitPath($uri);
 
@@ -1913,7 +1913,7 @@ class Server {
      * @param bool $handleAsGET
      * @return bool
      */
-    public function checkPreconditions($handleAsGET = false) {
+    public function checkPreconditions(bool $handleAsGET = false) : bool {
 
         $uri = $this->getRequestUri();
         $node = null;
@@ -2071,7 +2071,7 @@ class Server {
      * @param bool strip404s
      * @return string
      */
-    public function generateMultiStatus(array $fileProperties, $strip404s = false) {
+    public function generateMultiStatus(array $fileProperties, bool $strip404s = false) {
 
         $dom = new \DOMDocument('1.0','utf-8');
         //$dom->formatOutput = true;
@@ -2158,7 +2158,7 @@ class Server {
      * @param string $body
      * @return array
      */
-    public function parsePropFindRequest($body) {
+    public function parsePropFindRequest($body) : array {
 
         // If the propfind body was empty, it means IE is requesting 'all' properties
         if (!$body) return array();

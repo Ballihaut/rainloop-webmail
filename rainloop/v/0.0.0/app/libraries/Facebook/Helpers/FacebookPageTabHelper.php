@@ -79,7 +79,7 @@ class FacebookPageTabHelper extends FacebookCanvasHelper
      * @return boolean
      */
     public function isAdmin()
-    {
+    : bool {
         return $this->getPageData('admin') === true;
     }
 

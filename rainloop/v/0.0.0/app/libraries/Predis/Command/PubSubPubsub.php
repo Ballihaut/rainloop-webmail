@@ -22,7 +22,7 @@ class PubSubPubsub extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PUBSUB';
     }
 
@@ -30,7 +30,7 @@ class PubSubPubsub extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         switch (strtolower($this->getArgument(0))) {
             case 'numsub':
                 return self::processNumsub($data);
@@ -48,7 +48,7 @@ class PubSubPubsub extends Command
      * @return array
      */
     protected static function processNumsub(array $channels)
-    {
+    : array {
         $processed = array();
         $count = count($channels);
 

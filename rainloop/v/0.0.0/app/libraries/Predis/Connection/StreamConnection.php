@@ -121,7 +121,7 @@ class StreamConnection extends AbstractConnection
      * @return resource
      */
     protected function unixStreamInitializer(ParametersInterface $parameters)
-    {
+    : float {
         if (!isset($parameters->path)) {
             throw new InvalidArgumentException('Missing UNIX domain socket path.');
         }
@@ -179,7 +179,7 @@ class StreamConnection extends AbstractConnection
      *
      * @param string $buffer Representation of a command in the Redis wire protocol.
      */
-    protected function write($buffer)
+    protected function write(string $buffer)
     {
         $socket = $this->getResource();
 

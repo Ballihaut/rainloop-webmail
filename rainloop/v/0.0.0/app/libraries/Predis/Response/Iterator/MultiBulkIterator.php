@@ -28,7 +28,7 @@ use Predis\Response\ResponseInterface;
 abstract class MultiBulkIterator implements \Iterator, \Countable, ResponseInterface
 {
     protected $current;
-    protected $position;
+    protected int $position;
     protected $size;
 
     /**

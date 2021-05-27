@@ -30,7 +30,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var array
      */
-    public $iconMap = array(
+    public array $iconMap = array(
         'SabreForRainLoop\\DAV\\IFile' => 'icons/file',
         'SabreForRainLoop\\DAV\\ICollection' => 'icons/collection',
         'SabreForRainLoop\\DAVACL\\IPrincipal' => 'icons/principal',
@@ -44,7 +44,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var string
      */
-    public $iconExtension = '.png';
+    public string $iconExtension = '.png';
 
     /**
      * reference to server class
@@ -59,7 +59,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var bool
      */
-    protected $enablePost = true;
+    protected bool $enablePost = true;
 
     /**
      * By default the browser plugin will generate a favicon and other images.
@@ -67,7 +67,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @var bool
      */
-    protected $enableAssets = true;
+    protected bool $enableAssets = true;
 
     /**
      * Creates the object.
@@ -148,7 +148,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return bool
      */
-    public function httpPOSTHandler($method, $uri) {
+    public function httpPOSTHandler($method, string $uri) {
 
         if ($method!='POST') return;
         $contentType = $this->server->httpRequest->getHeader('Content-Type');
@@ -204,7 +204,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $value
      * @return string
      */
-    public function escapeHTML($value) {
+    public function escapeHTML(string $value) : string {
 
         return htmlspecialchars($value,ENT_QUOTES,'UTF-8');
 
@@ -216,7 +216,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $path
      * @return string
      */
-    public function generateDirectoryIndex($path) {
+    public function generateDirectoryIndex(string $path) {
 
         $version = '';
         if (DAV\Server::$exposeVersion) {
@@ -427,7 +427,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $assetName
      * @return string
      */
-    protected function getAssetUrl($assetName) {
+    protected function getAssetUrl(string $assetName) : string {
 
         return $this->server->getBaseUri() . '?sabreAction=asset&assetName=' . urlencode($assetName);
 
@@ -439,7 +439,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $assetName
      * @return string
      */
-    protected function getLocalAssetPath($assetName) {
+    protected function getLocalAssetPath(string $assetName) {
 
         $assetDir = __DIR__ . '/assets/';
         $path = $assetDir . $assetName;

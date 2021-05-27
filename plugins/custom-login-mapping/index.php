@@ -14,7 +14,7 @@ class CustomLoginMappingPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 *
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function FilterLoginСredentials(&$sEmail, &$sLogin, &$sPassword)
+	public function FilterLoginСredentials(bool &$sEmail, &$sLogin, &$sPassword)
 	{
 		$sMapping = \trim($this->Config()->Get('plugin', 'mapping', ''));
 		if (!empty($sMapping))
@@ -42,7 +42,7 @@ class CustomLoginMappingPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('mapping')->SetLabel('Mapping')
 				->SetType(\RainLoop\Enumerations\PluginPropertyType::STRING_TEXT)

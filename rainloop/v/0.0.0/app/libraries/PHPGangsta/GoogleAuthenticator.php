@@ -11,7 +11,7 @@
 
 class PHPGangsta_GoogleAuthenticator
 {
-    protected $_codeLength = 6;
+    protected int $_codeLength = 6;
 
     /**
      * Create new secret.
@@ -20,7 +20,7 @@ class PHPGangsta_GoogleAuthenticator
      * @param int $secretLength
      * @return string
      */
-    public function createSecret($secretLength = 16)
+    public function createSecret(int $secretLength = 16)
     {
         $validChars = $this->_getBase32LookupTable();
         unset($validChars[32]);
@@ -73,7 +73,7 @@ class PHPGangsta_GoogleAuthenticator
      * @param string $secret
      * @return string
      */
-    public function getQRCodeGoogleUrl($name, $secret) {
+    public function getQRCodeGoogleUrl(string $name, string $secret) : string {
         $urlencoded = urlencode('otpauth://totp/'.$name.'?secret='.$secret.'');
         return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl='.$urlencoded.'';
     }
@@ -86,8 +86,8 @@ class PHPGangsta_GoogleAuthenticator
      * @param int $discrepancy This is the allowed time drift in 30 second units (8 means 4 minutes before or after)
      * @return bool
      */
-    public function verifyCode($secret, $code, $discrepancy = 1)
-    {
+    public function verifyCode($secret, $code, int $discrepancy = 1)
+    : bool {
         $currentTimeSlice = floor(time() / 30);
 
         for ($i = -$discrepancy; $i <= $discrepancy; $i++) {
@@ -107,7 +107,7 @@ class PHPGangsta_GoogleAuthenticator
      * @return PHPGangsta_GoogleAuthenticator
      */
     public function setCodeLength($length)
-    {
+    : self {
         $this->_codeLength = $length;
         return $this;
     }
@@ -156,8 +156,8 @@ class PHPGangsta_GoogleAuthenticator
      * @param bool $padding
      * @return string
      */
-    protected function _base32Encode($secret, $padding = true)
-    {
+    protected function _base32Encode($secret, bool $padding = true)
+    : string {
         if (empty($secret)) return '';
 
         $base32chars = $this->_getBase32LookupTable();
@@ -189,7 +189,7 @@ class PHPGangsta_GoogleAuthenticator
      * @return array
      */
     protected function _getBase32LookupTable()
-    {
+    : array {
         return array(
             'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', //  7
             'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', // 15

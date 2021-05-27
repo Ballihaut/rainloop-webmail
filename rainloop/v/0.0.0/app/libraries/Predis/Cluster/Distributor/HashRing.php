@@ -26,10 +26,10 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
     const DEFAULT_REPLICAS = 128;
     const DEFAULT_WEIGHT = 100;
 
-    private $ring;
-    private $ringKeys;
-    private $ringKeysCount;
-    private $replicas;
+    private array $ring;
+    private array $ringKeys;
+    private int $ringKeysCount;
+    private int $replicas;
     private $nodeHashCallback;
     private $nodes = array();
 
@@ -108,7 +108,7 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
      * @return int
      */
     private function computeTotalWeight()
-    {
+    : int {
         $totalWeight = 0;
 
         foreach ($this->nodes as $node) {
@@ -154,7 +154,7 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
      * @param int   $replicas    Number of replicas in the ring.
      * @param float $weightRatio Weight ratio for the node.
      */
-    protected function addNodeToRing(&$ring, $node, $totalNodes, $replicas, $weightRatio)
+    protected function addNodeToRing(&$ring, $node, int $totalNodes, int $replicas, int $weightRatio)
     {
         $nodeObject = $node['object'];
         $nodeHash = $this->getNodeHash($nodeObject);
@@ -253,7 +253,7 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
      *
      * @return int
      */
-    protected function wrapAroundStrategy($upper, $lower, $ringKeysCount)
+    protected function wrapAroundStrategy($upper, $lower, int $ringKeysCount)
     {
         // Binary search for the last item in ringkeys with a value less or
         // equal to the key. If no such item exists, return the last item.
@@ -264,7 +264,7 @@ class HashRing implements DistributorInterface, HashGeneratorInterface
      * {@inheritdoc}
      */
     public function getHashGenerator()
-    {
+    : self {
         return $this;
     }
 }

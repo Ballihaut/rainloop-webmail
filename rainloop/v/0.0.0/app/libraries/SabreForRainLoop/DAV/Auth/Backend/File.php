@@ -20,7 +20,7 @@ class File extends AbstractDigest {
      *
      * @var array
      */
-    protected $users = array();
+    protected array $users = array();
 
     /**
      * Creates the backend object.
@@ -43,7 +43,7 @@ class File extends AbstractDigest {
      * @param string $filename
      * @return void
      */
-    public function loadFile($filename) {
+    public function loadFile(string $filename) {
 
         foreach(file($filename,FILE_IGNORE_NEW_LINES) as $line) {
 

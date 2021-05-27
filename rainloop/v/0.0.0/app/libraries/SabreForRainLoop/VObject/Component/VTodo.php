@@ -26,7 +26,7 @@ class VTodo extends VObject\Component {
      * @param DateTime $end
      * @return bool
      */
-    public function isInTimeRange(\DateTime $start, \DateTime $end) {
+    public function isInTimeRange(\DateTime $start, \DateTime $end) : bool {
 
         $dtstart = isset($this->DTSTART)?$this->DTSTART->getDateTime():null;
         $duration = isset($this->DURATION)?VObject\DateTimeParser::parseDuration($this->DURATION):null;

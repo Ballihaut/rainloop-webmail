@@ -75,7 +75,7 @@ class MasterSlaveReplication implements ReplicationInterface
      * {@inheritdoc}
      */
     public function remove(NodeConnectionInterface $connection)
-    {
+    : bool {
         if ($connection->getParameters()->alias === 'master') {
             $this->master = null;
             $this->reset();
@@ -171,7 +171,7 @@ class MasterSlaveReplication implements ReplicationInterface
      * {@inheritdoc}
      */
     public function getSlaves()
-    {
+    : array {
         return array_values($this->slaves);
     }
 
@@ -199,7 +199,7 @@ class MasterSlaveReplication implements ReplicationInterface
      * {@inheritdoc}
      */
     public function isConnected()
-    {
+    : bool {
         return $this->current ? $this->current->isConnected() : false;
     }
 

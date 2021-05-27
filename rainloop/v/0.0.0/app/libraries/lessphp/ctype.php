@@ -20,7 +20,7 @@ if (!function_exists('ctype_digit'))
 
 if (!function_exists('ctype_space'))
 {
-	function ctype_space($text)
+	function ctype_space(string $text)
 	{
 		if ('' === $text)
 		{
@@ -33,7 +33,7 @@ if (!function_exists('ctype_space'))
 
 if (!function_exists('ctype_alnum'))
 {
-	function ctype_alnum($sVar)
+	function ctype_alnum(string $sVar)
 	{
 		return !!preg_match('/^[a-zA-Z0-9]+$/', $sVar);
 	}

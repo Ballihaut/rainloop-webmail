@@ -37,7 +37,7 @@ abstract class Property extends Node {
      *
      * @var array
      */
-    public $parameters = array();
+    public array $parameters = array();
 
     /**
      * Current value
@@ -52,7 +52,7 @@ abstract class Property extends Node {
      *
      * @var string|null
      */
-    public $delimiter = ';';
+    public string $delimiter = ';';
 
     /**
      * Creates the generic property.
@@ -294,7 +294,7 @@ abstract class Property extends Node {
      *
      * @return array
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
 
         $parameters = array();
 
@@ -344,7 +344,7 @@ abstract class Property extends Node {
      * @param mixed $name
      * @return bool
      */
-    public function offsetExists($name) {
+    public function offsetExists($name) : bool {
 
         if (is_int($name)) return parent::offsetExists($name);
 

@@ -77,7 +77,7 @@ class Collection extends DAV\Collection implements ICollection, DAVACL\IACL {
      *
      * @return string
      */
-    public function getName() {
+    public function getName() : string {
 
         return 'notifications';
 
@@ -121,7 +121,7 @@ class Collection extends DAV\Collection implements ICollection, DAVACL\IACL {
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

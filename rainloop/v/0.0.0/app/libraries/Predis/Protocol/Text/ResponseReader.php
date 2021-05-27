@@ -25,7 +25,7 @@ use Predis\Protocol\ResponseReaderInterface;
  */
 class ResponseReader implements ResponseReaderInterface
 {
-    protected $handlers;
+    protected array $handlers;
 
     /**
      *
@@ -41,7 +41,7 @@ class ResponseReader implements ResponseReaderInterface
      * @return array
      */
     protected function getDefaultHandlers()
-    {
+    : array {
         return array(
             '+' => new Handler\StatusResponse(),
             '-' => new Handler\ErrorResponse(),

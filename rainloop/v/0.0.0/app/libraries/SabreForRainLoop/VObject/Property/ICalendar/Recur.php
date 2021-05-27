@@ -94,7 +94,7 @@ class Recur extends Property {
      *
      * @return string
      */
-    public function getValue() {
+    public function getValue() : string {
 
         $out = array();
         foreach($this->value as $key=>$value) {
@@ -124,7 +124,7 @@ class Recur extends Property {
      *
      * @return array
      */
-    public function getParts() {
+    public function getParts() : iterable {
 
         return $this->value;
 
@@ -164,7 +164,7 @@ class Recur extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return "RECUR";
 
@@ -177,7 +177,7 @@ class Recur extends Property {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         $values = array();
         foreach($this->getParts() as $k=>$v) {

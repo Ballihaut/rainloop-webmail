@@ -20,22 +20,22 @@ final class CMYK implements ColorInterface
     /**
      * @var integer
      */
-    private $c;
+    private int $c;
 
     /**
      * @var integer
      */
-    private $m;
+    private int $m;
 
     /**
      * @var integer
      */
-    private $y;
+    private int $y;
 
     /**
      * @var integer
      */
-    private $k;
+    private int $k;
 
     /**
      *
@@ -182,7 +182,7 @@ final class CMYK implements ColorInterface
      * {@inheritdoc}
      */
     public function isOpaque()
-    {
+    : bool {
         return true;
     }
 

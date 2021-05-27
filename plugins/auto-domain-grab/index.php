@@ -13,8 +13,8 @@
 class AutoDomainGrabPlugin extends \RainLoop\Plugins\AbstractPlugin
 {
 	
-	private $imap_prefix = "mail.";
-	private $smtp_prefix = "mail.";
+	private string $imap_prefix = "mail.";
+	private string $smtp_prefix = "mail.";
 	
 	public function Init()
 	{

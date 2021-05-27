@@ -7,7 +7,7 @@ class Identity
 	/**
 	 * @var string
 	 */
-	private $sId;
+	private string $sId;
 
 	/**
 	 * @var string
@@ -17,27 +17,27 @@ class Identity
 	/**
 	 * @var string
 	 */
-	private $sName;
+	private string $sName;
 
 	/**
 	 * @var string
 	 */
-	private $sReplyTo;
+	private string $sReplyTo;
 
 	/**
 	 * @var string
 	 */
-	private $sBcc;
+	private string $sBcc;
 
 	/**
 	 * @var string
 	 */
-	private $sSignature;
+	private string $sSignature;
 
 	/**
 	 * @var bool
 	 */
-	private $bSignatureInsertBefore;
+	private bool $bSignatureInsertBefore;
 
 	/**
 	 * @param string $sId = ''
@@ -79,7 +79,7 @@ class Identity
 	 *
 	 * @return string
 	 */
-	public function Id($bFillOnEmpty = false)
+	public function Id(bool $bFillOnEmpty = false)
 	{
 		return $bFillOnEmpty ? ('' === $this->sId ? '---' : $this->sId) : $this->sId;
 	}
@@ -98,7 +98,7 @@ class Identity
 	 * @return \RainLoop\Model\Identity
 	 */
 	public function SetEmail($sEmail)
-	{
+	: self {
 		$this->sEmail = $sEmail;
 
 		return $this;
@@ -150,8 +150,8 @@ class Identity
 	 *
 	 * @return bool
 	 */
-	public function FromJSON($aData, $bAjax = false)
-	{
+	public function FromJSON($aData, bool $bAjax = false)
+	: bool {
 		if (!empty($aData['Email']))
 		{
 			$this->sId = !empty($aData['Id']) ? $aData['Id'] : '';
@@ -174,8 +174,8 @@ class Identity
 	 *
 	 * @return array
 	 */
-	public function ToSimpleJSON($bAjax = false)
-	{
+	public function ToSimpleJSON(bool $bAjax = false)
+	: array {
 		return array(
 			'Id' => $this->Id(),
 			'Email' => $bAjax ? \MailSo\Base\Utils::IdnToUtf8($this->Email()) : $this->Email(),
@@ -199,7 +199,7 @@ class Identity
 	 * @return bool
 	 */
 	public function IsAccountIdentities()
-	{
+	: bool {
 		return '' === $this->Id();
 	}
 }

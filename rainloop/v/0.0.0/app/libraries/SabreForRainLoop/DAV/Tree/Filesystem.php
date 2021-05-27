@@ -65,7 +65,7 @@ class Filesystem extends DAV\Tree {
      * @param string $publicPath
      * @return string
      */
-    protected function getRealPath($publicPath) {
+    protected function getRealPath(string $publicPath) : string {
 
         return rtrim($this->basePath,'/') . '/' . trim($publicPath,'/');
 
@@ -96,7 +96,7 @@ class Filesystem extends DAV\Tree {
      * @param string $destination
      * @return void
      */
-    protected function realCopy($source,$destination) {
+    protected function realCopy(string $source,string $destination) {
 
         if (is_file($source)) {
             copy($source,$destination);

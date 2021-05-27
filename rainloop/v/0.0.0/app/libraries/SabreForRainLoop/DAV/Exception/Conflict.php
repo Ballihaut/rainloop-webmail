@@ -19,7 +19,7 @@ class Conflict extends \SabreForRainLoop\DAV\Exception {
      *
      * @return int
      */
-    public function getHTTPCode() {
+    public function getHTTPCode() : int {
 
         return 409;
 

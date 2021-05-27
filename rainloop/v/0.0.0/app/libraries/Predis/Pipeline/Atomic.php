@@ -60,7 +60,7 @@ class Atomic extends Pipeline
      * {@inheritdoc}
      */
     protected function executePipeline(ConnectionInterface $connection, \SplQueue $commands)
-    {
+    : array {
         $profile = $this->getClient()->getProfile();
         $connection->executeCommand($profile->createCommand('multi'));
 

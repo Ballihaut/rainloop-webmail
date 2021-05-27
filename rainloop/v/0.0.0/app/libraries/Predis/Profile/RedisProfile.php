@@ -52,7 +52,7 @@ abstract class RedisProfile implements ProfileInterface
      * {@inheritdoc}
      */
     public function supportsCommands(array $commandIDs)
-    {
+    : bool {
         foreach ($commandIDs as $commandID) {
             if (!$this->supportsCommand($commandID)) {
                 return false;
@@ -107,7 +107,7 @@ abstract class RedisProfile implements ProfileInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function defineCommand($commandID, $class)
+    public function defineCommand(string $commandID, string $class)
     {
         $reflection = new \ReflectionClass($class);
 

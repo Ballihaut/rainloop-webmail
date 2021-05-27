@@ -39,7 +39,7 @@ class ConnectionErrorProof extends Pipeline
      * {@inheritdoc}
      */
     protected function executePipeline(ConnectionInterface $connection, \SplQueue $commands)
-    {
+    : array {
         if ($connection instanceof NodeConnectionInterface) {
             return $this->executeSingleNode($connection, $commands);
         } elseif ($connection instanceof ClusterInterface) {
@@ -87,7 +87,7 @@ class ConnectionErrorProof extends Pipeline
      * {@inheritdoc}
      */
     protected function executeCluster(ClusterInterface $connection, \SplQueue $commands)
-    {
+    : array {
         $responses = array();
         $sizeOfPipe = count($commands);
         $exceptions = array();

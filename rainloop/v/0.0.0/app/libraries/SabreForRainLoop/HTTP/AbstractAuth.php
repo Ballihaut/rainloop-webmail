@@ -20,7 +20,7 @@ abstract class AbstractAuth {
      *
      * @var string
      */
-    protected $realm = 'SabreDAV';
+    protected string $realm = 'SabreDAV';
 
     /**
      * HTTP response helper

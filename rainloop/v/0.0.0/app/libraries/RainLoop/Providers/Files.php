@@ -48,7 +48,7 @@ class Files extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return resource|bool
 	 */
-	public function GetFile($oAccount, $sKey, $sOpenMode = 'rb')
+	public function GetFile($oAccount, $sKey, string $sOpenMode = 'rb')
 	{
 		return $this->oDriver->GetFile($oAccount, $sKey, $sOpenMode);
 	}
@@ -102,7 +102,7 @@ class Files extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return bool
 	 */
-	public function GC($iTimeToClearInHours = 24)
+	public function GC(int $iTimeToClearInHours = 24)
 	{
 		return $this->oDriver ? $this->oDriver->GC($iTimeToClearInHours) : false;
 	}

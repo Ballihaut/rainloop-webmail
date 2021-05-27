@@ -67,7 +67,7 @@ class LockInfo {
     /**
      * Depth of lock, can be 0 or SabreForRainLoop\DAV\Server::DEPTH_INFINITY
      */
-    public $depth = 0;
+    public int $depth = 0;
 
     /**
      * The uri this lock locks

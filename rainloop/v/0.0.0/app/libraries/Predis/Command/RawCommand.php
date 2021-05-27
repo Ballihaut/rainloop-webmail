@@ -24,8 +24,8 @@ namespace Predis\Command;
 class RawCommand implements CommandInterface
 {
     private $slot;
-    private $commandID;
-    private $arguments;
+    private string $commandID;
+    private array $arguments;
 
     /**
      * @param array $arguments Command ID and its arguments.

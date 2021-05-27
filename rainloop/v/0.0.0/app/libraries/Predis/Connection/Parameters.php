@@ -20,9 +20,9 @@ namespace Predis\Connection;
  */
 class Parameters implements ParametersInterface
 {
-    private $parameters;
+    private int $parameters;
 
-    private static $defaults = array(
+    private static array $defaults = array(
         'scheme' => 'tcp',
         'host' => '127.0.0.1',
         'port' => 6379,
@@ -136,7 +136,7 @@ class Parameters implements ParametersInterface
      * @return array
      */
     protected function filter(array $parameters)
-    {
+    : array {
         return $parameters ?: array();
     }
 

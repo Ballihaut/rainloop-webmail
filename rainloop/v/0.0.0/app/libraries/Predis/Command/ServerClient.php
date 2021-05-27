@@ -25,7 +25,7 @@ class ServerClient extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'CLIENT';
     }
 
@@ -33,7 +33,7 @@ class ServerClient extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         $args = array_change_key_case($this->getArguments(), CASE_UPPER);
 
         switch (strtoupper($args[0])) {
@@ -54,8 +54,8 @@ class ServerClient extends Command
      *
      * @return array
      */
-    protected function parseClientList($data)
-    {
+    protected function parseClientList(string $data)
+    : array {
         $clients = array();
 
         foreach (explode("\n", $data, -1) as $clientData) {

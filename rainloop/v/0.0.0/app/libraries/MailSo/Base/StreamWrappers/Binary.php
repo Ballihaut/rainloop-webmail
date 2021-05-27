@@ -26,17 +26,17 @@ class Binary
 	/**
 	 * @var array
 	 */
-	private static $aStreams = array();
+	private static array $aStreams = array();
 
 	/**
 	 * @var array
 	 */
-	private static $aRememberStreams = array();
+	private static array $aRememberStreams = array();
 
 	/**
 	 * @var resource
 	 */
-	private $rStream;
+	private bool $rStream;
 
 	/**
 	 * @var string
@@ -56,17 +56,17 @@ class Binary
 	/**
 	 * @var int
 	 */
-	private $iPos;
+	private int $iPos;
 
 	/**
 	 * @var string
 	 */
-	private $sBuffer;
+	private string $sBuffer;
 
 	/**
 	 * @var string
 	 */
-	private $sReadEndBuffer;
+	private string $sReadEndBuffer;
 
 	/**
 	 * @param string $sContentTransferEncoding
@@ -74,7 +74,7 @@ class Binary
 	 *
 	 * @return string
 	 */
-	public static function GetInlineDecodeOrEncodeFunctionName($sContentTransferEncoding, $bDecode = true)
+	public static function GetInlineDecodeOrEncodeFunctionName(string $sContentTransferEncoding, bool $bDecode = true)
 	{
 		$sFunctionName = '';
 		switch (strtolower($sContentTransferEncoding))
@@ -130,8 +130,8 @@ class Binary
 	 *
 	 * @return string
 	 */
-	public static function InlineQuotedPrintableDecode($sQuotedPrintableString, &$sEndBuffer)
-	{
+	public static function InlineQuotedPrintableDecode(string $sQuotedPrintableString, &$sEndBuffer)
+	: string {
 		$sEndBuffer = '';
 		$sQuotedPrintableLen = strlen($sQuotedPrintableString);
 		$iLastSpace = strrpos($sQuotedPrintableString, ' ');
@@ -149,7 +149,7 @@ class Binary
 	 *
 	 * @return string
 	 */
-	public static function InlineConvertDecode($sEncodedString, &$sEndBuffer, $sFromEncoding, $sToEncoding)
+	public static function InlineConvertDecode(string $sEncodedString, &$sEndBuffer, $sFromEncoding, $sToEncoding)
 	{
 		$sEndBuffer = '';
 		$sQuotedPrintableLen = strlen($sEncodedString);
@@ -168,7 +168,7 @@ class Binary
 	 * @return bool
 	 */
 	public static function IsStreamRemembed($rStream)
-	{
+	: bool {
 		foreach (self::$aRememberStreams as $rRem)
 		{
 			if ($rStream === $rRem)
@@ -201,7 +201,7 @@ class Binary
 	 */
 	public static function CreateStream($rStream,
 		$sUtilsDecodeOrEncodeFunctionName = null, $sFromEncoding = null, $sToEncoding = null)
-	{
+	: string {
 		if (!in_array(self::STREAM_NAME, stream_get_wrappers()))
 		{
 			stream_wrapper_register(self::STREAM_NAME, '\MailSo\Base\StreamWrappers\Binary');
@@ -247,8 +247,8 @@ class Binary
 	 *
 	 * @return bool
 	 */
-	public function stream_open($sPath)
-	{
+	public function stream_open(string $sPath)
+	: bool {
 		$this->iPos = 0;
 		$this->sBuffer = '';
 		$this->sReadEndBuffer = '';
@@ -358,7 +358,7 @@ class Binary
 	 * @return int
 	 */
 	public function stream_write()
-	{
+	: int {
 		return 0;
 	}
 
@@ -374,7 +374,7 @@ class Binary
 	 * @return bool
 	 */
 	public function stream_eof()
-	{
+	: bool {
 		return 0 === strlen($this->sBuffer) && feof($this->rStream);
 	}
 
@@ -383,7 +383,7 @@ class Binary
 	 * @return array
 	 */
 	public function stream_stat()
-	{
+	: array {
 		return array(
 			'dev' => 2,
 			'ino' => 0,
@@ -405,7 +405,7 @@ class Binary
 	 * @return bool
 	 */
 	public function stream_seek()
-	{
+	: bool {
 		return false;
 	}
 }

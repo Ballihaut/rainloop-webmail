@@ -22,7 +22,7 @@ class SetMembers extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SMEMBERS';
     }
 }

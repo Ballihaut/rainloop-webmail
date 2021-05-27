@@ -30,12 +30,12 @@ class Email
 	/**
 	 * @var string
 	 */
-	private $sDkimStatus;
+	private string $sDkimStatus;
 
 	/**
 	 * @var string
 	 */
-	private $sDkimValue;
+	private string $sDkimValue;
 
 	/**
 	 * @access private
@@ -69,7 +69,7 @@ class Email
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public static function NewInstance($sEmail, $sDisplayName = '')
+	public static function NewInstance($sEmail, string $sDisplayName = '')
 	{
 		return new self($sEmail, $sDisplayName);
 	}
@@ -212,7 +212,7 @@ class Email
 	 *
 	 * @return string
 	 */
-	public function GetEmail($bIdn = false)
+	public function GetEmail(bool $bIdn = false)
 	{
 		return $bIdn ? \MailSo\Base\Utils::IdnToUtf8($this->sEmail) : $this->sEmail;
 	}
@@ -254,7 +254,7 @@ class Email
 	 *
 	 * @return string
 	 */
-	public function GetDomain($bIdn = false)
+	public function GetDomain(bool $bIdn = false)
 	{
 		return \MailSo\Base\Utils::GetDomainFromEmail($this->GetEmail($bIdn));
 	}
@@ -263,7 +263,7 @@ class Email
 	 * @param string $sDkimStatus
 	 * @param string $sDkimValue = ''
 	 */
-	public function SetDkimStatusAndValue($sDkimStatus, $sDkimValue = '')
+	public function SetDkimStatusAndValue($sDkimStatus, string $sDkimValue = '')
 	{
 		$this->sDkimStatus = \MailSo\Mime\Enumerations\DkimStatus::normalizeValue($sDkimStatus);
 		$this->sDkimValue = $sDkimValue;
@@ -275,7 +275,7 @@ class Email
 	 *
 	 * @return array
 	 */
-	public function ToArray($bIdn = false, $bDkim = true)
+	public function ToArray(bool $bIdn = false, bool $bDkim = true)
 	{
 		return $bDkim ?
 			array($this->sDisplayName, $this->GetEmail($bIdn), $this->sDkimStatus, $this->sDkimValue) :
@@ -288,8 +288,8 @@ class Email
 	 *
 	 * @return string
 	 */
-	public function ToString($bConvertSpecialsName = false, $bIdn = false)
-	{
+	public function ToString(bool $bConvertSpecialsName = false, bool $bIdn = false)
+	: string {
 		$sReturn = '';
 
 		$sDisplayName = \str_replace('"', '\"', $this->sDisplayName);

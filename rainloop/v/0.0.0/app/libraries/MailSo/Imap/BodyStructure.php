@@ -90,7 +90,7 @@ class BodyStructure
 	/**
 	 * @var array
 	 */
-	private $aSubParts;
+	private iterable $aSubParts;
 
 	/**
 	 * @access private
@@ -229,7 +229,7 @@ class BodyStructure
 	 * return bool
 	 */
 	public function IsImage()
-	{
+	: bool {
 		return 'image' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -237,7 +237,7 @@ class BodyStructure
 	 * return bool
 	 */
 	public function IsArchive()
-	{
+	: bool {
 		return 'archive' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -245,7 +245,7 @@ class BodyStructure
 	 * @return bool
 	 */
 	public function IsPdf()
-	{
+	: bool {
 		return 'pdf' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -253,7 +253,7 @@ class BodyStructure
 	 * @return bool
 	 */
 	public function IsDoc()
-	{
+	: bool {
 		return 'doc' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -261,7 +261,7 @@ class BodyStructure
 	 * @return bool
 	 */
 	public function IsPgpSignature()
-	{
+	: bool {
 		return \in_array(\strtolower($this->ContentType()),
 			array('application/pgp-signature', 'application/pkcs7-signature'));
 	}
@@ -434,7 +434,7 @@ class BodyStructure
 	 *
 	 * @return array
 	 */
-	public function SearchByCallback($fCallback)
+	public function SearchByCallback(callable $fCallback)
 	{
 		$aReturn = array();
 		if (\call_user_func($fCallback, $this))
@@ -468,10 +468,10 @@ class BodyStructure
 	 *
 	 * @return array
 	 */
-	public function SearchByContentType($sContentType)
+	public function SearchByContentType(string $sContentType)
 	{
 		$sContentType = \strtolower($sContentType);
-		return $this->SearchByCallback(function ($oItem) use ($sContentType) {
+		return $this->SearchByCallback(function ($oItem) use ($sContentType) : bool {
 			return $sContentType === $oItem->ContentType();
 		});
 	}
@@ -481,7 +481,7 @@ class BodyStructure
 	 *
 	 * @return \MailSo\Imap\BodyStructure
 	 */
-	public function GetPartByMimeIndex($sMimeIndex)
+	public function GetPartByMimeIndex(string $sMimeIndex)
 	{
 		$oPart = null;
 		if (0 < \strlen($sMimeIndex))
@@ -515,7 +515,7 @@ class BodyStructure
 	 * @return string
 	 */
 	private static function decodeAttrParamenter($aParams, $sParamName, $sCharset = \MailSo\Base\Enumerations\Charset::UTF_8)
-	{
+	: string {
 		$sResult = '';
 		if (isset($aParams[$sParamName]))
 		{
@@ -916,7 +916,7 @@ class BodyStructure
 	 *
 	 * @return array|null
 	 */
-	private static function findPartByIndexInArray(array $aList, $sPartID)
+	private static function findPartByIndexInArray(array $aList, string $sPartID)
 	{
 		$bFind = false;
 		$aPath = \explode('.', ''.$sPartID);

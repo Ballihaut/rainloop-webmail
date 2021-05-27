@@ -22,7 +22,7 @@ class ZSetIncrementBy extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZINCRBY';
     }
 }

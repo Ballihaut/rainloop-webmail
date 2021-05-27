@@ -25,27 +25,27 @@ class Folder
 	/**
 	 * @var string
 	 */
-	private $sFullNameRaw;
+	private string $sFullNameRaw;
 
 	/**
 	 * @var string
 	 */
-	private $sDelimiter;
+	private string $sDelimiter;
 
 	/**
 	 * @var array
 	 */
-	private $aFlags;
+	private array $aFlags;
 
 	/**
 	 * @var array
 	 */
-	private $aFlagsLowerCase;
+	private array $aFlagsLowerCase;
 
 	/**
 	 * @var array
 	 */
-	private $aExtended;
+	private array $aExtended;
 
 	/**
 	 * @access private
@@ -112,7 +112,7 @@ class Folder
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public static function NewInstance($sFullNameRaw, $sDelimiter = '.', $aFlags = array())
+	public static function NewInstance($sFullNameRaw, string $sDelimiter = '.', array $aFlags = array())
 	{
 		return new self($sFullNameRaw, $sDelimiter, $aFlags);
 	}
@@ -169,7 +169,7 @@ class Folder
 	 * @return bool
 	 */
 	public function IsInbox()
-	{
+	: bool {
 		return 'INBOX' === \strtoupper($this->sFullNameRaw) || \in_array('\inbox', $this->aFlagsLowerCase);
 	}
 

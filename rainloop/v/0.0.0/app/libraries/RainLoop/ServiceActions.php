@@ -17,12 +17,12 @@ class ServiceActions
 	/**
 	 * @var array
 	 */
-	protected $aPaths;
+	protected array $aPaths;
 
 	/**
 	 * @var string
 	 */
-	protected $sQuery;
+	protected string $sQuery;
 
 	/**
 	 * @param \MailSo\Base\Http $oHttp
@@ -92,7 +92,7 @@ class ServiceActions
 	 * @return \RainLoop\ServiceActions
 	 */
 	public function SetPaths($aPaths)
-	{
+	: self {
 		$this->aPaths = \is_array($aPaths) ? $aPaths : array();
 		return $this;
 	}
@@ -103,7 +103,7 @@ class ServiceActions
 	 * @return \RainLoop\ServiceActions
 	 */
 	public function SetQuery($sQuery)
-	{
+	: self {
 		$this->sQuery = $sQuery;
 		return $this;
 	}
@@ -253,7 +253,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceOwnCloudAuth()
-	{
+	: string {
 		$this->oHttp->ServerNoCache();
 
 		if (!\RainLoop\Utils::IsOwnCloud() ||
@@ -340,7 +340,7 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	private function privateUpload($sAction, $iSizeLimit = 0)
+	private function privateUpload(string $sAction, $iSizeLimit = 0)
 	{
 		$oConfig = $this->Config();
 
@@ -452,7 +452,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceProxyExternal()
-	{
+	: string {
 		$bResult = false;
 		$sData = empty($this->aPaths[1]) ? '' : $this->aPaths[1];
 		if (!empty($sData) && $this->oActions->Config()->Get('labs', 'use_local_proxy_for_external_images', false))
@@ -822,7 +822,7 @@ class ServiceActions
 	/**
 	 * @return string
 	 */
-	public function ServiceAppData($sAdd = '')
+	public function ServiceAppData(string $sAdd = '')
 	{
 		return $this->localAppData(false, $sAdd);
 	}
@@ -830,7 +830,7 @@ class ServiceActions
 	/**
 	 * @return string
 	 */
-	public function ServiceAdminAppData($sAdd = '')
+	public function ServiceAdminAppData(string $sAdd = '')
 	{
 		return $this->localAppData(true, $sAdd);
 	}
@@ -839,7 +839,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceMobileVersion()
-	{
+	: string {
 		\RainLoop\Utils::SetCookie(\RainLoop\Actions::RL_MOBILE_TYPE, 'mobile');
 		$this->oActions->Location('./');
 		return '';
@@ -849,7 +849,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceDesktopVersion()
-	{
+	: string {
 		\RainLoop\Utils::SetCookie(\RainLoop\Actions::RL_MOBILE_TYPE, 'desktop');
 		$this->oActions->Location('./');
 		return '';
@@ -875,7 +875,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceBadBrowser()
-	{
+	: string {
 		$sTitle = $this->oActions->StaticI18N('STATIC/BAD_BROWSER_TITLE');
 		$sDesc = \nl2br($this->oActions->StaticI18N('STATIC/BAD_BROWSER_DESC'));
 
@@ -892,7 +892,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceMailto()
-	{
+	: string {
 		$this->oHttp->ServerNoCache();
 
 		$sTo = \trim($this->oHttp->GetQuery('to', ''));
@@ -913,7 +913,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServicePing()
-	{
+	: string {
 		$this->oHttp->ServerNoCache();
 
 		@\header('Content-Type: text/plain; charset=utf-8');
@@ -939,7 +939,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceSso()
-	{
+	: string {
 		$this->oHttp->ServerNoCache();
 
 		$oException = null;
@@ -1022,7 +1022,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceRemoteAutoLogin()
-	{
+	: string {
 		$oException = null;
 		$oAccount = null;
 		$bLogout = true;
@@ -1057,7 +1057,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceExternalLogin()
-	{
+	: string {
 		$this->oHttp->ServerNoCache();
 
 		$oException = null;
@@ -1196,7 +1196,7 @@ class ServiceActions
 	 * @return string
 	 */
 	public function ServiceChange()
-	{
+	: string {
 		$this->changeAction();
 		$this->oActions->Location('./');
 		return '';
@@ -1208,8 +1208,8 @@ class ServiceActions
 	 *
 	 * @return mixed
 	 */
-	public function ErrorTemplates($sTitle, $sDesc, $bShowBackLink = true)
-	{
+	public function ErrorTemplates($sTitle, $sDesc, bool $bShowBackLink = true)
+	: string {
 		return strtr(file_get_contents(APP_VERSION_ROOT_PATH.'app/templates/Error.html'), array(
 			'{{BaseWebStaticPath}}' => \RainLoop\Utils::WebStaticPath(),
 			'{{ErrorTitle}}' => $sTitle,
@@ -1227,7 +1227,7 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	private function localError($sTitle, $sDesc)
+	private function localError($sTitle, string $sDesc)
 	{
 		@header('Content-Type: text/html; charset=utf-8');
 		return $this->ErrorTemplates($sTitle, \nl2br($sDesc));
@@ -1239,7 +1239,7 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	private function localAppData($bAdmin = false, $sAdd = '')
+	private function localAppData(bool $bAdmin = false, string $sAdd = '')
 	{
 		@\header('Content-Type: application/javascript; charset=utf-8');
 		$this->oHttp->ServerNoCache();
@@ -1292,7 +1292,7 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	public function compileTemplates($bAdmin = false, $bJsOutput = true)
+	public function compileTemplates(bool $bAdmin = false, bool $bJsOutput = true)
 	{
 		$aTemplates = array();
 
@@ -1321,7 +1321,7 @@ class ServiceActions
 	 * @return string
 	 */
 	private function convertLanguageNameToMomentLanguageName($sLanguage)
-	{
+	: string {
 		$aHelper = array('en_gb' => 'en-gb', 'fr_ca' => 'fr-ca', 'pt_br' => 'pt-br',
 			'uk_ua' => 'ua', 'zh_cn' => 'zh-cn', 'zh_tw' => 'zh-tw', 'fa_ir' => 'fa');
 
@@ -1335,7 +1335,7 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	private function compileLanguage($sLanguage, $bAdmin = false, $bWrapByScriptTag = true)
+	private function compileLanguage(string $sLanguage, bool $bAdmin = false, bool $bWrapByScriptTag = true)
 	{
 		$aResultLang = array();
 
@@ -1387,8 +1387,8 @@ class ServiceActions
 	 *
 	 * @return string
 	 */
-	private function compileAppData($aAppData, $bWrapByScriptTag = true)
-	{
+	private function compileAppData($aAppData, bool $bWrapByScriptTag = true)
+	: string {
 		return
 			($bWrapByScriptTag ? '<script type="text/javascript" data-cfasync="false">' : '').
 			'if(window.__initAppData){window.__initAppData('.\json_encode($aAppData).');}'.

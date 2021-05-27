@@ -31,7 +31,7 @@ class ExceptionsOption implements OptionInterface
      * {@inheritdoc}
      */
     public function getDefault(OptionsInterface $options)
-    {
+    : bool {
         return true;
     }
 }

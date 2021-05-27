@@ -22,7 +22,7 @@ class SetUnion extends SetIntersection
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SUNION';
     }
 }

@@ -22,7 +22,7 @@ class HashGetAll extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HGETALL';
     }
 
@@ -30,7 +30,7 @@ class HashGetAll extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         $result = array();
 
         for ($i = 0; $i < count($data); ++$i) {

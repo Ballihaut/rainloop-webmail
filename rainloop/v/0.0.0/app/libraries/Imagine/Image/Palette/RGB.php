@@ -32,7 +32,7 @@ class RGB implements PaletteInterface
     /**
      * @var array
      */
-    protected static $colors = array();
+    protected static array $colors = array();
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ class RGB implements PaletteInterface
      * {@inheritdoc}
      */
     public function pixelDefinition()
-    {
+    : array {
         return array(
             ColorInterface::COLOR_RED,
             ColorInterface::COLOR_GREEN,
@@ -63,7 +63,7 @@ class RGB implements PaletteInterface
      * {@inheritdoc}
      */
     public function supportsAlpha()
-    {
+    : bool {
         return true;
     }
 
@@ -71,7 +71,7 @@ class RGB implements PaletteInterface
      * {@inheritdoc}
      */
     public function useProfile(ProfileInterface $profile)
-    {
+    : self {
         $this->profile = $profile;
 
         return $this;
@@ -93,7 +93,7 @@ class RGB implements PaletteInterface
      * {@inheritdoc}
      */
     public function color($color, $alpha = null)
-    {
+    : string {
         if (null === $alpha) {
             $alpha = 100;
         }

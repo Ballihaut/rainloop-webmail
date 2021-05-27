@@ -38,7 +38,7 @@ class AttachmentCollection extends \MailSo\Base\Collection
 	 */
 	public function LinkedAttachments()
 	{
-		return $this->FilterList(function ($oItem) {
+		return $this->FilterList(function ($oItem) : bool {
 			return $oItem && $oItem->IsLinked();
 		});
 	}
@@ -48,7 +48,7 @@ class AttachmentCollection extends \MailSo\Base\Collection
 	 */
 	public function UnlinkedAttachments()
 	{
-		return $this->FilterList(function ($oItem) {
+		return $this->FilterList(function ($oItem) : bool {
 			return $oItem && !$oItem->IsLinked();
 		});
 	}

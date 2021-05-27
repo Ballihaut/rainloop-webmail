@@ -35,7 +35,7 @@ class AccessToken
      *
      * @var string
      */
-    protected $value = '';
+    protected string $value = '';
 
     /**
      * Date when token expires.
@@ -86,7 +86,7 @@ class AccessToken
      * @return bool
      */
     public function isAppAccessToken()
-    {
+    : bool {
         return strpos($this->value, '|') !== false;
     }
 
@@ -96,7 +96,7 @@ class AccessToken
      * @return bool
      */
     public function isLongLived()
-    {
+    : bool {
         if ($this->expiresAt) {
             return $this->expiresAt->getTimestamp() > time() + (60 * 60 * 2);
         }

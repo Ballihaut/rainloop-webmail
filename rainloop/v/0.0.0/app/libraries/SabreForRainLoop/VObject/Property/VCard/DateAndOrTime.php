@@ -45,7 +45,7 @@ class DateAndOrTime extends Text {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         $parts = DateTimeParser::parseVCardDateTime($this->getValue());
 

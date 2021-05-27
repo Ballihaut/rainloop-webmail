@@ -20,7 +20,7 @@ use Predis\Command\RawCommand;
  */
 class Factory implements FactoryInterface
 {
-    protected $schemes = array(
+    protected array $schemes = array(
         'tcp' => 'Predis\Connection\StreamConnection',
         'unix' => 'Predis\Connection\StreamConnection',
         'redis' => 'Predis\Connection\StreamConnection',

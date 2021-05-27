@@ -71,7 +71,7 @@ class Http
 	 *
 	 * @return mixed
 	 */
-	public function GetQuery($sKey, $mDefault = null, $bClearPercZeroZero = true)
+	public function GetQuery($sKey, $mDefault = null, bool $bClearPercZeroZero = true)
 	{
 		return isset($_GET[$sKey]) ? \MailSo\Base\Utils::StripSlashesValue($_GET[$sKey], $bClearPercZeroZero) : $mDefault;
 	}
@@ -101,7 +101,7 @@ class Http
 	 *
 	 * @return mixed
 	 */
-	public function GetPost($sKey, $mDefault = null, $bClearPercZeroZero = false)
+	public function GetPost($sKey, $mDefault = null, bool $bClearPercZeroZero = false)
 	{
 		return isset($_POST[$sKey]) ? \MailSo\Base\Utils::StripSlashesValue($_POST[$sKey], $bClearPercZeroZero) : $mDefault;
 	}
@@ -220,8 +220,8 @@ class Http
 	/**
 	 * @return bool
 	 */
-	public function CheckLocalhost($sServer)
-	{
+	public function CheckLocalhost(string $sServer)
+	: bool {
 		return \in_array(\strtolower(\trim($sServer)), array(
 			'localhost', '127.0.0.1', '::1', '::1/128', '0:0:0:0:0:0:0:1'
 		));
@@ -232,7 +232,7 @@ class Http
 	 *
 	 * @return bool
 	 */
-	public function IsLocalhost($sValueToCheck = '')
+	public function IsLocalhost(string $sValueToCheck = '')
 	{
 		if (empty($sValueToCheck))
 		{
@@ -284,7 +284,7 @@ class Http
 	 *
 	 * @return string
 	 */
-	public function GetScheme($bCheckProxy = true)
+	public function GetScheme(bool $bCheckProxy = true)
 	{
 		return $this->IsSecure($bCheckProxy) ? 'https' : 'http';
 	}
@@ -294,8 +294,8 @@ class Http
 	 *
 	 * @return bool
 	 */
-	public function IsSecure($bCheckProxy = true)
-	{
+	public function IsSecure(bool $bCheckProxy = true)
+	: bool {
 		$sHttps = \strtolower($this->GetServer('HTTPS', ''));
 		if ('on' === $sHttps || ('' === $sHttps && '443' === (string) $this->GetServer('SERVER_PORT', '')))
 		{
@@ -320,7 +320,7 @@ class Http
 	 *
 	 * @return string
 	 */
-	public function GetHost($bWithRemoteUserData = false, $bWithoutWWW = true, $bWithoutPort = false)
+	public function GetHost(bool $bWithRemoteUserData = false, bool $bWithoutWWW = true, bool $bWithoutPort = false)
 	{
 		$sHost = $this->GetServer('HTTP_HOST', '');
 		if (0 === \strlen($sHost))
@@ -355,7 +355,7 @@ class Http
 	 *
 	 * @return string
 	 */
-	public function GetClientIp($bCheckProxy = false)
+	public function GetClientIp(bool $bCheckProxy = false)
 	{
 		$sIp = '';
 		if ($bCheckProxy && null !== $this->GetServer('HTTP_CLIENT_IP', null))
@@ -386,8 +386,8 @@ class Http
 	 *
 	 * @return string|bool
 	 */
-	public function SendPostRequest($sUrl, $aPost = array(), $sCustomUserAgent = 'MailSo Http User Agent (v1)', &$iCode = 0,
-		$oLogger = null, $iTimeout = 20, $sProxy = '', $sProxyAuth = '')
+	public function SendPostRequest(string $sUrl, array $aPost = array(), string $sCustomUserAgent = 'MailSo Http User Agent (v1)', &$iCode = 0,
+		$oLogger = null, int $iTimeout = 20, string $sProxy = '', string $sProxyAuth = '')
 	{
 		$aOptions = array(
 			CURLOPT_URL => $sUrl,
@@ -451,8 +451,8 @@ class Http
 	 *
 	 * @return string
 	 */
-	static public function DetectAndHackFollowLocationUrl($sUrl, &$aOptions, $oLogger = null)
-	{
+	public static function DetectAndHackFollowLocationUrl($sUrl, &$aOptions, $oLogger = null)
+	: string {
 		$sSafeMode = \strtolower(\trim(@\ini_get('safe_mode')));
 		$bSafeMode = 'on' === $sSafeMode || '1' === $sSafeMode;
 
@@ -549,8 +549,8 @@ class Http
 	 *
 	 * @return bool
 	 */
-	public function SaveUrlToFile($sUrl, $rFile, $sCustomUserAgent = 'MailSo Http User Agent (v1)', &$sContentType = '', &$iCode = 0,
-		$oLogger = null, $iTimeout = 10, $sProxy = '', $sProxyAuth = '', $aHttpHeaders = array(), $bFollowLocation = true)
+	public function SaveUrlToFile(string $sUrl, $rFile, $sCustomUserAgent = 'MailSo Http User Agent (v1)', string &$sContentType = '', &$iCode = 0,
+		$oLogger = null, int $iTimeout = 10, string $sProxy = '', string $sProxyAuth = '', $aHttpHeaders = array(), bool $bFollowLocation = true)
 	{
 		if (null === $sCustomUserAgent)
 		{
@@ -654,8 +654,8 @@ class Http
 	 *
 	 * @return string|bool
 	 */
-	public function GetUrlAsString($sUrl, $sCustomUserAgent = 'MailSo Http User Agent (v1)', &$sContentType = '', &$iCode = 0,
-		$oLogger = null, $iTimeout = 10, $sProxy = '', $sProxyAuth = '', $aHttpHeaders = array(), $bFollowLocation = true)
+	public function GetUrlAsString($sUrl, string $sCustomUserAgent = 'MailSo Http User Agent (v1)', string &$sContentType = '', int &$iCode = 0,
+		$oLogger = null, int $iTimeout = 10, string $sProxy = '', string $sProxyAuth = '', array $aHttpHeaders = array(), bool $bFollowLocation = true)
 	{
 		$rMemFile = \MailSo\Base\ResourceRegistry::CreateMemoryResource();
 		if ($this->SaveUrlToFile($sUrl, $rMemFile, $sCustomUserAgent, $sContentType, $iCode, $oLogger, $iTimeout, $sProxy, $sProxyAuth, $aHttpHeaders, $bFollowLocation) && \is_resource($rMemFile))
@@ -674,7 +674,7 @@ class Http
 	 *
 	 * @return bool
 	 */
-	public function ServerNotModifiedCache($iExpireTime, $bSetCacheHeader = true, $sEtag = '')
+	public function ServerNotModifiedCache(int $iExpireTime, bool $bSetCacheHeader = true, string $sEtag = '')
 	{
 		$bResult = false;
 		if (0 < $iExpireTime)
@@ -729,7 +729,7 @@ class Http
 	 * @param int $iLastModified
 	 * @param int $iExpires
 	 */
-	public function ServerUseCache($sEtag, $iLastModified, $iExpires)
+	public function ServerUseCache(string $sEtag, $iLastModified, $iExpires)
 	{
 		static $bCache = false;
 		if (false === $bCache)
@@ -747,7 +747,7 @@ class Http
 	 *
 	 * @return void
 	 */
-	public function StatusHeader($iStatus, $sCustomStatusText = '')
+	public function StatusHeader($iStatus, string $sCustomStatusText = '')
 	{
 		$iStatus = (int) $iStatus;
 		if (99 < $iStatus)
@@ -777,7 +777,7 @@ class Http
 	 * @return string
 	 */
 	public function GetPath()
-	{
+	: string {
 		$sUrl = \ltrim(\substr($this->GetServer('SCRIPT_NAME', ''), 0, \strrpos($this->GetServer('SCRIPT_NAME', ''), '/')), '/');
 		return '' === $sUrl ? '/' : '/'.$sUrl.'/';
 	}
@@ -794,7 +794,7 @@ class Http
 	 * @return string
 	 */
 	public function GetFullUrl()
-	{
+	: string {
 		return $this->GetScheme().'://'.$this->GetHost(true, false).$this->GetPath();
 	}
 }

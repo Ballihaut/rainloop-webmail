@@ -23,8 +23,8 @@ use Predis\NotSupportedException;
 class Consumer implements \Iterator
 {
     private $client;
-    private $valid;
-    private $position;
+    private bool $valid;
+    private int $position;
 
     /**
      * @param ClientInterface $client Client instance used by the consumer.
@@ -144,7 +144,7 @@ class Consumer implements \Iterator
         $client = null;
         $event = $this->client->getConnection()->read();
 
-        $callback = function ($matches) use (&$database, &$client) {
+        $callback = function ($matches) use (&$database, &$client) : string {
             if (2 === $count = count($matches)) {
                 // Redis <= 2.4
                 $database = (int) $matches[1];

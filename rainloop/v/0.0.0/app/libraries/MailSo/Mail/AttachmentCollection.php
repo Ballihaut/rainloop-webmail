@@ -37,8 +37,8 @@ class AttachmentCollection extends \MailSo\Base\Collection
 	 * @return int
 	 */
 	public function InlineCount()
-	{
-		$aList = $this->FilterList(function ($oAttachment) {
+	: int {
+		$aList = $this->FilterList(function ($oAttachment) : bool {
 			return $oAttachment && $oAttachment->IsInline();
 		});
 
@@ -49,8 +49,8 @@ class AttachmentCollection extends \MailSo\Base\Collection
 	 * @return int
 	 */
 	public function NonInlineCount()
-	{
-		$aList = $this->FilterList(function ($oAttachment) {
+	: int {
+		$aList = $this->FilterList(function ($oAttachment) : bool {
 			return $oAttachment && !$oAttachment->IsInline();
 		});
 

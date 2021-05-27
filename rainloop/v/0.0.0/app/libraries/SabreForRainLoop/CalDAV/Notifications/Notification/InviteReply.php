@@ -48,7 +48,7 @@ class InviteReply extends DAV\Property implements CalDAV\Notifications\INotifica
      *
      * @var int
      */
-    protected $type;
+    protected int $type;
 
     /**
      * A url to the shared calendar.

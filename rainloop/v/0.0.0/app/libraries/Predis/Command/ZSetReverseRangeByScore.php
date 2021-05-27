@@ -22,7 +22,7 @@ class ZSetReverseRangeByScore extends ZSetRangeByScore
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREVRANGEBYSCORE';
     }
 }

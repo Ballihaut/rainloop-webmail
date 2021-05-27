@@ -5,52 +5,52 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	/**
 	 * @var string
 	 */
-	private $sHost = '127.0.0.1';
+	private string $sHost = '127.0.0.1';
 
 	/**
 	 * @var int
 	 */
-	private $iPort = 3306;
+	private int $iPort = 3306;
 
 	/**
 	 * @var string
 	 */
-	private $sDatabase = 'mailserver';
+	private string $sDatabase = 'mailserver';
 
 	/**
 	* @var string
 	*/
-	private $sTable = 'virtual_users';
+	private string $sTable = 'virtual_users';
 
 	/**
 	* @var string
 	*/
-	private $sUsercol = 'email';
+	private string $sUsercol = 'email';
 
 	/**
 	* @var string
 	*/
-	private $sPasscol = 'password';
+	private string $sPasscol = 'password';
 
 	/**
 	 * @var string
 	 */
-	private $sUser = 'mailuser';
+	private string $sUser = 'mailuser';
 
 	/**
 	 * @var string
 	 */
-	private $sPassword = '';
+	private string $sPassword = '';
 
 	/**
 	 * @var string
 	 */
-	private $sEncrypt = '';
+	private string $sEncrypt = '';
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -63,7 +63,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetHost($sHost)
-	{
+	: self {
 		$this->sHost = $sHost;
 		return $this;
 	}
@@ -73,8 +73,8 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 *
 	 * @return \ChangePasswordISPmailDriver
 	 */
-	public function SetPort($iPort)
-	{
+	public function SetPort(int $iPort)
+	: self {
 		$this->iPort = (int) $iPort;
 		return $this;
 	}
@@ -85,7 +85,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetDatabase($sDatabase)
-	{
+	: self {
 		$this->sDatabase = $sDatabase;
 		return $this;
 	}
@@ -96,7 +96,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	* @return \ChangePasswordISPmailDriver
 	*/
 	public function SetTable($sTable)
-	{
+	: self {
 		$this->sTable = $sTable;
 		return $this;
 	}
@@ -107,7 +107,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	* @return \ChangePasswordISPmailDriver
 	*/
 	public function SetUserColumn($sUsercol)
-	{
+	: self {
 		$this->sUsercol = $sUsercol;
 		return $this;
 	}
@@ -118,7 +118,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	* @return \ChangePasswordISPmailDriver
 	*/
 	public function SetPasswordColumn($sPasscol)
-	{
+	: self {
 		$this->sPasscol = $sPasscol;
 		return $this;
 	}
@@ -129,7 +129,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetUser($sUser)
-	{
+	: self {
 		$this->sUser = $sUser;
 		return $this;
 	}
@@ -140,7 +140,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetPassword($sPassword)
-	{
+	: self {
 		$this->sPassword = $sPassword;
 		return $this;
 	}
@@ -151,7 +151,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetEncrypt($sEncrypt)
-	{
+	: self {
 		$this->sEncrypt = $sEncrypt;
 		return $this;
 	}
@@ -162,7 +162,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -173,7 +173,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return \ChangePasswordISPmailDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -188,7 +188,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}
@@ -255,7 +255,7 @@ class ChangePasswordISPmailDriver implements \RainLoop\Providers\ChangePassword\
 	 *
 	 * @return string
 	 */
-	private function cryptPassword($sPassword, $oPdo)
+	private function cryptPassword(string $sPassword, $oPdo)
 	{
 		$sResult = '';
 		$sSalt = substr(str_shuffle('./ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'), 0, 16);

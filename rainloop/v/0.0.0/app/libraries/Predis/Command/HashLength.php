@@ -22,7 +22,7 @@ class HashLength extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HLEN';
     }
 }

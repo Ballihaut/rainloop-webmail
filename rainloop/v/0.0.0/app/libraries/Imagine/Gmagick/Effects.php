@@ -32,7 +32,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function gamma($correction)
-    {
+    : self {
         try {
             $this->gmagick->gammaimage($correction);
         } catch (\GmagickException $e) {
@@ -46,7 +46,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function negative()
-    {
+    : self {
         if (!method_exists($this->gmagick, 'negateimage')) {
             throw new NotSupportedException('Gmagick version 1.1.0 RC3 is required for negative effect');
         }
@@ -64,7 +64,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function grayscale()
-    {
+    : self {
         try {
             $this->gmagick->setImageType(2);
         } catch (\GmagickException $e) {
@@ -94,7 +94,7 @@ class Effects implements EffectsInterface
      * {@inheritdoc}
      */
     public function blur($sigma = 1)
-    {
+    : self {
         try {
             $this->gmagick->blurImage(0, $sigma);
         } catch (\GmagickException $e) {

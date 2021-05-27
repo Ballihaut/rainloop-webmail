@@ -33,7 +33,7 @@ class GraphNode extends Collection
     /**
      * @var array Maps object key names to Graph object types.
      */
-    protected static $graphObjectMap = [];
+    protected static array $graphObjectMap = [];
 
     /**
      * Init this Graph object.
@@ -117,7 +117,7 @@ class GraphNode extends Collection
      * @see http://en.wikipedia.org/wiki/ISO_8601
      */
     public function isIso8601DateString($string)
-    {
+    : bool {
         // This insane regex was yoinked from here:
         // http://www.pelagodesign.com/blog/2009/05/20/iso-8601-date-validation-that-doesnt-suck/
         // ...and I'm all like:
@@ -140,7 +140,7 @@ class GraphNode extends Collection
      * @return boolean
      */
     public function shouldCastAsDateTime($key)
-    {
+    : bool {
         return in_array($key, [
             'created_time',
             'updated_time',

@@ -22,7 +22,7 @@ class ResponseList extends DAV\Property {
      *
      * @var array
      */
-    private $responses;
+    private iterable $responses;
 
     /**
      * The only valid argument is a list of SabreForRainLoop\DAV\Property\Response

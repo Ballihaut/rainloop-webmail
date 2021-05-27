@@ -18,7 +18,7 @@ class PiwikAnalyticsPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		$oUrl = \RainLoop\Plugins\Property::NewInstance('piwik_url')->SetLabel('Piwik URL')
 			->SetAllowedInJs(true);
 

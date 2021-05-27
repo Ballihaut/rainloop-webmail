@@ -42,7 +42,7 @@ class Principal extends DAV\Property implements DAV\Property\IHref {
      *
      * @var int
      */
-    private $type;
+    private int $type;
 
     /**
      * Url to principal
@@ -134,7 +134,7 @@ class Principal extends DAV\Property implements DAV\Property\IHref {
      * @param \DOMElement $dom
      * @return Principal
      */
-    static public function unserialize(\DOMElement $dom) {
+    public static function unserialize(\DOMElement $dom) {
 
         $parent = $dom->firstChild;
         while(!DAV\XMLUtil::toClarkNotation($parent)) {

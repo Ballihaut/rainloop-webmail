@@ -20,47 +20,47 @@ abstract class Driver
 	/**
 	 * @var string
 	 */
-	protected $sDatePattern;
+	protected string $sDatePattern;
 
 	/**
 	 * @var string
 	 */
-	protected $sName;
+	protected string $sName;
 
 	/**
 	 * @var array
 	 */
-	protected $aPrefixes;
+	protected array $aPrefixes;
 
 	/**
 	 * @var bool
 	 */
-	protected $bGuidPrefix;
+	protected bool $bGuidPrefix;
 
 	/**
 	 * @var string
 	 */
-	protected $sTimeOffset;
+	protected string $sTimeOffset;
 
 	/**
 	 * @var bool
 	 */
-	protected $bTimePrefix;
+	protected bool $bTimePrefix;
 
 	/**
 	 * @var bool
 	 */
-	protected $bTypedPrefix;
+	protected bool $bTypedPrefix;
 
 	/**
 	 * @var string
 	 */
-	protected $sNewLine;
+	protected string $sNewLine;
 
 	/**
 	 * @var int
 	 */
-	private $iWriteOnTimeoutOnly;
+	private int $iWriteOnTimeoutOnly;
 
 	/**
 	 * @var bool
@@ -80,7 +80,7 @@ abstract class Driver
 	/**
 	 * @var array
 	 */
-	private $aCache;
+	private array $aCache;
 
 	/**
 	 * @access protected
@@ -124,8 +124,8 @@ abstract class Driver
 	 *
 	 * @return \MailSo\Log\Driver
 	 */
-	public function SetTimeOffset($sTimeOffset)
-	{
+	public function SetTimeOffset(string $sTimeOffset)
+	: self {
 		$this->sTimeOffset = (string) $sTimeOffset;
 		return $this;
 	}
@@ -134,7 +134,7 @@ abstract class Driver
 	 * @return \MailSo\Log\Driver
 	 */
 	public function DisableGuidPrefix()
-	{
+	: self {
 		$this->bGuidPrefix = false;
 		return $this;
 	}
@@ -143,7 +143,7 @@ abstract class Driver
 	 * @return \MailSo\Log\Driver
 	 */
 	public function DisableTimePrefix()
-	{
+	: self {
 		$this->bTimePrefix = false;
 		return $this;
 	}
@@ -154,7 +154,7 @@ abstract class Driver
 	 * @return \MailSo\Log\Driver
 	 */
 	public function WriteOnErrorOnly($bValue)
-	{
+	: self {
 		$this->bWriteOnErrorOnly = !!$bValue;
 		return $this;
 	}
@@ -165,7 +165,7 @@ abstract class Driver
 	 * @return \MailSo\Log\Driver
 	 */
 	public function WriteOnPhpErrorOnly($bValue)
-	{
+	: self {
 		$this->bWriteOnPhpErrorOnly = !!$bValue;
 		return $this;
 	}
@@ -175,8 +175,8 @@ abstract class Driver
 	 *
 	 * @return \MailSo\Log\Driver
 	 */
-	public function WriteOnTimeoutOnly($iTimeout)
-	{
+	public function WriteOnTimeoutOnly(int $iTimeout)
+	: self {
 		$this->iWriteOnTimeoutOnly = (int) $iTimeout;
 		if (0 > $this->iWriteOnTimeoutOnly)
 		{
@@ -190,7 +190,7 @@ abstract class Driver
 	 * @return \MailSo\Log\Driver
 	 */
 	public function DisableTypedPrefix()
-	{
+	: self {
 		$this->bTypedPrefix = false;
 		return $this;
 	}
@@ -217,9 +217,9 @@ abstract class Driver
 	 *
 	 * @return string
 	 */
-	protected function loggerLineImplementation($sTimePrefix, $sDesc,
-		$iType = \MailSo\Log\Enumerations\Type::INFO, $sName = '')
-	{
+	protected function loggerLineImplementation(string $sTimePrefix, string $sDesc,
+		$iType = \MailSo\Log\Enumerations\Type::INFO, string $sName = '')
+	: string {
 		return \ltrim(
 			($this->bTimePrefix ? '['.$sTimePrefix.']' : '').
 			($this->bGuidPrefix ? '['.\MailSo\Log\Logger::Guid().']' : '').
@@ -239,7 +239,7 @@ abstract class Driver
 	 * @return string
 	 */
 	protected function getTimeWithMicroSec()
-	{
+	: string {
 		$aMicroTimeItems = \explode(' ', \microtime());
 		return \MailSo\Log\Logger::DateHelper($this->sDatePattern, $this->sTimeOffset, $aMicroTimeItems[1]).'.'.
 			\str_pad((int) ($aMicroTimeItems[0] * 1000), 3, '0', STR_PAD_LEFT);
@@ -251,7 +251,7 @@ abstract class Driver
 	 *
 	 * @return string
 	 */
-	protected function getTypedPrefix($iType, $sName = '')
+	protected function getTypedPrefix($iType, string $sName = '')
 	{
 		$sName = 0 < \strlen($sName) ? $sName : $this->sName;
 		return isset($this->aPrefixes[$iType]) ? $sName.$this->aPrefixes[$iType].': ' : '';
@@ -263,7 +263,7 @@ abstract class Driver
 	 *
 	 * @return string
 	 */
-	protected function localWriteImplementation($mDesc, $bDiplayCrLf = false)
+	protected function localWriteImplementation($mDesc, bool $bDiplayCrLf = false)
 	{
 		if ($bDiplayCrLf)
 		{
@@ -294,7 +294,7 @@ abstract class Driver
 	 *
 	 * @return bool
 	 */
-	final public function Write($sDesc, $iType = \MailSo\Log\Enumerations\Type::INFO, $sName = '', $bDiplayCrLf = false)
+	final public function Write($sDesc, $iType = \MailSo\Log\Enumerations\Type::INFO, string $sName = '', bool $bDiplayCrLf = false)
 	{
 		$bResult = true;
 		if (!$this->bFlushCache && ($this->bWriteOnErrorOnly || $this->bWriteOnPhpErrorOnly || 0 < $this->iWriteOnTimeoutOnly))

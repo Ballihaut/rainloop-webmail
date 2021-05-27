@@ -24,7 +24,7 @@ class VCard extends VObject\Document {
      *
      * @var string
      */
-    static public $defaultName = 'VCARD';
+    public static string $defaultName = 'VCARD';
 
     /**
      * Caching the version number
@@ -38,7 +38,7 @@ class VCard extends VObject\Document {
      *
      * @var array
      */
-    static public $valueMap = array(
+    public static array $valueMap = array(
         'BINARY'           => 'SabreForRainLoop\\VObject\\Property\\Binary',
         'BOOLEAN'          => 'SabreForRainLoop\\VObject\\Property\\Boolean',
         'CONTENT-ID'       => 'SabreForRainLoop\\VObject\\Property\\FlatText',   // vCard 2.1 only
@@ -62,7 +62,7 @@ class VCard extends VObject\Document {
      *
      * @var array
      */
-    static public $propertyMap = array(
+    public static array $propertyMap = array(
 
         // vCard 2.1 properties and up
         'N'       => 'SabreForRainLoop\\VObject\\Property\\Text',
@@ -191,7 +191,7 @@ class VCard extends VObject\Document {
      * @param int $options
      * @return array
      */
-    public function validate($options = 0) {
+    public function validate($options = 0) : array {
 
         $warnings = array();
 
@@ -299,7 +299,7 @@ class VCard extends VObject\Document {
      *
      * @return array
      */
-    protected function getDefaults() {
+    protected function getDefaults() : array {
 
         return array(
             'VERSION' => '3.0',
@@ -314,7 +314,7 @@ class VCard extends VObject\Document {
      *
      * @return array
      */
-    public function jsonSerialize() {
+    public function jsonSerialize() : array {
 
         // A vcard does not have sub-components, so we're overriding this
         // method to remove that array element.
@@ -337,7 +337,7 @@ class VCard extends VObject\Document {
      * @param string $propertyName
      * @return string
      */
-    public function getClassNameForPropertyName($propertyName) {
+    public function getClassNameForPropertyName($propertyName) : string {
 
         $className = parent::getClassNameForPropertyName($propertyName);
         // In vCard 4, BINARY no longer exists, and we need URI instead.

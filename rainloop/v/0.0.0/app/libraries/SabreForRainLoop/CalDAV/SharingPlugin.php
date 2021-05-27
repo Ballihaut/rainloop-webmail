@@ -46,7 +46,7 @@ class SharingPlugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array('calendarserver-sharing');
 
@@ -60,7 +60,7 @@ class SharingPlugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'caldav-sharing';
 
@@ -454,7 +454,7 @@ class SharingPlugin extends DAV\ServerPlugin {
      * @param \DOMDocument $dom
      * @return array
      */
-    protected function parseShareRequest(\DOMDocument $dom) {
+    protected function parseShareRequest(\DOMDocument $dom) : array {
 
         $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('cs', Plugin::NS_CALENDARSERVER);
@@ -502,7 +502,7 @@ class SharingPlugin extends DAV\ServerPlugin {
      * @param \DOMDocument $dom
      * @return array
      */
-    protected function parseInviteReplyRequest(\DOMDocument $dom) {
+    protected function parseInviteReplyRequest(\DOMDocument $dom) : array {
 
         $xpath = new \DOMXPath($dom);
         $xpath->registerNamespace('cs', Plugin::NS_CALENDARSERVER);

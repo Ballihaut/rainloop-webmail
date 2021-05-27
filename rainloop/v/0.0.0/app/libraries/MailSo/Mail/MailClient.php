@@ -67,9 +67,9 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function Connect($sServerName, $iPort = 143,
-		$iSecurityType = \MailSo\Net\Enumerations\ConnectionSecurityType::AUTO_DETECT, $bVerifySsl = false, $bAllowSelfSigned = false, $sClientCert = '')
-	{
+	public function Connect($sServerName, int $iPort = 143,
+		$iSecurityType = \MailSo\Net\Enumerations\ConnectionSecurityType::AUTO_DETECT, bool $bVerifySsl = false, bool $bAllowSelfSigned = false, string $sClientCert = '')
+	: self {
 		$this->oImapClient->Connect($sServerName, $iPort, $iSecurityType, $bVerifySsl, $bAllowSelfSigned, $sClientCert);
 		return $this;
 	}
@@ -87,9 +87,9 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\LoginException
 	 */
-	public function Login($sLogin, $sPassword, $sProxyAuthUser = '',
-		$bUseAuthPlainIfSupported = true, $bUseAuthCramMd5IfSupported = true)
-	{
+	public function Login($sLogin, $sPassword, string $sProxyAuthUser = '',
+		bool $bUseAuthPlainIfSupported = true, bool $bUseAuthCramMd5IfSupported = true)
+	: self {
 		$this->oImapClient->Login($sLogin, $sPassword, $sProxyAuthUser, $bUseAuthPlainIfSupported, $bUseAuthCramMd5IfSupported);
 		return $this;
 	}
@@ -104,7 +104,7 @@ class MailClient
 	 * @throws \MailSo\Imap\Exceptions\LoginException
 	 */
 	public function LoginWithXOauth2($sXOAuth2Token)
-	{
+	: self {
 		$this->oImapClient->LoginWithXOauth2($sXOAuth2Token);
 		return $this;
 	}
@@ -115,7 +115,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 */
 	public function Logout()
-	{
+	: self {
 		$this->oImapClient->Logout();
 		return $this;
 	}
@@ -126,7 +126,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 */
 	public function Disconnect()
-	{
+	: self {
 		$this->oImapClient->Disconnect();
 		return $this;
 	}
@@ -233,7 +233,7 @@ class MailClient
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 * @throws \MailSo\Mail\Exceptions\Exception
 	 */
-	public function MessageSetFlagToAll($sFolderName, $sMessageFlag, $bSetAction = true, $sSkipUnsupportedFlag = false, $aCustomUids = null)
+	public function MessageSetFlagToAll($sFolderName, string $sMessageFlag, bool $bSetAction = true, bool $sSkipUnsupportedFlag = false, $aCustomUids = null)
 	{
 		$this->oImapClient->FolderSelect($sFolderName);
 
@@ -280,7 +280,7 @@ class MailClient
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 * @throws \MailSo\Mail\Exceptions\Exception
 	 */
-	public function MessageSetFlag($sFolderName, $aIndexRange, $bIndexIsUid, $sMessageFlag, $bSetAction = true, $sSkipUnsupportedFlag = false)
+	public function MessageSetFlag($sFolderName, $aIndexRange, $bIndexIsUid, string $sMessageFlag, bool $bSetAction = true, bool $sSkipUnsupportedFlag = false)
 	{
 		$this->oImapClient->FolderSelect($sFolderName);
 
@@ -315,7 +315,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageSetFlagged($sFolderName, $aIndexRange, $bIndexIsUid, $bSetAction = true, $sSkipUnsupportedFlag = false)
+	public function MessageSetFlagged($sFolderName, $aIndexRange, $bIndexIsUid, bool $bSetAction = true, bool $sSkipUnsupportedFlag = false)
 	{
 		$this->MessageSetFlag($sFolderName, $aIndexRange, $bIndexIsUid,
 			\MailSo\Imap\Enumerations\MessageFlag::FLAGGED, $bSetAction, $sSkipUnsupportedFlag);
@@ -330,7 +330,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageSetSeenToAll($sFolderName, $bSetAction = true, $aCustomUids = null)
+	public function MessageSetSeenToAll($sFolderName, bool $bSetAction = true, $aCustomUids = null)
 	{
 		$this->MessageSetFlagToAll($sFolderName, \MailSo\Imap\Enumerations\MessageFlag::SEEN, $bSetAction, true, $aCustomUids);
 	}
@@ -345,7 +345,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageSetSeen($sFolderName, $aIndexRange, $bIndexIsUid, $bSetAction = true)
+	public function MessageSetSeen($sFolderName, $aIndexRange, $bIndexIsUid, bool $bSetAction = true)
 	{
 		$this->MessageSetFlag($sFolderName, $aIndexRange, $bIndexIsUid,
 			\MailSo\Imap\Enumerations\MessageFlag::SEEN, $bSetAction, true);
@@ -364,7 +364,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function Message($sFolderName, $iIndex, $bIndexIsUid = true, $oCacher = null, $iBodyTextLimit = null)
+	public function Message($sFolderName, $iIndex, bool $bIndexIsUid = true, $oCacher = null, $iBodyTextLimit = null)
 	{
 		if (!\MailSo\Base\Validator::RangeInt($iIndex, 1))
 		{
@@ -464,7 +464,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageMimeStream($mCallback, $sFolderName, $iIndex, $bIndexIsUid = true, $sMimeIndex = '')
+	public function MessageMimeStream($mCallback, $sFolderName, string $iIndex, bool $bIndexIsUid = true, string $sMimeIndex = '')
 	{
 		if (!is_callable($mCallback))
 		{
@@ -529,7 +529,7 @@ class MailClient
 
 		$aFetchResponse = $this->oImapClient->Fetch(array(
 			array(\MailSo\Imap\Enumerations\FetchType::BODY_PEEK.'['.$sMimeIndex.']',
-				function ($sParent, $sLiteralAtomUpperCase, $rImapLiteralStream) use ($mCallback, $sMimeIndex, $sMailEncodingName, $sContentType, $sFileName)
+				function (bool $sParent, string $sLiteralAtomUpperCase, $rImapLiteralStream) use ($mCallback, $sMimeIndex, $sMailEncodingName, $sContentType, $sFileName)
 				{
 					if (0 < \strlen($sLiteralAtomUpperCase))
 					{
@@ -563,8 +563,8 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageDelete($sFolder, $aIndexRange, $bIndexIsUid, $bUseExpunge = true, $bExpungeAll = false)
-	{
+	public function MessageDelete(string $sFolder, $aIndexRange, $bIndexIsUid, bool $bUseExpunge = true, bool $bExpungeAll = false)
+	: self {
 		if (0 === \strlen($sFolder) || !\is_array($aIndexRange) || 0 === \count($aIndexRange))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -601,8 +601,8 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageMove($sFromFolder, $sToFolder, $aIndexRange, $bIndexIsUid, $bUseMoveSupported = false, $bExpungeAll = false)
-	{
+	public function MessageMove(string $sFromFolder, string $sToFolder, $aIndexRange, $bIndexIsUid, bool $bUseMoveSupported = false, bool $bExpungeAll = false)
+	: self {
 		if (0 === \strlen($sFromFolder) || 0 === \strlen($sToFolder) ||
 			!\is_array($aIndexRange) || 0 === \count($aIndexRange))
 		{
@@ -639,8 +639,8 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageCopy($sFromFolder, $sToFolder, $aIndexRange, $bIndexIsUid)
-	{
+	public function MessageCopy(string $sFromFolder, string $sToFolder, $aIndexRange, $bIndexIsUid)
+	: self {
 		if (0 === \strlen($sFromFolder) || 0 === \strlen($sToFolder) ||
 			!\is_array($aIndexRange) || 0 === \count($aIndexRange))
 		{
@@ -661,7 +661,7 @@ class MailClient
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
 	public function FolderUnSelect()
-	{
+	: self {
 		if ($this->oImapClient->IsSelected())
 		{
 			$this->oImapClient->FolderUnSelect();
@@ -679,8 +679,8 @@ class MailClient
 	 *
 	 * @return \MailSo\Mail\MailClient
 	 */
-	public function MessageAppendStream($rMessageStream, $iMessageStreamSize, $sFolderToSave, $aAppendFlags = null, &$iUid = null)
-	{
+	public function MessageAppendStream($rMessageStream, $iMessageStreamSize, string $sFolderToSave, $aAppendFlags = null, &$iUid = null)
+	: self {
 		if (!\is_resource($rMessageStream) || 0 === \strlen($sFolderToSave))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -700,8 +700,8 @@ class MailClient
 	 *
 	 * @return \MailSo\Mail\MailClient
 	 */
-	public function MessageAppendFile($sMessageFileName, $sFolderToSave, $aAppendFlags = null, &$iUid = null)
-	{
+	public function MessageAppendFile(string $sMessageFileName, $sFolderToSave, $aAppendFlags = null, &$iUid = null)
+	: self {
 		if (!@\is_file($sMessageFileName) || !@\is_readable($sMessageFileName))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -729,8 +729,8 @@ class MailClient
 	 *
 	 * @return void
 	 */
-	protected function initFolderValues($sFolderName, &$iCount, &$iUnseenCount,
-		&$sUidNext, &$sHighestModSeq = '')
+	protected function initFolderValues($sFolderName, bool &$iCount, &$iUnseenCount,
+		&$sUidNext, string &$sHighestModSeq = '')
 	{
 		$aTypes = array(
 			\MailSo\Imap\Enumerations\FolderResponseStatus::MESSAGES,
@@ -776,7 +776,7 @@ class MailClient
 	 * @return string
 	 */
 	public function GenerateImapClientHash()
-	{
+	: string {
 		return \md5('ImapClientHash/'.
 			$this->oImapClient->GetLogginedUser().'@'.
 			$this->oImapClient->GetConnectedHost().':'.
@@ -793,8 +793,8 @@ class MailClient
 	 *
 	 * @return string
 	 */
-	public function GenerateFolderHash($sFolder, $iCount, $iUnseenCount, $sUidNext, $sHighestModSeq = '')
-	{
+	public function GenerateFolderHash(string $sFolder, string $iCount, string $iUnseenCount, string $sUidNext, string $sHighestModSeq = '')
+	: string {
 		$iUnseenCount = 0; // unneccessery
 		return \md5('FolderHash/'.$sFolder.'-'.$iCount.'-'.$iUnseenCount.'-'.$sUidNext.'-'.
 			$sHighestModSeq.'-'.$this->GenerateImapClientHash().'-'.
@@ -809,7 +809,7 @@ class MailClient
 	 *
 	 * @return array
 	 */
-	private function getFolderNextMessageInformation($sFolderName, $sPrevUidNext, $sCurrentUidNext)
+	private function getFolderNextMessageInformation($sFolderName, string $sPrevUidNext, string $sCurrentUidNext)
 	{
 		$aNewMessages = array();
 
@@ -883,7 +883,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function FolderInformation($sFolderName, $sPrevUidNext = '', $aUids = array())
+	public function FolderInformation($sFolderName, string $sPrevUidNext = '', $aUids = array())
 	{
 		$aFlags = array();
 
@@ -984,7 +984,7 @@ class MailClient
 	 * @return bool
 	 */
 	public function IsGmail()
-	{
+	: bool {
 		return 'ssl://imap.gmail.com' === \strtolower($this->oImapClient->GetConnectedHost());
 	}
 
@@ -994,7 +994,7 @@ class MailClient
 	 *
 	 * @return string
 	 */
-	private function escapeSearchString($sSearch, $bDetectGmail = true)
+	private function escapeSearchString(string $sSearch, bool $bDetectGmail = true)
 	{
 		return !\MailSo\Base\Utils::IsAscii($sSearch)
 			? '{'.\strlen($sSearch).'}'."\r\n".$sSearch : $this->oImapClient->EscapeString($sSearch);
@@ -1008,7 +1008,7 @@ class MailClient
 	 *
 	 * @return int
 	 */
-	private function parseSearchDate($sDate, $iTimeZoneOffset)
+	private function parseSearchDate(string $sDate, int $iTimeZoneOffset)
 	{
 		$iResult = 0;
 		if (0 < \strlen($sDate))
@@ -1188,8 +1188,8 @@ class MailClient
 	 *
 	 * @return string
 	 */
-	private function getImapSearchCriterias($sSearch, $sFilter, $iTimeZoneOffset = 0, &$bUseCache = true)
-	{
+	private function getImapSearchCriterias(string $sSearch, string $sFilter, int $iTimeZoneOffset = 0, bool &$bUseCache = true)
+	: string {
 		$bUseCache = true;
 		$iTimeFilter = 0;
 		$aCriteriasResult = array();
@@ -1457,7 +1457,7 @@ class MailClient
 	 * @param array $aThreads
 	 * @return array
 	 */
-	private function threadArrayMap($aThreads)
+	private function threadArrayMap(iterable $aThreads)
 	{
 		$aNew = array();
 		foreach ($aThreads as $mItem)
@@ -1484,7 +1484,7 @@ class MailClient
 	 *
 	 * @return array
 	 */
-	private function compileThreadArray($aThreads)
+	private function compileThreadArray(iterable $aThreads)
 	{
 		$aResult = array();
 		foreach ($aThreads as $mItem)
@@ -1526,7 +1526,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageListThreadsMap($sFolderName, $sFolderHash, $aIndexOrUids, $oCacher, $bCacheOnly = false)
+	public function MessageListThreadsMap(string $sFolderName, string $sFolderHash, iterable $aIndexOrUids, $oCacher, bool $bCacheOnly = false)
 	{
 		$iThreadLimit = \MailSo\Config::$LargeThreadLimit;
 
@@ -1721,7 +1721,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageListByRequestIndexOrUids(&$oMessageCollection, $aRequestIndexOrUids, $bIndexAsUid, $bSimple = false)
+	public function MessageListByRequestIndexOrUids(&$oMessageCollection, $aRequestIndexOrUids, $bIndexAsUid, bool $bSimple = false)
 	{
 		if (\is_array($aRequestIndexOrUids) && 0 < \count($aRequestIndexOrUids))
 		{
@@ -1769,7 +1769,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 */
 	public function IsThreadsSupported()
-	{
+	: bool {
 		return $this->oImapClient->IsSupported('THREAD=REFS') ||
 			$this->oImapClient->IsSupported('THREAD=REFERENCES') ||
 			$this->oImapClient->IsSupported('THREAD=ORDEREDSUBJECT');
@@ -1785,7 +1785,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageListSimple($sFolderName, $aUids)
+	public function MessageListSimple(string $sFolderName, $aUids)
 	{
 		if (0 === \strlen($sFolderName) || !\MailSo\Base\Validator::NotEmptyArray($aUids))
 		{
@@ -1816,7 +1816,7 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function GetUids($oCacher, $sSearch, $sFilter, $sFolderName, $sFolderHash, $bUseSortIfSupported = false)
+	public function GetUids($oCacher, string $sSearch, $sFilter, string $sFolderName, bool $sFolderHash, bool $bUseSortIfSupported = false)
 	{
 		$aResultUids = false;
 		$bUidsFromCacher = false;
@@ -1905,8 +1905,8 @@ class MailClient
 	 * @throws \MailSo\Net\Exceptions\Exception
 	 * @throws \MailSo\Imap\Exceptions\Exception
 	 */
-	public function MessageList($sFolderName, $iOffset = 0, $iLimit = 10, $sSearch = '', $sPrevUidNext = '', $oCacher = null,
-		$bUseSortIfSupported = false, $bUseThreadSortIfSupported = false, $sThreadUid = '', $sFilter = '')
+	public function MessageList(bool $sFolderName, int $iOffset = 0, $iLimit = 10, string $sSearch = '', string $sPrevUidNext = '', $oCacher = null,
+		bool $bUseSortIfSupported = false, bool $bUseThreadSortIfSupported = false, $sThreadUid = '', string $sFilter = '')
 	{
 		$sFilter = \trim($sFilter);
 		$sSearch = \trim($sSearch);
@@ -2131,7 +2131,7 @@ class MailClient
 
 		if ($bUseThreadSortIfSupported && 0 === $iThreadUid && \is_array($mAllThreads) && 0 < \count($mAllThreads))
 		{
-			$oMessageCollection->ForeachList(function (/* @var $oMessage \MailSo\Mail\Message */ $oMessage) use ($mAllThreads) {
+			$oMessageCollection->ForeachList(function (/* @var $oMessage \MailSo\Mail\Message */ /* @var $oMessage \MailSo\Mail\Message */ $oMessage) use ($mAllThreads) {
 
 				$iUid = $oMessage->Uid();
 				if (isset($mAllThreads[$iUid]) && \is_array($mAllThreads[$iUid]) && 0 < \count($mAllThreads[$iUid]))
@@ -2162,7 +2162,7 @@ class MailClient
 	 *
 	 * @return int|null
 	 */
-	public function FindMessageUidByMessageId($sFolderName, $sMessageId)
+	public function FindMessageUidByMessageId($sFolderName, string $sMessageId)
 	{
 		if (0 === \strlen($sMessageId))
 		{
@@ -2319,7 +2319,7 @@ class MailClient
 	 *
 	 * @return \MailSo\Mail\FolderCollection|false
 	 */
-	public function Folders($sParent = '', $sListPattern = '*', $bUseListSubscribeStatus = true, $iOptimizationLimit = 0)
+	public function Folders(string $sParent = '', string $sListPattern = '*', bool $bUseListSubscribeStatus = true, int $iOptimizationLimit = 0)
 	{
 		$oFolderCollection = false;
 
@@ -2379,7 +2379,7 @@ class MailClient
 
 		if ($oFolderCollection)
 		{
-			$oFolderCollection->SortByCallback(function ($oFolderA, $oFolderB) {
+			$oFolderCollection->SortByCallback(function ($oFolderA, $oFolderB) : int {
 				$sA = \strtoupper($oFolderA->FullNameRaw());
 				$sB = \strtoupper($oFolderB->FullNameRaw());
 				switch (true)
@@ -2419,8 +2419,8 @@ class MailClient
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public function FolderCreate($sFolderNameInUtf8, $sFolderParentFullNameRaw = '', $bSubscribeOnCreation = true, $sDelimiter = '')
-	{
+	public function FolderCreate(string $sFolderNameInUtf8, $sFolderParentFullNameRaw = '', bool $bSubscribeOnCreation = true, string $sDelimiter = '')
+	: self {
 		if (!\MailSo\Base\Validator::NotEmptyString($sFolderNameInUtf8, true) ||
 			!\is_string($sFolderParentFullNameRaw))
 		{
@@ -2480,7 +2480,7 @@ class MailClient
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public function FolderMove($sPrevFolderFullNameRaw, $sNextFolderFullNameInUtf, $bSubscribeOnMove = true)
+	public function FolderMove($sPrevFolderFullNameRaw, $sNextFolderFullNameInUtf, bool $bSubscribeOnMove = true)
 	{
 		return $this->folderModify($sPrevFolderFullNameRaw, $sNextFolderFullNameInUtf, false, $bSubscribeOnMove);
 	}
@@ -2494,7 +2494,7 @@ class MailClient
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public function FolderRename($sPrevFolderFullNameRaw, $sNewTopFolderNameInUtf, $bSubscribeOnRename = true)
+	public function FolderRename($sPrevFolderFullNameRaw, $sNewTopFolderNameInUtf, bool $bSubscribeOnRename = true)
 	{
 		return $this->folderModify($sPrevFolderFullNameRaw, $sNewTopFolderNameInUtf, true, $bSubscribeOnRename);
 	}
@@ -2509,8 +2509,8 @@ class MailClient
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public function folderModify($sPrevFolderFullNameRaw, $sNextFolderNameInUtf, $bRenameOrMove, $bSubscribeOnModify)
-	{
+	public function folderModify(string $sPrevFolderFullNameRaw, string $sNextFolderNameInUtf, $bRenameOrMove, $bSubscribeOnModify)
+	: self {
 		if (0 === \strlen($sPrevFolderFullNameRaw) || 0 === \strlen($sNextFolderNameInUtf))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -2584,8 +2584,8 @@ class MailClient
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 * @throws \MailSo\Mail\Exceptions\RuntimeException
 	 */
-	public function FolderDelete($sFolderFullNameRaw, $bUnsubscribeOnDeletion = true)
-	{
+	public function FolderDelete($sFolderFullNameRaw, bool $bUnsubscribeOnDeletion = true)
+	: self {
 		if (0 === \strlen($sFolderFullNameRaw) || 'INBOX' === $sFolderFullNameRaw)
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -2619,7 +2619,7 @@ class MailClient
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
 	public function FolderClear($sFolderFullNameRaw)
-	{
+	: self {
 		$this->oImapClient->FolderSelect($sFolderFullNameRaw);
 
 		$oFolderInformation = $this->oImapClient->FolderCurrentInformation();
@@ -2644,8 +2644,8 @@ class MailClient
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public function FolderSubscribe($sFolderFullNameRaw, $bSubscribe)
-	{
+	public function FolderSubscribe(string $sFolderFullNameRaw, $bSubscribe)
+	: self {
 		if (0 === \strlen($sFolderFullNameRaw))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();
@@ -2664,7 +2664,7 @@ class MailClient
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if (!($oLogger instanceof \MailSo\Log\Logger))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();

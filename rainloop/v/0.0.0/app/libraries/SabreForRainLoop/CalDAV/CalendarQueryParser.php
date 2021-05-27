@@ -21,7 +21,7 @@ class CalendarQueryParser {
      *
      * @var array
      */
-    public $requestedProperties;
+    public array $requestedProperties;
 
     /**
      * List of property/component filters.
@@ -269,7 +269,7 @@ class CalendarQueryParser {
      * @param \DOMElement $parentNode
      * @return void
      */
-    protected function parseExpand(\DOMElement $parentNode) {
+    protected function parseExpand(\DOMElement $parentNode) : array {
 
         $start = $parentNode->getAttribute('start');
         if(!$start) {

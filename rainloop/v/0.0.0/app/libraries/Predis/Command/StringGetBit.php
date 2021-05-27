@@ -22,7 +22,7 @@ class StringGetBit extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'GETBIT';
     }
 }

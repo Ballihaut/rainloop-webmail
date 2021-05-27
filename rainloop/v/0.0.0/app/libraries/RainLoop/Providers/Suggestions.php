@@ -33,7 +33,7 @@ class Suggestions extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return array
 	 */
-	public function Process($oAccount, $sQuery, $iLimit = 20)
+	public function Process($oAccount, string $sQuery, $iLimit = 20)
 	{
 		$aSuggestions = array();
 		if ($oAccount instanceof \RainLoop\Model\Account &&
@@ -67,7 +67,7 @@ class Suggestions extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function IsActive()
-	{
+	: bool {
 		return \is_array($this->aDrivers) && 0 < \count($this->aDrivers);
 	}
 }

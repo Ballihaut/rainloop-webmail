@@ -20,7 +20,7 @@ class ResourceRegistry
 	/**
 	 * @var array
 	 */
-	public static $Resources = array();
+	public static array $Resources = array();
 
 	/**
 	 * @access private
@@ -64,8 +64,8 @@ class ResourceRegistry
 	 *
 	 * @return resource | bool
 	 */
-	public static function CreateMemoryResource($iMemoryMaxInMb = 5)
-	{
+	public static function CreateMemoryResource(int $iMemoryMaxInMb = 5)
+	: bool {
 		self::regResourcesShutdownFunc();
 
 		$oResult = @\fopen('php://temp/maxmemory:'.($iMemoryMaxInMb * 1024 * 1024), 'r+b');
@@ -84,7 +84,7 @@ class ResourceRegistry
 	 *
 	 * @return resource | bool
 	 */
-	public static function CreateMemoryResourceFromString($sString)
+	public static function CreateMemoryResourceFromString(string $sString)
 	{
 		$oResult = self::CreateMemoryResource();
 		if (\is_resource($oResult))

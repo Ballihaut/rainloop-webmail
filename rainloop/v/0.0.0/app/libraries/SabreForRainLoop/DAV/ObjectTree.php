@@ -25,7 +25,7 @@ class ObjectTree extends Tree {
      *
      * @var array
      */
-    protected $cache = array();
+    protected array $cache = array();
 
     /**
      * Creates the object
@@ -84,7 +84,7 @@ class ObjectTree extends Tree {
      * @param string $path
      * @return bool
      */
-    public function nodeExists($path) {
+    public function nodeExists($path) : bool {
 
         try {
 

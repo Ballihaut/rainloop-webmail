@@ -73,7 +73,7 @@ class FacebookClient
     /**
      * @var bool Toggle to use Graph beta url.
      */
-    protected $enableBetaMode = false;
+    protected bool $enableBetaMode = false;
 
     /**
      * @var FacebookHttpClientInterface HTTP client handler.
@@ -83,7 +83,7 @@ class FacebookClient
     /**
      * @var int The number of calls that have been made to Graph.
      */
-    public static $requestCount = 0;
+    public static int $requestCount = 0;
 
     /**
      * Instantiates a new FacebookClient object.
@@ -132,7 +132,7 @@ class FacebookClient
      *
      * @param boolean $betaMode
      */
-    public function enableBetaMode($betaMode = true)
+    public function enableBetaMode(bool $betaMode = true)
     {
         $this->enableBetaMode = $betaMode;
     }
@@ -144,7 +144,7 @@ class FacebookClient
      *
      * @return string
      */
-    public function getBaseGraphUrl($postToVideoUrl = false)
+    public function getBaseGraphUrl(bool $postToVideoUrl = false)
     {
         if ($postToVideoUrl) {
             return $this->enableBetaMode ? static::BASE_GRAPH_VIDEO_URL_BETA : static::BASE_GRAPH_VIDEO_URL;
@@ -161,7 +161,7 @@ class FacebookClient
      * @return array
      */
     public function prepareRequestMessage(FacebookRequest $request)
-    {
+    : array {
         $postToVideoUrl = $request->containsVideoUploads();
         $url = $this->getBaseGraphUrl($postToVideoUrl) . $request->getUrl();
 

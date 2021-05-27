@@ -20,7 +20,7 @@ use Predis\Command\CommandInterface;
  */
 class ProcessorChain implements \ArrayAccess, ProcessorInterface
 {
-    private $processors = array();
+    private array $processors = array();
 
     /**
      * @param array $processors List of instances of ProcessorInterface.
@@ -84,7 +84,7 @@ class ProcessorChain implements \ArrayAccess, ProcessorInterface
      * @return int
      */
     public function count()
-    {
+    : int {
         return count($this->processors);
     }
 

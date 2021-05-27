@@ -24,7 +24,7 @@ final class Bucket implements \Countable
     /**
      * @var integer
      */
-    private $count;
+    private int $count;
 
     /**
      * @param Range   $range

@@ -21,7 +21,7 @@ class Inline extends \MailSo\Log\Driver
 	/**
 	 * @var bool
 	 */
-	private $bHtmlEncodeSpecialChars;
+	private bool $bHtmlEncodeSpecialChars;
 
 	/**
 	 * @access protected
@@ -43,7 +43,7 @@ class Inline extends \MailSo\Log\Driver
 	 *
 	 * @return \MailSo\Log\Drivers\Inline
 	 */
-	public static function NewInstance($sNewLine = "\r\n", $bHtmlEncodeSpecialChars = false)
+	public static function NewInstance(string $sNewLine = "\r\n", bool $bHtmlEncodeSpecialChars = false)
 	{
 		return new self($sNewLine, $bHtmlEncodeSpecialChars);
 	}
@@ -54,12 +54,12 @@ class Inline extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	protected function writeImplementation($mDesc)
-	{
+	: bool {
 		if (\is_array($mDesc))
 		{
 			if ($this->bHtmlEncodeSpecialChars)
 			{
-				$mDesc = \array_map(function ($sItem) {
+				$mDesc = \array_map(function (string $sItem) : string {
 					return \htmlspecialchars($sItem);
 				}, $mDesc);
 			}
@@ -78,7 +78,7 @@ class Inline extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	protected function clearImplementation()
-	{
+	: bool {
 		if (\defined('PHP_SAPI') && 'cli' === PHP_SAPI && \MailSo\Base\Utils::FunctionExistsAndEnabled('system'))
 		{
 			\system('clear');

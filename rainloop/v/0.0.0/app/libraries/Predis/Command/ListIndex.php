@@ -22,7 +22,7 @@ class ListIndex extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LINDEX';
     }
 }

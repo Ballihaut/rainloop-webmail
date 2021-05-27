@@ -22,7 +22,7 @@ class ZSetRemoveRangeByScore extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREMRANGEBYSCORE';
     }
 }

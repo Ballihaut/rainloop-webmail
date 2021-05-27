@@ -22,7 +22,7 @@ class HashSet extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HSET';
     }
 

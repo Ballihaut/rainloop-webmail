@@ -37,7 +37,7 @@ class ParameterCollection extends \MailSo\Base\Collection
 	 *
 	 * @return \MailSo\Mime\ParameterCollection
 	 */
-	public static function NewInstance($sRawParams = '')
+	public static function NewInstance(string $sRawParams = '')
 	{
 		return new self($sRawParams);
 	}
@@ -60,7 +60,7 @@ class ParameterCollection extends \MailSo\Base\Collection
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
 	public function SetAsArray($aList)
-	{
+	: self {
 		parent::SetAsArray($aList);
 
 		return $this;
@@ -71,7 +71,7 @@ class ParameterCollection extends \MailSo\Base\Collection
 	 *
 	 * @return string
 	 */
-	public function ParameterValueByName($sName)
+	public function ParameterValueByName(string $sName)
 	{
 		$sResult = '';
 		$sName = \trim($sName);
@@ -94,8 +94,8 @@ class ParameterCollection extends \MailSo\Base\Collection
 	 *
 	 * @return \MailSo\Mime\ParameterCollection
 	 */
-	public function Parse($sRawParams)
-	{
+	public function Parse(string $sRawParams)
+	: self {
 		$this->Clear();
 
 		$aDataToParse = \explode(';', $sRawParams);
@@ -115,8 +115,8 @@ class ParameterCollection extends \MailSo\Base\Collection
 	 *
 	 * @return string
 	 */
-	public function ToString($bConvertSpecialsName = false)
-	{
+	public function ToString(bool $bConvertSpecialsName = false)
+	: string {
 		$aResult = array();
 		$aParams =& $this->GetAsArray();
 		foreach ($aParams as /* @var $oParam \MailSo\Mime\Parameter */ $oParam)

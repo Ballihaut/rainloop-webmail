@@ -22,7 +22,7 @@ class ServerSlowlog extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SLOWLOG';
     }
 
@@ -30,7 +30,7 @@ class ServerSlowlog extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         if (is_array($data)) {
             $log = array();
 

@@ -6,7 +6,7 @@ class OC_RainLoop_Helper
 	 * @return string
 	 */
 	public static function getAppUrl()
-	{
+	: string {
 		if (class_exists('\\OCP\\Util'))
 		{
 			return OCP\Util::linkToRoute('rainloop_app');
@@ -26,7 +26,7 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function getSsoHash($sPath, $sEmail, $sPassword)
+	public static function getSsoHash(string $sPath, $sEmail, $sPassword)
 	{
 		$SsoHash = '';
 
@@ -52,7 +52,7 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function normalizeUrl($sUrl)
+	public static function normalizeUrl(string $sUrl)
 	{
 		$sUrl = rtrim(trim($sUrl), '/\\');
 		if ('.php' !== strtolower(substr($sUrl, -4)))
@@ -67,7 +67,7 @@ class OC_RainLoop_Helper
 	 * @return boolean
 	 */
 	public static function mcryptSupported()
-	{
+	: bool {
 		return function_exists('mcrypt_encrypt') &&
 			function_exists('mcrypt_decrypt') &&
 			defined('MCRYPT_RIJNDAEL_256') &&
@@ -96,8 +96,8 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function encodePasswordSsl($sMethod, $sPassword, $sSalt)
-	{
+	public static function encodePasswordSsl(string $sMethod, string $sPassword, string $sSalt)
+	: string {
 		$sData = base64_encode($sPassword);
 
 		$iv = @openssl_random_pseudo_bytes(openssl_cipher_iv_length($sMethod));
@@ -113,7 +113,7 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function decodePasswordSsl($sMethod, $sPassword, $sSalt)
+	public static function decodePasswordSsl(string $sMethod, string $sPassword, string $sSalt)
 	{
 		$sLine = base64_decode(trim($sPassword));
 		$aParts = explode('|', $sLine, 2);
@@ -137,8 +137,8 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function encodePassword($sPassword, $sSalt)
-	{
+	public static function encodePassword(string $sPassword, string $sSalt)
+	: string {
 		$method = self::openSslSupportedMethod();
 		if ($method)
 		{
@@ -160,7 +160,7 @@ class OC_RainLoop_Helper
 	 *
 	 * @return string
 	 */
-	public static function decodePassword($sPassword, $sSalt)
+	public static function decodePassword(string $sPassword, string $sSalt)
 	{
 		$method = self::openSslSupportedMethod();
 		if ($method)
@@ -183,7 +183,7 @@ class OC_RainLoop_Helper
 	 * @return boolean
 	 */
 	public static function login($aParams)
-	{
+	: bool {
 		if (isset($aParams['uid'], $aParams['password']))
 		{
 			$sUser = $aParams['uid'];
@@ -199,7 +199,7 @@ class OC_RainLoop_Helper
 	}
 
 	public static function logout()
-	{
+	: bool {
 		OCP\Config::setUserValue(
 			OCP\User::getUser(), 'rainloop', 'rainloop-autologin-password', '');
 
@@ -221,7 +221,7 @@ class OC_RainLoop_Helper
 	}
 
 	public static function changePassword($aParams)
-	{
+	: bool {
 		if (isset($aParams['uid'], $aParams['password']))
 		{
 			$sUser = $aParams['uid'];
@@ -271,7 +271,7 @@ class OC_RainLoop_Helper
 		}
 	}
 
-	public static function mimeContentType($filename) {
+	public static function mimeContentType(string $filename) : string {
 
         $mime_types = array(
 

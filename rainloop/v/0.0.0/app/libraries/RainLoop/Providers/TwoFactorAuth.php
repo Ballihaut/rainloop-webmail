@@ -34,8 +34,8 @@ class TwoFactorAuth extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return string
 	 */
-	public function GetQRCodeGoogleUrl($sName, $sSecret, $sTitle = '')
-	{
+	public function GetQRCodeGoogleUrl(string $sName, $sSecret, string $sTitle = '')
+	: string {
 		$sUrl = sprintf('otpauth://%s/%s?secret=%s&issuer=%s', 'totp', urlencode($sName), $sSecret, urlencode($sTitle));
 		return 'https://chart.googleapis.com/chart?chs=200x200&chld=M|0&cht=qr&chl='.\urlencode($sUrl);
 	}

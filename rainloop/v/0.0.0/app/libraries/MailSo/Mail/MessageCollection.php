@@ -20,62 +20,62 @@ class MessageCollection extends \MailSo\Base\Collection
 	/**
 	 * @var string
 	 */
-	public $FolderHash;
+	public string $FolderHash;
 
 	/**
 	 * @var int
 	 */
-	public $MessageCount;
+	public int $MessageCount;
 
 	/**
 	 * @var int
 	 */
-	public $MessageUnseenCount;
+	public int $MessageUnseenCount;
 
 	/**
 	 * @var int
 	 */
-	public $MessageResultCount;
+	public int $MessageResultCount;
 
 	/**
 	 * @var string
 	 */
-	public $FolderName;
+	public string $FolderName;
 
 	/**
 	 * @var int
 	 */
-	public $Offset;
+	public int $Offset;
 
 	/**
 	 * @var int
 	 */
-	public $Limit;
+	public int $Limit;
 
 	/**
 	 * @var string
 	 */
-	public $Search;
+	public string $Search;
 
 	/**
 	 * @var string
 	 */
-	public $UidNext;
+	public string $UidNext;
 
 	/**
 	 * @var string
 	 */
-	public $ThreadUid;
+	public string $ThreadUid;
 
 	/**
 	 * @var array
 	 */
-	public $NewMessages;
+	public array $NewMessages;
 
 	/**
 	 * @var bool
 	 */
-	public $Filtered;
+	public bool $Filtered;
 
 	/**
 	 * @access protected
@@ -99,7 +99,7 @@ class MessageCollection extends \MailSo\Base\Collection
 	 * @return \MailSo\Mail\MessageCollection
 	 */
 	public function Clear()
-	{
+	: self {
 		parent::Clear();
 
 		$this->FolderHash = '';

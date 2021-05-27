@@ -21,12 +21,12 @@ final class Point implements PointInterface
     /**
      * @var integer
      */
-    private $x;
+    private int $x;
 
     /**
      * @var integer
      */
-    private $y;
+    private int $y;
 
     /**
      * Constructs a point of coordinates
@@ -66,7 +66,7 @@ final class Point implements PointInterface
      * {@inheritdoc}
      */
     public function in(BoxInterface $box)
-    {
+    : bool {
         return $this->x < $box->getWidth() && $this->y < $box->getHeight();
     }
 

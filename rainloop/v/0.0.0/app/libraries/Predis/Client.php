@@ -193,7 +193,7 @@ class Client implements ClientInterface
      *
      * @return Client
      */
-    public function getClientFor($connectionID)
+    public function getClientFor(string $connectionID)
     {
         if (!$connection = $this->getConnectionById($connectionID)) {
             throw new \InvalidArgumentException("Invalid connection ID: $connectionID.");

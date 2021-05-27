@@ -22,7 +22,7 @@ class KeyMove extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'MOVE';
     }
 

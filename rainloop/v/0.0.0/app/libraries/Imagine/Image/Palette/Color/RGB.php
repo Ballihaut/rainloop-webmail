@@ -19,22 +19,22 @@ final class RGB implements ColorInterface
     /**
      * @var integer
      */
-    private $r;
+    private int $r;
 
     /**
      * @var integer
      */
-    private $g;
+    private int $g;
 
     /**
      * @var integer
      */
-    private $b;
+    private int $b;
 
     /**
      * @var integer
      */
-    private $alpha;
+    private int $alpha;
 
     /**
      *
@@ -162,7 +162,7 @@ final class RGB implements ColorInterface
      * {@inheritdoc}
      */
     public function isOpaque()
-    {
+    : bool {
         return 100 === $this->alpha;
     }
 

@@ -14,7 +14,7 @@
 class tmhOAuth {
   const VERSION = '0.7.5';
 
-  var $response = array();
+  var array $response = array();
 
   /**
    * Creates a new tmhOAuth object
@@ -118,7 +118,7 @@ class tmhOAuth {
    * @param string $include_time whether to include time at the beginning of the nonce. default true
    * @return void value is stored to the config array class variable
    */
-  private function create_nonce($length=12, $include_time=true) {
+  private function create_nonce($length=12, bool $include_time=true) {
     if ($this->config['force_nonce'] == false) {
       $sequence = array_merge(range(0,9), range('A','Z'), range('a','z'));
       $length = $length > count($sequence) ? count($sequence) : $length;
@@ -209,7 +209,7 @@ class tmhOAuth {
    * @param string $body the response body from an OAuth flow method
    * @return array the response body safely decoded to an array of key => values
    */
-  public function extract_params($body) {
+  public function extract_params(string $body) : array {
     $kvs = explode('&', $body);
     $decoded = array();
     foreach ($kvs as $kv) {
@@ -228,7 +228,7 @@ class tmhOAuth {
    * @param string $method an HTTP method such as GET or POST
    * @return void value is stored to the class variable 'method'
    */
-  private function prepare_method($method) {
+  private function prepare_method(string $method) {
     $this->method = strtoupper($method);
   }
 
@@ -241,7 +241,7 @@ class tmhOAuth {
    * @param string $url the request URL
    * @return void value is stored to the class variable 'url'
    */
-  private function prepare_url($url) {
+  private function prepare_url(string $url) {
     $parts = parse_url($url);
 
     $port   = isset($parts['port']) ? $parts['port'] : false;
@@ -422,7 +422,7 @@ class tmhOAuth {
    * @param array $headers any custom headers to send with the request. Default empty array
    * @return int the http response code for the request. 0 is returned if a connection could not be made
    */
-  public function request($method, $url, $params=array(), $useauth=true, $multipart=false, $headers=array()) {
+  public function request($method, $url, array $params=array(), bool $useauth=true, bool $multipart=false, array $headers=array()) : int {
     // reset the request headers (we don't want to reuse them)
     $this->headers = array();
     $this->custom_headers = $headers;
@@ -453,7 +453,7 @@ class tmhOAuth {
    * @param string $callback the callback function to stream the buffer to.
    * @return void
    */
-  public function streaming_request($method, $url, $params=array(), $callback='') {
+  public function streaming_request($method, $url, array $params=array(), $callback='') : bool {
     if ( ! empty($callback) ) {
       if ( ! is_callable($callback) ) {
         return false;
@@ -475,7 +475,7 @@ class tmhOAuth {
    *
    * @return array the metrics for the streaming api connection
    */
-  private function update_metrics() {
+  private function update_metrics() : bool {
     $now = time();
     if (($this->metrics['interval_start'] + $this->config['streaming_metrics_interval']) > $now)
       return false;
@@ -496,7 +496,7 @@ class tmhOAuth {
    * @param string $format the format of the response. Default json. Set to an empty string to exclude the format
    * @return string the concatenation of the host, API version, API method and format
    */
-  public function url($request, $format='json') {
+  public function url($request, string $format='json') : string {
     $format = strlen($format) > 0 ? ".$format" : '';
     $proto  = $this->config['use_ssl'] ? 'https:/' : 'http:/';
 
@@ -524,7 +524,7 @@ class tmhOAuth {
    * @param string $mode the transformation mode. either encode or decode
    * @return string $text transformed by the given $mode
    */
-  public function transformText($text, $mode='encode') {
+  public function transformText($text, string $mode='encode') {
     return $this->{"safe_$mode"}($text);
   }
 
@@ -536,7 +536,7 @@ class tmhOAuth {
    * @param string $header the response headers
    * @return string the length of the header
    */
-  private function curlHeader($ch, $header) {
+  private function curlHeader($ch, string $header) : int {
     $this->response['raw'] .= $header;
 
     list($key, $value) = array_pad(explode(':', $header, 2), 2, null);
@@ -567,7 +567,7 @@ class tmhOAuth {
     * @param string $data the current curl buffer
     * @return int the length of the data string processed in this function
     */
-  private function curlWrite($ch, $data) {
+  private function curlWrite($ch, string $data) : int {
     $l = strlen($data);
     if (strpos($data, $this->config['streaming_eol']) === false) {
       $this->buffer .= $data;

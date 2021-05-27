@@ -21,9 +21,9 @@ use Predis\NotSupportedException;
  */
 class ReplicationStrategy
 {
-    protected $disallowed;
-    protected $readonly;
-    protected $readonlySHA1;
+    protected array $disallowed;
+    protected array $readonly;
+    protected array $readonlySHA1;
 
     /**
      *
@@ -114,7 +114,7 @@ class ReplicationStrategy
      * @param string $commandID Command ID.
      * @param mixed  $readonly  A boolean value or a callable object.
      */
-    public function setCommandReadOnly($commandID, $readonly = true)
+    public function setCommandReadOnly($commandID, bool $readonly = true)
     {
         $commandID = strtoupper($commandID);
 
@@ -135,7 +135,7 @@ class ReplicationStrategy
      * @param string $script   Body of the Lua script.
      * @param mixed  $readonly A boolean value or a callable object.
      */
-    public function setScriptReadOnly($script, $readonly = true)
+    public function setScriptReadOnly(string $script, bool $readonly = true)
     {
         $sha1 = sha1($script);
 
@@ -152,7 +152,7 @@ class ReplicationStrategy
      * @return array
      */
     protected function getDisallowedOperations()
-    {
+    : array {
         return array(
             'SHUTDOWN' => true,
             'INFO' => true,
@@ -174,7 +174,7 @@ class ReplicationStrategy
      * @return array
      */
     protected function getReadOnlyOperations()
-    {
+    : array {
         return array(
             'EXISTS' => true,
             'TYPE' => true,

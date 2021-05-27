@@ -31,7 +31,7 @@ class DateTime extends Property {
      *
      * @var string|null
      */
-    public $delimiter = ',';
+    public string $delimiter = ',';
 
     /**
      * Sets a multi-valued property.
@@ -93,7 +93,7 @@ class DateTime extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    public function getRawMimeDirValue() : string {
 
         return implode($this->delimiter, $this->getParts());
 
@@ -104,7 +104,7 @@ class DateTime extends Property {
      *
      * @return bool
      */
-    public function hasTime() {
+    public function hasTime() : bool {
 
         return strtoupper((string)$this['VALUE']) !== 'DATE';
 
@@ -157,7 +157,7 @@ class DateTime extends Property {
      * @param bool isFloating If set to true, timezones will be ignored.
      * @return void
      */
-    public function setDateTime(\DateTime $dt, $isFloating = false) {
+    public function setDateTime(\DateTime $dt, bool $isFloating = false) {
 
         $this->setDateTimes(array($dt), $isFloating);
 
@@ -173,7 +173,7 @@ class DateTime extends Property {
      * @param bool isFloating If set to true, timezones will be ignored.
      * @return void
      */
-    public function setDateTimes(array $dt, $isFloating = false) {
+    public function setDateTimes(array $dt, bool $isFloating = false) {
 
         $values = array();
 
@@ -253,7 +253,7 @@ class DateTime extends Property {
         $tz = $dts[0]->getTimeZone();
         $isUtc = in_array($tz->getName() , array('UTC', 'GMT', 'Z'));
 
-        return array_map(function($dt) use ($hasTime, $isUtc) {
+        return array_map(function($dt) use ($hasTime, $isUtc) : string {
 
             if ($hasTime) {
                 return $dt->format('Y-m-d\\TH:i:s') . ($isUtc?'Z':'');
@@ -279,7 +279,7 @@ class DateTime extends Property {
         // iCalendar. In jCal date-parts are separated by dashes, and
         // time-parts are separated by colons. It makes sense to just remove
         // those.
-        $this->setValue(array_map(function($item) {
+        $this->setValue(array_map(function(string $item) : string {
 
             return strtr($item, array(':'=>'', '-'=>''));
 

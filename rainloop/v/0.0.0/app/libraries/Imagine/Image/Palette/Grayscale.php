@@ -32,7 +32,7 @@ class Grayscale implements PaletteInterface
     /**
      * @var array
      */
-    protected static $colors = array();
+    protected static array $colors = array();
 
     public function __construct()
     {
@@ -51,7 +51,7 @@ class Grayscale implements PaletteInterface
      * {@inheritdoc}
      */
     public function pixelDefinition()
-    {
+    : array {
         return array(ColorInterface::COLOR_GRAY);
     }
 
@@ -59,7 +59,7 @@ class Grayscale implements PaletteInterface
      * {@inheritdoc}
      */
     public function supportsAlpha()
-    {
+    : bool {
         return true;
     }
 
@@ -67,7 +67,7 @@ class Grayscale implements PaletteInterface
      * {@inheritdoc}
      */
     public function useProfile(ProfileInterface $profile)
-    {
+    : self {
         $this->profile = $profile;
 
         return $this;
@@ -89,7 +89,7 @@ class Grayscale implements PaletteInterface
      * {@inheritdoc}
      */
     public function color($color, $alpha = null)
-    {
+    : string {
         if (null === $alpha) {
             $alpha = 0;
         }

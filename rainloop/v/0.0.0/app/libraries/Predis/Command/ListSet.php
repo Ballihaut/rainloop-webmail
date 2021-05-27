@@ -22,7 +22,7 @@ class ListSet extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LSET';
     }
 }

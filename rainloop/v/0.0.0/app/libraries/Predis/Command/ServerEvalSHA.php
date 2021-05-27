@@ -22,7 +22,7 @@ class ServerEvalSHA extends ServerEval
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'EVALSHA';
     }
 
@@ -32,7 +32,7 @@ class ServerEvalSHA extends ServerEval
      * @return string SHA1 hash.
      */
     public function getScriptHash()
-    {
+    : int {
         return $this->getArgument(0);
     }
 }

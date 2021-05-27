@@ -73,7 +73,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'auth';
 

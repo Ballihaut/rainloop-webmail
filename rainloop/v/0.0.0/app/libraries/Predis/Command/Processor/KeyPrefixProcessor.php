@@ -23,7 +23,7 @@ use Predis\Command\PrefixableCommandInterface;
 class KeyPrefixProcessor implements ProcessorInterface
 {
     private $prefix;
-    private $commands;
+    private array $commands;
 
     /**
      * @param string $prefix Prefix for the keys.
@@ -243,7 +243,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function first(CommandInterface $command, $prefix)
+    public static function first(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $arguments[0] = "$prefix{$arguments[0]}";
@@ -257,7 +257,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function all(CommandInterface $command, $prefix)
+    public static function all(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             foreach ($arguments as &$key) {
@@ -274,7 +274,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function interleaved(CommandInterface $command, $prefix)
+    public static function interleaved(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $length = count($arguments);
@@ -293,7 +293,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function skipFirst(CommandInterface $command, $prefix)
+    public static function skipFirst(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $length = count($arguments);
@@ -312,7 +312,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function skipLast(CommandInterface $command, $prefix)
+    public static function skipLast(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $length = count($arguments);
@@ -331,7 +331,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function sort(CommandInterface $command, $prefix)
+    public static function sort(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $arguments[0] = "$prefix{$arguments[0]}";
@@ -368,7 +368,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function evalKeys(CommandInterface $command, $prefix)
+    public static function evalKeys(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             for ($i = 2; $i < $arguments[1] + 2; ++$i) {
@@ -385,7 +385,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function zsetStore(CommandInterface $command, $prefix)
+    public static function zsetStore(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $arguments[0] = "$prefix{$arguments[0]}";
@@ -405,7 +405,7 @@ class KeyPrefixProcessor implements ProcessorInterface
      * @param CommandInterface $command Command instance.
      * @param string           $prefix  Prefix string.
      */
-    public static function migrate(CommandInterface $command, $prefix)
+    public static function migrate(CommandInterface $command, string $prefix)
     {
         if ($arguments = $command->getArguments()) {
             $arguments[2] = "$prefix{$arguments[2]}";

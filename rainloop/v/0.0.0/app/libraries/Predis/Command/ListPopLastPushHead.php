@@ -22,7 +22,7 @@ class ListPopLastPushHead extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'RPOPLPUSH';
     }
 }

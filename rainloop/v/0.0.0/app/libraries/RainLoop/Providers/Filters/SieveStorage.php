@@ -49,7 +49,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 * @return array
 	 */
 	public function Load($oAccount, $bAllowRaw = false)
-	{
+	: array {
 		$sRaw = '';
 
 		$bBasicIsActive = false;
@@ -116,7 +116,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 * @return bool
 	 */
 	public function Save($oAccount, $aFilters, $sRaw = '', $bRawIsActive = false)
-	{
+	: bool {
 		$oSieveClient = \MailSo\Sieve\ManageSieveClient::NewInstance()->SetLogger($this->oLogger);
 		$oSieveClient->SetTimeOuts(10, (int) \RainLoop\Api::Config()->Get('labs', 'sieve_timeout', 10));
 
@@ -236,7 +236,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 				)) && false !== \strpos($sValue, ','))
 				{
 					$self = $this;
-					$aValue = \array_map(function ($sValue) use ($self) {
+					$aValue = \array_map(function (string $sValue) use ($self) : string {
 						return '"'.$self->quote(\trim($sValue)).'"';
 					}, \explode(',', $sValue));
 
@@ -269,7 +269,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 * @return string
 	 */
 	private function filterToSieveScript($oFilter, &$aCapa)
-	{
+	: string {
 		$sNL = \RainLoop\Providers\Filters\SieveStorage::NEW_LINE;
 		$sTab = '    ';
 
@@ -383,7 +383,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 						$self = $this;
 
 						$aAddresses = \explode(',', $sValueFourth);
-						$aAddresses = \array_filter(\array_map(function ($sEmail) use ($self) {
+						$aAddresses = \array_filter(\array_map(function (string $sEmail) use ($self) {
 							$sEmail = \trim($sEmail);
 							return 0 < \strlen($sEmail) ? '"'.$self->quote($sEmail).'"' : '';
 						}, $aAddresses), 'strlen');
@@ -473,8 +473,8 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 *
 	 * @return string
 	 */
-	private function collectionToFileString($aFilters)
-	{
+	private function collectionToFileString(iterable $aFilters)
+	: string {
 		$sNL = \RainLoop\Providers\Filters\SieveStorage::NEW_LINE;
 
 		$aCapa = array();
@@ -514,7 +514,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 *
 	 * @return array
 	 */
-	private function fileStringToCollection($sFileString)
+	private function fileStringToCollection(string $sFileString)
 	{
 		$aResult = array();
 		if (!empty($sFileString) && false !== \strpos($sFileString, 'RAINLOOP:SIEVE'))
@@ -549,7 +549,7 @@ class SieveStorage implements \RainLoop\Providers\Filters\FiltersInterface
 	 *
 	 * @return string
 	 */
-	public function quote($sValue)
+	public function quote(string $sValue)
 	{
 		return \str_replace(array('\\', '"'), array('\\\\', '\\"'), \trim($sValue));
 	}

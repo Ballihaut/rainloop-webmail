@@ -20,22 +20,22 @@ class Folder
 	/**
 	 * @var string
 	 */
-	private $sParentFullNameRaw;
+	private string $sParentFullNameRaw;
 
 	/**
 	 * @var int
 	 */
-	private $iNestingLevel;
+	private int $iNestingLevel;
 
 	/**
 	 * @var bool
 	 */
-	private $bExisten;
+	private bool $bExisten;
 
 	/**
 	 * @var bool
 	 */
-	private $bSubscribed;
+	private bool $bSubscribed;
 
 	/**
 	 * @var \MailSo\Imap\Folder
@@ -91,7 +91,7 @@ class Folder
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public static function NewInstance($oImapFolder, $bSubscribed = true, $bExisten = true)
+	public static function NewInstance($oImapFolder, bool $bSubscribed = true, bool $bExisten = true)
 	{
 		return new self($oImapFolder, $bSubscribed, $bExisten);
 	}
@@ -193,7 +193,7 @@ class Folder
 	 * @param bool $bCreateIfNull = false
 	 * @return \MailSo\Mail\FolderCollection
 	 */
-	public function SubFolders($bCreateIfNull = false)
+	public function SubFolders(bool $bCreateIfNull = false)
 	{
 		if ($bCreateIfNull && !$this->oSubFolders)
 		{
@@ -207,7 +207,7 @@ class Folder
 	 * @return bool
 	 */
 	public function HasSubFolders()
-	{
+	: bool {
 		return $this->oSubFolders && 0 < $this->oSubFolders->Count();
 	}
 
@@ -215,7 +215,7 @@ class Folder
 	 * @return bool
 	 */
 	public function HasVisibleSubFolders()
-	{
+	: bool {
 		$sList = array();
 		if ($this->oSubFolders)
 		{
@@ -247,7 +247,7 @@ class Folder
 	 * @return bool
 	 */
 	public function IsSelectable()
-	{
+	: bool {
 		return $this->IsExists() && $this->oImapFolder->IsSelectable();
 	}
 

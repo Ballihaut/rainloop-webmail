@@ -22,7 +22,7 @@ class ServerSentinel extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SENTINEL';
     }
 
@@ -30,7 +30,7 @@ class ServerSentinel extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         switch (strtolower($this->getArgument(0))) {
             case 'masters':
             case 'slaves':
@@ -49,7 +49,7 @@ class ServerSentinel extends Command
      * @return array
      */
     protected static function processMastersOrSlaves(array $servers)
-    {
+    : array {
         foreach ($servers as $idx => $node) {
             $processed = array();
             $count = count($node);

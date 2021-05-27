@@ -66,7 +66,7 @@ class Service
 	 * @return bool
 	 */
 	public function RunResult()
-	{
+	: bool {
 		return true;
 	}
 
@@ -95,7 +95,7 @@ class Service
 	 * @return \RainLoop\Service
 	 */
 	private function localHandle()
-	{
+	: self {
 		if (!\class_exists('MailSo\Version'))
 		{
 			return $this;
@@ -282,7 +282,7 @@ class Service
 	 *
 	 * @return array
 	 */
-	private function indexTemplateParameters($bAdmin = false, $bMobile = false, $bMobileDevice = false)
+	private function indexTemplateParameters(bool $bAdmin = false, bool $bMobile = false, bool $bMobileDevice = false)
 	{
 		$sLanguage = 'en';
 		$sTheme = 'Default';

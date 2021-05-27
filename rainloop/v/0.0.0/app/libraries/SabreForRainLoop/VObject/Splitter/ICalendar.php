@@ -27,14 +27,14 @@ class ICalendar implements SplitterInterface {
      *
      * @var array
      */
-    protected $vtimezones = array();
+    protected array $vtimezones = array();
 
     /**
      * iCalendar objects
      *
      * @var array
      */
-    protected $objects = array();
+    protected array $objects = array();
 
     /**
      * Constructor

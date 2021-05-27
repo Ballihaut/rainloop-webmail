@@ -60,7 +60,7 @@ class Node extends DAV\File implements INode, DAVACL\IACL {
      *
      * @return id
      */
-    public function getName() {
+    public function getName() : string {
 
         return $this->notification->getId() . '.xml';
 
@@ -140,7 +140,7 @@ class Node extends DAV\File implements INode, DAVACL\IACL {
      *
      * @return array
      */
-    public function getACL() {
+    public function getACL() : array {
 
         return array(
             array(

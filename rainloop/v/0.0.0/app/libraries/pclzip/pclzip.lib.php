@@ -190,21 +190,21 @@
   class PclZip
   {
     // ----- Filename of the zip file
-    var $zipname = '';
+    var string $zipname = '';
 
     // ----- File descriptor of the zip file
     var $zip_fd = 0;
 
     // ----- Internal error handling
-    var $error_code = 1;
-    var $error_string = '';
+    var int $error_code = 1;
+    var string $error_string = '';
 
     // ----- Current status of the magic_quotes_runtime
     // This value store the php configuration for magic_quotes
     // The class can then disable the magic_quotes and reset it after
     var $magic_quotes_status;
 
-    var $bUseGzopen64;
+    var bool $bUseGzopen64;
 
   // --------------------------------------------------------------------------------
   // Function : PclZip()
@@ -273,7 +273,7 @@
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
   function create($p_filelist)
-  {
+  : int {
     $v_result=1;
 
     // ----- Reset the error handler
@@ -456,7 +456,7 @@
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
   function add($p_filelist)
-  {
+  : int {
     $v_result=1;
 
     // ----- Reset the error handler
@@ -702,7 +702,7 @@
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
   function extract()
-  {
+  : int {
     $v_result=1;
 
     // ----- Reset the error handler
@@ -859,7 +859,7 @@
   // --------------------------------------------------------------------------------
   //function extractByIndex($p_index, options...)
   function extractByIndex($p_index)
-  {
+  : int {
     $v_result=1;
 
     // ----- Reset the error handler
@@ -1008,7 +1008,7 @@
   //   (see PclZip::listContent() for list entry format)
   // --------------------------------------------------------------------------------
   function delete()
-  {
+  : int {
     $v_result=1;
 
     // ----- Reset the error handler
@@ -1091,7 +1091,7 @@
   //   An array with the archive properties.
   // --------------------------------------------------------------------------------
   function properties()
-  {
+  : int {
 
     // ----- Reset the error handler
     $this->privErrorReset();
@@ -1289,7 +1289,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function errorName($p_with_code=false)
+  function errorName(bool $p_with_code=false)
   {
     $v_name = array ( PCLZIP_ERR_NO_ERROR => 'PCLZIP_ERR_NO_ERROR',
                       PCLZIP_ERR_WRITE_OPEN_FAIL => 'PCLZIP_ERR_WRITE_OPEN_FAIL',
@@ -1335,7 +1335,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function errorInfo($p_full=false)
+  function errorInfo(bool $p_full=false)
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
       return(PclErrorString());
@@ -1374,7 +1374,7 @@
   //   true on success,
   //   false on error, the error code is set.
   // --------------------------------------------------------------------------------
-  function privCheckFormat($p_level=0)
+  function privCheckFormat(int $p_level=0)
   {
     $v_result = true;
 
@@ -2339,7 +2339,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function privOpenFd($p_mode)
+  function privOpenFd(string $p_mode)
   {
     $v_result=1;
 
@@ -3132,7 +3132,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privWriteCentralHeader($p_nb_entries, $p_size, $p_offset, $p_comment)
+  function privWriteCentralHeader($p_nb_entries, $p_size, $p_offset, string $p_comment)
   {
     $v_result=1;
 
@@ -3287,7 +3287,7 @@
   // Return Values :
   //   1 on success,0 or less on error (see error code list)
   // --------------------------------------------------------------------------------
-  function privExtractByRule(&$p_file_list, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
+  function privExtractByRule(&$p_file_list, string $p_path, string $p_remove_path, $p_remove_all_path, &$p_options)
   {
     $v_result=1;
 
@@ -3627,7 +3627,7 @@
   // 1 : ... ?
   // PCLZIP_ERR_USER_ABORTED(2) : User ask for extraction stop in callback
   // --------------------------------------------------------------------------------
-  function privExtractFile(&$p_entry, $p_path, $p_remove_path, $p_remove_all_path, &$p_options)
+  function privExtractFile(&$p_entry, string $p_path, string $p_remove_path, $p_remove_all_path, &$p_options)
   {
     $v_result=1;
 
@@ -5015,8 +5015,8 @@
   //    1 : OK
   //   -1 : Unable to create directory
   // --------------------------------------------------------------------------------
-  function privDirCheck($p_dir, $p_is_dir=false)
-  {
+  function privDirCheck(string $p_dir, bool $p_is_dir=false)
+  : int {
     $v_result = 1;
 
 
@@ -5255,7 +5255,7 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function privDuplicate($p_archive_filename)
+  function privDuplicate(string $p_archive_filename)
   {
     $v_result=1;
 
@@ -5315,7 +5315,7 @@
   // Description :
   // Parameters :
   // --------------------------------------------------------------------------------
-  function privErrorLog($p_error_code=0, $p_error_string='')
+  function privErrorLog(int $p_error_code=0, string $p_error_string='')
   {
     if (PCLZIP_ERROR_EXTERNAL == 1) {
       PclError($p_error_code, $p_error_string);
@@ -5419,8 +5419,8 @@
   // Parameters :
   // Return Values :
   // --------------------------------------------------------------------------------
-  function PclZipUtilPathReduction($p_dir)
-  {
+  function PclZipUtilPathReduction(string $p_dir)
+  : string {
     $v_result = "";
 
     // ----- Look for not empty path
@@ -5500,7 +5500,7 @@
   //   1 if $p_path is inside directory $p_dir
   //   2 if $p_path is exactly the same as $p_dir
   // --------------------------------------------------------------------------------
-  function PclZipUtilPathInclusion($p_dir, $p_path)
+  function PclZipUtilPathInclusion(string $p_dir, string $p_path)
   {
     $v_result = 1;
 
@@ -5577,7 +5577,7 @@
   //             3 : src & dest gzip
   // Return Values :
   // --------------------------------------------------------------------------------
-  function PclZipUtilCopyBlock($p_src, $p_dest, $p_size, $p_mode=0)
+  function PclZipUtilCopyBlock($p_src, $p_dest, int $p_size, int $p_mode=0)
   {
     $v_result = 1;
 
@@ -5639,7 +5639,7 @@
   // Return Values :
   //   1 on success, 0 on failure.
   // --------------------------------------------------------------------------------
-  function PclZipUtilRename($p_src, $p_dest)
+  function PclZipUtilRename(string $p_src, string $p_dest)
   {
     $v_result = 1;
 
@@ -5700,7 +5700,7 @@
   // Return Values :
   //   The path translated.
   // --------------------------------------------------------------------------------
-  function PclZipUtilTranslateWinPath($p_path, $p_remove_disk_letter=true)
+  function PclZipUtilTranslateWinPath(string $p_path, bool $p_remove_disk_letter=true)
   {
     if (stristr(php_uname(), 'windows')) {
       // ----- Look for potential disk letter

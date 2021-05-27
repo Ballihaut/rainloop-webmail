@@ -20,12 +20,12 @@ class Attachment
 	/**
 	 * @var string
 	 */
-	private $sFolder;
+	private string $sFolder;
 
 	/**
 	 * @var int
 	 */
-	private $iUid;
+	private int $iUid;
 
 	/**
 	 * @var \MailSo\Imap\BodyStructure
@@ -44,7 +44,7 @@ class Attachment
 	 * @return \MailSo\Mail\Attachment
 	 */
 	public function Clear()
-	{
+	: self {
 		$this->sFolder = '';
 		$this->iUid = 0;
 		$this->oBodyStructure = null;
@@ -81,7 +81,7 @@ class Attachment
 	 *
 	 * @return string
 	 */
-	public function FileName($bCalculateOnEmpty = false)
+	public function FileName(bool $bCalculateOnEmpty = false)
 	{
 		$sFileName = '';
 		if ($this->oBodyStructure)
@@ -230,7 +230,7 @@ class Attachment
 	 * @return \MailSo\Mail\Attachment
 	 */
 	public function InitByBodyStructure($sFolder, $iUid, $oBodyStructure)
-	{
+	: self {
 		$this->sFolder = $sFolder;
 		$this->iUid = $iUid;
 		$this->oBodyStructure = $oBodyStructure;

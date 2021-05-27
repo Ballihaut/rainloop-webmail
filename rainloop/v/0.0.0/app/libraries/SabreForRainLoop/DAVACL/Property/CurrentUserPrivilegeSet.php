@@ -21,7 +21,7 @@ class CurrentUserPrivilegeSet extends DAV\Property {
      *
      * @var array
      */
-    private $privileges;
+    private array $privileges;
 
     /**
      * Creates the object
@@ -60,7 +60,7 @@ class CurrentUserPrivilegeSet extends DAV\Property {
      *
      * @return bool
      */
-    public function has($privilegeName) {
+    public function has($privilegeName) : bool {
 
         return in_array($privilegeName, $this->privileges);
 
@@ -92,7 +92,7 @@ class CurrentUserPrivilegeSet extends DAV\Property {
      * @param DOMElement $node
      * @return CurrentUserPrivilegeSet
      */
-    static public function unserialize(\DOMElement $node) {
+    public static function unserialize(\DOMElement $node) {
 
         $result = array();
 

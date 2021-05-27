@@ -33,11 +33,11 @@ class DigestAuth extends AbstractAuth {
     const QOP_AUTH = 1;
     const QOP_AUTHINT = 2;
 
-    protected $nonce;
-    protected $opaque;
+    protected string $nonce;
+    protected string $opaque;
     protected $digestParts;
-    protected $A1;
-    protected $qop = self::QOP_AUTH;
+    protected string $A1;
+    protected int $qop = self::QOP_AUTH;
 
     /**
      * Initializes the object
@@ -108,7 +108,7 @@ class DigestAuth extends AbstractAuth {
      * @param string $password
      * @return bool
      */
-    public function validatePassword($password) {
+    public function validatePassword(string $password) {
 
         $this->A1 = md5($this->digestParts['username'] . ':' . $this->realm . ':' . $password);
         return $this->validate();
@@ -131,7 +131,7 @@ class DigestAuth extends AbstractAuth {
      *
      * @return bool
      */
-    protected function validate() {
+    protected function validate() : bool {
 
         $A2 = $this->httpRequest->getMethod() . ':' . $this->digestParts['uri'];
 

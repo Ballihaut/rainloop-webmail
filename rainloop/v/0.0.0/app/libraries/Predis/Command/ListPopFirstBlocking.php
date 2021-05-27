@@ -30,7 +30,7 @@ class ListPopFirstBlocking extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 2 && is_array($arguments[0])) {
             list($arguments, $timeout) = $arguments;
             array_push($arguments, $timeout);

@@ -22,7 +22,7 @@ class Response {
      *
      * @var string
      */
-    public $defaultHttpVersion = '1.1';
+    public string $defaultHttpVersion = '1.1';
 
     /**
      * Returns a full HTTP status message for an HTTP status code
@@ -30,7 +30,7 @@ class Response {
      * @param int $code
      * @return string
      */
-    public function getStatusMessage($code, $httpVersion = '1.1') {
+    public function getStatusMessage($code, string $httpVersion = '1.1') : string {
 
         $msg = array(
             100 => 'Continue',
@@ -107,7 +107,7 @@ class Response {
      * @param int $code HTTP status code
      * @return bool
      */
-    public function sendStatus($code) {
+    public function sendStatus($code) : bool {
 
         if (!headers_sent())
             return header($this->getStatusMessage($code, $this->defaultHttpVersion));
@@ -123,7 +123,7 @@ class Response {
      * @param bool $replace
      * @return bool
      */
-    public function setHeader($name, $value, $replace = true) {
+    public function setHeader(string $name, $value, bool $replace = true) : bool {
 
         $value = str_replace(array("\r","\n"),array('\r','\n'),$value);
         if (!headers_sent())

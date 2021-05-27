@@ -15,7 +15,7 @@ class Api
 	 * @return bool
 	 */
 	public static function RunResult()
-	{
+	: bool {
 		return true;
 	}
 
@@ -24,7 +24,7 @@ class Api
 	 * @return bool
 	 */
 	public static function Handle()
-	{
+	: bool {
 		static $bOne = null;
 		if (null === $bOne)
 		{
@@ -201,8 +201,8 @@ class Api
 	 *
 	 * @return string
 	 */
-	public static function GetUserSsoHash($sEmail, $sPassword, $aAdditionalOptions = array(), $bUseTimeout = true)
-	{
+	public static function GetUserSsoHash(string $sEmail, string $sPassword, array $aAdditionalOptions = array(), bool $bUseTimeout = true)
+	: string {
 		$sSsoHash = \MailSo\Base\Utils::Sha1Rand(\md5($sEmail).\md5($sPassword));
 
 		return \RainLoop\Api::Actions()->Cacher()->Set(\RainLoop\KeyPathHelper::SsoCacherKey($sSsoHash),
@@ -229,8 +229,8 @@ class Api
 	 *
 	 * @return bool
 	 */
-	public static function ClearUserData($sEmail)
-	{
+	public static function ClearUserData(string $sEmail)
+	: bool {
 		if (0 < \strlen($sEmail))
 		{
 			$sEmail = \MailSo\Base\Utils::IdnToAscii($sEmail);
@@ -257,7 +257,7 @@ class Api
 	 * @return bool
 	 */
 	public static function LogoutCurrentLogginedUser()
-	{
+	: bool {
 		\RainLoop\Utils::ClearCookie('rlsession');
 		return true;
 	}

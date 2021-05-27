@@ -21,7 +21,7 @@ use Predis\Command\ScriptCommand;
  */
 abstract class ClusterStrategy implements StrategyInterface
 {
-    protected $commands;
+    protected array $commands;
 
     /**
      *
@@ -37,7 +37,7 @@ abstract class ClusterStrategy implements StrategyInterface
      * @return array
      */
     protected function getDefaultCommands()
-    {
+    : array {
         $getKeyFromFirstArgument = array($this, 'getKeyFromFirstArgument');
         $getKeyFromAllArguments = array($this, 'getKeyFromAllArguments');
 
@@ -173,7 +173,7 @@ abstract class ClusterStrategy implements StrategyInterface
      * @return array
      */
     public function getSupportedCommands()
-    {
+    : array {
         return array_keys($this->commands);
     }
 
@@ -385,7 +385,7 @@ abstract class ClusterStrategy implements StrategyInterface
      *
      * @return string
      */
-    protected function extractKeyTag($key)
+    protected function extractKeyTag(string $key)
     {
         if (false !== $start = strpos($key, '{')) {
             if (false !== ($end = strpos($key, '}', $start)) && $end !== ++$start) {

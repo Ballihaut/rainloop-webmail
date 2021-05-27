@@ -22,7 +22,7 @@ class TransactionExec extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'EXEC';
     }
 }

@@ -5,22 +5,22 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	/**
 	 * @var string
 	 */
-	private $sDsn = '';
+	private string $sDsn = '';
 
 	/**
 	 * @var string
 	 */
-	private $sUser = '';
+	private string $sUser = '';
 
 	/**
 	 * @var string
 	 */
-	private $sPassword = '';
+	private string $sPassword = '';
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -35,7 +35,7 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \IspConfigChangePasswordDriver
 	 */
 	public function SetConfig($sDsn, $sUser, $sPassword)
-	{
+	: self {
 		$this->sDsn = $sDsn;
 		$this->sUser = $sUser;
 		$this->sPassword = $sPassword;
@@ -49,7 +49,7 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \IspConfigChangePasswordDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -60,7 +60,7 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return \IspConfigChangePasswordDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -75,7 +75,7 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}
@@ -136,8 +136,8 @@ class IspConfigChangePasswordDriver implements \RainLoop\Providers\ChangePasswor
 	 * @param string $sPassword
 	 * @return string
 	 */
-	private function cryptPassword($sPassword)
-	{
+	private function cryptPassword(string $sPassword)
+	: string {
 		$sSalt = '';
 		$sBase64 = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
 

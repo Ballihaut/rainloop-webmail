@@ -48,7 +48,7 @@ class DateTimeHelper
 	 * @return int
 	 */
 	public static function ParseRFC2822DateString($sDateTime)
-	{
+	: int {
 		$sDateTime = \trim($sDateTime);
 		if (empty($sDateTime))
 		{
@@ -68,8 +68,8 @@ class DateTimeHelper
 	 *
 	 * @return int
 	 */
-	public static function ParseInternalDateString($sDateTime)
-	{
+	public static function ParseInternalDateString(string $sDateTime)
+	: int {
 		$sDateTime = \trim($sDateTime);
 		if (empty($sDateTime))
 		{
@@ -92,8 +92,8 @@ class DateTimeHelper
 	 *
 	 * @return int
 	 */
-	public static function ParseDateStringType1($sDateTime)
-	{
+	public static function ParseDateStringType1(string $sDateTime)
+	: int {
 		$sDateTime = \trim($sDateTime);
 		if (empty($sDateTime))
 		{
@@ -111,7 +111,7 @@ class DateTimeHelper
 	 *
 	 * @return int
 	 */
-	public static function TryToParseSpecEtagFormat($sDateTime)
+	public static function TryToParseSpecEtagFormat(string $sDateTime)
 	{
 		$sDateTime = \trim(\preg_replace('/ \([a-zA-Z0-9]+\)$/', '', \trim($sDateTime)));
 		$sDateTime = \trim(\preg_replace('/(:[\d]{2})\.[\d]{3}/', '$1', \trim($sDateTime)));
@@ -126,8 +126,8 @@ class DateTimeHelper
 	 *
 	 * @return int
 	 */
-	public static function TimeToSec($sTime)
-	{
+	public static function TimeToSec(string $sTime)
+	: int {
 		$iMod = 1;
 		$sTime = \trim($sTime);
 		if ('-' === \substr($sTime, 0, 1))

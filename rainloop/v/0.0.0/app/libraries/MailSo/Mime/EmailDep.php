@@ -36,12 +36,12 @@ class EmailDep
 	/**
 	 * @var string
 	 */
-	private $sDkimStatus;
+	private string $sDkimStatus;
 
 	/**
 	 * @var string
 	 */
-	private $sDkimValue;
+	private string $sDkimValue;
 
 	/**
 	 * @access private
@@ -78,7 +78,7 @@ class EmailDep
 	 *
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
-	public static function NewInstance($sEmail, $sDisplayName = '', $sRemark = '')
+	public static function NewInstance($sEmail, string $sDisplayName = '', string $sRemark = '')
 	{
 		return new self($sEmail, $sDisplayName, $sRemark);
 	}
@@ -221,7 +221,7 @@ class EmailDep
 	 *
 	 * @return string
 	 */
-	public function GetEmail($bIdn = false)
+	public function GetEmail(bool $bIdn = false)
 	{
 		return $bIdn ? \MailSo\Base\Utils::IdnToUtf8($this->sEmail) : $this->sEmail;
 	}
@@ -271,7 +271,7 @@ class EmailDep
 	 *
 	 * @return string
 	 */
-	public function GetDomain($bIdn = false)
+	public function GetDomain(bool $bIdn = false)
 	{
 		return \MailSo\Base\Utils::GetDomainFromEmail($this->GetEmail($bIdn));
 	}
@@ -280,7 +280,7 @@ class EmailDep
 	 * @param string $sDkimStatus
 	 * @param string $sDkimValue = ''
 	 */
-	public function SetDkimStatusAndValue($sDkimStatus, $sDkimValue = '')
+	public function SetDkimStatusAndValue($sDkimStatus, string $sDkimValue = '')
 	{
 		$this->sDkimStatus = \MailSo\Mime\Enumerations\DkimStatus::normalizeValue($sDkimStatus);
 		$this->sDkimValue = $sDkimValue;
@@ -292,7 +292,7 @@ class EmailDep
 	 *
 	 * @return array
 	 */
-	public function ToArray($bIdn = false, $bDkim = true)
+	public function ToArray(bool $bIdn = false, bool $bDkim = true)
 	{
 		return $bDkim ? array($this->sDisplayName, $this->GetEmail($bIdn), $this->sRemark, $this->sDkimStatus, $this->sDkimValue) :
 			array($this->sDisplayName, $this->GetEmail($bIdn), $this->sRemark);
@@ -304,8 +304,8 @@ class EmailDep
 	 *
 	 * @return string
 	 */
-	public function ToString($bConvertSpecialsName = false, $bIdn = false)
-	{
+	public function ToString(bool $bConvertSpecialsName = false, bool $bIdn = false)
+	: string {
 		$sReturn = '';
 
 		$sRemark = \str_replace(')', '\)', $this->sRemark);

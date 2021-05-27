@@ -30,7 +30,7 @@ class ZSetRange extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 4) {
             $lastType = gettype($arguments[3]);
 
@@ -57,7 +57,7 @@ class ZSetRange extends Command
      *
      * @return array
      */
-    protected function prepareOptions($options)
+    protected function prepareOptions(array $options)
     {
         $opts = array_change_key_case($options, CASE_UPPER);
         $finalizedOpts = array();
@@ -89,7 +89,7 @@ class ZSetRange extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         if ($this->withScores()) {
             $result = array();
 

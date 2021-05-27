@@ -36,7 +36,7 @@ class VirtualminChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('host')->SetLabel('Virtualmin Host')
 					->SetDefaultValue('https://localhost:10000')

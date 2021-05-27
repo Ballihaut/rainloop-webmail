@@ -22,7 +22,7 @@ class ServerCommand extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'COMMAND';
     }
 }

@@ -44,12 +44,12 @@ class RequestBodyMultipart implements RequestBodyInterface
     /**
      * @var array The parameters to send with this request.
      */
-    private $params;
+    private array $params;
 
     /**
      * @var array The files to send with this request.
      */
-    private $files = [];
+    private array $files = [];
 
     /**
      * @param array  $params   The parameters to send with this request.
@@ -106,7 +106,7 @@ class RequestBodyMultipart implements RequestBodyInterface
      * @return string
      */
     private function getFileString($name, FacebookFile $file)
-    {
+    : string {
         return sprintf(
             "--%s\r\nContent-Disposition: form-data; name=\"%s\"; filename=\"%s\"%s\r\n\r\n%s\r\n",
             $this->boundary,
@@ -126,7 +126,7 @@ class RequestBodyMultipart implements RequestBodyInterface
      * @return string
      */
     private function getParamString($name, $value)
-    {
+    : string {
         return sprintf(
             "--%s\r\nContent-Disposition: form-data; name=\"%s\"\r\n\r\n%s\r\n",
             $this->boundary,
@@ -164,7 +164,7 @@ class RequestBodyMultipart implements RequestBodyInterface
      * @return string
      */
     protected function getFileHeaders(FacebookFile $file)
-    {
+    : string {
         return "\r\nContent-Type: {$file->getMimetype()}";
     }
 }

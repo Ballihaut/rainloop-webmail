@@ -20,32 +20,32 @@ class NamespaceResult
 	/**
 	 * @var string
 	 */
-	private $sPersonal;
+	private string $sPersonal;
 
 	/**
 	 * @var string
 	 */
-	private $sPersonalDelimiter;
+	private string $sPersonalDelimiter;
 
 	/**
 	 * @var string
 	 */
-	private $sOtherUser;
+	private string $sOtherUser;
 
 	/**
 	 * @var string
 	 */
-	private $sOtherUserDelimiter;
+	private string $sOtherUserDelimiter;
 
 	/**
 	 * @var string
 	 */
-	private $sShared;
+	private string $sShared;
 
 	/**
 	 * @var string
 	 */
-	private $sSharedDelimiter;
+	private string $sSharedDelimiter;
 
 	/**
 	 * @access private
@@ -74,7 +74,7 @@ class NamespaceResult
 	 * @return \MailSo\Imap\NamespaceResult
 	 */
 	public function InitByImapResponse($oImapResponse)
-	{
+	: self {
 		if ($oImapResponse && $oImapResponse instanceof \MailSo\Imap\Response)
 		{
 			if (isset($oImapResponse->ResponseList[2][0]) &&

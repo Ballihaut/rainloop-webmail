@@ -22,7 +22,7 @@ class ListRemove extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LREM';
     }
 }

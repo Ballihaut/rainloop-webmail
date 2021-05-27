@@ -20,7 +20,7 @@ use Imagine\Exception\NotSupportedException;
 class Layers extends AbstractLayers
 {
     private $image;
-    private $offset;
+    private int $offset;
     private $resource;
     private $palette;
 
@@ -54,7 +54,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function animate($format, $delay, $loops)
-    {
+    : self {
         return $this;
     }
 
@@ -94,7 +94,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function valid()
-    {
+    : bool {
         return $this->offset < 1;
     }
 
@@ -102,7 +102,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function count()
-    {
+    : int {
         return 1;
     }
 
@@ -110,7 +110,7 @@ class Layers extends AbstractLayers
      * {@inheritdoc}
      */
     public function offsetExists($offset)
-    {
+    : bool {
         return 0 === $offset;
     }
 

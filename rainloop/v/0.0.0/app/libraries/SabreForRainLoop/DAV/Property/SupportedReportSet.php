@@ -21,7 +21,7 @@ class SupportedReportSet extends DAV\Property {
      *
      * @var array
      */
-    protected $reports = array();
+    protected array $reports = array();
 
     /**
      * Creates the property

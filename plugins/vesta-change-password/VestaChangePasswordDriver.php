@@ -5,17 +5,17 @@ class VestaChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Ch
     /**
      * @var string
      */
-    private $sHost = '';
+    private string $sHost = '';
 
     /**
      * @var string
      */
-    private $iPort = 8083;
+    private int $iPort = 8083;
 
     /**
      * @var string
      */
-    private $sAllowedEmails = '';
+    private string $sAllowedEmails = '';
 
     /**
      * @var \MailSo\Log\Logger
@@ -29,7 +29,7 @@ class VestaChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Ch
      * @return \VestaChangePasswordDriver
      */
     public function SetConfig($sHost, $iPort)
-    {
+    : self {
         $this->sHost = $sHost;
         $this->iPort = $iPort;
 
@@ -42,7 +42,7 @@ class VestaChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Ch
      * @return \VestaChangePasswordDriver
      */
     public function SetAllowedEmails($sAllowedEmails)
-    {
+    : self {
         $this->sAllowedEmails = $sAllowedEmails;
         return $this;
     }
@@ -53,7 +53,7 @@ class VestaChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Ch
      * @return \VestaChangePasswordDriver
      */
     public function SetLogger($oLogger)
-    {
+    : self {
         if ($oLogger instanceof \MailSo\Log\Logger)
         {
             $this->oLogger = $oLogger;
@@ -68,7 +68,7 @@ class VestaChangePasswordDriver implements \RainLoop\Providers\ChangePassword\Ch
      * @return bool
      */
     public function PasswordChangePossibility($oAccount)
-    {
+    : bool {
         return $oAccount && $oAccount->Email() &&
             \RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
     }

@@ -22,7 +22,7 @@ class HyperLogLogAdd extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PFADD';
     }
 
@@ -30,7 +30,7 @@ class HyperLogLogAdd extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         return self::normalizeVariadic($arguments);
     }
 

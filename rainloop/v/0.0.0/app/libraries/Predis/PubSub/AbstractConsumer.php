@@ -49,7 +49,7 @@ abstract class AbstractConsumer implements \Iterator
      * @return bool
      */
     protected function isFlagSet($value)
-    {
+    : bool {
         return ($this->statusFlags & $value) === $value;
     }
 
@@ -114,7 +114,7 @@ abstract class AbstractConsumer implements \Iterator
      *
      * @return bool Returns false when there are no pending messages.
      */
-    public function stop($drop = false)
+    public function stop(bool $drop = false)
     {
         if (!$this->valid()) {
             return false;
@@ -193,7 +193,7 @@ abstract class AbstractConsumer implements \Iterator
      * @return bool
      */
     public function valid()
-    {
+    : bool {
         $isValid = $this->isFlagSet(self::STATUS_VALID);
         $subscriptionFlags = self::STATUS_SUBSCRIBED | self::STATUS_PSUBSCRIBED;
         $hasSubscriptions = ($this->statusFlags & $subscriptionFlags) > 0;

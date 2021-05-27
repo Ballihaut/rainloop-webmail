@@ -37,7 +37,7 @@ class Directory extends Node implements DAV\ICollection, DAV\IQuota {
      * @param resource|string $data Initial payload
      * @return null|string
      */
-    public function createFile($name, $data = null) {
+    public function createFile($name, $data = null) : string {
 
         // We're not allowing dots
         if ($name=='.' || $name=='..') throw new DAV\Exception\Forbidden('Permission denied to . and ..');
@@ -98,7 +98,7 @@ class Directory extends Node implements DAV\ICollection, DAV\IQuota {
      * @param string $name
      * @return bool
      */
-    public function childExists($name) {
+    public function childExists($name) : bool {
 
         if ($name=='.' || $name=='..')
             throw new DAV\Exception\Forbidden('Permission denied to . and ..');
@@ -113,7 +113,7 @@ class Directory extends Node implements DAV\ICollection, DAV\IQuota {
      *
      * @return DAV\INode[]
      */
-    public function getChildren() {
+    public function getChildren() : iterable {
 
         $nodes = array();
         foreach(scandir($this->path) as $node) if($node!='.' && $node!='..' && $node!='.sabredav') $nodes[] = $this->getChild($node);
@@ -146,7 +146,7 @@ class Directory extends Node implements DAV\ICollection, DAV\IQuota {
      *
      * @return array
      */
-    public function getQuotaInfo() {
+    public function getQuotaInfo() : array {
 
         return array(
             disk_total_space($this->path)-disk_free_space($this->path),

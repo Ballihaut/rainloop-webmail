@@ -21,9 +21,9 @@ namespace Predis\Configuration;
  */
 class Options implements OptionsInterface
 {
-    protected $input;
-    protected $options;
-    protected $handlers;
+    protected array $input;
+    protected array $options;
+    protected array $handlers;
 
     /**
      * @param array $options Array of options with their values
@@ -41,7 +41,7 @@ class Options implements OptionsInterface
      * @return array
      */
     protected function getHandlers()
-    {
+    : array {
         return array(
             'cluster' => 'Predis\Configuration\ClusterOption',
             'connections' => 'Predis\Configuration\ConnectionFactoryOption',
@@ -69,7 +69,7 @@ class Options implements OptionsInterface
      * {@inheritdoc}
      */
     public function defined($option)
-    {
+    : bool {
         return (
             array_key_exists($option, $this->options) ||
             array_key_exists($option, $this->input)

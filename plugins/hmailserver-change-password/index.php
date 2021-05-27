@@ -11,7 +11,7 @@ class HmailserverChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	public function Supported()
-	{
+	: string {
 		if (!class_exists('COM'))
 		{
 			return 'The PHP extension COM must be installed to use this plugin';
@@ -51,7 +51,7 @@ class HmailserverChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('login')->SetLabel('HmailServer Admin Login')
 				->SetDefaultValue('Administrator'),

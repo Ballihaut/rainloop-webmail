@@ -26,7 +26,7 @@ class Duration extends Property {
      *
      * @var string|null
      */
-    public $delimiter = ',';
+    public string $delimiter = ',';
 
     /**
      * Sets a raw value coming from a mimedir (iCalendar/vCard) file.
@@ -48,7 +48,7 @@ class Duration extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    public function getRawMimeDirValue() : string {
 
         return implode($this->delimiter, $this->getParts());
 
@@ -62,7 +62,7 @@ class Duration extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return 'DURATION';
 

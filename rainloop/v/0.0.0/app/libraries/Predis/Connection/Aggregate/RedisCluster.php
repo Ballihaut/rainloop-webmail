@@ -44,10 +44,10 @@ use Predis\Response\ErrorInterface as ErrorResponseInterface;
  */
 class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
 {
-    private $useClusterSlots = true;
-    private $defaultParameters = array();
-    private $pool = array();
-    private $slots = array();
+    private bool $useClusterSlots = true;
+    private array $defaultParameters = array();
+    private array $pool = array();
+    private array $slots = array();
     private $slotsMap;
     private $strategy;
     private $connections;
@@ -68,7 +68,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function isConnected()
-    {
+    : bool {
         foreach ($this->pool as $connection) {
             if ($connection->isConnected()) {
                 return true;
@@ -111,7 +111,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function remove(NodeConnectionInterface $connection)
-    {
+    : bool {
         if (false !== $id = array_search($connection, $this->pool, true)) {
             unset(
                 $this->pool[$id],
@@ -132,7 +132,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * @return bool True if the connection was in the pool.
      */
     public function removeById($connectionID)
-    {
+    : bool {
         if (isset($this->pool[$connectionID])) {
             unset(
                 $this->pool[$connectionID],
@@ -180,7 +180,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * @return array
      */
     public function askSlotsMap(NodeConnectionInterface $connection = null)
-    {
+    : array {
         if (!$connection && !$connection = $this->getRandomConnection()) {
             return array();
         }
@@ -226,7 +226,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      *
      * @throws \OutOfBoundsException
      */
-    public function setSlots($first, $last, $connection)
+    public function setSlots($first, $last, string $connection)
     {
         if ($first < 0x0000 || $first > 0x3FFF ||
             $last < 0x0000 || $last > 0x3FFF ||
@@ -366,7 +366,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * @param NodeConnectionInterface $connection Connection instance.
      * @param int                     $slot       Target slot index.
      */
-    protected function move(NodeConnectionInterface $connection, $slot)
+    protected function move(NodeConnectionInterface $connection, int $slot)
     {
         $this->pool[(string) $connection] = $connection;
         $this->slots[(int) $slot] = $connection;
@@ -405,7 +405,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      *
      * @return mixed
      */
-    protected function onMovedResponse(CommandInterface $command, $details)
+    protected function onMovedResponse(CommandInterface $command, string $details)
     {
         list($slot, $connectionID) = explode(' ', $details, 2);
 
@@ -432,7 +432,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      *
      * @return mixed
      */
-    protected function onAskResponse(CommandInterface $command, $details)
+    protected function onAskResponse(CommandInterface $command, string $details)
     {
         list($slot, $connectionID) = explode(' ', $details, 2);
 
@@ -481,7 +481,7 @@ class RedisCluster implements ClusterInterface, \IteratorAggregate, \Countable
      * {@inheritdoc}
      */
     public function count()
-    {
+    : int {
         return count($this->pool);
     }
 

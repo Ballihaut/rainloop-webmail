@@ -17,7 +17,7 @@ abstract class AbstractLayers implements LayersInterface
      * {@inheritdoc}
      */
     public function add(ImageInterface $image)
-    {
+    : self {
         $this[] = $image;
 
         return $this;
@@ -27,7 +27,7 @@ abstract class AbstractLayers implements LayersInterface
      * {@inheritdoc}
      */
     public function set($offset, ImageInterface $image)
-    {
+    : self {
         $this[$offset] = $image;
 
         return $this;
@@ -37,7 +37,7 @@ abstract class AbstractLayers implements LayersInterface
      * {@inheritdoc}
      */
     public function remove($offset)
-    {
+    : self {
         unset($this[$offset]);
 
         return $this;

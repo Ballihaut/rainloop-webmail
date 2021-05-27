@@ -22,7 +22,7 @@ class ListPopFirst extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LPOP';
     }
 }

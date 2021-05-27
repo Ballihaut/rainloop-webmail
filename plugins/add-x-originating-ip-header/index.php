@@ -28,7 +28,7 @@ class AddXOriginatingIpHeaderPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('check_proxy')
 				->SetLabel('Сheck User Proxy')

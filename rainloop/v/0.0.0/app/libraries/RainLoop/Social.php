@@ -28,8 +28,8 @@ class Social
 	/**
 	 * @return bool
 	 */
-	public function GoogleDisconnect($oAccount)
-	{
+	public function GoogleDisconnect(bool $oAccount)
+	: bool {
 		$oGoogle = $this->GoogleConnector();
 		if ($oAccount && $oGoogle)
 		{
@@ -60,8 +60,8 @@ class Social
 	/**
 	 * @return bool
 	 */
-	public function FacebookDisconnect($oAccount)
-	{
+	public function FacebookDisconnect(bool $oAccount)
+	: bool {
 		$oFacebook = $this->FacebookConnector($oAccount ? $oAccount : null);
 		if ($oAccount && $oFacebook)
 		{
@@ -93,8 +93,8 @@ class Social
 	/**
 	 * @return bool
 	 */
-	public function TwitterDisconnect($oAccount)
-	{
+	public function TwitterDisconnect(bool $oAccount)
+	: bool {
 		$oTwitter = $this->TwitterConnector();
 		if ($oAccount && $oTwitter)
 		{
@@ -125,7 +125,7 @@ class Social
 	/**
 	 * @return string
 	 */
-	public function popupServiceResult($sTypeStr, $sLoginUrl, $bLogin, $iErrorCode)
+	public function popupServiceResult(string $sTypeStr, string $sLoginUrl, $bLogin, string $iErrorCode)
 	{
 		$sResult = '';
 		$bAppCssDebug = !!$this->oActions->Config()->Get('labs', 'use_app_debug_css', false);
@@ -189,7 +189,7 @@ class Social
 	/**
 	 * @return string
 	 */
-	public function GooglePopupService($bGmail = false)
+	public function GooglePopupService(bool $bGmail = false)
 	{
 		$sLoginUrl = '';
 		$oAccount = null;
@@ -706,7 +706,7 @@ class Social
 	 *
 	 * @return \RainLoop\Common\RainLoopFacebookRedirectLoginHelper|null
 	 */
-	public function FacebookConnector($oAccount = null, &$sRedirectUrl = '')
+	public function FacebookConnector($oAccount = null, string &$sRedirectUrl = '')
 	{
 		$oFacebook = false;
 		$oConfig = $this->oActions->Config();
@@ -755,7 +755,7 @@ class Social
 	 * @return string
 	 */
 	public function GoogleUserLoginStorageKey($oGoogle, $sGoogleUserId)
-	{
+	: string {
 		return \implode('_', array('google', \md5($oGoogle->getClientId()), $sGoogleUserId, APP_SALT));
 	}
 
@@ -763,7 +763,7 @@ class Social
 	 * @return string
 	 */
 	public function FacebookUserLoginStorageKey($oFacebook, $sFacebookUserId)
-	{
+	: string {
 		return \implode('_', array('facebookNew', \md5($oFacebook->getApp()->getId()), $sFacebookUserId, APP_SALT));
 	}
 
@@ -771,7 +771,7 @@ class Social
 	 * @return string
 	 */
 	public function TwitterUserLoginStorageKey($oTwitter, $sTwitterUserId)
-	{
+	: string {
 		return \implode('_', array('twitter_2', \md5($oTwitter->config['consumer_secret']), $sTwitterUserId, APP_SALT));
 	}
 

@@ -50,12 +50,12 @@ class Attachment
 	/**
 	 * @var array
 	 */
-	private $aCustomContentTypeParams;
+	private array $aCustomContentTypeParams;
 
 	/**
 	 * @var string
 	 */
-	private $sContentLocation;
+	private string $sContentLocation;
 
 	/**
 	 * @access private
@@ -85,8 +85,8 @@ class Attachment
 	 *
 	 * @return \MailSo\Mime\Attachment
 	 */
-	public static function NewInstance($rResource, $sFileName = '', $iFileSize = 0, $bIsInline = false,
-		$bIsLinked = false, $sCID = '', $aCustomContentTypeParams = array(), $sContentLocation = '')
+	public static function NewInstance($rResource, string $sFileName = '', int $iFileSize = 0, bool $bIsInline = false,
+		bool $bIsLinked = false, string $sCID = '', array $aCustomContentTypeParams = array(), string $sContentLocation = '')
 	{
 		return new self($rResource, $sFileName, $iFileSize, $bIsInline, $bIsLinked, $sCID, $aCustomContentTypeParams, $sContentLocation);
 	}
@@ -159,7 +159,7 @@ class Attachment
 	 * @return bool
 	 */
 	public function IsImage()
-	{
+	: bool {
 		return 'image' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -167,7 +167,7 @@ class Attachment
 	 * @return bool
 	 */
 	public function IsArchive()
-	{
+	: bool {
 		return 'archive' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -175,7 +175,7 @@ class Attachment
 	 * @return bool
 	 */
 	public function IsPdf()
-	{
+	: bool {
 		return 'pdf' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -183,7 +183,7 @@ class Attachment
 	 * @return bool
 	 */
 	public function IsDoc()
-	{
+	: bool {
 		return 'doc' === \MailSo\Base\Utils::ContentTypeType($this->ContentType(), $this->FileName());
 	}
 
@@ -191,7 +191,7 @@ class Attachment
 	 * @return bool
 	 */
 	public function IsLinked()
-	{
+	: bool {
 		return $this->bIsLinked && 0 < \strlen($this->sCID);
 	}
 }

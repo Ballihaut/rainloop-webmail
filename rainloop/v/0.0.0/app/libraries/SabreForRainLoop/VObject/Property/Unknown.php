@@ -27,7 +27,7 @@ class Unknown extends Text {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         return array($this->getRawMimeDirValue());
 
@@ -41,7 +41,7 @@ class Unknown extends Text {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return "UNKNOWN";
 

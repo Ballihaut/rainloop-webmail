@@ -22,7 +22,7 @@ class KeyRenamePreserve extends KeyRename
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'RENAMENX';
     }
 

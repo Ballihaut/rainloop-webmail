@@ -22,7 +22,7 @@ class KeySort extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SORT';
     }
 
@@ -30,7 +30,7 @@ class KeySort extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 1) {
             return $arguments;
         }

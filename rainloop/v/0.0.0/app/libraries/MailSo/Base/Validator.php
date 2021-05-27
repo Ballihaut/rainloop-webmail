@@ -23,7 +23,7 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function EmailString($sEmail, $aAllowedInternalDomains = array('localhost'))
+	public static function EmailString($sEmail, array $aAllowedInternalDomains = array('localhost'))
 	{
 		$bResult = false;
 		if (\MailSo\Base\Validator::NotEmptyString($sEmail, true))
@@ -46,8 +46,8 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function SimpleEmailString($sEmail)
-	{
+	public static function SimpleEmailString(string $sEmail)
+	: bool {
 		return \MailSo\Base\Validator::NotEmptyString($sEmail, true) &&
 			!!\preg_match('/^[a-zA-Z0-9][a-zA-Z0-9\.\+\-_]*@[a-zA-Z0-9][a-zA-Z0-9\.\+\-_]*$/', $sEmail);
 	}
@@ -58,7 +58,7 @@ class Validator
 	 *
 	 * @return bool
 	 */
-	public static function NotEmptyString($sString, $bTrim = false)
+	public static function NotEmptyString($sString, bool $bTrim = false)
 	{
 		return \is_string($sString) &&
 			(0 < \strlen($bTrim ? \trim($sString) : $sString));
@@ -70,7 +70,7 @@ class Validator
 	 * @return bool
 	 */
 	public static function NotEmptyArray($aList)
-	{
+	: bool {
 		return \is_array($aList) && 0 < \count($aList);
 	}
 
@@ -82,7 +82,7 @@ class Validator
 	 * @return bool
 	 */
 	public static function RangeInt($iNumber, $iMin = null, $iMax = null)
-	{
+	: bool {
 		return \is_int($iNumber) &&
 		   (null !== $iMin && $iNumber >= $iMin || null === $iMin) &&
 		   (null !== $iMax && $iNumber <= $iMax || null === $iMax);

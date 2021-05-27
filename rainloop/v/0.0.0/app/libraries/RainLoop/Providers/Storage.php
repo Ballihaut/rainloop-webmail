@@ -23,8 +23,8 @@ class Storage extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return bool
 	 */
-	private function verifyAccount($mAccount, $iStorageType)
-	{
+	private function verifyAccount($mAccount, bool $iStorageType)
+	: bool {
 		if (\RainLoop\Providers\Storage\Enumerations\StorageType::NOBODY !== $iStorageType &&
 			!($mAccount instanceof \RainLoop\Model\Account || \is_string($mAccount)))
 		{
@@ -43,7 +43,7 @@ class Storage extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function Put($oAccount, $iStorageType, $sKey, $sValue)
-	{
+	: bool {
 		if (!$this->verifyAccount($oAccount, $iStorageType))
 		{
 			return false;
@@ -60,8 +60,8 @@ class Storage extends \RainLoop\Providers\AbstractProvider
 	 *
 	 * @return mixed
 	 */
-	public function Get($oAccount, $iStorageType, $sKey, $mDefault = false)
-	{
+	public function Get($oAccount, $iStorageType, $sKey, bool $mDefault = false)
+	: bool {
 		if (!$this->verifyAccount($oAccount, $iStorageType))
 		{
 			return $mDefault;
@@ -78,7 +78,7 @@ class Storage extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function Clear($oAccount, $iStorageType, $sKey)
-	{
+	: bool {
 		if (!$this->verifyAccount($oAccount, $iStorageType))
 		{
 			return false;
@@ -109,7 +109,7 @@ class Storage extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function IsLocal()
-	{
+	: bool {
 		return $this->oDriver instanceof \RainLoop\Providers\Storage\IStorage &&
 			$this->oDriver->IsLocal();
 	}

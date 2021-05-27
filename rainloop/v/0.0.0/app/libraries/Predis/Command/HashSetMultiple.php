@@ -22,7 +22,7 @@ class HashSetMultiple extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HMSET';
     }
 
@@ -30,7 +30,7 @@ class HashSetMultiple extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 2 && is_array($arguments[1])) {
             $flattenedKVs = array($arguments[0]);
             $args = $arguments[1];

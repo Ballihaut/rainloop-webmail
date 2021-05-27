@@ -30,7 +30,7 @@ class ZSetRangeByLex extends ZSetRange
      * {@inheritdoc}
      */
     protected function prepareOptions($options)
-    {
+    : array {
         $opts = array_change_key_case($options, CASE_UPPER);
         $finalizedOpts = array();
 
@@ -49,7 +49,7 @@ class ZSetRangeByLex extends ZSetRange
      * {@inheritdoc}
      */
     protected function withScores()
-    {
+    : bool {
         return false;
     }
 }

@@ -22,7 +22,7 @@ class StringBitCount extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BITCOUNT';
     }
 }

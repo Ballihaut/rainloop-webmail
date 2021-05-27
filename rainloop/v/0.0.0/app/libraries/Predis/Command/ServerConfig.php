@@ -25,7 +25,7 @@ class ServerConfig extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'CONFIG';
     }
 
@@ -33,7 +33,7 @@ class ServerConfig extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : array {
         if (is_array($data)) {
             $result = array();
 

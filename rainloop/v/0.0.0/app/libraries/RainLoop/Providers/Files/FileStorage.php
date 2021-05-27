@@ -7,12 +7,12 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	/**
 	 * @var array
 	 */
-	private $aResources;
+	private array $aResources;
 
 	/**
 	 * @var string
 	 */
-	private $sDataPath;
+	private string $sDataPath;
 
 	/**
 	 * @param string $sStoragePath
@@ -66,7 +66,7 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	 * @return bool
 	 */
 	public function MoveUploadedFile($oAccount, $sKey, $sSource)
-	{
+	: bool {
 		return @\move_uploaded_file($sSource,
 			$this->generateFullFileName($oAccount, $sKey, true));
 	}
@@ -163,7 +163,7 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	 * @return bool
 	 */
 	public function FileExists($oAccount, $sKey)
-	{
+	: bool {
 		return @\file_exists($this->generateFullFileName($oAccount, $sKey));
 	}
 
@@ -173,7 +173,7 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	 * @return bool
 	 */
 	public function GC($iTimeToClearInHours = 24)
-	{
+	: bool {
 		if (0 < $iTimeToClearInHours)
 		{
 			\MailSo\Base\Utils::RecTimeDirRemove($this->sDataPath, 60 * 60 * $iTimeToClearInHours, \time());
@@ -187,7 +187,7 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	 * @return bool
 	 */
 	public function CloseAllOpenedFiles()
-	{
+	: bool {
 		if (\is_array($this->aResources) && 0 < \count($this->aResources))
 		{
 			foreach ($this->aResources as $sFileName => $rFile)
@@ -209,7 +209,7 @@ class FileStorage implements \RainLoop\Providers\Files\IFiles
 	 *
 	 * @return string
 	 */
-	private function generateFullFileName($oAccount, $sKey, $bMkDir = false)
+	private function generateFullFileName($oAccount, string $sKey, bool $bMkDir = false)
 	{
 		$sEmail = $sSubEmail = '';
 		if ($oAccount instanceof \RainLoop\Model\Account)

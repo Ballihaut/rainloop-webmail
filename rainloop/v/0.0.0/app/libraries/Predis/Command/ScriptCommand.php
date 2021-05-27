@@ -38,7 +38,7 @@ abstract class ScriptCommand extends ServerEvalSHA
      * @return int
      */
     protected function getKeysCount()
-    {
+    : int {
         return 0;
     }
 
@@ -48,7 +48,7 @@ abstract class ScriptCommand extends ServerEvalSHA
      * @return array
      */
     public function getKeys()
-    {
+    : array {
         return array_slice($this->getArguments(), 2, $this->getKeysCount());
     }
 
@@ -56,7 +56,7 @@ abstract class ScriptCommand extends ServerEvalSHA
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (($numkeys = $this->getKeysCount()) && $numkeys < 0) {
             $numkeys = count($arguments) + $numkeys;
         }

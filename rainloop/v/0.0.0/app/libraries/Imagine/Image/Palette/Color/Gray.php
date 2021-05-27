@@ -19,12 +19,12 @@ final class Gray implements ColorInterface
     /**
      * @var integer
      */
-    private $gray;
+    private int $gray;
 
     /**
      * @var integer
      */
-    private $alpha;
+    private int $alpha;
 
     /**
      *
@@ -108,7 +108,7 @@ final class Gray implements ColorInterface
      * {@inheritdoc}
      */
     public function grayscale()
-    {
+    : self {
         return $this;
     }
 
@@ -116,7 +116,7 @@ final class Gray implements ColorInterface
      * {@inheritdoc}
      */
     public function isOpaque()
-    {
+    : bool {
         return 100 === $this->alpha;
     }
 

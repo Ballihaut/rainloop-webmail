@@ -22,7 +22,7 @@ class ListPopLast extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'RPOP';
     }
 }

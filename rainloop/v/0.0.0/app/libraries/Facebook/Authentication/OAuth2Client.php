@@ -133,7 +133,7 @@ class OAuth2Client
      * @return string
      */
     public function getAuthorizationUrl($redirectUrl, $state, array $scope = [], array $params = [], $separator = '&')
-    {
+    : string {
         $params += [
             'client_id' => $this->app->getId(),
             'state' => $state,
@@ -156,7 +156,7 @@ class OAuth2Client
      *
      * @throws FacebookSDKException
      */
-    public function getAccessTokenFromCode($code, $redirectUri = '')
+    public function getAccessTokenFromCode($code, string $redirectUri = '')
     {
         $params = [
             'code' => $code,
@@ -196,7 +196,7 @@ class OAuth2Client
      *
      * @throws FacebookSDKException
      */
-    public function getCodeFromLongLivedAccessToken($accessToken, $redirectUri = '')
+    public function getCodeFromLongLivedAccessToken($accessToken, string $redirectUri = '')
     {
         $params = [
             'redirect_uri' => $redirectUri,
@@ -283,7 +283,7 @@ class OAuth2Client
      * @return array
      */
     protected function getClientParams()
-    {
+    : array {
         return [
             'client_id' => $this->app->getId(),
             'client_secret' => $this->app->getSecret(),

@@ -26,22 +26,22 @@ class Literal
 	/**
 	 * @var array
 	 */
-	private static $aStreams = array();
+	private static array $aStreams = array();
 
 	/**
 	 * @var resource
 	 */
-	private $rStream;
+	private bool $rStream;
 
 	/**
 	 * @var int
 	 */
-	private $iSize;
+	private int $iSize;
 
 	/**
 	 * @var int
 	 */
-	private $iPos;
+	private int $iPos;
 
 	/**
 	 * @param resource $rStream
@@ -50,7 +50,7 @@ class Literal
 	 * @return resource|bool
 	 */
 	public static function CreateStream($rStream, $iLiteralLen)
-	{
+	: string {
 		if (!in_array(self::STREAM_NAME, stream_get_wrappers()))
 		{
 			stream_wrapper_register(self::STREAM_NAME, '\MailSo\Base\StreamWrappers\Literal');
@@ -70,8 +70,8 @@ class Literal
 	 *
 	 * @return bool
 	 */
-	public function stream_open($sPath)
-	{
+	public function stream_open(string $sPath)
+	: bool {
 		$this->iPos = 0;
 		$this->iSize = 0;
 		$this->rStream = false;
@@ -103,7 +103,7 @@ class Literal
 	 *
 	 * @return string
 	 */
-	public function stream_read($iCount)
+	public function stream_read(int $iCount)
 	{
 		$sResult = false;
 		if ($this->iSize < $this->iPos + $iCount)
@@ -142,7 +142,7 @@ class Literal
 	 * @return int
 	 */
 	public function stream_write()
-	{
+	: int {
 		return 0;
 	}
 
@@ -158,7 +158,7 @@ class Literal
 	 * @return bool
 	 */
 	public function stream_eof()
-	{
+	: bool {
 		return $this->iPos >= $this->iSize;
 	}
 
@@ -166,7 +166,7 @@ class Literal
 	 * @return array
 	 */
 	public function stream_stat()
-	{
+	: array {
 		return array(
 			'dev' => 2,
 			'ino' => 0,
@@ -188,7 +188,7 @@ class Literal
 	 * @return bool
 	 */
 	public function stream_seek()
-	{
+	: bool {
 		return false;
 	}
 }

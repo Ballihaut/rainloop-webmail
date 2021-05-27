@@ -22,7 +22,7 @@ class KeyPreciseExpireAt extends KeyExpireAt
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PEXPIREAT';
     }
 }

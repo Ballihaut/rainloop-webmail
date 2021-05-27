@@ -22,7 +22,7 @@ class ServerTime extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'TIME';
     }
 }

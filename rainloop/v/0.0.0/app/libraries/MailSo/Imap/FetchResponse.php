@@ -52,7 +52,7 @@ class FetchResponse
 	 *
 	 * @return array|null
 	 */
-	public function GetEnvelope($bForce = false)
+	public function GetEnvelope(bool $bForce = false)
 	{
 		if (null === $this->aEnvelopeCache || $bForce)
 		{
@@ -116,7 +116,7 @@ class FetchResponse
 	 *
 	 * @return \MailSo\Imap\BodyStructure|null
 	 */
-	public function GetFetchBodyStructure($sRfc822SubMimeIndex = '')
+	public function GetFetchBodyStructure(string $sRfc822SubMimeIndex = '')
 	{
 		$oBodyStructure = null;
 		$aBodyStructureArray = $this->GetFetchValue(Enumerations\FetchType::BODYSTRUCTURE);
@@ -175,7 +175,7 @@ class FetchResponse
 	 *
 	 * @return string
 	 */
-	public function GetHeaderFieldsValue($sRfc822SubMimeIndex = '')
+	public function GetHeaderFieldsValue(string $sRfc822SubMimeIndex = '')
 	{
 		$sReturn = '';
 		$bNextIsValue = false;
@@ -206,7 +206,7 @@ class FetchResponse
 	}
 
 	private static function findFetchUidAndSize($aList)
-	{
+	: bool {
 		$bUid = false;
 		$bSize = false;
 		if (is_array($aList))

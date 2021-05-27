@@ -25,14 +25,14 @@ class Text extends Property {
      *
      * @var string
      */
-    public $delimiter = ',';
+    public string $delimiter = ',';
 
     /**
      * List of properties that are considered 'structured'.
      *
      * @var array
      */
-    protected $structuredValues = array(
+    protected array $structuredValues = array(
         // vCard
         'N',
         'ADR',
@@ -51,7 +51,7 @@ class Text extends Property {
      *
      * @var array
      */
-    protected $minimumPropertyValues = array(
+    protected array $minimumPropertyValues = array(
         'N' => 5,
         'ADR' => 7,
     );
@@ -107,7 +107,7 @@ class Text extends Property {
      * @param string $val
      * @return void
      */
-    public function setQuotedPrintableValue($val) {
+    public function setQuotedPrintableValue(string $val) {
 
         $val = quoted_printable_decode($val);
 

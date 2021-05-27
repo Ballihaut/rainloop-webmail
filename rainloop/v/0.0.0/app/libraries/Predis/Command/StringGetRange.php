@@ -22,7 +22,7 @@ class StringGetRange extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'GETRANGE';
     }
 }

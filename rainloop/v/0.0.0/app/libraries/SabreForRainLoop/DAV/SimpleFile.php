@@ -20,7 +20,7 @@ class SimpleFile extends File {
      *
      * @var string
      */
-    protected $contents = array();
+    protected array $contents = array();
 
     /**
      * Name of this resource
@@ -100,7 +100,7 @@ class SimpleFile extends File {
      * Return null if the ETag can not effectively be determined
      * @return string
      */
-    public function getETag() {
+    public function getETag() : string {
 
         return '"' . md5($this->contents) . '"';
 

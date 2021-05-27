@@ -22,7 +22,7 @@ class ListLength extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'LLEN';
     }
 }

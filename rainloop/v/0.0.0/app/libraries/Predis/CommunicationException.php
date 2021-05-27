@@ -54,7 +54,7 @@ abstract class CommunicationException extends PredisException
      * @return bool
      */
     public function shouldResetConnection()
-    {
+    : bool {
         return true;
     }
 

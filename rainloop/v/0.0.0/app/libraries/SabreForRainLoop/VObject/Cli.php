@@ -26,7 +26,7 @@ class Cli {
      *
      * @var bool
      */
-    protected $showHelp = false;
+    protected bool $showHelp = false;
 
     /**
      * Wether to spit out 'mimedir' or 'json' format.
@@ -40,42 +40,42 @@ class Cli {
      *
      * @var bool
      */
-    protected $pretty;
+    protected bool $pretty;
 
     /**
      * Source file
      *
      * @var string
      */
-    protected $inputPath;
+    protected string $inputPath;
 
     /**
      * Destination file
      *
      * @var string
      */
-    protected $outputPath;
+    protected string $outputPath;
 
     /**
      * output stream
      *
      * @var resource
      */
-    protected $stdout;
+    protected int $stdout;
 
     /**
      * stdin
      *
      * @var resource
      */
-    protected $stdin;
+    protected int $stdin;
 
     /**
      * stderr
      *
      * @var resource
      */
-    protected $stderr;
+    protected int $stderr;
 
     /**
      * Input format (one of json or mimedir)
@@ -89,14 +89,14 @@ class Cli {
      *
      * @var bool
      */
-    protected $forgiving = false;
+    protected bool $forgiving = false;
 
     /**
      * Main function
      *
      * @return int
      */
-    public function main(array $argv) {
+    public function main(array $argv) : int {
 
         // @codeCoverageIgnoreStart
         // We cannot easily test this, so we'll skip it. Pretty basic anyway.
@@ -401,7 +401,7 @@ HELP
      * @param Component $vObj
      * @return int
      */
-    protected function convert($vObj) {
+    protected function convert($vObj) : int {
 
         $json = false;
         $convertVersion = null;
@@ -478,7 +478,7 @@ HELP
      * @param string $color
      * @return string
      */
-    protected function colorize($color, $str, $resetTo = 'default') {
+    protected function colorize($color, string $str, $resetTo = 'default') : string {
 
         $colors = array(
             'cyan'    => '1;36',
@@ -526,7 +526,7 @@ HELP
          * @param array $array
          * @return int
          */
-        $sortScore = function($key, $array) {
+        $sortScore = function($key, $array) : int {
 
             if ($array[$key] instanceof Component) {
 
@@ -557,7 +557,7 @@ HELP
         };
 
         $tmp = $vObj->children;
-        uksort($vObj->children, function($a, $b) use ($sortScore, $tmp) {
+        uksort($vObj->children, function($a, $b) use ($sortScore, $tmp) : int {
 
             $sA = $sortScore($a, $tmp);
             $sB = $sortScore($b, $tmp);
@@ -652,7 +652,7 @@ HELP
      * @param array $argv
      * @return void
      */
-    protected function parseArguments(array $argv) {
+    protected function parseArguments(array $argv) : array {
 
         $positional = array();
         $options = array();
@@ -721,7 +721,7 @@ HELP
      * @param string $msg
      * @return void
      */
-    protected function log($msg, $color = 'default') {
+    protected function log(string $msg, string $color = 'default') {
 
         if (!$this->quiet) {
             if ($color!=='default') {

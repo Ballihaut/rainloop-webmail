@@ -24,7 +24,7 @@ class AddressBookQueryParser {
      *
      * @var array
      */
-    public $requestedProperties;
+    public array $requestedProperties;
 
     /**
      * The number of results the client wants
@@ -194,7 +194,7 @@ class AddressBookQueryParser {
      * @param \DOMElement $textMatchNode
      * @return array
      */
-    public function parseTextMatchNode(\DOMElement $textMatchNode) {
+    public function parseTextMatchNode(\DOMElement $textMatchNode) : array {
 
         $matchType = $textMatchNode->getAttribute('match-type');
         if (!$matchType) $matchType = 'contains';

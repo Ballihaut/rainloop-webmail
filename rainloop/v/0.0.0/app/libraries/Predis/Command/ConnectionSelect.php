@@ -22,7 +22,7 @@ class ConnectionSelect extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SELECT';
     }
 }

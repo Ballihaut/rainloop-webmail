@@ -30,7 +30,7 @@ final class Version
 	 * @return string
 	 */
 	public static function AppVersion()
-	{
+	: string {
 		return \MailSo\Version::APP_VERSION;
 	}
 
@@ -38,7 +38,7 @@ final class Version
 	 * @return string
 	 */
 	public static function XMailer()
-	{
+	: string {
 		return \MailSo\Version::MIME_X_MAILER.'/'.\MailSo\Version::APP_VERSION;
 	}
 
@@ -46,7 +46,7 @@ final class Version
 	 * @return string
 	 */
 	public static function Signature()
-	{
+	: string {
 		$sSignature = '';
 		if (\defined('MAILSO_LIBRARY_USE_PHAR'))
 		{

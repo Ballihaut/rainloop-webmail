@@ -79,7 +79,7 @@ class VAlarm extends VObject\Component {
      * @param \DateTime $end
      * @return bool
      */
-    public function isInTimeRange(\DateTime $start, \DateTime $end) {
+    public function isInTimeRange(\DateTime $start, \DateTime $end) : bool {
 
         $effectiveTrigger = $this->getEffectiveTriggerTime();
 

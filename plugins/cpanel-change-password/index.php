@@ -41,7 +41,7 @@ class CpanelChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('host')->SetLabel('cPanel Host')
 				->SetDefaultValue(''),

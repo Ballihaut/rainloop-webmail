@@ -21,7 +21,7 @@ class ResourceType extends DAV\Property {
      *
      * @var array
      */
-    public $resourceType = array();
+    public array $resourceType = array();
 
     /**
      * __construct
@@ -86,7 +86,7 @@ class ResourceType extends DAV\Property {
      * @param string $type
      * @return bool
      */
-    public function is($type) {
+    public function is($type) : bool {
 
         return in_array($type, $this->resourceType);
 
@@ -111,7 +111,7 @@ class ResourceType extends DAV\Property {
      * @param \DOMElement $dom
      * @return DAV\Property\ResourceType
      */
-    static public function unserialize(\DOMElement $dom) {
+    public static function unserialize(\DOMElement $dom) {
 
         $value = array();
         foreach($dom->childNodes as $child) {

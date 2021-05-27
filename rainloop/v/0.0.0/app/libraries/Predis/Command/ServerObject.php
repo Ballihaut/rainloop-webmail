@@ -22,7 +22,7 @@ class ServerObject extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'OBJECT';
     }
 }

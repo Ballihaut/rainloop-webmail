@@ -22,7 +22,7 @@ class StringSubstr extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SUBSTR';
     }
 }

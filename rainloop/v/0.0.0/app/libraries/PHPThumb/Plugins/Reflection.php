@@ -25,14 +25,6 @@ namespace PHPThumb\Plugins;
  * @filesource
  */
 
-/**
- * GD Reflection Lib Plugin
- *
- * This plugin allows you to create those fun Apple(tm)-style reflections in your images
- *
- * @package PhpThumb
- * @subpackage Plugins
- */
 class Reflection implements \PHPThumb\PluginInterface
 {
     protected $currentDimensions;
@@ -40,9 +32,9 @@ class Reflection implements \PHPThumb\PluginInterface
     protected $newImage;
     protected $options;
 
-    protected $percent;
-    protected $reflection;
-    protected $white;
+    protected int $percent;
+    protected int $reflection;
+    protected int $white;
     protected $border;
     protected $borderColor;
 
@@ -238,7 +230,7 @@ class Reflection implements \PHPThumb\PluginInterface
      * @param  string $hex
      * @param  bool   $asString
      */
-    protected function hex2rgb ($hex, $asString = false)
+    protected function hex2rgb (string $hex, bool $asString = false)
     {
         // strip off any leading #
         if (0 === strpos($hex, '#')) {

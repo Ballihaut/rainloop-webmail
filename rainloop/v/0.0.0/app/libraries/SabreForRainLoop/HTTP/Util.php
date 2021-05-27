@@ -20,7 +20,7 @@ class Util {
      * @param string $dateHeader
      * @return bool|DateTime
      */
-    static function parseHTTPDate($dateHeader) {
+    static function parseHTTPDate(string $dateHeader) {
 
         //RFC 2616 section 3.3.1 Full Date
         //Only the format is checked, valid ranges are checked by strtotime below

@@ -26,12 +26,12 @@ class LinkFinder
 	/**
 	 * @var array
 	 */
-	private $aPrepearPlainStringUrls;
+	private array $aPrepearPlainStringUrls;
 
 	/**
 	 * @var string
 	 */
-	private $sText;
+	private string $sText;
 
 	/**
 	 * @var mixed
@@ -51,7 +51,7 @@ class LinkFinder
 	/**
 	 * @var int
 	 */
-	private $iOptimizationLimit;
+	private int $iOptimizationLimit;
 
 	/**
 	 * @access private
@@ -83,7 +83,7 @@ class LinkFinder
 	 * @return \MailSo\Base\LinkFinder
 	 */
 	public function Clear()
-	{
+	: self {
 		$this->aPrepearPlainStringUrls = array();
 		$this->fLinkWrapper = null;
 		$this->fMailWrapper = null;
@@ -98,7 +98,7 @@ class LinkFinder
 	 * @return \MailSo\Base\LinkFinder
 	 */
 	public function Text($sText)
-	{
+	: self {
 		$this->sText = $sText;
 
 		return $this;
@@ -110,7 +110,7 @@ class LinkFinder
 	 * @return \MailSo\Base\LinkFinder
 	 */
 	public function LinkWrapper($fLinkWrapper)
-	{
+	: self {
 		$this->fLinkWrapper = $fLinkWrapper;
 
 		return $this;
@@ -122,7 +122,7 @@ class LinkFinder
 	 * @return \MailSo\Base\LinkFinder
 	 */
 	public function MailWrapper($fMailWrapper)
-	{
+	: self {
 		$this->fMailWrapper = $fMailWrapper;
 
 		return $this;
@@ -133,9 +133,9 @@ class LinkFinder
 	 *
 	 * @return \MailSo\Base\LinkFinder
 	 */
-	public function UseDefaultWrappers($bAddTargetBlank = false)
-	{
-		$this->fLinkWrapper = function ($sLink) use ($bAddTargetBlank) {
+	public function UseDefaultWrappers(bool $bAddTargetBlank = false)
+	: self {
+		$this->fLinkWrapper = function (string $sLink) use ($bAddTargetBlank) : string {
 			
 			$sNameLink = $sLink;
 			if (!\preg_match('/^[a-z]{3,5}\:\/\//i', \ltrim($sLink)))
@@ -146,7 +146,7 @@ class LinkFinder
 			return '<a '.($bAddTargetBlank ? 'target="_blank" ': '').'href="'.$sLink.'">'.$sNameLink.'</a>';
 		};
 
-		$this->fMailWrapper = function ($sEmail) use ($bAddTargetBlank) {
+		$this->fMailWrapper = function (string $sEmail) use ($bAddTargetBlank) : string {
 			return '<a '.($bAddTargetBlank ? 'target="_blank" ': '').'href="mailto:'.$sEmail.'">'.$sEmail.'</a>';
 		};
 
@@ -158,8 +158,8 @@ class LinkFinder
 	 *
 	 * @return string
 	 */
-	public function CompileText($bUseHtmlSpecialChars = true)
-	{
+	public function CompileText(bool $bUseHtmlSpecialChars = true)
+	: string {
 		$sText = \substr($this->sText, 0, $this->iOptimizationLimit);
 		$sSubText = \substr($this->sText, $this->iOptimizationLimit);
 
@@ -209,12 +209,12 @@ class LinkFinder
 	 * @return string
 	 */
 	private function findLinks($sText, $fWrapper)
-	{
+	: string {
 		$sPattern = '/([\W]|^)((?:https?:\/\/)|(?:svn:\/\/)|(?:git:\/\/)|(?:s?ftps?:\/\/)|(?:www\.))'.
 			'((\S+?)(\\/)?)((?:&gt;)?|[^\w\=\\/;\(\)\[\]]*?)(?=<|\s|$)/imu';
 
 		$aPrepearPlainStringUrls = $this->aPrepearPlainStringUrls;
-		$sText = \preg_replace_callback($sPattern, function ($aMatch) use ($fWrapper, &$aPrepearPlainStringUrls) {
+		$sText = \preg_replace_callback($sPattern, function ($aMatch) use ($fWrapper, &$aPrepearPlainStringUrls) : string {
 
 			if (\is_array($aMatch) && 6 < \count($aMatch))
 			{
@@ -264,11 +264,11 @@ class LinkFinder
 	 * @return string
 	 */
 	private function findMails($sText, $fWrapper)
-	{
+	: string {
 		$sPattern = '/([\w\.!#\$%\-+.]+@[A-Za-z0-9\-]+(\.[A-Za-z0-9\-]+)+)/';
 
 		$aPrepearPlainStringUrls = $this->aPrepearPlainStringUrls;
-		$sText = \preg_replace_callback($sPattern, function ($aMatch) use ($fWrapper, &$aPrepearPlainStringUrls) {
+		$sText = \preg_replace_callback($sPattern, function ($aMatch) use ($fWrapper, &$aPrepearPlainStringUrls) : string {
 
 			if (\is_array($aMatch) && isset($aMatch[1]))
 			{

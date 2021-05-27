@@ -70,7 +70,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_np_map_nothing = array(
+    private static array $_np_map_nothing = array(
         0xAD,
         0x34F,
         0x1806,
@@ -107,7 +107,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_general_prohibited = array(
+    private static array $_general_prohibited = array(
         0,
         1,
         2,
@@ -180,7 +180,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_np_prohibit = array(
+    private static array $_np_prohibit = array(
         0xA0,
         0x1680,
         0x2000,
@@ -274,7 +274,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_np_prohibit_ranges = array(
+    private static array $_np_prohibit_ranges = array(
         array(0x80,     0x9F    ),
         array(0x2060,   0x206F  ),
         array(0x1D173,  0x1D17A ),
@@ -294,7 +294,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_np_replacemaps = array(
+    private static array $_np_replacemaps = array(
         0x41    => array(0x61),
         0x42    => array(0x62),
         0x43    => array(0x63),
@@ -1707,7 +1707,7 @@ class Net_IDNA2
      * @var array
      * @access private
      */
-    private static $_np_norm_combcls = array(
+    private static array $_np_norm_combcls = array(
         0x334   => 1,
         0x335   => 1,
         0x336   => 1,
@@ -2057,103 +2057,103 @@ class Net_IDNA2
      * @var string
      * @access private
      */
-    private $_punycode_prefix = 'xn--';
+    private string $_punycode_prefix = 'xn--';
 
     /**
      * @access private
      */
-    private $_invalid_ucs = 0x80000000;
+    private int $_invalid_ucs = 0x80000000;
 
     /**
      * @access private
      */
-    private $_max_ucs = 0x10FFFF;
-
-    /**
-     * @var int
-     * @access private
-     */
-    private $_base = 36;
+    private int $_max_ucs = 0x10FFFF;
 
     /**
      * @var int
      * @access private
      */
-    private $_tmin = 1;
+    private int $_base = 36;
 
     /**
      * @var int
      * @access private
      */
-    private $_tmax = 26;
+    private int $_tmin = 1;
 
     /**
      * @var int
      * @access private
      */
-    private $_skew = 38;
+    private int $_tmax = 26;
 
     /**
      * @var int
      * @access private
      */
-    private $_damp = 700;
+    private int $_skew = 38;
 
     /**
      * @var int
      * @access private
      */
-    private $_initial_bias = 72;
+    private int $_damp = 700;
 
     /**
      * @var int
      * @access private
      */
-    private $_initial_n = 0x80;
+    private int $_initial_bias = 72;
 
     /**
      * @var int
      * @access private
      */
-    private $_slast;
-
-    /**
-     * @access private
-     */
-    private $_sbase = 0xAC00;
-
-    /**
-     * @access private
-     */
-    private $_lbase = 0x1100;
-
-    /**
-     * @access private
-     */
-    private $_vbase = 0x1161;
-
-    /**
-     * @access private
-     */
-    private $_tbase = 0x11a7;
+    private int $_initial_n = 0x80;
 
     /**
      * @var int
      * @access private
      */
-    private $_lcount = 19;
+    private int $_slast;
+
+    /**
+     * @access private
+     */
+    private int $_sbase = 0xAC00;
+
+    /**
+     * @access private
+     */
+    private int $_lbase = 0x1100;
+
+    /**
+     * @access private
+     */
+    private int $_vbase = 0x1161;
+
+    /**
+     * @access private
+     */
+    private int $_tbase = 0x11a7;
 
     /**
      * @var int
      * @access private
      */
-    private $_vcount = 21;
+    private int $_lcount = 19;
 
     /**
      * @var int
      * @access private
      */
-    private $_tcount = 28;
+    private int $_vcount = 21;
+
+    /**
+     * @var int
+     * @access private
+     */
+    private int $_tcount = 28;
 
     /**
      * vcount * tcount
@@ -2161,7 +2161,7 @@ class Net_IDNA2
      * @var int
      * @access private
      */
-    private $_ncount = 588;
+    private int $_ncount = 588;
 
     /**
      * lcount * tcount * vcount
@@ -2169,7 +2169,7 @@ class Net_IDNA2
      * @var int
      * @access private
      */
-    private $_scount = 11172;
+    private int $_scount = 11172;
 
     /**
      * Default encoding for encode()'s input and decode()'s output is UTF-8;
@@ -2179,7 +2179,7 @@ class Net_IDNA2
      * @var bool
      * @access private
      */
-    private $_api_encoding = 'utf8';
+    private string $_api_encoding = 'utf8';
 
     /**
      * Overlong UTF-8 encodings are forbidden
@@ -2195,7 +2195,7 @@ class Net_IDNA2
      * @var bool
      * @access private
      */
-    private $_strict_mode = false;
+    private bool $_strict_mode = false;
 
     /**
      * IDNA-version to use
@@ -2209,7 +2209,7 @@ class Net_IDNA2
      * @var bool
      * @access private
      */
-    private $_version = '2003';
+    private string $_version = '2003';
 
     /**
      * Cached value indicating whether or not mbstring function overloading is
@@ -2268,8 +2268,8 @@ class Net_IDNA2
      * @return boolean       true on success, false otherwise
      * @access public
      */
-    public function setParams($option, $value = false)
-    {
+    public function setParams($option, bool $value = false)
+    : bool {
         if (!is_array($option)) {
             $option = array($option => $value);
         }
@@ -2326,8 +2326,8 @@ class Net_IDNA2
      * @throws Exception
      * @access public
      */
-    public function encode($decoded, $one_time_encoding = false)
-    {
+    public function encode($decoded, bool $one_time_encoding = false)
+    : string {
         // Forcing conversion of input to UCS4 array
         // If one time encoding is given, use this, else the objects property
         switch (($one_time_encoding) ? $one_time_encoding : $this->_api_encoding) {
@@ -2414,8 +2414,8 @@ class Net_IDNA2
      * @throws Exception
      * @access public
      */
-    public function decode($input, $one_time_encoding = false)
-    {
+    public function decode(string $input, $one_time_encoding = false)
+    : string {
         // Optionally set
         if ($one_time_encoding) {
             switch ($one_time_encoding) {
@@ -2538,7 +2538,7 @@ class Net_IDNA2
      * @access private
      */
     private function _encode($decoded)
-    {
+    : bool {
         // We cannot encode a domain name containing the Punycode prefix
         $extract = self::_byteLength($this->_punycode_prefix);
         $check_pref = $this->_utf8_to_ucs4($this->_punycode_prefix);
@@ -2669,7 +2669,7 @@ class Net_IDNA2
      * @access private
      */
     private function _decode($encoded)
-    {
+    : bool {
         // We do need to find the Punycode prefix
         if (!preg_match('!^' . preg_quote($this->_punycode_prefix, '!') . '!', $encoded)) {
             return false;
@@ -2746,7 +2746,7 @@ class Net_IDNA2
      * @return int
      * @access private
      */
-    private function _adapt($delta, $npoints, $is_first)
+    private function _adapt(int $delta, int $npoints, $is_first)
     {
         $delta = (int) ($is_first ? ($delta / $this->_damp) : ($delta / 2));
         $delta += (int) ($delta / $npoints);
@@ -2766,8 +2766,8 @@ class Net_IDNA2
      * @return char  Encoded digit
      * @access private
      */
-    private function _encodeDigit($d)
-    {
+    private function _encodeDigit(int $d)
+    : string {
         return chr($d + 22 + 75 * ($d < 26));
     }
 
@@ -2794,7 +2794,7 @@ class Net_IDNA2
      * @throws Exception
      * @access private
      */
-    private function _nameprep($input)
+    private function _nameprep(iterable $input)
     {
         $output = array();
 
@@ -2892,8 +2892,8 @@ class Net_IDNA2
      *                      value as one value array
      * @access private
      */
-    private function _hangulDecompose($char)
-    {
+    private function _hangulDecompose(int $char)
+    : array {
         $sindex = $char - $this->_sbase;
 
         if ($sindex < 0 || $sindex >= $this->_scount) {
@@ -2922,7 +2922,7 @@ class Net_IDNA2
      * @access private
      */
     private function _hangulCompose($input)
-    {
+    : array {
         $inp_len = count($input);
 
         if (!$inp_len) {
@@ -3000,7 +3000,7 @@ class Net_IDNA2
      * @access private
      */
     private function _applyCannonicalOrdering($input)
-    {
+    : iterable {
         $swap = true;
         $size = count($input);
 
@@ -3044,7 +3044,7 @@ class Net_IDNA2
      * @access private
      */
     private function _combine($input)
-    {
+    : bool {
         $inp_len = count($input);
 
         // Is it a Hangul syllable?
@@ -3185,7 +3185,7 @@ class Net_IDNA2
      * @throws Exception
      * @access private
      */
-    private function _ucs4_to_utf8($input)
+    private function _ucs4_to_utf8(iterable $input)
     {
         $output = '';
 
@@ -3242,7 +3242,7 @@ class Net_IDNA2
      * @throws Exception
      * @access private
      */
-    private function _ucs4_to_ucs4_string($input)
+    private function _ucs4_to_ucs4_string(iterable $input)
     {
         $output = '';
         // Take array values and split output to 4 bytes per value
@@ -3298,7 +3298,7 @@ class Net_IDNA2
      * @static
      * @access private
      */
-    private static function _showHex($input, $include_bit = false)
+    private static function _showHex(iterable $input, bool $include_bit = false)
     {
         foreach ($input as $k => $v) {
             echo '[', $k, '] => ', sprintf('%X', $v);
@@ -3350,7 +3350,7 @@ class Net_IDNA2
      *
      * @see Net_IDNA2::$_mb_string_overload
      */
-    private static function _byteLength($string)
+    private static function _byteLength(string $string)
     {
         if (self::$_mb_string_overload) {
             return mb_strlen($string, '8bit');
@@ -3369,7 +3369,7 @@ class Net_IDNA2
      * @return Net_IDNA2
      * @access public
      */
-    function getInstance($params = array())
+    function getInstance(array $params = array())
     {
         return new Net_IDNA2($params);
     }
@@ -3387,7 +3387,7 @@ class Net_IDNA2
      * @access public
      */
     function singleton($params = array())
-    {
+    : string {
         static $instances;
         if (!isset($instances)) {
             $instances = array();

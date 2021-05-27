@@ -22,7 +22,7 @@ class HashIncrementByFloat extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'HINCRBYFLOAT';
     }
 }

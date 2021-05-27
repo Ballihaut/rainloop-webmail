@@ -5,57 +5,57 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
   /**
 	* @var string
 	*/
-	private $sEngine = 'MySQL';
+	private string $sEngine = 'MySQL';
 
 	/**
 	 * @var string
 	 */
-	private $sHost = '127.0.0.1';
+	private string $sHost = '127.0.0.1';
 
 	/**
 	 * @var int
 	 */
-	private $iPort = 3306;
+	private int $iPort = 3306;
 
 	/**
 	 * @var string
 	 */
-	private $sDatabase = 'postfixadmin';
+	private string $sDatabase = 'postfixadmin';
 
 	/**
 	* @var string
 	*/
-	private $sTable = 'mailbox';
+	private string $sTable = 'mailbox';
 
 	/**
 	* @var string
 	*/
-	private $sUsercol = 'username';
+	private string $sUsercol = 'username';
 
 	/**
 	* @var string
 	*/
-	private $sPasscol = 'password';
+	private string $sPasscol = 'password';
 
 	/**
 	 * @var string
 	 */
-	private $sUser = 'postfixadmin';
+	private string $sUser = 'postfixadmin';
 
 	/**
 	 * @var string
 	 */
-	private $sPassword = '';
+	private string $sPassword = '';
 
 	/**
 	 * @var string
 	 */
-	private $sEncrypt = '';
+	private string $sEncrypt = '';
 
 	/**
 	 * @var string
 	 */
-	private $sAllowedEmails = '';
+	private string $sAllowedEmails = '';
 
 	/**
 	 * @var \MailSo\Log\Logger
@@ -68,7 +68,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	 public function SetEngine($sEngine)
-	 {
+	 : self {
 		 $this->sEngine = $sEngine;
 		 return $this;
 	 }
@@ -79,7 +79,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetHost($sHost)
-	{
+	: self {
 		$this->sHost = $sHost;
 		return $this;
 	}
@@ -89,8 +89,8 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 *
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
-	public function SetPort($iPort)
-	{
+	public function SetPort(int $iPort)
+	: self {
 		$this->iPort = (int) $iPort;
 		return $this;
 	}
@@ -101,7 +101,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetDatabase($sDatabase)
-	{
+	: self {
 		$this->sDatabase = $sDatabase;
 		return $this;
 	}
@@ -112,7 +112,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	* @return \ChangePasswordPostfixAdminDriver
 	*/
 	public function SetTable($sTable)
-	{
+	: self {
 		$this->sTable = $sTable;
 		return $this;
 	}
@@ -123,7 +123,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	* @return \ChangePasswordPostfixAdminDriver
 	*/
 	public function SetUserColumn($sUsercol)
-	{
+	: self {
 		$this->sUsercol = $sUsercol;
 		return $this;
 	}
@@ -134,7 +134,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	* @return \ChangePasswordPostfixAdminDriver
 	*/
 	public function SetPasswordColumn($sPasscol)
-	{
+	: self {
 		$this->sPasscol = $sPasscol;
 		return $this;
 	}
@@ -145,7 +145,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetUser($sUser)
-	{
+	: self {
 		$this->sUser = $sUser;
 		return $this;
 	}
@@ -156,7 +156,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetPassword($sPassword)
-	{
+	: self {
 		$this->sPassword = $sPassword;
 		return $this;
 	}
@@ -167,7 +167,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetEncrypt($sEncrypt)
-	{
+	: self {
 		$this->sEncrypt = $sEncrypt;
 		return $this;
 	}
@@ -178,7 +178,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetAllowedEmails($sAllowedEmails)
-	{
+	: self {
 		$this->sAllowedEmails = $sAllowedEmails;
 		return $this;
 	}
@@ -189,7 +189,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return \ChangePasswordPostfixAdminDriver
 	 */
 	public function SetLogger($oLogger)
-	{
+	: self {
 		if ($oLogger instanceof \MailSo\Log\Logger)
 		{
 			$this->oLogger = $oLogger;
@@ -204,7 +204,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $oAccount && $oAccount->Email() &&
 			\RainLoop\Plugins\Helper::ValidateWildcardValues($oAccount->Email(), $this->sAllowedEmails);
 	}
@@ -283,7 +283,7 @@ class ChangePasswordPostfixAdminDriver implements \RainLoop\Providers\ChangePass
 	 *
 	 * @return string
 	 */
-	private function cryptPassword($sPassword, $oPdo)
+	private function cryptPassword(string $sPassword, $oPdo)
 	{
 		$sResult = '';
 		if (function_exists('random_bytes')) {

@@ -15,7 +15,7 @@ class VideoOnLoginScreenPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('mp4_file')->SetLabel('Url to a mp4 file')
 				->SetPlaceholder('http://')

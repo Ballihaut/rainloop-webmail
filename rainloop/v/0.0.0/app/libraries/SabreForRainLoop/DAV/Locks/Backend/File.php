@@ -85,7 +85,7 @@ class File extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function lock($uri, LockInfo $lockInfo) {
+    public function lock($uri, LockInfo $lockInfo) : bool {
 
         // We're making the lock timeout 30 minutes
         $lockInfo->timeout = 1800;
@@ -115,7 +115,7 @@ class File extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function unlock($uri, LockInfo $lockInfo) {
+    public function unlock($uri, LockInfo $lockInfo) : bool {
 
         $locks = $this->getData();
         foreach($locks as $k=>$lock) {
@@ -137,7 +137,7 @@ class File extends AbstractBackend {
      *
      * @return array
      */
-    protected function getData() {
+    protected function getData() : array {
 
         if (!file_exists($this->locksFile)) return array();
 

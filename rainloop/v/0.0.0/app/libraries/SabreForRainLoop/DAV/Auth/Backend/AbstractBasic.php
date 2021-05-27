@@ -61,7 +61,7 @@ abstract class AbstractBasic implements BackendInterface {
      * @throws DAV\Exception\NotAuthenticated
      * @return bool
      */
-    public function authenticate(DAV\Server $server, $realm) {
+    public function authenticate(DAV\Server $server, $realm) : bool {
 
         $auth = new HTTP\BasicAuth();
         $auth->setHTTPRequest($server->httpRequest);

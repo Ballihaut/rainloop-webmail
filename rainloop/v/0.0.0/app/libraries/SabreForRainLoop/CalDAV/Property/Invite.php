@@ -25,7 +25,7 @@ class Invite extends DAV\Property {
      *
      * @var array
      */
-    protected $users;
+    protected array $users;
 
     /**
      * The organizer contains information about the person who shared the

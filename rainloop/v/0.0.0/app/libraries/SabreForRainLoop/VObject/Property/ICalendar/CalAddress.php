@@ -32,7 +32,7 @@ class CalAddress extends Text {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return 'CAL-ADDRESS';
 

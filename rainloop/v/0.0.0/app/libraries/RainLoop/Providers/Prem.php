@@ -32,7 +32,7 @@ class Prem
 	 * @return bool
 	 */
 	public function IsActive()
-	{
+	: bool {
 		return true;
 	}
 
@@ -42,8 +42,8 @@ class Prem
 	 *
 	 * @return bool
 	 */
-	public function Parser($sInput, &$iExpired = 0)
-	{
+	public function Parser(string $sInput, int &$iExpired = 0)
+	: bool {
 		$aMatch = array();
 		if (\preg_match('/^EXPIRED:([\d]+)$/', $sInput, $aMatch))
 		{
@@ -109,7 +109,7 @@ class Prem
 	/**
 	 * @return string
 	 */
-	public function Activate($sDomain, $sKey, &$iCode)
+	public function Activate(string $sDomain, string $sKey, &$iCode)
 	{
 		$iCode = 0;
 		$sContentType = '';
@@ -133,8 +133,8 @@ class Prem
 	/**
 	 * @return string
 	 */
-	public function Fetcher($sForce = false, $bLongCache = false, $iFastCacheTimeInMin = 10, $iLongCacheTimeInDays = 3)
-	{
+	public function Fetcher(bool $sForce = false, bool $bLongCache = false, int $iFastCacheTimeInMin = 10, int $iLongCacheTimeInDays = 3)
+	: string {
 		$sDomain = \trim(APP_SITE);
 
 		$oConfig = $this->oConfig;

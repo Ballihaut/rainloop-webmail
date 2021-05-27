@@ -1,20 +1,5 @@
 <?php
 /**
- * Note : Code is released under the GNU LGPL
- *
- * Please do not change the header of this file
- *
- * This library is free software; you can redistribute it and/or modify it under the terms of the GNU
- * Lesser General Public License as published by the Free Software Foundation; either version 2 of
- * the License, or (at your option) any later version.
- *
- * This library is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY;
- * without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
- *
- * See the GNU Lesser General Public License for more details.
- */
-
-/**
  * Light PHP wrapper for the OAuth 2.0 protocol.
  *
  * This client is based on the OAuth2 specification draft v2.15
@@ -85,7 +70,7 @@ class Client
      *
      * @var int
      */
-    protected $client_auth = self::AUTH_TYPE_URI;
+    protected int $client_auth = self::AUTH_TYPE_URI;
 
     /**
      * Access Token
@@ -99,7 +84,7 @@ class Client
      *
      * @var int
      */
-    protected $access_token_type = self::ACCESS_TOKEN_URI;
+    protected int $access_token_type = self::ACCESS_TOKEN_URI;
 
     /**
      * Access Token Secret
@@ -134,7 +119,7 @@ class Client
      *
      * @var array
      */
-    protected $curl_options = array();
+    protected array $curl_options = array();
 
     /**
      * Construct
@@ -188,8 +173,8 @@ class Client
      * @param array  $extra_parameters  Array of extra parameters like scope or state (Ex: array('scope' => null, 'state' => ''))
      * @return string URL used for authentication
      */
-    public function getAuthenticationUrl($auth_endpoint, $redirect_uri, array $extra_parameters = array())
-    {
+    public function getAuthenticationUrl(string $auth_endpoint, $redirect_uri, array $extra_parameters = array())
+    : string {
         $parameters = array_merge(array(
             'response_type' => 'code',
             'client_id'     => $this->client_id,
@@ -206,7 +191,7 @@ class Client
      * @param array  $parameters        Array sent to the server (depend on which grant type you're using)
      * @return array Array of parameters required by the grant_type (CF SPEC)
      */
-    public function getAccessToken($token_endpoint, $grant_type, array $parameters)
+    public function getAccessToken($token_endpoint, string $grant_type, array $parameters)
     {
         if (!$grant_type) {
             throw new InvalidArgumentException('The grant_type is mandatory.', InvalidArgumentException::INVALID_GRANT_TYPE);
@@ -281,7 +266,7 @@ class Client
      * @param array $options An array specifying which options to set and their values
      * @return void
      */
-    public function setCurlOptions($options) 
+    public function setCurlOptions(array $options) 
     {
         $this->curl_options = array_merge($this->curl_options, $options);
     }
@@ -350,8 +335,8 @@ class Client
      * @param string $http_method Http Method
      * @return string
      */
-    private function generateMACSignature($url, $parameters, $http_method)
-    {
+    private function generateMACSignature(string $url, $parameters, string $http_method)
+    : string {
         $timestamp = time();
         $nonce = uniqid();
         $parsed_url = parse_url($url);
@@ -390,7 +375,7 @@ class Client
      * @return array
      */
     private function executeRequest($url, $parameters = array(), $http_method = self::HTTP_METHOD_GET, array $http_headers = null, $form_content_type = self::HTTP_FORM_CONTENT_TYPE_MULTIPART)
-    {
+    : array {
         $curl_options = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_SSL_VERIFYPEER => true,
@@ -487,10 +472,10 @@ class Client
      * @param  mixed  $grant_type  the grant type
      * @return string
      */
-    private function convertToCamelCase($grant_type)
-    {
+    private function convertToCamelCase(string $grant_type)
+    : string {
         $parts = explode('_', $grant_type);
-        array_walk($parts, function(&$item) { $item = ucfirst($item);});
+        array_walk($parts, function(string &$item) { $item = ucfirst($item);});
         return implode('', $parts);
     }
 }

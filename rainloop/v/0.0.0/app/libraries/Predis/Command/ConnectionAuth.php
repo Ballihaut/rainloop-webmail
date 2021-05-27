@@ -22,7 +22,7 @@ class ConnectionAuth extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'AUTH';
     }
 }

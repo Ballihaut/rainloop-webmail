@@ -29,7 +29,7 @@ class Response extends DAV\Property implements IHref {
      *
      * @var array
      */
-    private $responseProperties;
+    private array $responseProperties;
 
     /**
      * The responseProperties argument is a list of properties

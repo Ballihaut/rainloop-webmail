@@ -7,7 +7,7 @@ class Utils
 	/**
 	 * @var string
 	 */
-	static $CookieDefaultPath = '';
+	static string $CookieDefaultPath = '';
 
 	/**
 	 * @var bool|null
@@ -31,7 +31,7 @@ class Utils
 	 *
 	 * @return bool
 	 */
-	static public function PgpVerifyFile($sFileName, $sSignature)
+	public static function PgpVerifyFile(string $sFileName, $sSignature)
 	{
 		$sKeyFile = APP_VERSION_ROOT_PATH.'app/resources/RainLoop.asc';
 		if (\file_exists($sKeyFile) && \file_exists($sFileName) && !empty($sSignature))
@@ -46,7 +46,7 @@ class Utils
 	/**
 	 * @return string
 	 */
-	static public function RsaPrivateKey()
+	public static function RsaPrivateKey()
 	{
 		if (!empty(\RainLoop\Utils::$RsaKey))
 		{
@@ -65,7 +65,7 @@ class Utils
 	 *
 	 * @return string|false
 	 */
-	static public function EncryptStringRSA($sString, $sKey = '')
+	public static function EncryptStringRSA(string $sString, string $sKey = '')
 	{
 		$sResult = '';
 		$sKey = \md5($sKey);
@@ -108,7 +108,7 @@ class Utils
 	 *
 	 * @return string|false
 	 */
-	static public function DecryptStringRSA($sString, $sKey = '')
+	public static function DecryptStringRSA(string $sString, string $sKey = '')
 	{
 		$sResult = '';
 		$sKey = \md5($sKey);
@@ -146,7 +146,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function EncryptString($sString, $sKey)
+	public static function EncryptString($sString, $sKey)
 	{
 		return \MailSo\Base\Crypt::XxteaEncrypt($sString, $sKey);
 	}
@@ -157,7 +157,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function DecryptString($sEncriptedString, $sKey)
+	public static function DecryptString($sEncriptedString, $sKey)
 	{
 		return \MailSo\Base\Crypt::XxteaDecrypt($sEncriptedString, $sKey);
 	}
@@ -168,7 +168,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function EncryptStringQ($sString, $sKey)
+	public static function EncryptStringQ($sString, string $sKey)
 	{
 //		if (\MailSo\Base\Utils::FunctionExistsAndEnabled('openssl_pkey_get_private'))
 //		{
@@ -186,7 +186,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function DecryptStringQ($sEncriptedString, $sKey)
+	public static function DecryptStringQ($sEncriptedString, string $sKey)
 	{
 //		if (\MailSo\Base\Utils::FunctionExistsAndEnabled('openssl_pkey_get_private'))
 //		{
@@ -204,7 +204,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function EncodeKeyValues(array $aValues, $sCustomKey = '')
+	public static function EncodeKeyValues(array $aValues, string $sCustomKey = '')
 	{
 		return \MailSo\Base\Utils::UrlSafeBase64Encode(
 			\RainLoop\Utils::EncryptString(@\serialize($aValues), \md5(APP_SALT.$sCustomKey)));
@@ -216,7 +216,7 @@ class Utils
 	 *
 	 * @return array
 	 */
-	static public function DecodeKeyValues($sEncodedValues, $sCustomKey = '')
+	public static function DecodeKeyValues($sEncodedValues, string $sCustomKey = '')
 	{
 		$aResult = @\unserialize(
 			\RainLoop\Utils::DecryptString(
@@ -231,7 +231,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	static public function EncodeKeyValuesQ(array $aValues, $sCustomKey = '')
+	public static function EncodeKeyValuesQ(array $aValues, string $sCustomKey = '')
 	{
 		return \MailSo\Base\Utils::UrlSafeBase64Encode(
 			\RainLoop\Utils::EncryptStringQ(
@@ -244,7 +244,7 @@ class Utils
 	 *
 	 * @return array
 	 */
-	static public function DecodeKeyValuesQ($sEncodedValues, $sCustomKey = '')
+	public static function DecodeKeyValuesQ($sEncodedValues, string $sCustomKey = '')
 	{
 		$aResult = @\unserialize(
 			\RainLoop\Utils::DecryptStringQ(
@@ -256,8 +256,8 @@ class Utils
 	/**
 	 * @return string
 	 */
-	static public function GetConnectionToken()
-	{
+	public static function GetConnectionToken()
+	: string {
 		$sKey = 'rltoken';
 
 		$sToken = \RainLoop\Utils::GetCookie($sKey, null);
@@ -273,16 +273,16 @@ class Utils
 	/**
 	 * @return string
 	 */
-	static public function Fingerprint()
-	{
+	public static function Fingerprint()
+	: string {
 		return \md5(empty($_SERVER['HTTP_USER_AGENT']) ? 'RainLoopFingerprint' : $_SERVER['HTTP_USER_AGENT']);
 	}
 
 	/**
 	 * @return string
 	 */
-	static public function GetShortToken()
-	{
+	public static function GetShortToken()
+	: string {
 		$sKey = 'rlsession';
 
 		$sToken = \RainLoop\Utils::GetCookie($sKey, null);
@@ -298,7 +298,7 @@ class Utils
 	/**
 	 * @return void
 	 */
-	static public function UpdateConnectionToken()
+	public static function UpdateConnectionToken()
 	{
 		$sKey = 'rltoken';
 
@@ -312,8 +312,8 @@ class Utils
 	/**
 	 * @return string
 	 */
-	static public function GetCsrfToken()
-	{
+	public static function GetCsrfToken()
+	: string {
 		return \md5('Csrf'.APP_SALT.self::GetConnectionToken().'Token'.APP_SALT);
 	}
 
@@ -322,7 +322,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	public static function PathMD5($sPath)
+	public static function PathMD5(string $sPath)
 	{
 		$sResult = '';
 		if (@\is_dir($sPath))
@@ -345,7 +345,7 @@ class Utils
 	 *
 	 * @return void
 	 */
-	public static function ReadAndAddLang($sFileName, &$aResultLang)
+	public static function ReadAndAddLang(string $sFileName, &$aResultLang)
 	{
 		if (\file_exists($sFileName))
 		{
@@ -397,7 +397,7 @@ class Utils
 	 * @param string $sType = ''
 	 * @return array
 	 */
-	public static function FolderFiles($sDir, $sType = '')
+	public static function FolderFiles(string $sDir, $sType = '')
 	{
 		$aResult = array();
 		if (@\is_dir($sDir))
@@ -428,7 +428,7 @@ class Utils
 	 * @return string
 	 */
 	public static function ClearHtmlOutput($sHtml)
-	{
+	: string {
 //		return $sHtml;
 		return \trim(\str_replace('> <', '><',
 			\str_replace('" />', '"/>',
@@ -443,7 +443,7 @@ class Utils
 	 * @param string $sKey
 	 * @return bool
 	 */
-	public static function FastCheck($sKey)
+	public static function FastCheck(string $sKey)
 	{
 		$bResult = false;
 
@@ -462,7 +462,7 @@ class Utils
 	 * @param string $sDirName
 	 * @param string $sNameSuffix = ''
 	 */
-	public static function CompileTemplates(&$aList, $sDirName, $sNameSuffix = '')
+	public static function CompileTemplates(&$aList, string $sDirName, string $sNameSuffix = '')
 	{
 		if (\file_exists($sDirName))
 		{
@@ -491,7 +491,7 @@ class Utils
 		return isset(\RainLoop\Utils::$Cookies[$sName]) ? \RainLoop\Utils::$Cookies[$sName] : $mDefault;
 	}
 
-	public static function SetCookie($sName, $sValue = '', $iExpire = 0, $sPath = null, $sDomain = null, $bSecure = null, $bHttpOnly = true)
+	public static function SetCookie($sName, string $sValue = '', $iExpire = 0, $sPath = null, $sDomain = null, $bSecure = null, bool $bHttpOnly = true)
 	{
 		if (null === \RainLoop\Utils::$Cookies)
 		{
@@ -531,7 +531,7 @@ class Utils
 	 * @return bool
 	 */
 	public static function IsOwnCloud()
-	{
+	: bool {
 		return isset($_ENV['RAINLOOP_OWNCLOUD']) && $_ENV['RAINLOOP_OWNCLOUD'] &&
 			\class_exists('OC');
 	}
@@ -539,7 +539,7 @@ class Utils
 	 * @return bool
 	 */
 	public static function IsOwnCloudLoggedIn()
-	{
+	: bool {
 		return self::IsOwnCloud() && \class_exists('OCP\User') && \OCP\User::isLoggedIn();
 	}
 
@@ -549,7 +549,7 @@ class Utils
 	 *
 	 * @return string
 	 */
-	public static function UrlEncode($sV, $bEncode = false)
+	public static function UrlEncode(string $sV, bool $bEncode = false)
 	{
 		return $bEncode ? \urlencode($sV) : $sV;
 	}
@@ -584,7 +584,7 @@ class Utils
 	 * @return string
 	 */
 	public static function WebVersionPath()
-	{
+	: string {
 		return self::WebPath().'rainloop/v/'.APP_VERSION.'/';
 	}
 
@@ -592,7 +592,7 @@ class Utils
 	 * @return string
 	 */
 	public static function WebStaticPath()
-	{
+	: string {
 		return self::WebVersionPath().'static/';
 	}
 
@@ -628,7 +628,7 @@ class Utils
 	 *
 	 * @return array
 	 */
-	public static function CustomParseIniFile($sFileName, $bProcessSections = false)
+	public static function CustomParseIniFile(string $sFileName, bool $bProcessSections = false)
 	{
 //		if (\MailSo\Base\Utils::FunctionExistsAndEnabled('parse_ini_file'))
 //		{
@@ -639,7 +639,7 @@ class Utils
 		return \is_string($sData) ? @\parse_ini_string($sData, !!$bProcessSections) : null;
 	}
 
-	public static function CustomBaseConvert($sNumberInput, $sFromBaseInput = '0123456789', $sToBaseInput = '0123456789')
+	public static function CustomBaseConvert(string $sNumberInput, string $sFromBaseInput = '0123456789', string $sToBaseInput = '0123456789')
 	{
 		if ($sFromBaseInput === $sToBaseInput)
 		{

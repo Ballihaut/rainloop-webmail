@@ -78,7 +78,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param string $uri
      * @return array
      */
-    public function getHTTPMethods($uri) {
+    public function getHTTPMethods($uri) : array {
 
         // The MKCALENDAR is only available on unmapped uri's, whose
         // parents extend IExtendedCollection
@@ -102,7 +102,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return array
      */
-    public function getFeatures() {
+    public function getFeatures() : array {
 
         return array('calendar-access', 'calendar-proxy');
 
@@ -116,7 +116,7 @@ class Plugin extends DAV\ServerPlugin {
      *
      * @return string
      */
-    public function getPluginName() {
+    public function getPluginName() : string {
 
         return 'caldav';
 
@@ -255,7 +255,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param \DOMNode $dom
      * @return bool
      */
-    public function report($reportName,$dom) {
+    public function report($reportName,$dom) : bool {
 
         switch($reportName) {
             case '{'.self::NS_CALDAV.'}calendar-multiget' :
@@ -1193,7 +1193,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param VObject\Component $request
      * @return array
      */
-    protected function getFreeBusyForEmail($email, \DateTime $start, \DateTime $end, VObject\Component $request) {
+    protected function getFreeBusyForEmail(string $email, \DateTime $start, \DateTime $end, VObject\Component $request) : array {
 
         $caldavNS = '{' . Plugin::NS_CALDAV . '}';
 
@@ -1320,7 +1320,7 @@ class Plugin extends DAV\ServerPlugin {
      * @param array $postVars
      * @return bool
      */
-    public function browserPostAction($uri, $action, array $postVars) {
+    public function browserPostAction(string $uri, $action, array $postVars) {
 
         if ($action!=='mkcalendar')
             return;

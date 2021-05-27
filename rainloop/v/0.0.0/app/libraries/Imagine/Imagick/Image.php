@@ -51,7 +51,7 @@ final class Image extends AbstractImage
      */
     private static $supportsColorspaceConversion;
 
-    private static $colorspaceMapping = array(
+    private static array $colorspaceMapping = array(
         PaletteInterface::PALETTE_CMYK      => \Imagick::COLORSPACE_CMYK,
         PaletteInterface::PALETTE_RGB       => \Imagick::COLORSPACE_RGB,
         PaletteInterface::PALETTE_GRAYSCALE => \Imagick::COLORSPACE_GRAY,
@@ -123,7 +123,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function crop(PointInterface $start, BoxInterface $size)
-    {
+    : self {
         if (!$start->in($this->getSize())) {
             throw new OutOfBoundsException('Crop coordinates must start at minimum 0, 0 position from top left corner, crop height and width must be positive integers and must not exceed the current image borders');
         }
@@ -145,7 +145,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function flipHorizontally()
-    {
+    : self {
         try {
             $this->imagick->flopImage();
         } catch (\ImagickException $e) {
@@ -161,7 +161,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function flipVertically()
-    {
+    : self {
         try {
             $this->imagick->flipImage();
         } catch (\ImagickException $e) {
@@ -177,7 +177,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function strip()
-    {
+    : self {
         try {
             try {
                 $this->profile($this->palette->profile());
@@ -199,7 +199,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function paste(ImageInterface $image, PointInterface $start)
-    {
+    : self {
         if (!$image instanceof self) {
             throw new InvalidArgumentException(sprintf('Imagick\Image can only paste() Imagick\Image instances, %s given', get_class($image)));
         }
@@ -223,7 +223,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function resize(BoxInterface $size, $filter = ImageInterface::FILTER_UNDEFINED)
-    {
+    : self {
         try {
             $this->imagick->resizeImage($size->getWidth(), $size->getHeight(), $this->getFilter($filter), 1);
         } catch (\ImagickException $e) {
@@ -239,7 +239,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function rotate($angle, ColorInterface $background = null)
-    {
+    : self {
         $color = $background ? $background : $this->palette->color('fff');
 
         try {
@@ -262,7 +262,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function save($path = null, array $options = array())
-    {
+    : self {
         $path = null === $path ? $this->imagick->getImageFilename() : $path;
         if (null === $path) {
             throw new RuntimeException('You can omit save path only if image has been open from a file');
@@ -284,7 +284,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function show($format, array $options = array())
-    {
+    : self {
         header('Content-type: '.$this->getMimeType($format));
         echo $this->get($format, $options);
 
@@ -310,7 +310,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function interlace($scheme)
-    {
+    : self {
         static $supportedInterlaceSchemes = array(
             ImageInterface::INTERLACE_NONE      => \Imagick::INTERLACE_NO,
             ImageInterface::INTERLACE_LINE      => \Imagick::INTERLACE_LINE,
@@ -404,7 +404,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function applyMask(ImageInterface $mask)
-    {
+    : self {
         if (!$mask instanceof self) {
             throw new InvalidArgumentException('Can only apply instances of Imagine\Imagick\Image as masks');
         }
@@ -456,7 +456,7 @@ final class Image extends AbstractImage
      * @return ImageInterface
      */
     public function fill(FillInterface $fill)
-    {
+    : self {
         try {
             if ($this->isLinearOpaque($fill)) {
                 $this->applyFastLinear($fill);
@@ -545,7 +545,7 @@ final class Image extends AbstractImage
         $alpha = $this->palette->supportsAlpha() ? (int) round($pixel->getColorValue(\Imagick::COLOR_ALPHA) * 100) : null;
         $palette = $this->palette();
 
-        return $this->palette->color(array_map(function ($color) use ($palette, $pixel, $colorMapping) {
+        return $this->palette->color(array_map(function ($color) use ($palette, $pixel, $colorMapping) : int {
             if (!isset($colorMapping[$color])) {
                 throw new InvalidArgumentException(sprintf('Color %s is not mapped in Imagick', $color));
             }
@@ -570,7 +570,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function usePalette(PaletteInterface $palette)
-    {
+    : self {
         if (!isset(static::$colorspaceMapping[$palette->name()])) {
             throw new InvalidArgumentException(sprintf('The palette %s is not supported by Imagick driver', $palette->name()));
         }
@@ -615,7 +615,7 @@ final class Image extends AbstractImage
      * {@inheritdoc}
      */
     public function profile(ProfileInterface $profile)
-    {
+    : self {
         try {
             $this->imagick->profileImage('icc', $profile->data());
         } catch (\ImagickException $e) {
@@ -632,11 +632,11 @@ final class Image extends AbstractImage
      */
     private function flatten()
     {
-        /**
+        try {
+            /**
          * @see https://github.com/mkoppanen/imagick/issues/45
          */
-        try {
-            if (method_exists($this->imagick, 'mergeImageLayers') && defined('Imagick::LAYERMETHOD_UNDEFINED')) {
+        if (method_exists($this->imagick, 'mergeImageLayers') && defined('Imagick::LAYERMETHOD_UNDEFINED')) {
                 $this->imagick = $this->imagick->mergeImageLayers(\Imagick::LAYERMETHOD_UNDEFINED);
             } elseif (method_exists($this->imagick, 'flattenImages')) {
                 $this->imagick = $this->imagick->flattenImages();
@@ -658,7 +658,7 @@ final class Image extends AbstractImage
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    private function applyImageOptions(\Imagick $image, array $options, $path)
+    private function applyImageOptions(\Imagick $image, array $options, string $path)
     {
         if (isset($options['format'])) {
             $format = $options['format'];
@@ -742,7 +742,7 @@ final class Image extends AbstractImage
      * @return Boolean
      */
     private function isLinearOpaque(FillInterface $fill)
-    {
+    : bool {
         return $fill instanceof Linear && $fill->getStart()->isOpaque() && $fill->getEnd()->isOpaque();
     }
 

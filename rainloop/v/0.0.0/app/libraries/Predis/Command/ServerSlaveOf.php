@@ -22,7 +22,7 @@ class ServerSlaveOf extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SLAVEOF';
     }
 
@@ -30,7 +30,7 @@ class ServerSlaveOf extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 0 || $arguments[0] === 'NO ONE') {
             return array('NO', 'ONE');
         }

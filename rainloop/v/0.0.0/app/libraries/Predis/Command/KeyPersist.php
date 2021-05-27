@@ -22,7 +22,7 @@ class KeyPersist extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PERSIST';
     }
 

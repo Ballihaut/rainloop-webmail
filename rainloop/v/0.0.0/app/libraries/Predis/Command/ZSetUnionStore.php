@@ -30,7 +30,7 @@ class ZSetUnionStore extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         $options = array();
         $argc = count($arguments);
 
@@ -55,8 +55,8 @@ class ZSetUnionStore extends Command
      *
      * @return array
      */
-    private function prepareOptions($options)
-    {
+    private function prepareOptions(array $options)
+    : array {
         $opts = array_change_key_case($options, CASE_UPPER);
         $finalizedOpts = array();
 

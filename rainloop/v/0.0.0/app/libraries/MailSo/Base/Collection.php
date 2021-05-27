@@ -20,7 +20,7 @@ abstract class Collection
 	/**
 	 * @var array
 	 */
-	protected $aItems;
+	protected array $aItems;
 
 	/**
 	 * @access protected
@@ -35,7 +35,7 @@ abstract class Collection
 	 * @param bool $bToTop = false
 	 * @return self
 	 */
-	public function Add($mItem, $bToTop = false)
+	public function Add($mItem, bool $bToTop = false)
 	{
 		if ($bToTop)
 		{
@@ -56,7 +56,7 @@ abstract class Collection
 	 * @throws \MailSo\Base\Exceptions\InvalidArgumentException
 	 */
 	public function AddArray($aItems)
-	{
+	: self {
 		if (!\is_array($aItems))
 		{
 			throw new \MailSo\Base\Exceptions\InvalidArgumentException();

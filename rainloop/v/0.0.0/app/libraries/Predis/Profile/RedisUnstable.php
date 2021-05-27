@@ -22,7 +22,7 @@ class RedisUnstable extends RedisVersion300
      * {@inheritdoc}
      */
     public function getVersion()
-    {
+    : string {
         return '3.2';
     }
 
@@ -30,7 +30,7 @@ class RedisUnstable extends RedisVersion300
      * {@inheritdoc}
      */
     public function getSupportedCommands()
-    {
+    : array {
         return array_merge(parent::getSupportedCommands(), array(
             /* ---------------- Redis 3.2 ---------------- */
 

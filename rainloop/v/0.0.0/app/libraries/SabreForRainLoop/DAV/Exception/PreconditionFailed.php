@@ -45,7 +45,7 @@ class PreconditionFailed extends DAV\Exception {
      *
      * @return int
      */
-    public function getHTTPCode() {
+    public function getHTTPCode() : int {
 
         return 412;
 

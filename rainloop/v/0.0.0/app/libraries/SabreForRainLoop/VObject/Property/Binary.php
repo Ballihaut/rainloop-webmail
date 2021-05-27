@@ -76,7 +76,7 @@ class Binary extends Property {
      *
      * @return string
      */
-    public function getRawMimeDirValue() {
+    public function getRawMimeDirValue() : string {
 
         return base64_encode($this->value);
 
@@ -90,7 +90,7 @@ class Binary extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return 'BINARY';
 
@@ -103,7 +103,7 @@ class Binary extends Property {
      *
      * @return array
      */
-    public function getJsonValue() {
+    public function getJsonValue() : array {
 
         return array(base64_encode($this->getValue()));
 

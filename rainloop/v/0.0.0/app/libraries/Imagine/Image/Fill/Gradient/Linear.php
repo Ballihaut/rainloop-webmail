@@ -23,7 +23,7 @@ abstract class Linear implements FillInterface
     /**
      * @var integer
      */
-    private $length;
+    private int $length;
 
     /**
      * @var ColorInterface

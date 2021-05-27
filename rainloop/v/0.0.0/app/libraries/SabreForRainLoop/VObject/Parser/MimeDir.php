@@ -141,7 +141,7 @@ class MimeDir extends Parser {
      * @param string $line Unfolded line
      * @return Node
      */
-    protected function parseLine($line) {
+    protected function parseLine(string $line) : bool {
 
         // Start of a new component
         if (strtoupper(substr($line, 0, 6)) === 'BEGIN:') {
@@ -196,7 +196,7 @@ class MimeDir extends Parser {
     /**
      * The real current line number.
      */
-    protected $lineIndex = 0;
+    protected int $lineIndex = 0;
 
     /**
      * In the case of unfolded lines, this property holds the line number for
@@ -204,7 +204,7 @@ class MimeDir extends Parser {
      *
      * @var int
      */
-    protected $startLine = 0;
+    protected int $startLine = 0;
 
     /**
      * Contains a 'raw' representation of the current line.
@@ -267,7 +267,7 @@ class MimeDir extends Parser {
      *
      * @return void
      */
-    protected function readProperty($line) {
+    protected function readProperty($line) : bool {
 
         if ($this->options & self::OPTION_FORGIVING) {
             $propNameToken = 'A-Z0-9\-\._\\/';
@@ -455,7 +455,7 @@ class MimeDir extends Parser {
      * @param string $delimiter
      * @return string|string[]
      */
-    static public function unescapeValue($input, $delimiter = ';') {
+    public static function unescapeValue($input, string $delimiter = ';') {
 
         $regex = '#  (?: (\\\\ (?: \\\\ | N | n | ; | , ) )';
         if ($delimiter) {
@@ -537,7 +537,7 @@ class MimeDir extends Parser {
     private function unescapeParam($input) {
 
         return
-            preg_replace_callback('#(\^(\^|n|\'))#',function($matches) {
+            preg_replace_callback('#(\^(\^|n|\'))#',function($matches) : string {
                 switch($matches[2]) {
                     case 'n' :
                         return "\n";

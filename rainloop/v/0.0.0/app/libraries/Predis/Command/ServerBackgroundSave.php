@@ -22,7 +22,7 @@ class ServerBackgroundSave extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'BGSAVE';
     }
 
@@ -30,7 +30,7 @@ class ServerBackgroundSave extends Command
      * {@inheritdoc}
      */
     public function parseResponse($data)
-    {
+    : bool {
         return $data === 'Background saving started' ? true : $data;
     }
 }

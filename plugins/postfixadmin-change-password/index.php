@@ -11,7 +11,7 @@ class PostfixadminChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return string
 	 */
 	public function Supported()
-	{
+	: string {
 		if (!extension_loaded('pdo') || !class_exists('PDO'))
 		{
 			return 'The PHP extension PDO must be installed to use this plugin';
@@ -63,7 +63,7 @@ class PostfixadminChangePasswordPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('engine')->SetLabel('Engine')
 				->SetType(\RainLoop\Enumerations\PluginPropertyType::SELECTION)

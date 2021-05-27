@@ -22,7 +22,7 @@ class SetScan extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'SSCAN';
     }
 
@@ -30,7 +30,7 @@ class SetScan extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 3 && is_array($arguments[2])) {
             $options = $this->prepareOptions(array_pop($arguments));
             $arguments = array_merge($arguments, $options);
@@ -47,7 +47,7 @@ class SetScan extends Command
      * @return array
      */
     protected function prepareOptions($options)
-    {
+    : array {
         $options = array_change_key_case($options, CASE_UPPER);
         $normalized = array();
 

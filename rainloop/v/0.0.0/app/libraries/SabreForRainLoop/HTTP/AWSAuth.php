@@ -34,7 +34,7 @@ class AWSAuth extends AbstractAuth {
      *
      * @var int
      */
-    public $errorCode = 0;
+    public int $errorCode = 0;
 
     const ERR_NOAWSHEADER = 1;
     const ERR_MD5CHECKSUMWRONG = 2;
@@ -49,7 +49,7 @@ class AWSAuth extends AbstractAuth {
      *
      * @return bool
      */
-    public function init() {
+    public function init() : bool {
 
         $authHeader = $this->httpRequest->getHeader('Authorization');
         $authHeader = explode(' ',$authHeader);
@@ -82,7 +82,7 @@ class AWSAuth extends AbstractAuth {
      * @param string $secretKey
      * @return bool
      */
-    public function validate($secretKey) {
+    public function validate($secretKey) : bool {
 
         $contentMD5 = $this->httpRequest->getHeader('Content-MD5');
 
@@ -156,7 +156,7 @@ class AWSAuth extends AbstractAuth {
      * @param string $dateHeader
      * @return bool
      */
-    protected function validateRFC2616Date($dateHeader) {
+    protected function validateRFC2616Date($dateHeader) : bool {
 
         $date = Util::parseHTTPDate($dateHeader);
 
@@ -211,7 +211,7 @@ class AWSAuth extends AbstractAuth {
      * @param string $message
      * @return string
      */
-    private function hmacsha1($key, $message) {
+    private function hmacsha1(string $key, string $message) {
 
         $blocksize=64;
         if (strlen($key)>$blocksize)

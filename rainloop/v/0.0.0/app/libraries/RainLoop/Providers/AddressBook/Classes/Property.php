@@ -9,17 +9,17 @@ class Property
 	/**
 	 * @var int
 	 */
-	public $IdProperty;
+	public int $IdProperty;
 
 	/**
 	 * @var int
 	 */
-	public $Type;
+	public int $Type;
 
 	/**
 	 * @var string
 	 */
-	public $TypeStr;
+	public string $TypeStr;
 
 	/**
 	 * @var string
@@ -29,17 +29,17 @@ class Property
 	/**
 	 * @var string
 	 */
-	public $ValueLower;
+	public string $ValueLower;
 
 	/**
 	 * @var string
 	 */
-	public $ValueCustom;
+	public string $ValueCustom;
 
 	/**
 	 * @var int
 	 */
-	public $Frec;
+	public int $Frec;
 
 	public function __construct(
 		$iType = \RainLoop\Providers\AddressBook\Enumerations\PropertyType::UNKNOWN, $sValue = '', $sTypeStr = '')
@@ -69,7 +69,7 @@ class Property
 	 * @return bool
 	 */
 	public function IsName()
-	{
+	: bool {
 		return \in_array($this->Type, array(PropertyType::FULLNAME, PropertyType::FIRST_NAME,
 			PropertyType::LAST_NAME, PropertyType::MIDDLE_NAME, PropertyType::NICK_NAME));
 	}
@@ -78,7 +78,7 @@ class Property
 	 * @return bool
 	 */
 	public function IsEmail()
-	{
+	: bool {
 		return PropertyType::EMAIl === $this->Type;
 	}
 
@@ -86,7 +86,7 @@ class Property
 	 * @return bool
 	 */
 	public function IsPhone()
-	{
+	: bool {
 		return PropertyType::PHONE === $this->Type;
 	}
 
@@ -94,7 +94,7 @@ class Property
 	 * @return bool
 	 */
 	public function IsWeb()
-	{
+	: bool {
 		return PropertyType::WEB_PAGE === $this->Type;
 	}
 
@@ -102,7 +102,7 @@ class Property
 	 * @return bool
 	 */
 	public function IsValueForLower()
-	{
+	: bool {
 		return $this->IsEmail() || $this->IsName() || $this->IsWeb();
 	}
 
@@ -125,7 +125,7 @@ class Property
 	 * @return array
 	 */
 	public function TypesUpperAsArray()
-	{
+	: array {
 		return \array_map('strtoupper', $this->TypesAsArray());
 	}
 

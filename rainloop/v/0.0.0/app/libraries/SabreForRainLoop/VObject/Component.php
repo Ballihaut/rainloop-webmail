@@ -21,14 +21,14 @@ class Component extends Node {
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * A list of properties and/or sub-components.
      *
      * @var array
      */
-    public $children = array();
+    public array $children = array();
 
     /**
      * Creates a new component.
@@ -241,7 +241,7 @@ class Component extends Node {
          * @param array $array
          * @return int
          */
-        $sortScore = function($key, $array) {
+        $sortScore = function($key, $array) : int {
 
             if ($array[$key] instanceof Component) {
 
@@ -272,7 +272,7 @@ class Component extends Node {
         };
 
         $tmp = $this->children;
-        uksort($this->children, function($a, $b) use ($sortScore, $tmp) {
+        uksort($this->children, function($a, $b) use ($sortScore, $tmp) : int {
 
             $sA = $sortScore($a, $tmp);
             $sB = $sortScore($b, $tmp);
@@ -348,8 +348,8 @@ class Component extends Node {
             return null;
         } else {
             $firstMatch = current($matches);
-            /** @var $firstMatch Property */
-            $firstMatch->setIterator(new ElementList(array_values($matches)));
+            $firstMatch->setIterator(new ElementList(/** @var $firstMatch Property */
+            array_values($matches)));
             return $firstMatch;
         }
 

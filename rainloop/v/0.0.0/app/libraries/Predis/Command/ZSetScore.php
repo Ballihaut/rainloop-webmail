@@ -22,7 +22,7 @@ class ZSetScore extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZSCORE';
     }
 }

@@ -31,7 +31,7 @@ class Uri extends Property {
      *
      * @return string
      */
-    public function getValueType() {
+    public function getValueType() : string {
 
         return "URI";
 

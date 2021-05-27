@@ -28,7 +28,7 @@ class PDO extends AbstractBackend {
      *
      * @var string
      */
-    protected $tableName;
+    protected string $tableName;
 
     /**
      * Constructor
@@ -120,7 +120,7 @@ class PDO extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function lock($uri, LockInfo $lockInfo) {
+    public function lock($uri, LockInfo $lockInfo) : bool {
 
         // We're making the lock timeout 30 minutes
         $lockInfo->timeout = 30*60;
@@ -154,7 +154,7 @@ class PDO extends AbstractBackend {
      * @param LockInfo $lockInfo
      * @return bool
      */
-    public function unlock($uri, LockInfo $lockInfo) {
+    public function unlock($uri, LockInfo $lockInfo) : bool {
 
         $stmt = $this->pdo->prepare('DELETE FROM '.$this->tableName.' WHERE uri = ? AND token = ?');
         $stmt->execute(array($uri,$lockInfo->token));

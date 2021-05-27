@@ -20,12 +20,12 @@ class Message
 	/**
 	 * @var string
 	 */
-	private $sFolder;
+	private string $sFolder;
 
 	/**
 	 * @var int
 	 */
-	private $iUid;
+	private int $iUid;
 
 	/**
 	 * @var string
@@ -35,42 +35,42 @@ class Message
 	/**
 	 * @var string
 	 */
-	private $sMessageId;
+	private string $sMessageId;
 
 	/**
 	 * @var string
 	 */
-	private $sContentType;
+	private string $sContentType;
 
 	/**
 	 * @var int
 	 */
-	private $iSize;
+	private int $iSize;
 
 	/**
 	 * @var int
 	 */
-	private $iInternalTimeStampInUTC;
+	private int $iInternalTimeStampInUTC;
 
 	/**
 	 * @var int
 	 */
-	private $iHeaderTimeStampInUTC;
+	private int $iHeaderTimeStampInUTC;
 
 	/**
 	 * @var string
 	 */
-	private $sHeaderDate;
+	private string $sHeaderDate;
 
 	/**
 	 * @var array
 	 */
-	private $aFlags;
+	private array $aFlags;
 
 	/**
 	 * @var array
 	 */
-	private $aFlagsLowerCase;
+	private array $aFlagsLowerCase;
 
 	/**
 	 * @var \MailSo\Mime\EmailCollection
@@ -110,17 +110,17 @@ class Message
 	/**
 	 * @var string
 	 */
-	private $sInReplyTo;
+	private string $sInReplyTo;
 
 	/**
 	 * @var string
 	 */
-	private $sPlain;
+	private string $sPlain;
 
 	/**
 	 * @var string
 	 */
-	private $sHtml;
+	private string $sHtml;
 
 	/**
 	 * @var \MailSo\Mail\AttachmentCollection
@@ -140,52 +140,52 @@ class Message
 	/**
 	 * @var int
 	 */
-	private $iSensitivity;
+	private int $iSensitivity;
 
 	/**
 	 * @var int
 	 */
-	private $iPriority;
+	private int $iPriority;
 
 	/**
 	 * @var string
 	 */
-	private $sDeliveryReceipt;
+	private string $sDeliveryReceipt;
 
 	/**
 	 * @var string
 	 */
-	private $sReadReceipt;
+	private string $sReadReceipt;
 
 	/**
 	 * @var array
 	 */
-	private $aUnsubsribeLinks;
+	private array $aUnsubsribeLinks;
 
 	/**
 	 * @var array
 	 */
-	private $aThreads;
+	private array $aThreads;
 
 	/**
 	 * @var bool
 	 */
-	private $bTextPartIsTrimmed;
+	private bool $bTextPartIsTrimmed;
 
 	/**
 	 * @var string
 	 */
-	private $sPgpSignature;
+	private string $sPgpSignature;
 
 	/**
 	 * @var bool
 	 */
-	private $bPgpSigned;
+	private bool $bPgpSigned;
 
 	/**
 	 * @var bool
 	 */
-	private $bPgpEncrypted;
+	private bool $bPgpEncrypted;
 
 	/**
 	 * @access private
@@ -199,7 +199,7 @@ class Message
 	 * @return \MailSo\Mail\Message
 	 */
 	public function Clear()
-	{
+	: self {
 		$this->sFolder = '';
 		$this->iUid = 0;
 		$this->sSubject = '';
@@ -571,8 +571,8 @@ class Message
 	 *
 	 * @return \MailSo\Mail\Message
 	 */
-	public function InitByFetchResponse($sFolder, $oFetchResponse, $oBodyStructure = null)
-	{
+	public function InitByFetchResponse(string $sFolder, $oFetchResponse, $oBodyStructure = null)
+	: self {
 		if (!$oBodyStructure)
 		{
 			$oBodyStructure = $oFetchResponse->GetFetchBodyStructure();
@@ -710,7 +710,7 @@ class Message
 			{
 				$this->aUnsubsribeLinks = explode(',', $this->aUnsubsribeLinks);
 				$this->aUnsubsribeLinks = array_map(
-					function ($link) {
+					function (string $link) : string {
 						return trim($link, ' <>');
 					},
 					$this->aUnsubsribeLinks

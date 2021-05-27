@@ -21,12 +21,12 @@ class File implements \MailSo\Cache\DriverInterface
 	/**
 	 * @var string
 	 */
-	private $sCacheFolder;
+	private string $sCacheFolder;
 
 	/**
 	 * @var string
 	 */
-	private $sKeyPrefix;
+	private string $sKeyPrefix;
 
 	/**
 	 * @access private
@@ -57,7 +57,7 @@ class File implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return \MailSo\Cache\Drivers\File
 	 */
-	public static function NewInstance($sCacheFolder, $sKeyPrefix = '')
+	public static function NewInstance($sCacheFolder, string $sKeyPrefix = '')
 	{
 		return new self($sCacheFolder, $sKeyPrefix);
 	}
@@ -111,7 +111,7 @@ class File implements \MailSo\Cache\DriverInterface
 	 * @return bool
 	 */
 	public function GC($iTimeToClearInHours = 24)
-	{
+	: bool {
 		if (0 < $iTimeToClearInHours)
 		{
 			\MailSo\Base\Utils::RecTimeDirRemove($this->sCacheFolder, 60 * 60 * $iTimeToClearInHours, \time());
@@ -127,7 +127,7 @@ class File implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return string
 	 */
-	private function generateCachedFileName($sKey, $bMkDir = false)
+	private function generateCachedFileName(string $sKey, bool $bMkDir = false)
 	{
 		$sFilePath = '';
 		if (3 < \strlen($sKey))

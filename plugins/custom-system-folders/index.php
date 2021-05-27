@@ -5,27 +5,27 @@ class CustomSystemFoldersPlugin extends \RainLoop\Plugins\AbstractPlugin
 	/**
 	 * @var string
 	 */
-	private $sSentFolder = '';
+	private string $sSentFolder = '';
 
 	/**
 	 * @var string
 	 */
-	private $sDraftsFolder = '';
+	private string $sDraftsFolder = '';
 
 	/**
 	 * @var string
 	 */
-	private $sSpamFolder = '';
+	private string $sSpamFolder = '';
 
 	/**
 	 * @var string
 	 */
-	private $sTrashFolder = '';
+	private string $sTrashFolder = '';
 
 	/**
 	 * @var string
 	 */
-	private $sArchiveFolder = '';
+	private string $sArchiveFolder = '';
 
 	public function Init()
 	{
@@ -91,7 +91,7 @@ class CustomSystemFoldersPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @param \RainLoop\Model\Account $oAccount
 	 * @param array $aSystemFolderNames
 	 */
-	public function FilterSystemFoldersNames($oAccount, &$aSystemFolderNames)
+	public function FilterSystemFoldersNames(bool $oAccount, &$aSystemFolderNames)
 	{
 		$aPrepend = array();
 		if ($oAccount && \is_array($aSystemFolderNames))
@@ -122,7 +122,7 @@ class CustomSystemFoldersPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	public function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('sent_folder')->SetLabel('Sent')
 				->SetDefaultValue('Sent'),

@@ -7,7 +7,7 @@ class Settings
 	/**
 	 * @var array
 	 */
-	protected $aData;
+	protected array $aData;
 
 	/**
 	 * @var bool
@@ -29,7 +29,7 @@ class Settings
 	 * @return \RainLoop\Settings
 	 */
 	public function InitData($aData)
-	{
+	: self {
 		if (\is_array($aData))
 		{
 			$this->aData = $aData;

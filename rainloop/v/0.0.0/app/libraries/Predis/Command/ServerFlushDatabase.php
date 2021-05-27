@@ -22,7 +22,7 @@ class ServerFlushDatabase extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'FLUSHDB';
     }
 }

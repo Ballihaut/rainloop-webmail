@@ -39,7 +39,7 @@ class ChangePassword extends \RainLoop\Providers\AbstractProvider
 	 * @return bool
 	 */
 	public function PasswordChangePossibility($oAccount)
-	{
+	: bool {
 		return $this->IsActive() &&
 			$oAccount instanceof \RainLoop\Account &&
 			$this->oDriver && $this->oDriver->PasswordChangePossibility($oAccount)
@@ -51,7 +51,7 @@ class ChangePassword extends \RainLoop\Providers\AbstractProvider
 	 * @param string $sPrevPassword
 	 * @param string $sNewPassword
 	 */
-	public function ChangePassword(\RainLoop\Account $oAccount, $sPrevPassword, $sNewPassword)
+	public function ChangePassword(\RainLoop\Account $oAccount, $sPrevPassword, string $sNewPassword)
 	{
 		$mResult = false;
 		

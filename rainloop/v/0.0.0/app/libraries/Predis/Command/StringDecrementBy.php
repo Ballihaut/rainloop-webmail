@@ -22,7 +22,7 @@ class StringDecrementBy extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'DECRBY';
     }
 }

@@ -22,7 +22,7 @@ class KeyKeys extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'KEYS';
     }
 }

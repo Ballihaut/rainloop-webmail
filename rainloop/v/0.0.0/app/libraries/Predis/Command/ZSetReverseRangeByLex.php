@@ -17,7 +17,7 @@ class ZSetReverseRangeByLex extends ZSetRangeByLex
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'ZREVRANGEBYLEX';
     }
 }

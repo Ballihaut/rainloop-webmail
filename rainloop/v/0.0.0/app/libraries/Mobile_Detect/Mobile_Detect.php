@@ -82,7 +82,7 @@ class Mobile_Detect
      * A cache for resolved matches
      * @var array
      */
-    protected $cache = array();
+    protected array $cache = array();
 
     /**
      * The User-Agent HTTP header is stored in here.
@@ -94,13 +94,13 @@ class Mobile_Detect
      * HTTP headers in the PHP-flavor. So HTTP_USER_AGENT and SERVER_SOFTWARE.
      * @var array
      */
-    protected $httpHeaders = array();
+    protected array $httpHeaders = array();
 
     /**
      * CloudFront headers. E.g. CloudFront-Is-Desktop-Viewer, CloudFront-Is-Mobile-Viewer & CloudFront-Is-Tablet-Viewer.
      * @var array
      */
-    protected $cloudfrontHeaders = array();
+    protected array $cloudfrontHeaders = array();
 
     /**
      * The matching Regex.
@@ -131,7 +131,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $mobileHeaders = array(
+    protected static array $mobileHeaders = array(
 
             'HTTP_ACCEPT'                  => array('matches' => array(
                                                                         // Opera Mini; @reference: http://dev.opera.com/articles/view/opera-binary-markup-language/
@@ -166,7 +166,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $phoneDevices = array(
+    protected static array $phoneDevices = array(
         'iPhone'        => '\biPhone\b|\biPod\b', // |\biTunes
         'BlackBerry'    => 'BlackBerry|\bBB10\b|rim[0-9]+',
         'HTC'           => 'HTC|HTC.*(Sensation|Evo|Vision|Explorer|6800|8100|8900|A7272|S510e|C110e|Legend|Desire|T8282)|APX515CKT|Qtek9090|APA9292KT|HD_mini|Sensation.*Z710e|PG86100|Z715e|Desire.*(A8181|HD)|ADR6200|ADR6400L|ADR6425|001HT|Inspire 4G|Android.*\bEVO\b|T-Mobile G1|Z520m',
@@ -214,7 +214,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $tabletDevices = array(
+    protected static array $tabletDevices = array(
         // @todo: check for mobile friendly emails topic.
         'iPad'              => 'iPad|iPad.*Mobile',
         // Removed |^.*Android.*Nexus(?!(?:Mobile).)*$
@@ -476,7 +476,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $operatingSystems = array(
+    protected static array $operatingSystems = array(
         'AndroidOS'         => 'Android',
         'BlackBerryOS'      => 'blackberry|\bBB10\b|rim tablet os',
         'PalmOS'            => 'PalmOS|avantgo|blazer|elaine|hiptop|palm|plucker|xiino',
@@ -512,7 +512,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $browsers = array(
+    protected static array $browsers = array(
         //'Vivaldi'         => 'Vivaldi',
         // @reference: https://developers.google.com/chrome/mobile/docs/user-agent
         'Chrome'          => '\bCrMo\b|CriOS|Android.*Chrome/[.0-9]* (Mobile)?',
@@ -555,7 +555,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $utilities = array(
+    protected static array $utilities = array(
         // Experimental. When a mobile device wants to switch to 'Desktop Mode'.
         // http://scottcate.com/technology/windows-phone-8-ie10-desktop-or-mobile/
         // https://github.com/serbanghita/Mobile-Detect/issues/57#issuecomment-15024011
@@ -576,7 +576,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $uaHttpHeaders = array(
+    protected static array $uaHttpHeaders = array(
         // The default User-Agent string.
         'HTTP_USER_AGENT',
         // Header can occur on devices using Opera Mini.
@@ -596,7 +596,7 @@ class Mobile_Detect
      *
      * @var array
      */
-    protected static $properties = array(
+    protected static array $properties = array(
 
         // Build
         'Mobile'        => 'Mobile/[VER]',
@@ -691,7 +691,7 @@ class Mobile_Detect
      * @return string The version number in semantic version format.
      */
     public static function getScriptVersion()
-    {
+    : string {
         return self::VERSION;
     }
 
@@ -765,7 +765,7 @@ class Mobile_Detect
     }
 
     public function getMobileHeaders()
-    {
+    : iterable {
         return self::$mobileHeaders;
     }
 
@@ -776,7 +776,7 @@ class Mobile_Detect
      * @return array List of HTTP headers.
      */
     public function getUaHttpHeaders()
-    {
+    : iterable {
         return self::$uaHttpHeaders;
     }
 
@@ -789,7 +789,7 @@ class Mobile_Detect
      *
      * @return  boolean If there were CloudFront headers to be set
      */
-    public function setCfHeaders($cfHeaders = null) {
+    public function setCfHeaders($cfHeaders = null) : bool {
         // use global _SERVER if $cfHeaders aren't defined
         if (!is_array($cfHeaders) || !count($cfHeaders)) {
             $cfHeaders = $_SERVER;
@@ -954,7 +954,7 @@ class Mobile_Detect
      * @return array All the rules (but not extended).
      */
     public static function getMobileDetectionRules()
-    {
+    : array {
         static $rules;
 
         if (!$rules) {
@@ -981,7 +981,7 @@ class Mobile_Detect
      * @return array All the rules + extended.
      */
     public function getMobileDetectionRulesExtended()
-    {
+    : array {
         static $rules;
 
         if (!$rules) {
@@ -1006,7 +1006,7 @@ class Mobile_Detect
      * @return array
      */
     public function getRules()
-    {
+    : iterable {
         if ($this->detectionType == self::DETECTION_TYPE_EXTENDED) {
             return self::getMobileDetectionRulesExtended();
         } else {
@@ -1032,7 +1032,7 @@ class Mobile_Detect
      * @return bool
      */
     public function checkHttpHeadersForMobile()
-    {
+    : bool {
 
         foreach ($this->getMobileHeaders() as $mobileHeader => $matchType) {
             if (isset($this->httpHeaders[$mobileHeader])) {
@@ -1084,7 +1084,7 @@ class Mobile_Detect
      * @return boolean
      */
     protected function matchDetectionRulesAgainstUA($userAgent = null)
-    {
+    : bool {
         // Begin general search.
         foreach ($this->getRules() as $_regex) {
             if (empty($_regex)) {
@@ -1109,7 +1109,7 @@ class Mobile_Detect
      * @return boolean
      */
     protected function matchUAAgainstKey($key)
-    {
+    : string {
         // Make the keys lowercase so we can match: isIphone(), isiPhone(), isiphone(), etc.
         $key = strtolower($key);
         if (false === isset($this->cache[$key])) {
@@ -1137,7 +1137,7 @@ class Mobile_Detect
      * @return bool
      */
     public function isMobile($userAgent = null, $httpHeaders = null)
-    {
+    : bool {
 
         if ($httpHeaders) {
             $this->setHttpHeaders($httpHeaders);
@@ -1174,7 +1174,7 @@ class Mobile_Detect
      * @return bool
      */
     public function isTablet($userAgent = null, $httpHeaders = null)
-    {
+    : bool {
         // Check specifically for cloudfront headers if the useragent === 'Amazon CloudFront'
         if ($this->getUserAgent() === 'Amazon CloudFront') {
             $cfHeaders = $this->getCfHeaders();
@@ -1205,7 +1205,7 @@ class Mobile_Detect
      * @return bool|int|null
      */
     public function is($key, $userAgent = null, $httpHeaders = null)
-    {
+    : string {
         // Set the UA and HTTP headers only if needed (eg. batch mode).
         if ($httpHeaders) {
             $this->setHttpHeaders($httpHeaders);
@@ -1267,7 +1267,7 @@ class Mobile_Detect
      * @return float
      */
     public function prepareVersionNo($ver)
-    {
+    : array {
         $ver = str_replace(array('_', ' ', '/'), '.', $ver);
         $arrVer = explode('.', $ver, 2);
 
@@ -1292,7 +1292,7 @@ class Mobile_Detect
      * @return string|float The version of the property we are trying to extract.
      */
     public function version($propertyName, $type = self::VERSION_TYPE_STRING)
-    {
+    : bool {
         if (empty($propertyName)) {
             return false;
         }
@@ -1337,7 +1337,7 @@ class Mobile_Detect
      * @return string One of the self::MOBILE_GRADE_* constants.
      */
     public function mobileGrade()
-    {
+    : string {
         $isMobile = $this->isMobile();
 
         if (

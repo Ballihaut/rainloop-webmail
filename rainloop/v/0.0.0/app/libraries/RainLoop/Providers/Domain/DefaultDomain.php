@@ -7,7 +7,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	/**
 	 * @var string
 	 */
-	protected $sDomainPath;
+	protected string $sDomainPath;
 
 	/**
 	 * @var \MailSo\Cache\CacheClient
@@ -32,8 +32,8 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 *
 	 * @return string
 	 */
-	public function codeFileName($sName, $bBack = false)
-	{
+	public function codeFileName($sName, bool $bBack = false)
+	: string {
 		if ($bBack && 'default' === $sName)
 		{
 			return '*';
@@ -59,7 +59,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 * @return string
 	 */
 	private function wildcardDomainsCacheKey()
-	{
+	: string {
 		return '/WildCard/DomainCache/'.\md5(APP_VERSION.APP_PRIVATE_DATA_NAME).'/';
 	}
 
@@ -208,7 +208,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 * @return bool
 	 */
 	public function Save(\RainLoop\Model\Domain $oDomain)
-	{
+	: bool {
 		$sRealFileName = $this->codeFileName($oDomain->Name());
 
 		if ($this->oCacher)
@@ -227,7 +227,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 * @return bool
 	 */
 	public function SaveAlias($sName, $sAlias)
-	{
+	: bool {
 		$sRealFileName = $this->codeFileName($sName);
 
 		if ($this->oCacher)
@@ -246,7 +246,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 * @return bool
 	 */
 	public function Disable($sName, $bDisable)
-	{
+	: bool {
 		$sName = \MailSo\Base\Utils::IdnToAscii($sName, true);
 
 		$sFile = '';
@@ -404,7 +404,7 @@ class DefaultDomain implements \RainLoop\Providers\Domain\DomainAdminInterface
 	 * @return int
 	 */
 	public function Count($sSearch = '', $bIncludeAliases = true)
-	{
+	: int {
 		return \count($this->GetList(0, 999, $sSearch, $bIncludeAliases));
 	}
 }

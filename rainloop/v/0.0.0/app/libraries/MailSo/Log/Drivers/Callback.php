@@ -59,7 +59,7 @@ class Callback extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	protected function writeImplementation($mDesc)
-	{
+	: bool {
 		if ($this->fWriteCallback)
 		{
 			\call_user_func_array($this->fWriteCallback, array($mDesc));
@@ -72,7 +72,7 @@ class Callback extends \MailSo\Log\Driver
 	 * @return bool
 	 */
 	protected function clearImplementation()
-	{
+	: bool {
 		if ($this->fClearCallback)
 		{
 			\call_user_func($this->fClearCallback);

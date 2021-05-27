@@ -33,7 +33,7 @@ class Thumbnail implements FilterInterface
     /**
      * @var string
      */
-    private $filter;
+    private string $filter;
 
     /**
      * Constructs the Thumbnail filter with given width, height and mode

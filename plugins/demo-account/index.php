@@ -18,7 +18,7 @@ class DemoAccountPlugin extends \RainLoop\Plugins\AbstractPlugin
 	 * @return array
 	 */
 	protected function configMapping()
-	{
+	: array {
 		return array(
 			\RainLoop\Plugins\Property::NewInstance('email')->SetLabel('Demo Email')
 				->SetDefaultValue('demo@domain.com'),
@@ -42,7 +42,7 @@ class DemoAccountPlugin extends \RainLoop\Plugins\AbstractPlugin
 	/**
 	 * @return void
 	 */
-	public function FilterActionParams($sMethodName, &$aActionParams)
+	public function FilterActionParams(bool $sMethodName, &$aActionParams)
 	{
 		if ('DoLogin' === $sMethodName && isset($aActionParams['Email']) && isset($aActionParams['Password']))
 		{
@@ -63,7 +63,7 @@ class DemoAccountPlugin extends \RainLoop\Plugins\AbstractPlugin
 		return ($oAccount && $oAccount->Email() === $this->Config()->Get('plugin', 'email'));
 	}
 
-	public function AjaxActionPreCall($sAction)
+	public function AjaxActionPreCall(bool $sAction)
 	{
 		if ('AccountSetup' === $sAction &&
 			$this->isDemoAccount($this->Manager()->Actions()->GetAccount()))
@@ -72,7 +72,7 @@ class DemoAccountPlugin extends \RainLoop\Plugins\AbstractPlugin
 		}
 	}
 
-	public function FilterSendMessage(&$oMessage)
+	public function FilterSendMessage(bool &$oMessage)
 	{
 		if ($oMessage && $this->isDemoAccount($this->Manager()->Actions()->GetAccount()))
 		{

@@ -24,7 +24,7 @@ class Actions
 	/**
 	 * @var array
 	 */
-	private $aCurrentActionParams;
+	private array $aCurrentActionParams;
 
 	/**
 	 * @var \MailSo\Mail\MailClient
@@ -54,7 +54,7 @@ class Actions
 	/**
 	 * @var array of \MailSo\Cache\CacheClient
 	 */
-	private $aCachers;
+	private array $aCachers;
 
 	/**
 	 * @var \RainLoop\Providers\Storage
@@ -124,12 +124,12 @@ class Actions
 	/**
 	 * @var string
 	 */
-	private $sSpecAuthToken;
+	private string $sSpecAuthToken;
 
 	/**
 	 * @var string
 	 */
-	private $sUpdateAuthToken;
+	private string $sUpdateAuthToken;
 
 	/**
 	 * @access private
@@ -183,7 +183,7 @@ class Actions
 	 * @return \RainLoop\Application
 	 */
 	public function SetSpecAuthToken($sSpecAuthToken)
-	{
+	: self {
 		$this->sSpecAuthToken = $sSpecAuthToken;
 
 		return $this;
@@ -195,7 +195,7 @@ class Actions
 	 * @return \RainLoop\Application
 	 */
 	public function SetUpdateAuthToken($sUpdateAuthToken)
-	{
+	: self {
 		$this->sUpdateAuthToken = $sUpdateAuthToken;
 
 		return $this;
@@ -207,7 +207,7 @@ class Actions
 	 * @return \RainLoop\Application
 	 */
 	public function SetIsAjax($bIsAjax)
-	{
+	: self {
 		$this->bIsAjax = $bIsAjax;
 
 		return $this;
@@ -240,8 +240,8 @@ class Actions
 	/**
 	 * @return string
 	 */
-	public function GetShortLifeSpecAuthToken($iLife = 60)
-	{
+	public function GetShortLifeSpecAuthToken(int $iLife = 60)
+	: string {
 		$aAccountHash = \RainLoop\Utils::DecodeKeyValues($this->getLocalAuthToken());
 		if (!empty($aAccountHash[0]) && 'token' === $aAccountHash[0] && \is_array($aAccountHash))
 		{
@@ -407,7 +407,7 @@ class Actions
 	 * @return string
 	 */
 	public function ParseQueryAuthString()
-	{
+	: string {
 		$sQuery = \trim($this->Http()->GetQueryString());
 
 		$iPos = \strpos($sQuery, '&');
@@ -421,7 +421,7 @@ class Actions
 		$aSubQuery = $this->Http()->GetQuery('q', null);
 		if (\is_array($aSubQuery))
 		{
-			$aSubQuery = \array_map(function ($sS) {
+			$aSubQuery = \array_map(function (string $sS) : string {
 				return \trim(\trim($sS), ' /');
 			}, $aSubQuery);
 
@@ -451,7 +451,7 @@ class Actions
 	 *
 	 * @return string
 	 */
-	private function compileLogParams($sLine, $oAccount = null, $bUrlEncode = false, $aAdditionalParams = array())
+	private function compileLogParams($sLine, $oAccount = null, bool $bUrlEncode = false, $aAdditionalParams = array())
 	{
 		$aClear = array();
 
@@ -557,7 +557,7 @@ class Actions
 
 		if (false !== \strpos($sLine, '{labs:'))
 		{
-			$sLine = \preg_replace_callback('/\{labs:rand:([1-9])\}/', function ($aMatch) {
+			$sLine = \preg_replace_callback('/\{labs:rand:([1-9])\}/', function ($aMatch) : int {
 				return \rand(\pow(10, $aMatch[1] - 1), \pow(10, $aMatch[1]) - 1);
 			}, $sLine);
 
@@ -715,7 +715,7 @@ class Actions
 	 * @return string
 	 */
 	private function getLocalAuthToken()
-	{
+	: string {
 		$sToken = $this->GetSpecAuthToken();
 		return !empty($sToken) && '_' === \substr($sToken, 0, 1) ? \substr($sToken, 1) : '';
 	}
@@ -751,7 +751,7 @@ class Actions
 	 * @return \RainLoop\Model\Account|bool
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function GetAccount($bThrowExceptionOnFalse = false)
+	public function GetAccount(bool $bThrowExceptionOnFalse = false)
 	{
 		return $this->getAccountFromToken($bThrowExceptionOnFalse);
 	}
@@ -867,7 +867,7 @@ class Actions
 	 *
 	 * @return \RainLoop\Providers\Storage
 	 */
-	public function StorageProvider($bLocal = false)
+	public function StorageProvider(bool $bLocal = false)
 	{
 		if ($bLocal)
 		{
@@ -896,7 +896,7 @@ class Actions
 	/**
 	 * @return \RainLoop\Providers\Settings
 	 */
-	public function SettingsProvider($bLocal = false)
+	public function SettingsProvider(bool $bLocal = false)
 	{
 		if ($bLocal)
 		{
@@ -970,7 +970,7 @@ class Actions
 	 *
 	 * @return \RainLoop\Providers\AddressBook
 	 */
-	public function AddressBookProvider($oAccount = null, $bForceEnable = false)
+	public function AddressBookProvider($oAccount = null, bool $bForceEnable = false)
 	{
 		if (null === $this->oAddressBookProvider)
 		{
@@ -996,7 +996,7 @@ class Actions
 	 *
 	 * @return \MailSo\Cache\CacheClient
 	 */
-	public function Cacher($oAccount = null, $bForceFile = false)
+	public function Cacher($oAccount = null, bool $bForceFile = false)
 	{
 		$sKey = '';
 		if ($oAccount)
@@ -1213,7 +1213,7 @@ class Actions
 	 * @param \RainLoop\Model\Account $oAccount = null
 	 * @param array $aAdditionalParams = array()
 	 */
-	public function LoggerAuthHelper($oAccount = null, $aAdditionalParams = array())
+	public function LoggerAuthHelper($oAccount = null, array $aAdditionalParams = array())
 	{
 		$sLine = $this->Config()->Get('logs', 'auth_logging_format', '');
 		if (!empty($sLine))
@@ -1244,7 +1244,7 @@ class Actions
 	 *
 	 * @return bool
 	 */
-	public function IsAdminLoggined($bThrowExceptionOnFalse = true)
+	public function IsAdminLoggined(bool $bThrowExceptionOnFalse = true)
 	{
 		$bResult = false;
 		if ($this->Config()->Get('security', 'allow_admin_panel', true))
@@ -1293,7 +1293,7 @@ class Actions
 	 *
 	 * @return \RainLoop\Model\Account|null
 	 */
-	public function LoginProvide($sEmail, $sLogin, $sPassword, $sSignMeToken = '', $sClientCert = '', $bThrowProvideException = false)
+	public function LoginProvide(string $sEmail, string $sLogin, string $sPassword, string $sSignMeToken = '', string $sClientCert = '', bool $bThrowProvideException = false)
 	{
 		$oAccount = null;
 		if (0 < \strlen($sEmail) && 0 < \strlen($sLogin) && 0 < \strlen($sPassword))
@@ -1334,7 +1334,7 @@ class Actions
 	 * @return \RainLoop\Model\Account|bool
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function GetAccountFromCustomToken($sToken, $bThrowExceptionOnFalse = true, $bValidateShortToken = true, $bQ = false)
+	public function GetAccountFromCustomToken($sToken, bool $bThrowExceptionOnFalse = true, bool $bValidateShortToken = true, bool $bQ = false)
 	{
 		$oResult = false;
 		if (!empty($sToken))
@@ -1424,7 +1424,7 @@ class Actions
 	 * @return \RainLoop\Model\Account|bool
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function getAccountFromToken($bThrowExceptionOnFalse = true)
+	public function getAccountFromToken(bool $bThrowExceptionOnFalse = true)
 	{
 		return $this->GetAccountFromCustomToken($this->getLocalAuthToken(), $bThrowExceptionOnFalse, true, true);
 	}
@@ -1444,8 +1444,8 @@ class Actions
 	 *
 	 * @return array
 	 */
-	public function AppDataSystem($bAdmin = false, $bMobile = false, $bMobileDevice = false)
-	{
+	public function AppDataSystem(bool $bAdmin = false, bool $bMobile = false, bool $bMobileDevice = false)
+	: array {
 		$oConfig = $this->Config();
 
 		$aAttachmentsActions = array();
@@ -1513,7 +1513,7 @@ class Actions
 	 *
 	 * @return array
 	 */
-	public function AppData($bAdmin, $bMobile = false, $bMobileDevice = false, $sAuthAccountHash = '')
+	public function AppData($bAdmin, bool $bMobile = false, bool $bMobileDevice = false, string $sAuthAccountHash = '')
 	{
 		if (0 < \strlen($sAuthAccountHash) && \preg_match('/[^_\-\.a-zA-Z0-9]/', $sAuthAccountHash))
 		{
@@ -2016,7 +2016,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return array
 	 */
 	private function getUserLanguagesFromHeader()
-	{
+	: array {
 		$aResult = $aList = array();
 		$sAcceptLang = \strtolower($this->Http()->GetServer('HTTP_ACCEPT_LANGUAGE', 'en'));
 		if (!empty($sAcceptLang) && \preg_match_all('/([a-z]{1,8}(?:-[a-z]{1,8})?)(?:;q=([0-9.]+))?/', $sAcceptLang, $aList))
@@ -2033,7 +2033,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		return $aResult;
 	}
 
-	public function googleStoreTokens($oCache, $sAccessToken, $sRefreshToken)
+	public function googleStoreTokens($oCache, $sAccessToken, string $sRefreshToken)
 	{
 		$sCacheKey = 'tokens='.\md5($sRefreshToken);
 		$oCache->Set($sCacheKey, $sAccessToken);
@@ -2043,7 +2043,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	/**
 	 * @return string
 	 */
-	public function googleRefreshTokenCallback($sAccessToken, $sRefreshToken)
+	public function googleRefreshTokenCallback($sAccessToken, string $sRefreshToken)
 	{
 		$oAccount = $this->getAccountFromToken(false);
 		if ($oAccount && $this->GetIsAjax())
@@ -2081,7 +2081,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	/**
 	 * @return string
 	 */
-	public function detectUserLanguage($bAdmin = false)
+	public function detectUserLanguage(bool $bAdmin = false)
 	{
 		$sResult = '';
 		$aLangs = $this->getUserLanguagesFromHeader();
@@ -2147,7 +2147,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function CheckMailConnection($oAccount, $bAuthLog = false)
+	public function CheckMailConnection($oAccount, bool $bAuthLog = false)
 	{
 		try
 		{
@@ -2189,8 +2189,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param bool $bAdmin = false
 	 * @return array
 	 */
-	private function getAdditionalLogParamsByUserLogin($sLogin, $bAdmin = false)
-	{
+	private function getAdditionalLogParamsByUserLogin($sLogin, bool $bAdmin = false)
+	: array {
 		$sHost = $bAdmin ? $this->Http()->GetHost(false, true, true) : \MailSo\Base\Utils::GetDomainFromEmail($sLogin);
 		return array(
 			'{imap:login}' => $sLogin,
@@ -2214,8 +2214,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return \RainLoop\Model\Account
 	 * @throws \RainLoop\Exceptions\ClientException
 	 */
-	public function LoginProcess(&$sEmail, &$sPassword, $sSignMeToken = '',
-		$sAdditionalCode = '', $bAdditionalCodeSignMe = false, $bSkipTwoFactorAuth = false)
+	public function LoginProcess(string &$sEmail, string &$sPassword, string $sSignMeToken = '',
+		$sAdditionalCode = '', bool $bAdditionalCodeSignMe = false, bool $bSkipTwoFactorAuth = false)
 	{
 		$sInputEmail = $sEmail;
 
@@ -2419,7 +2419,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	private function generateSignMeToken($sEmail)
+	private function generateSignMeToken(string $sEmail)
 	{
 		return \MailSo\Base\Utils::Md5Rand(APP_SALT.$sEmail);
 	}
@@ -2534,7 +2534,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 					{
 						$aAccounts = \array_merge(\array_flip($aOrder['Accounts']), $aAccounts);
 
-						$aAccounts = \array_filter($aAccounts, function ($sHash) {
+						$aAccounts = \array_filter($aAccounts, function (string $sHash) : bool {
 							return 5 < \strlen($sHash);
 						});
 					}
@@ -2615,7 +2615,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return \RainLoop\Model\Identity
 	 */
-	public function GetTemplateByID($oAccount, $sID)
+	public function GetTemplateByID($oAccount, bool $sID)
 	{
 		$aTemplates = $this->GetTemplates($oAccount);
 		if (\is_array($aTemplates))
@@ -2726,7 +2726,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return \RainLoop\Model\Identity
 	 */
-	public function GetIdentityByID($oAccount, $sID, $bFirstOnEmpty = false)
+	public function GetIdentityByID($oAccount, bool $sID, bool $bFirstOnEmpty = false)
 	{
 		$aIdentities = $this->GetIdentities($oAccount);
 
@@ -2786,7 +2786,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function SetIdentities($oAccount, $aIdentities = array())
+	public function SetIdentities($oAccount, array $aIdentities = array())
 	{
 		$bAllowIdentities = $this->GetCapa(false, false, \RainLoop\Enumerations\Capa::IDENTITIES, $oAccount);
 
@@ -2814,7 +2814,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function SetTemplates($oAccount, $aTemplates = array())
+	public function SetTemplates($oAccount, array $aTemplates = array())
 	{
 		$aResult = array();
 		foreach ($aTemplates as $oItem)
@@ -3679,7 +3679,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param string $sType = 'string'
 	 * @param callable|null $mStringCallback = null
 	 */
-	public function setConfigFromParams(&$oConfig, $sParamName, $sConfigSector, $sConfigName, $sType = 'string', $mStringCallback = null)
+	public function setConfigFromParams(&$oConfig, $sParamName, $sConfigSector, $sConfigName, string $sType = 'string', $mStringCallback = null)
 	{
 		$sValue = $this->GetActionParam($sParamName, '');
 		if ($this->HasActionParam($sParamName))
@@ -3765,7 +3765,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param string $sType = 'string'
 	 * @param callable|null $mStringCallback = null
 	 */
-	private function setSettingsFromParams(&$oSettings, $sConfigName, $sType = 'string', $mStringCallback = null)
+	private function setSettingsFromParams(&$oSettings, $sConfigName, string $sType = 'string', $mStringCallback = null)
 	{
 		if ($this->HasActionParam($sConfigName))
 		{
@@ -4345,7 +4345,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	}
 
 	private function rainLoopUpdatable()
-	{
+	: bool {
 		return @file_exists(APP_INDEX_ROOT_PATH.'index.php') &&
 			@is_writable(APP_INDEX_ROOT_PATH.'index.php') &&
 			@is_writable(APP_INDEX_ROOT_PATH.'rainloop/') &&
@@ -4354,7 +4354,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	}
 
 	private function rainLoopCoreAccess()
-	{
+	: bool {
 		$sCoreAccess = \strtolower(\preg_replace('/[\s,;]+/', ' ',
 			$this->Config()->Get('security', 'core_install_access_domain', '')));
 
@@ -4367,7 +4367,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	private function getRepositoryDataByUrl($sRepo, &$bReal = false)
+	private function getRepositoryDataByUrl(string $sRepo, bool &$bReal = false)
 	{
 		$bReal = false;
 		$aRep = null;
@@ -4729,7 +4729,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function downloadRemotePackageByUrl($sUrl)
+	public function downloadRemotePackageByUrl(string $sUrl)
 	{
 		$bResult = false;
 		$sTmp = APP_PRIVATE_DATA.\md5(\microtime(true).$sUrl).'.zip';
@@ -4865,8 +4865,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param bool $bEnable = true
 	 * @return bool
 	 */
-	private function pluginEnable($sName, $bEnable = true)
-	{
+	private function pluginEnable($sName, bool $bEnable = true)
+	: bool {
 		if (0 === \strlen($sName))
 		{
 			return false;
@@ -5085,7 +5085,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 			return (int) (\in_array($iValue, array(10, 20, 30, 50, 100, 150, 200, 300)) ? $iValue : 20);
 		});
 
-		$this->setSettingsFromParams($oSettings, 'Layout', 'int', function ($iValue) {
+		$this->setSettingsFromParams($oSettings, 'Layout', 'int', function (int $iValue) {
 			return (int) (\in_array((int) $iValue, array(\RainLoop\Enumerations\Layout::NO_PREVIW,
 				\RainLoop\Enumerations\Layout::SIDE_PREVIEW, \RainLoop\Enumerations\Layout::BOTTOM_PREVIEW)) ?
 					$iValue : \RainLoop\Enumerations\Layout::SIDE_PREVIEW);
@@ -5292,7 +5292,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param array $aResult
 	 * @param bool $bListFolderTypes = true
 	 */
-	private function recFoldersTypes($oAccount, $oFolders, &$aResult, $bListFolderTypes = true)
+	private function recFoldersTypes($oAccount, $oFolders, &$aResult, bool $bListFolderTypes = true)
 	{
 		if ($oFolders)
 		{
@@ -5720,7 +5720,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		if (0 < strlen($sFlagsUids))
 		{
 			$aFlagsUids = explode(',', $sFlagsUids);
-			$aFlagsFilteredUids = array_filter($aFlagsUids, function (&$sUid) {
+			$aFlagsFilteredUids = array_filter($aFlagsUids, function (string &$sUid) : bool {
 				$sUid = (int) trim($sUid);
 				return 0 < (int) trim($sUid);
 			});
@@ -5900,7 +5900,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return \MailSo\Mime\Message
 	 */
-	private function buildMessage($oAccount, $bWithDraftInfo = true)
+	private function buildMessage($oAccount, bool $bWithDraftInfo = true)
 	{
 		$sIdentityID = $this->GetActionParam('IdentityID', '');
 		$sTo = $this->GetActionParam('To', '');
@@ -6235,7 +6235,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @throws \MailSo\Net\Exceptions\ConnectionException
 	 */
 	private function smtpSendMessage($oAccount, $oMessage,
-		&$rMessageStream, &$iMessageStreamSize, $bDsn = false, $bAddHiddenRcpt = true)
+		&$rMessageStream, &$iMessageStreamSize, bool $bDsn = false, bool $bAddHiddenRcpt = true)
 	{
 		$oRcpt = $oMessage->GetRcpt();
 		if ($oRcpt && 0 < $oRcpt->Count())
@@ -6762,7 +6762,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		return $this->TrueResponse(__FUNCTION__);
 	}
 
-	private function getTwoFactorInfo($oAccount, $bRemoveSecret = false)
+	private function getTwoFactorInfo($oAccount, bool $bRemoveSecret = false)
 	{
 		$sEmail = $oAccount->ParentEmailHelper();
 
@@ -6830,8 +6830,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return bool
 	 */
-	private function removeBackupCodeFromTwoFactorInfo($oAccount, $sCode)
-	{
+	private function removeBackupCodeFromTwoFactorInfo($oAccount, string $sCode)
+	: bool {
 		if (!$oAccount || empty($sCode))
 		{
 			return false;
@@ -7069,7 +7069,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		$oAccount = $this->getAccountFromToken();
 		$aUids = \explode(',', (string) $this->GetActionParam('Uids', ''));
 
-		$aFilteredUids = \array_filter($aUids, function (&$mUid) {
+		$aFilteredUids = \array_filter($aUids, function (string &$mUid) : bool {
 			$mUid = (int) \trim($mUid);
 			return 0 < $mUid;
 		});
@@ -7236,7 +7236,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		$sFolder = $this->GetActionParam('Folder', '');
 		$bSetAction = '1' === (string) $this->GetActionParam('SetAction', '0');
 		$aUids = \explode(',', (string) $this->GetActionParam('Uids', ''));
-		$aFilteredUids = \array_filter($aUids, function (&$sUid) {
+		$aFilteredUids = \array_filter($aUids, function (string &$sUid) : bool {
 			$sUid = (int) \trim($sUid);
 			return 0 < $sUid;
 		});
@@ -7358,7 +7358,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		$sFolder = $this->GetActionParam('Folder', '');
 		$aUids = \explode(',', (string) $this->GetActionParam('Uids', ''));
 
-		$aFilteredUids = \array_filter($aUids, function (&$sUid) {
+		$aFilteredUids = \array_filter($aUids, function (string &$sUid) : bool {
 			$sUid = (int) \trim($sUid);
 			return 0 < $sUid;
 		});
@@ -7413,7 +7413,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		$aUids = \explode(',', (string) $this->GetActionParam('Uids', ''));
 		$bMarkAsRead = '1' === (string) $this->GetActionParam('MarkAsRead', '0');
 
-		$aFilteredUids = \array_filter($aUids, function (&$mUid) {
+		$aFilteredUids = \array_filter($aUids, function (string &$mUid) : bool {
 			$mUid = (int) \trim($mUid);
 			return 0 < $mUid;
 		});
@@ -7481,7 +7481,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 		$sToFolder = $this->GetActionParam('ToFolder', '');
 		$aUids = \explode(',', (string) $this->GetActionParam('Uids', ''));
 
-		$aFilteredUids = \array_filter($aUids, function (&$mUid) {
+		$aFilteredUids = \array_filter($aUids, function (string &$mUid) : bool {
 			$mUid = (int) \trim($mUid);
 			return 0 < $mUid;
 		});
@@ -7510,7 +7510,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function MainClearFileName($sFileName, $sContentType, $sMimeIndex, $iMaxLength = 250)
+	public function MainClearFileName($sFileName, string $sContentType, string $sMimeIndex, $iMaxLength = 250)
 	{
 		$sFileName = 0 === \strlen($sFileName) ? \preg_replace('/[^a-zA-Z0-9]/', '.', (empty($sMimeIndex) ? '' : $sMimeIndex.'.').$sContentType) : $sFileName;
 		$sClearedFileName = \MailSo\Base\Utils::StripSpaces(\preg_replace('/[\.]+/', '.', $sFileName));
@@ -7553,7 +7553,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 						if (!$this->FilesProvider()->FileExists($oAccount, $sTempName))
 						{
 							$this->MailClient()->MessageMimeStream(
-								function($rResource, $sContentType, $sFileName, $sMimeIndex = '') use ($oAccount, &$mResult, $sTempName, $sAttachment, $self) {
+								function($rResource, $sContentType, $sFileName, string $sMimeIndex = '') use ($oAccount, &$mResult, $sTempName, $sAttachment, $self) {
 									if (is_resource($rResource))
 									{
 										$sContentType = (empty($sFileName)) ? 'text/plain' : \MailSo\Base\Utils::MimeContentType($sFileName);
@@ -8025,8 +8025,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return int
 	 */
-	private function importContactsFromCsvFile($oAccount, $rFile, $sFileStart)
-	{
+	private function importContactsFromCsvFile($oAccount, $rFile, string $sFileStart)
+	: int {
 		$iCount = 0;
 		$aHeaders = null;
 		$aData = array();
@@ -8139,7 +8139,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return string
 	 */
 	public function RawFramedView()
-	{
+	: bool {
 		$oAccount = $this->getAccountFromToken(false);
 		if ($oAccount)
 		{
@@ -8227,7 +8227,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function Capa($bAdmin, $bMobile = false, $oAccount = null)
+	public function Capa(bool $bAdmin, bool $bMobile = false, $oAccount = null)
 	{
 		$oConfig = $this->Config();
 
@@ -8390,8 +8390,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function etag($sKey)
-	{
+	public function etag(string $sKey)
+	: string {
 		return \md5('Etag:'.\md5($sKey.\md5($this->Config()->Get('cache', 'index', ''))));
 	}
 
@@ -8401,7 +8401,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return bool
 	 */
-	public function cacheByKey($sKey, $bForce = false)
+	public function cacheByKey($sKey, bool $bForce = false)
 	{
 		$bResult = false;
 		if (!empty($sKey) && ($bForce || ($this->Config()->Get('cache', 'enable', true) && $this->Config()->Get('cache', 'http', true))))
@@ -8428,7 +8428,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return void
 	 */
-	public function verifyCacheByKey($sKey, $bForce = false)
+	public function verifyCacheByKey($sKey, bool $bForce = false)
 	{
 		if (!empty($sKey) && ($bForce || $this->Config()->Get('cache', 'enable', true) && $this->Config()->Get('cache', 'http', true)))
 		{
@@ -8463,7 +8463,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 
 		$sResultHash = '';
 
-		$mResult = $this->MailClient()->MessageMimeStream(function($rResource, $sContentType, $sFileName, $sMimeIndex = '')
+		$mResult = $this->MailClient()->MessageMimeStream(function($rResource, $sContentType, $sFileName, string $sMimeIndex = '')
 			use ($oAccount, $oFileProvider, $sFileNameIn, $sContentTypeIn, &$sResultHash) {
 
 				unset($sContentType, $sFileName, $sMimeIndex);
@@ -8545,7 +8545,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	/**
 	 * @param \Imagine\Image\AbstractImage $oImage
 	 */
-	public function correctImageOrientation($oImage, $bDetectImageOrientation = true, $iThumbnailBoxSize = null)
+	public function correctImageOrientation($oImage, bool $bDetectImageOrientation = true, $iThumbnailBoxSize = null)
 	{
 		$iOrientation = 1;
 		if ($bDetectImageOrientation && \MailSo\Base\Utils::FunctionExistsAndEnabled('exif_read_data') &&
@@ -8578,8 +8578,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return bool
 	 */
-	private function rawSmart($bDownload, $bThumbnail = false)
-	{
+	private function rawSmart($bDownload, bool $bThumbnail = false)
+	: bool {
 		$sRawKey = (string) $this->GetActionParam('RawKey', '');
 		$aValues = $this->getDecodedRawKeyValue($sRawKey);
 
@@ -8650,7 +8650,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 
 		$self = $this;
 		return $this->MailClient()->MessageMimeStream(
-			function($rResource, $sContentType, $sFileName, $sMimeIndex = '') use (
+			function($rResource, $sContentType, $sFileName, string $sMimeIndex = '') use (
 				$self, $oAccount, $sRawKey, $sContentTypeIn, $sFileNameIn, $bDownload, $bThumbnail, $bDetectImageOrientation,
 				$bIsRangeRequest, $sRangeStart, $sRangeEnd
 			) {
@@ -8830,7 +8830,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return bool
 	 */
 	public function RawUserBackground()
-	{
+	: bool {
 		$sRawKey = (string) $this->GetActionParam('RawKey', '');
 		$this->verifyCacheByKey($sRawKey);
 
@@ -8866,7 +8866,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return bool
 	 */
 	public function RawPublic()
-	{
+	: bool {
 		$sRawKey = (string) $this->GetActionParam('RawKey', '');
 		$this->verifyCacheByKey($sRawKey);
 
@@ -8907,7 +8907,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return bool
 	 */
 	public function isFileHasFramedPreview($sFileName)
-	{
+	: bool {
 		$sExt = \MailSo\Base\Utils::GetFileExtension($sFileName);
 		return \in_array($sExt, array('doc', 'docx', 'xls', 'xlsx', 'ppt', 'pptx'));
 	}
@@ -8955,7 +8955,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @return bool
 	 */
 	public function RawAvatar()
-	{
+	: bool {
 		$sData = '';
 
 		$sRawKey = (string) $this->GetActionParam('RawKey', '');
@@ -9100,8 +9100,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 * @param int | null $iLenCache
 	 * @return array | bool
 	 */
-	private function getDecodedClientRawKeyValue($sRawKey, $iLenCache = null)
-	{
+	private function getDecodedClientRawKeyValue(string $sRawKey, $iLenCache = null)
+	: array {
 		$mResult = false;
 		if (!empty($sRawKey))
 		{
@@ -9135,8 +9135,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function ThemeLink($sTheme, $bAdmin)
-	{
+	public function ThemeLink(string $sTheme, $bAdmin)
+	: string {
 		return './?/Css/0/'.($bAdmin ? 'Admin' : 'User').'/-/'.$sTheme.'/-/'.$this->StaticCache().'/Hash/-/';
 	}
 
@@ -9145,8 +9145,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function ValidateTheme($sTheme, $bMobile = false)
-	{
+	public function ValidateTheme($sTheme, bool $bMobile = false)
+	: string {
 		if ($bMobile)
 		{
 			return 'Mobile';
@@ -9164,7 +9164,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function ValidateLanguage($sLanguage, $sDefault = '', $bAdmin = false, $bAllowEmptyResult = false)
+	public function ValidateLanguage($sLanguage, $sDefault = '', bool $bAdmin = false, bool $bAllowEmptyResult = false)
 	{
 		$sResult = '';
 		$aLang = $this->GetLanguages($bAdmin);
@@ -9189,11 +9189,11 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 				$sDefault = $sDefault.'_'.$sDefault;
 			}
 
-			$sLanguage = \preg_replace_callback('/_([a-zA-Z0-9]{2})$/', function ($aData) {
+			$sLanguage = \preg_replace_callback('/_([a-zA-Z0-9]{2})$/', function ($aData) : string {
 				return \strtoupper($aData[0]);
 			}, $sLanguage);
 
-			$sDefault = \preg_replace_callback('/_([a-zA-Z0-9]{2})$/', function ($aData) {
+			$sDefault = \preg_replace_callback('/_([a-zA-Z0-9]{2})$/', function ($aData) : string {
 				return \strtoupper($aData[0]);
 			}, $sDefault);
 
@@ -9232,8 +9232,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function GetThemes($bMobile = false, $bIncludeMobile = true)
-	{
+	public function GetThemes(bool $bMobile = false, bool $bIncludeMobile = true)
+	: array {
 		if ($bMobile)
 		{
 			return array('Mobile');
@@ -9321,7 +9321,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function GetLanguages($bAdmin = false)
+	public function GetLanguages(bool $bAdmin = false)
 	{
 		static $aCache = array();
 		$sDir = APP_VERSION_ROOT_PATH.'app/localization/'.($bAdmin ? 'admin' : 'webmail').'/';
@@ -9386,7 +9386,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	private function mainDefaultResponse($sActionName, $mResult = false, $aAdditionalParams = array())
+	private function mainDefaultResponse($sActionName, bool $mResult = false, $aAdditionalParams = array())
 	{
 		$sActionName = 'Do' === \substr($sActionName, 0, 2) ? \substr($sActionName, 2) : $sActionName;
 		$sActionName = \preg_replace('/[^a-zA-Z0-9_]+/', '', $sActionName);
@@ -9413,7 +9413,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function DefaultResponse($sActionName, $mResult = false, $aAdditionalParams = array())
+	public function DefaultResponse($sActionName, bool $mResult = false, array $aAdditionalParams = array())
 	{
 		$this->Plugins()->RunHook('main.default-response-data', array($sActionName, &$mResult));
 		$aResponseItem = $this->mainDefaultResponse($sActionName, $mResult, $aAdditionalParams);
@@ -9427,7 +9427,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function TrueResponse($sActionName, $aAdditionalParams = array())
+	public function TrueResponse($sActionName, array $aAdditionalParams = array())
 	{
 		$mResult = true;
 		$this->Plugins()->RunHook('main.default-response-data', array($sActionName, &$mResult));
@@ -9519,8 +9519,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return \RainLoop\Actions
 	 */
-	public function SetActionParams($aCurrentActionParams, $sMethodName = '')
-	{
+	public function SetActionParams($aCurrentActionParams, string $sMethodName = '')
+	: self {
 		$this->Plugins()->RunHook('filter.action-params', array($sMethodName, &$aCurrentActionParams));
 
 		$this->aCurrentActionParams = $aCurrentActionParams;
@@ -9563,8 +9563,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return bool
 	 */
-	public function HasOneOfActionParams($aKeys)
-	{
+	public function HasOneOfActionParams(iterable $aKeys)
+	: bool {
 		foreach ($aKeys as $sKey)
 		{
 			if ($this->HasActionParam($sKey))
@@ -9579,7 +9579,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	/**
 	 * @param string $sUrl
 	 */
-	public function Location($sUrl)
+	public function Location(string $sUrl)
 	{
 		$this->Logger()->Write('Location: '.$sUrl);
 		@\header('Location: '.$sUrl);
@@ -9592,7 +9592,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array | false
 	 */
-	private function objectData($oData, $sParent, $aParameters = array())
+	private function objectData($oData, $sParent, array $aParameters = array())
 	{
 		$mResult = false;
 		if (is_object($oData))
@@ -9622,7 +9622,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	private function hashFolderFullName($sFolderFullName)
+	private function hashFolderFullName(string $sFolderFullName)
 	{
 		return \in_array(\strtolower($sFolderFullName), array('inbox', 'sent', 'send', 'drafts',
 			'spam', 'junk', 'bin', 'trash', 'archive', 'allmail', 'all')) ?
@@ -9635,8 +9635,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	public function GetLanguageAndTheme($bAdmin = false, $bMobile = false)
-	{
+	public function GetLanguageAndTheme(bool $bAdmin = false, bool $bMobile = false)
+	: array {
 		$sTheme = $this->Config()->Get('webmail', 'theme', 'Default');
 
 		if ($bAdmin)
@@ -9708,8 +9708,8 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return string
 	 */
-	public function StaticPath($sPath)
-	{
+	public function StaticPath(string $sPath)
+	: string {
 		$sKey = defined('APP_VERSION_TYPE') && 0 < strlen(APP_VERSION_TYPE) ? APP_VERSION_TYPE :
 			($this->IsOpen() ? 'community' : 'standard');
 
@@ -9741,7 +9741,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return array
 	 */
-	private function explodeSubject($sSubject)
+	private function explodeSubject(string $sSubject)
 	{
 		$aResult = array('', '');
 		if (0 < \strlen($sSubject))
@@ -9791,7 +9791,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 	 *
 	 * @return mixed
 	 */
-	protected function responseObject($mResponse, $sParent = '', $aParameters = array())
+	protected function responseObject($mResponse, string $sParent = '', $aParameters = array())
 	{
 		$mResult = $mResponse;
 		if (\is_object($mResponse))
@@ -9953,7 +9953,7 @@ NewThemeLink IncludeCss LoadingDescriptionEsc LangLink IncludeBackground Plugins
 					$fAdditionalExternalFilter = null;
 					if (!!$this->Config()->Get('labs', 'use_local_proxy_for_external_images', false))
 					{
-						$fAdditionalExternalFilter = function ($sUrl) {
+						$fAdditionalExternalFilter = function ($sUrl) : string {
 							return './?/ProxyExternal/'.\RainLoop\Utils::EncodeKeyValuesQ(array(
 								'Rnd' => \md5(\microtime(true)),
 								'Token' => \RainLoop\Utils::GetConnectionToken(),

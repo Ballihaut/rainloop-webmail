@@ -23,7 +23,7 @@ class SupportedCalendarComponentSet extends DAV\Property {
      *
      * @var array
      */
-    private $components;
+    private array $components;
 
     /**
      * Creates the property

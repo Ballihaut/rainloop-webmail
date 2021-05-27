@@ -41,7 +41,7 @@ final class Transformation implements FilterInterface, ManipulatorInterface
     /**
      * @var array
      */
-    private $filters = array();
+    private array $filters = array();
 
     /**
      * @var array
@@ -231,7 +231,7 @@ final class Transformation implements FilterInterface, ManipulatorInterface
      * @return Transformation
      */
     public function add(FilterInterface $filter, $priority = 0)
-    {
+    : self {
         $this->filters[$priority][] = $filter;
         $this->sorted = null;
 

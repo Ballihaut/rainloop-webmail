@@ -22,7 +22,7 @@ class CMYK implements PaletteInterface
 {
     private $parser;
     private $profile;
-    private static $colors = array();
+    private static array $colors = array();
 
     public function __construct()
     {
@@ -41,7 +41,7 @@ class CMYK implements PaletteInterface
      * {@inheritdoc}
      */
     public function pixelDefinition()
-    {
+    : array {
         return array(
             ColorInterface::COLOR_CYAN,
             ColorInterface::COLOR_MAGENTA,
@@ -54,7 +54,7 @@ class CMYK implements PaletteInterface
      * {@inheritdoc}
      */
     public function supportsAlpha()
-    {
+    : bool {
         return false;
     }
 
@@ -62,7 +62,7 @@ class CMYK implements PaletteInterface
      * {@inheritdoc}
      */
     public function color($color, $alpha = null)
-    {
+    : string {
         if (null !== $alpha) {
             throw new InvalidArgumentException('CMYK palette does not support alpha');
         }
@@ -98,7 +98,7 @@ class CMYK implements PaletteInterface
      * {@inheritdoc}
      */
     public function useProfile(ProfileInterface $profile)
-    {
+    : self {
         $this->profile = $profile;
 
         return $this;

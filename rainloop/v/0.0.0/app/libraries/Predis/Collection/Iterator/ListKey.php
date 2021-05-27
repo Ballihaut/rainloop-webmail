@@ -31,13 +31,13 @@ use Predis\NotSupportedException;
 class ListKey implements \Iterator
 {
     protected $client;
-    protected $count;
+    protected int $count;
     protected $key;
 
-    protected $valid;
-    protected $fetchmore;
+    protected bool $valid;
+    protected bool $fetchmore;
     protected $elements;
-    protected $position;
+    protected int $position;
     protected $current;
 
     /**
@@ -71,7 +71,7 @@ class ListKey implements \Iterator
      *
      * @throws NotSupportedException
      */
-    protected function requiredCommand(ClientInterface $client, $commandID)
+    protected function requiredCommand(ClientInterface $client, string $commandID)
     {
         if (!$client->getProfile()->supportsCommand($commandID)) {
             throw new NotSupportedException("The current profile does not support '$commandID'.");

@@ -21,17 +21,17 @@ class Redis implements \MailSo\Cache\DriverInterface
 	/**
 	 * @var string
 	 */
-	private $sHost;
+	private string $sHost;
 
 	/**
 	 * @var int
 	 */
-	private $iPost;
+	private int $iPost;
 
 	/**
 	 * @var int
 	 */
-	private $iExpire;
+	private int $iExpire;
 
 	/**
 	 * @var \Memcache|null
@@ -41,7 +41,7 @@ class Redis implements \MailSo\Cache\DriverInterface
 	/**
 	 * @var string
 	 */
-	private $sKeyPrefix;
+	private string $sKeyPrefix;
 
 	/**
 	 * @param string $sHost = '127.0.0.1'
@@ -93,7 +93,7 @@ class Redis implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return \MailSo\Cache\Drivers\APC
 	 */
-	public static function NewInstance($sHost = '127.0.0.1', $iPost = 6379, $iExpire = 43200, $sKeyPrefix = '')
+	public static function NewInstance(string $sHost = '127.0.0.1', int $iPost = 6379, int $iExpire = 43200, string $sKeyPrefix = '')
 	{
 		return new self($sHost, $iPost, $iExpire, $sKeyPrefix);
 	}
@@ -139,7 +139,7 @@ class Redis implements \MailSo\Cache\DriverInterface
 	 * @return bool
 	 */
 	public function GC($iTimeToClearInHours = 24)
-	{
+	: bool {
 		if (0 === $iTimeToClearInHours && $this->oRedis)
 		{
 			return $this->oRedis->flushdb();
@@ -153,8 +153,8 @@ class Redis implements \MailSo\Cache\DriverInterface
 	 *
 	 * @return string
 	 */
-	private function generateCachedKey($sKey)
-	{
+	private function generateCachedKey(string $sKey)
+	: string {
 		return $this->sKeyPrefix.\sha1($sKey);
 	}
 }

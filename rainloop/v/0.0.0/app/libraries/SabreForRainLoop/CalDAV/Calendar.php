@@ -152,7 +152,7 @@ class Calendar implements ICalendar, DAV\IProperties, DAVACL\IACL {
      * @param string $name
      * @return bool
      */
-    public function childExists($name) {
+    public function childExists($name) : bool {
 
         $obj = $this->caldavBackend->getCalendarObject($this->calendarInfo['id'],$name);
         if (!$obj)

@@ -27,7 +27,7 @@ abstract class AbstractImagine implements ImagineInterface
      * @return ImagineInterface
      */
     public function setMetadataReader(MetadataReaderInterface $metadataReader)
-    {
+    : self {
         $this->metadataReader = $metadataReader;
 
         return $this;

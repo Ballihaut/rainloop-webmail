@@ -70,7 +70,7 @@ class FacebookStream
      *
      * @return mixed
      */
-    public function fileGetContents($url)
+    public function fileGetContents(string $url)
     {
         $rawResponse = file_get_contents($url, false, $this->stream);
         $this->responseHeaders = $http_response_header;

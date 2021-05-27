@@ -3,7 +3,7 @@
 if (!function_exists('mb_strtoupper'))
 {
 	function mb_strtoupper($s, $encoding = INF)
-	{
+	: string {
 		if ('' === $s .= '') return '';
 
 		if (INF === $encoding) $encoding = 'UTF-8';
@@ -406,8 +406,8 @@ czo0OiLwkJCmIjtzOjQ6IvCQkY8iO3M6NDoi8JCQpyI7fQ=='));
 
 if (!function_exists('mb_strcut'))
 {
-	function mb_strcut($str, $start, $length = null, $encoding = '')
-	{
+	function mb_strcut(string $str, int $start, $length = null, string $encoding = '')
+	: string {
 		$match = array();
         // use the regex unicode support to separate the UTF-8 characters into an array
         preg_match_all( '/./us', $str, $match );
@@ -418,8 +418,8 @@ if (!function_exists('mb_strcut'))
 
 if (!function_exists('mb_detect_encoding'))
 {
-	function mb_detect_encoding($str, $encoding_list = INF, $strict = false)
-	{
+	function mb_detect_encoding(string $str, $encoding_list = INF, bool $strict = false)
+	: bool {
 		if (INF === $encoding_list) $encoding_list = 'UTF-8';
 		else
 		{
@@ -452,7 +452,7 @@ if (!function_exists('mb_detect_encoding'))
 if (!function_exists('mb_check_encoding'))
 {
 	function mb_check_encoding($var = INF, $encoding = INF)
-	{
+	: bool {
 		if (INF === $encoding)
 		{
 			if (INF === $var) return false;

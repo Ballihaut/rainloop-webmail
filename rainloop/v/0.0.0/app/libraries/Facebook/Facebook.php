@@ -107,7 +107,7 @@ class Facebook
     /**
      * @var string|null The default Graph version we want to use.
      */
-    protected $defaultGraphVersion;
+    protected string $defaultGraphVersion;
 
     /**
      * @var PersistentDataInterface|null The persistent data handler.

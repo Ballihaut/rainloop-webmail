@@ -32,7 +32,7 @@ class DkimStatus
 	 * @return bool
 	 */
 	public static function verifyValue($sStatus)
-	{
+	: bool {
 		return \in_array($sStatus, array(
 			self::NONE,
 			self::PASS,
@@ -49,7 +49,7 @@ class DkimStatus
 	 * 
 	 * @return string
 	 */
-	public static function normalizeValue($sStatus)
+	public static function normalizeValue(string $sStatus)
 	{
 		$sStatus = \strtolower(\trim($sStatus));
 		return self::verifyValue($sStatus) ? $sStatus : self::NONE;

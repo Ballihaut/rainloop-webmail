@@ -83,7 +83,7 @@ class FacebookApp implements \Serializable
      * @return string
      */
     public function serialize()
-    {
+    : string {
         return serialize([$this->id, $this->secret]);
     }
 
@@ -92,7 +92,7 @@ class FacebookApp implements \Serializable
      *
      * @param string $serialized
      */
-    public function unserialize($serialized)
+    public function unserialize(string $serialized)
     {
         list($id, $secret) = unserialize($serialized);
 

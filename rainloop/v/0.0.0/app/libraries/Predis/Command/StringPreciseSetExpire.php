@@ -22,7 +22,7 @@ class StringPreciseSetExpire extends StringSetExpire
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'PSETEX';
     }
 }

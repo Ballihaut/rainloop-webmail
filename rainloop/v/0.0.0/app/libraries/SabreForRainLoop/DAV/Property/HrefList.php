@@ -20,14 +20,14 @@ class HrefList extends DAV\Property {
      *
      * @var array
      */
-    private $hrefs;
+    private array $hrefs;
 
     /**
      * Automatically prefix the url with the server base directory
      *
      * @var bool
      */
-    private $autoPrefix = true;
+    private bool $autoPrefix = true;
 
     /**
      * __construct

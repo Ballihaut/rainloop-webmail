@@ -30,7 +30,7 @@ class SetIntersectionStore extends Command
      * {@inheritdoc}
      */
     protected function filterArguments(array $arguments)
-    {
+    : array {
         if (count($arguments) === 2 && is_array($arguments[1])) {
             return array_merge(array($arguments[0]), $arguments[1]);
         }

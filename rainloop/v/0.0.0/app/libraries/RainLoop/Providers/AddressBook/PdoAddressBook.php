@@ -16,17 +16,17 @@ class PdoAddressBook
 	/**
 	 * @var string
 	 */
-	private $sDsnType;
+	private string $sDsnType;
 
 	/**
 	 * @var string
 	 */
-	private $sUser;
+	private string $sUser;
 
 	/**
 	 * @var string
 	 */
-	private $sPassword;
+	private string $sPassword;
 
 	public function __construct($sDsn, $sUser = '', $sPassword = '', $sDsnType = 'mysql')
 	{
@@ -51,7 +51,7 @@ class PdoAddressBook
 	 * @return bool
 	 */
 	public function IsSharingAllowed()
-	{
+	: bool {
 		return $this->IsSupported() && false; // TODO
 	}
 
@@ -110,7 +110,7 @@ class PdoAddressBook
 		return $aResult;
 	}
 
-	private function prepearRemoteSyncData($oClient, $sPath)
+	private function prepearRemoteSyncData($oClient, string $sPath)
 	{
 		$mResult = false;
 		$aResponse = null;
@@ -181,7 +181,7 @@ class PdoAddressBook
 		return $mResult;
 	}
 
-	private function davClientRequest($oClient, $sCmd, $sUrl, $mData = null)
+	private function davClientRequest($oClient, $sCmd, string $sUrl, $mData = null)
 	{
 		\MailSo\Base\Utils::ResetTimeLimit();
 
@@ -226,7 +226,7 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	private function detectionPropFind($oClient, $sPath)
+	private function detectionPropFind($oClient, string $sPath)
 	{
 		$aResponse = null;
 
@@ -259,7 +259,7 @@ class PdoAddressBook
 	 *
 	 * @return array
 	 */
-	private function getContactsPaths(&$oClient, $sUser, $sPassword, $sProxy = '')
+	private function getContactsPaths(&$oClient, $sUser, $sPassword, string $sProxy = '')
 	{
 		$aContactsPaths = array();
 
@@ -451,8 +451,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	private function checkContactsPath(&$oClient, $sPath)
-	{
+	private function checkContactsPath(&$oClient, string $sPath)
+	: bool {
 		if (!$oClient)
 		{
 			return false;
@@ -501,7 +501,7 @@ class PdoAddressBook
 		return $bGood;
 	}
 
-	public function getDavClientFromUrl($sUrl, $sUser, $sPassword, $sProxy = '')
+	public function getDavClientFromUrl($sUrl, $sUser, $sPassword, string $sProxy = '')
 	{
 		if (!\preg_match('/^http[s]?:\/\//i', $sUrl))
 		{
@@ -562,8 +562,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function getDavClient($sUrl, $sUser, $sPassword, $sProxy = '')
-	{
+	public function getDavClient($sUrl, $sUser, $sPassword, string $sProxy = '')
+	: bool {
 		if (!\class_exists('SabreForRainLoop\DAV\Client'))
 		{
 			return false;
@@ -664,8 +664,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function Sync($sEmail, $sUrl, $sUser, $sPassword, $sProxy = '')
-	{
+	public function Sync($sEmail, $sUrl, $sUser, $sPassword, string $sProxy = '')
+	: bool {
 		$this->SyncDatabase();
 
 		$iUserID = $this->getUserId($sEmail);
@@ -821,8 +821,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function Export($sEmail, $sType = 'vcf')
-	{
+	public function Export($sEmail, string $sType = 'vcf')
+	: bool {
 		$this->SyncDatabase();
 
 		$iUserID = $this->getUserId($sEmail);
@@ -868,8 +868,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function ContactSave($sEmail, &$oContact, $bSyncDb = true)
-	{
+	public function ContactSave($sEmail, &$oContact, bool $bSyncDb = true)
+	: bool {
 		if ($bSyncDb)
 		{
 			$this->SyncDatabase();
@@ -988,8 +988,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function DeleteContacts($sEmail, $aContactIds, $bSyncDb = true)
-	{
+	public function DeleteContacts($sEmail, $aContactIds, bool $bSyncDb = true)
+	: bool {
 		if ($bSyncDb)
 		{
 			$this->SyncDatabase();
@@ -997,7 +997,7 @@ class PdoAddressBook
 
 		$iUserID = $this->getUserId($sEmail);
 
-		$aContactIds = \array_filter($aContactIds, function (&$mItem) {
+		$aContactIds = \array_filter($aContactIds, function (string &$mItem) : bool {
 			$mItem = (int) \trim($mItem);
 			return 0 < $mItem;
 		});
@@ -1029,8 +1029,8 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function DeleteAllContacts($sEmail, $bSyncDb = true)
-	{
+	public function DeleteAllContacts($sEmail, bool $bSyncDb = true)
+	: bool {
 		if ($bSyncDb)
 		{
 			$this->SyncDatabase();
@@ -1055,7 +1055,7 @@ class PdoAddressBook
 	 *
 	 * @return array
 	 */
-	public function GetContacts($sEmail, $iOffset = 0, $iLimit = 20, $sSearch = '', &$iResultCount = 0)
+	public function GetContacts($sEmail, int $iOffset = 0, int $iLimit = 20, string $sSearch = '', int &$iResultCount = 0)
 	{
 		$this->SyncDatabase();
 
@@ -1252,7 +1252,7 @@ class PdoAddressBook
 	 *
 	 * @return \RainLoop\Providers\AddressBook\Classes\Contact|null
 	 */
-	public function GetContactByID($sEmail, $mID, $bIsStrID = false)
+	public function GetContactByID($sEmail, string $mID, bool $bIsStrID = false)
 	{
 		$mID = \trim($mID);
 
@@ -1358,8 +1358,8 @@ class PdoAddressBook
 	 *
 	 * @throws \InvalidArgumentException
 	 */
-	public function GetSuggestions($sEmail, $sSearch, $iLimit = 20)
-	{
+	public function GetSuggestions($sEmail, string $sSearch, $iLimit = 20)
+	: array {
 		$sSearch = \trim($sSearch);
 		if (0 === \strlen($sSearch))
 		{
@@ -1560,10 +1560,10 @@ class PdoAddressBook
 	 *
 	 * @return bool
 	 */
-	public function IncFrec($sEmail, $aEmails, $bCreateAuto = true)
+	public function IncFrec($sEmail, array $aEmails, bool $bCreateAuto = true)
 	{
 		$self = $this;
-		$aEmailsObjects = \array_map(function ($mItem) {
+		$aEmailsObjects = \array_map(function (string $mItem) {
 			$oResult = null;
 			try
 			{
@@ -1967,8 +1967,8 @@ SQLITEINITIAL;
 	 *
 	 * @return string
 	 */
-	private function specialConvertSearchValue($sSearch, $sEscapeSign = '=')
-	{
+	private function specialConvertSearchValue($sSearch, string $sEscapeSign = '=')
+	: string {
 		return '%'.\str_replace(array($sEscapeSign, '_', '%'),
 			array($sEscapeSign.$sEscapeSign, $sEscapeSign.'_', $sEscapeSign.'%'), $sSearch).'%';
 	}
@@ -1979,8 +1979,8 @@ SQLITEINITIAL;
 	 *
 	 * @return string
 	 */
-	private function specialConvertSearchValueLower($sSearch, $sEscapeSign = '=')
-	{
+	private function specialConvertSearchValueLower(string $sSearch, string $sEscapeSign = '=')
+	: string {
 		if (!\MailSo\Base\Utils::FunctionExistsAndEnabled('mb_strtolower'))
 		{
 			return '';
@@ -2006,7 +2006,7 @@ SQLITEINITIAL;
 	 * @return array
 	 */
 	protected function getPdoAccessData()
-	{
+	: array {
 		return array($this->sDsnType, $this->sDsn, $this->sUser, $this->sPassword);
 	}
 }

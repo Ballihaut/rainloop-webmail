@@ -7,22 +7,22 @@ class FilterCondition
 	/**
 	 * @var string
 	 */
-	private $sField;
+	private string $sField;
 
 	/**
 	 * @var string
 	 */
-	private $sType;
+	private string $sType;
 
 	/**
 	 * @var string
 	 */
-	private $sValue;
+	private string $sValue;
 
 	/**
 	 * @var string
 	 */
-	private $sValueSecond;
+	private string $sValueSecond;
 
 	public function __construct()
 	{
@@ -75,7 +75,7 @@ class FilterCondition
 	 * @return array
 	 */
 	public function FromJSON($aData)
-	{
+	: bool {
 		if (\is_array($aData))
 		{
 			$this->sField = isset($aData['Field']) ? $aData['Field'] :
@@ -98,8 +98,8 @@ class FilterCondition
 	 *
 	 * @return array
 	 */
-	public function ToSimpleJSON($bAjax = false)
-	{
+	public function ToSimpleJSON(bool $bAjax = false)
+	: array {
 		return array(
 			'Field' => $this->Field(),
 			'Type' => $this->Type(),

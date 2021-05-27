@@ -22,7 +22,7 @@ class StringGet extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'GET';
     }
 }

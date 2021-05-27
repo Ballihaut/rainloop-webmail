@@ -21,7 +21,7 @@ class ResponseException extends \MailSo\Smtp\Exceptions\Exception
 	/**
 	 * @var array
 	 */
-	private $aResponses;
+	private array $aResponses;
 
 	/**
 	 * @param array $aResponses = array

@@ -33,11 +33,11 @@ abstract class CursorBasedIterator implements \Iterator
     protected $match;
     protected $count;
 
-    protected $valid;
-    protected $fetchmore;
+    protected bool $valid;
+    protected bool $fetchmore;
     protected $elements;
-    protected $cursor;
-    protected $position;
+    protected int $cursor;
+    protected int $position;
     protected $current;
 
     /**
@@ -63,7 +63,7 @@ abstract class CursorBasedIterator implements \Iterator
      *
      * @throws NotSupportedException
      */
-    protected function requiredCommand(ClientInterface $client, $commandID)
+    protected function requiredCommand(ClientInterface $client, string $commandID)
     {
         if (!$client->getProfile()->supportsCommand($commandID)) {
             throw new NotSupportedException("The current profile does not support '$commandID'.");

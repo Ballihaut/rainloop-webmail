@@ -22,7 +22,7 @@ class ServerInfo extends Command
      * {@inheritdoc}
      */
     public function getId()
-    {
+    : string {
         return 'INFO';
     }
 
@@ -53,7 +53,7 @@ class ServerInfo extends Command
      *
      * @return array
      */
-    protected function parseRow($row)
+    protected function parseRow(string $row)
     {
         list($k, $v) = explode(':', $row, 2);
 
@@ -71,8 +71,8 @@ class ServerInfo extends Command
      *
      * @return array
      */
-    protected function parseDatabaseStats($str)
-    {
+    protected function parseDatabaseStats(string $str)
+    : array {
         $db = array();
 
         foreach (explode(',', $str) as $dbvar) {
@@ -90,8 +90,8 @@ class ServerInfo extends Command
      *
      * @return array
      */
-    protected function parseAllocationStats($str)
-    {
+    protected function parseAllocationStats(string $str)
+    : array {
         $stats = array();
 
         foreach (explode(',', $str) as $kv) {

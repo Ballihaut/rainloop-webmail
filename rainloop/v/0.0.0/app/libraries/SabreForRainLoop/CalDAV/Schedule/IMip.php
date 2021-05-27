@@ -99,7 +99,7 @@ class IMip {
      * @param array $headers List of headers
      * @return void
      */
-    protected function mail($to, $subject, $body, array $headers) {
+    protected function mail(string $to, string $subject, string $body, array $headers) {
 
 
         mail($to, $subject, $body, implode("\r\n", $headers));
